@@ -27,9 +27,9 @@ LIB_DEPENDS=				libboost_system.so:devel/boost-libs \
 							libparquet.so:databases/arrow
 
 BUILD_DEPENDS=				${LOCALBASE}/lib/libarrow.so:databases/arrow \
+							${LOCALBASE}/lib/libarrow_python_flight.so:databases/arrow \
 							${LOCALBASE}/lib/libarrow_dataset.so:databases/arrow \
 							${LOCALBASE}/lib/libarrow_flight.so:databases/arrow \
-							${LOCALBASE}/lib/libarrow_python_flight.so:databases/arrow \
 							${LOCALBASE}/lib/libarrow_python.so:databases/arrow \
 							${LOCALBASE}/lib/libgandiva.so:databases/arrow \
 							${LOCALBASE}/lib/libparquet.so:databases/arrow \
@@ -77,6 +77,38 @@ S3_LIB_DEPENDS=				libaws-cpp-sdk-s3.so:devel/aws-sdk-cpp \
 							libaws-c-event-stream.so:devel/aws-c-event-stream \
 							libaws-checksums.so:devel/aws-checksums
 
+.include <bsd.port.options.mk>
+
+.if ${PORT_OPTIONS:MPARQUET}
+PYARROW_WITH_PARQUET?=1
+.else
+PYARROW_WITH_PARQUET?=0
+.endif
+
+.if ${PORT_OPTIONS:MFLIGHT}
+PYARROW_WITH_FLIGHT?=1
+.else
+PYARROW_WITH_FLIGHT?=0
+.endif
+
+.if ${PORT_OPTIONS:MDATASET}
+PYARROW_WITH_DATASET?=1
+.else
+PYARROW_WITH_DATASET?=0
+.endif
+
+.if ${PORT_OPTIONS:MHDFS}
+PYARROW_WITH_HDFS?=1
+.else
+PYARROW_WITH_HDFS?=0
+.endif
+
+.if ${PORT_OPTIONS:MGANDIVA}
+PYARROW_WITH_GANDIVA?=1
+.else
+PYARROW_WITH_GANDIVA?=0
+.endif
+
 do-build:
 	# echo "BUILD_WRKSRC: ${BUILD_WRKSRC}"
 	# echo "SETENV: ${SETENV}"
@@ -98,6 +130,11 @@ do-build:
 		PYARROW_BUNDLE_ARROW_CPP=0 \
 		PYARROW_BUNDLE_CYTHON_CPP=0 \
 		PYARROW_BUNDLE_BOOST=0 \
+		PYARROW_WITH_PARQUET=${PYARROW_WITH_PARQUET} \
+		PYARROW_WITH_FLIGHT=${PYARROW_WITH_FLIGHT} \
+		PYARROW_WITH_DATASET=${PYARROW_WITH_DATASET} \
+		PYARROW_WITH_HDFS=${PYARROW_WITH_HDFS} \
+		PYARROW_WITH_GANDIVA=${PYARROW_WITH_GANDIVA} \
 		PYARROW_WITH_S3=0 \
 		PYARROW_WITH_CUDA=0 \
 		PYARROW_WITH_PLASMA=0 \
@@ -126,47 +163,5 @@ post-install:
 	${SED} -i '' '/.*\/$$/d' ${_PYTHONPKGLIST}
 	${CAT} ${TMPPLIST } ${_PYTHONPKGLIST} ${WRKDIR}/mytmplist1 | ${SORT} | uniq >> ${WRKDIR}/mytmplist2
 	${SED} 's|'${STAGEDIR}'||g' ${WRKDIR}/mytmplist2 | ${SORT} | uniq > ${_PYTHONPKGLIST}
-
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MPARQUET}
-pre-build:
-export PYARROW_WITH_PARQUET=1
-.else
-pre-build:
-export PYARROW_WITH_PARQUET=0
-.endif
-
-.if ${PORT_OPTIONS:MFLIGHT}
-pre-build:
-export PYARROW_WITH_FLIGHT=1
-.else
-pre-build:
-export PYARROW_WITH_FLIGHT=0
-.endif
-
-.if ${PORT_OPTIONS:MDATASET}
-pre-build:
-export PYARROW_WITH_DATASET=1
-.else
-pre-build:
-export PYARROW_WITH_DATASET=0
-.endif
-
-.if ${PORT_OPTIONS:MHDFS}
-pre-build:
-export PYARROW_WITH_HDFS=1
-.else
-pre-build:
-export PYARROW_WITH_HDFS=0
-.endif
-
-.if ${PORT_OPTIONS:MGANDIVA}
-pre-build:
-export PYARROW_WITH_GANDIVA=1
-.else
-pre-build:
-export PYARROW_WITH_GANDIVA=0
-.endif
 
 .include <bsd.port.mk>
