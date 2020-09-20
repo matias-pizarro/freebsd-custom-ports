@@ -19,20 +19,10 @@ LIB_DEPENDS=				libboost_system.so:devel/boost-libs \
 							libsnappy.so:archivers/snappy \
 							libzstd.so:archivers/zstd \
 							libarrow.so:databases/arrow \
-							libarrow_dataset.so:databases/arrow \
-							libarrow_flight.so:databases/arrow \
-							libarrow_python_flight.so:databases/arrow \
-							libarrow_python.so:databases/arrow \
-							libgandiva.so:databases/arrow \
-							libparquet.so:databases/arrow
+							libarrow_python.so:databases/arrow
 
 BUILD_DEPENDS=				${LOCALBASE}/lib/libarrow.so:databases/arrow \
-							${LOCALBASE}/lib/libarrow_python_flight.so:databases/arrow \
-							${LOCALBASE}/lib/libarrow_dataset.so:databases/arrow \
-							${LOCALBASE}/lib/libarrow_flight.so:databases/arrow \
 							${LOCALBASE}/lib/libarrow_python.so:databases/arrow \
-							${LOCALBASE}/lib/libgandiva.so:databases/arrow \
-							${LOCALBASE}/lib/libparquet.so:databases/arrow \
 							${PYTHON_PKGNAMEPREFIX}keras-preprocessing>0:math/py-keras-preprocessing@${PY_FLAVOR} \
 							${PYTHON_PKGNAMEPREFIX}pandas>0:math/py-pandas@${PY_FLAVOR} \
 							${PYTHON_PKGNAMEPREFIX}wheel>0:devel/py-wheel@${PY_FLAVOR}
@@ -50,19 +40,29 @@ OPTIONS_DEFAULT=			PARQUET FLIGHT
 EXTENSIONS_DESC=			Extensions:
 
 PARQUET_DESC=				Parquet support
-PARQUET_LIB_DEPENDS=		libthrift-0.11.0.so:devel/thrift-cpp \
+PARQUET_BUILD_DEPENDS=		${LOCALBASE}/lib/libparquet.so:databases/arrow
+PARQUET_LIB_DEPENDS=		libparquet.so:databases/arrow \
+							libthrift-0.11.0.so:devel/thrift-cpp \
 							libutf8proc.so:textproc/utf8proc
 
 GANDIVA_DESC=				Gandiva support
-GANDIVA_LIB_DEPENDS=		libgrpc.so:devel/grpc \
+GANDIVA_BUILD_DEPENDS=		${LOCALBASE}/lib/libgandiva.so:databases/arrow
+GANDIVA_LIB_DEPENDS=		libgandiva.so:databases/arrow \
+							libgrpc.so:devel/grpc \
 							libre2.so:devel/re2
 
 HDFS_DESC=					Arrow HDFS bridge support
 
 DATASET_DESC=				Arrow Dataset Modules support
+DATASET_BUILD_DEPENDS=		${LOCALBASE}/lib/libarrow_dataset.so:databases/arrow
+DATASET_LIB_DEPENDS=		libarrow_dataset.so:databases/arrow
 
 FLIGHT_DESC=				Arrow Flight RPC System support
-FLIGHT_LIB_DEPENDS=			libgflags.so:devel/gflags \
+FLIGHT_BUILD_DEPENDS=		${LOCALBASE}/lib/libarrow_python_flight.so:databases/arrow \
+							${LOCALBASE}/lib/libarrow_flight.so:databases/arrow
+FLIGHT_LIB_DEPENDS=			libarrow_flight.so:databases/arrow \
+							libarrow_python_flight.so:databases/arrow \
+							libgflags.so:devel/gflags \
 							libprotobuf.so:devel/protobuf \
 							libabsl_base.so:devel/abseil \
 							libcares.so:dns/c-ares \
