@@ -145,20 +145,26 @@ do-build:
 		${MAKE_ENV} ${PYTHON_CMD} ${PYDISTUTILS_SETUP} ${PYDISTUTILS_BUILD_TARGET} ${PYDISTUTILS_BUILDARGS} \
 	)
 
+pre-build:
+	for _file in $$(${FIND} /tmp -type f -depth 2 | ${TR} '\n' ' '); do \
+		echo $${_file}; \
+		_new_file=$$(${ECHO_CMD} $${_file} | rev | cut -d / -f 1 | rev); \
+		${ECHO_CMD} $${_new_file}; \
+		[ ! -f "${LOCALBASE}/lib/$${_new_file}" ] || ${ECHO_CMD} "deleting $${_file}"; \
+		[ -f "${LOCALBASE}/lib/$${_new_file}" ] || ${ECHO_CMD} "not deleting $${_file}"; \
+	done
+
 post-install:
-	ls -al ${WRKDIR}
 	[ ! -d "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow" ] || ${FIND} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow -name *.so -exec ${STRIP_CMD} {} +
 	[ ! -d "${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION}/site-packages/pyarrow" ] || ${FIND} ${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION}/site-packages/pyarrow -name *.so -exec ${STRIP_CMD} {} +
 	[ ! -d "${BUILD_WRKSRC}/build" ] || ${FIND} ${BUILD_WRKSRC}/build -name *.so -exec ${STRIP_CMD} {} +
 	[ ! -d "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow" ] || ${CP} ${BUILD_WRKSRC}/build/lib.freebsd-*-${PYTHON_VER}/pyarrow/*.so ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/
 	[ ! -d "${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION}/site-packages/pyarrow" ] || ${CP} ${BUILD_WRKSRC}/build/lib.freebsd-*-${PYTHON_VER}/pyarrow/*.so ${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION}/site-packages/pyarrow/
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_dataset.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_dataset.so.100
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_flight.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_flight.so.100
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_python_flight.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_python_flight.so.100
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_python.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow_python.so.100
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libarrow.so.100
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libgandiva.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libgandiva.so.100
-	[ ! -f "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libparquet.so.100" ] || ${RM} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow/libparquet.so.100
+	for _file in $$(${FIND} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow -type f -depth 1 -name '*.so*' | ${TR} '\n' ' '); do \
+		_new_file=$$(${ECHO_CMD} $${_file} | rev | cut -d / -f 1 | rev); \
+		[ ! -f "${LOCALBASE}/lib/$${_new_file}" ] || ${ECHO_CMD} "${LOCALBASE}/lib/$${_new_file} exists => deleting $${_file}"; \
+		[ ! -f "${LOCALBASE}/lib/$${_new_file}" ] || ${RM} "$${_file}"; \
+	done
 	${FIND} ${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION}/site-packages/pyarrow -type f >> ${WRKDIR}/mytmplist1
 	${SED} -i '' '/.*\/$$/d' ${_PYTHONPKGLIST}
 	${CAT} ${TMPPLIST } ${_PYTHONPKGLIST} ${WRKDIR}/mytmplist1 | ${SORT} | uniq >> ${WRKDIR}/mytmplist2
