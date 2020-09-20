@@ -110,13 +110,6 @@ PYARROW_WITH_GANDIVA?=0
 .endif
 
 do-build:
-	# echo "BUILD_WRKSRC: ${BUILD_WRKSRC}"
-	# echo "SETENV: ${SETENV}"
-	# echo "MAKE_ENV: ${MAKE_ENV}"
-	# echo "PYTHON_CMD: ${PYTHON_CMD}"
-	# echo "PYDISTUTILS_SETUP: ${PYDISTUTILS_SETUP}"
-	# echo "PYDISTUTILS_BUILD_TARGET: ${PYDISTUTILS_BUILD_TARGET}"
-	# echo "PYDISTUTILS_BUILDARGS: ${PYDISTUTILS_BUILDARGS}"
 	@(cd ${BUILD_WRKSRC}; \
 		ARROW_HOME=${LOCALBASE} \
 		ARROW_INCLUDE_DIR=${LOCALBASE}/include/arrow \
@@ -144,15 +137,6 @@ do-build:
 		PYARROW_WITH_STATIC_BOOST=0 \
 		${MAKE_ENV} ${PYTHON_CMD} ${PYDISTUTILS_SETUP} ${PYDISTUTILS_BUILD_TARGET} ${PYDISTUTILS_BUILDARGS} \
 	)
-
-pre-build:
-	for _file in $$(${FIND} /tmp -type f -depth 2 | ${TR} '\n' ' '); do \
-		echo $${_file}; \
-		_new_file=$$(${ECHO_CMD} $${_file} | rev | cut -d / -f 1 | rev); \
-		${ECHO_CMD} $${_new_file}; \
-		[ ! -f "${LOCALBASE}/lib/$${_new_file}" ] || ${ECHO_CMD} "deleting $${_file}"; \
-		[ -f "${LOCALBASE}/lib/$${_new_file}" ] || ${ECHO_CMD} "not deleting $${_file}"; \
-	done
 
 post-install:
 	[ ! -d "${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow" ] || ${FIND} ${STAGEDIR}${PYTHON_SITELIBDIR}/pyarrow -name *.so -exec ${STRIP_CMD} {} +
