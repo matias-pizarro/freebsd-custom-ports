@@ -1,0 +1,29 @@
+#!/bin/sh
+
+BC_LIB=/compat/linux/usr/lib64/beyondcompare
+
+# LINUXULATOR_LIB=/compat/linux/usr/lib64
+LINUXULATOR_LIB=/compat/linux/usr/lib64/beyondcompare
+
+EXEC="${BC_LIB}/BCompare"
+
+if [ -n "$LD_LIBRARY_PATH" ]; then
+_LD_LIBRARY_PATH="${BC_LIB}:$LD_LIBRARY_PATH:/compat/linux/usr/lib64"
+else
+_LD_LIBRARY_PATH="${BC_LIB}:/compat/linux/usr/lib64"
+fi
+
+_LD_PRELOAD="${BC_LIB}/nosched.so"
+
+########################################
+# execute the program
+ARGS="";
+while [ "$#" -gt 0 ]; do
+    ARGS=$ARGS" \"$1\""
+    shift 1
+done
+
+env LD_LIBRARY_PATH=${_LD_LIBRARY_PATH} \
+    LD_PRELOAD=${_LD_PRELOAD} \
+    ${EXEC} ${ARGS} # \
+    # > /dev/null 2>&1
