@@ -1,3 +1,5 @@
 **/work
 **/work-py*
 **/*.txz
+*.shar
+**/venv3*
