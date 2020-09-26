@@ -3,3 +3,7 @@ the differences you're interested in and ignore those you're not.  Merge
 changes, synchronize files, and generate reports.
 
 WWW: https://www.scootersoftware.com/
+
+Thanks to shkhln (https://forums.freebsd.org/members/shkhln.54069/) and
+aragats (https://forums.freebsd.org/members/aragats.37029/) for coming
+up with the nosched.c fix
