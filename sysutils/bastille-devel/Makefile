@@ -1,8 +1,8 @@
-# Created by: Christer Edwards <christer.edwards@gmail.com>
-# $FreeBSD: head/sysutils/bastille/Makefile 543423 2020-07-25 15:16:32Z mikael $
+# $FreeBSD$
 
 PORTNAME=	bastille
-PORTVERSION=	0.7.devel
+PORTVERSION=	0.7
+PKGNAMESUFFIX=	-devel
 CATEGORIES=	sysutils
 
 MAINTAINER=	christer.edwards@gmail.com
@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 USE_GITHUB=	yes
 GH_ACCOUNT=	bastillebsd
 GH_PROJECT=	bastille
-GH_TAGNAME=	a4fcf01
+GH_TAGNAME=	bf5fd4e
 
 CONFLICTS_INSTALL=	sysutils/bastille
 
