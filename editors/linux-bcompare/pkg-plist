@@ -1,7 +1,3 @@
-@dir /compat
-@dir %%LINUXBASE%%
-@dir %%LINUXBASE%%/usr
-@dir %%LINUXBASE%%/usr/%%LIBDIR%%
 @dir %%LOCALBASE%%/bin
 @dir %%LOCALBASE%%/lib/beyondcompare
 @dir %%LOCALBASE%%/lib/beyondcompare/ext
@@ -11,10 +7,21 @@
 @dir %%LOCALBASE%%/share/applications
 @dir %%LOCALBASE%%/share/mime
 @dir %%LOCALBASE%%/share/mime/packages
+@dir %%LOCALBASE%%/share/icons
+@dir %%LOCALBASE%%/share/icons/hicolor
+@dir %%LOCALBASE%%/share/icons/hicolor/16x16
+@dir %%LOCALBASE%%/share/icons/hicolor/16x16/apps
+@dir %%LOCALBASE%%/share/icons/hicolor/32x32
+@dir %%LOCALBASE%%/share/icons/hicolor/32x32/apps
+@dir %%LOCALBASE%%/share/icons/hicolor/48x48
+@dir %%LOCALBASE%%/share/icons/hicolor/48x48/apps
 @dir %%LOCALBASE%%/share/pixmaps
 %%LOCALBASE%%/bin/bcompare
 %%LOCALBASE%%/share/applications/bcompare.desktop
 %%LOCALBASE%%/share/mime/packages/bcompare.xml
+%%LOCALBASE%%/share/icons/hicolor/16x16/apps/bcompare.png
+%%LOCALBASE%%/share/icons/hicolor/32x32/apps/bcompare.png
+%%LOCALBASE%%/share/icons/hicolor/48x48/apps/bcompare.png
 %%LOCALBASE%%/share/pixmaps/bcompare.png
 %%LOCALBASE%%/share/pixmaps/bcomparefull32.png
 %%LOCALBASE%%/share/pixmaps/bcomparehalf32.png
@@ -534,4 +541,4 @@
 %%LOCALBASE%%/lib/beyondcompare/RPM-GPG-KEY-scootersoftware
 %%LOCALBASE%%/lib/beyondcompare/scootersoftware.repo
 %%LOCALBASE%%/lib/beyondcompare/nosched.so
-%%LINUXBASE%%/usr/%%LIBDIR%%/libbz2.so.1.0
+%%LOCALBASE%%/lib/beyondcompare/libbz2.so.1.0

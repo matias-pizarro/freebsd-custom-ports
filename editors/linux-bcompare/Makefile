@@ -8,7 +8,7 @@ PKGNAMEPREFIX=		linux-
 DISTNAME=			${PORTNAME}-${DISTVERSION}.${DISTREVISION}
 
 MAINTAINER=			matias@pizarro.net
-COMMENT=			Sophisticated comparison of files and folder
+COMMENT=			Compare, sync, and merge files and folders
 
 LICENSE=			SCOOTERSOFTWARE
 LICENSE_NAME=		Scooter Software License
@@ -26,8 +26,7 @@ NO_WRKSUBDIR=		true
 INSTALLS_ICONS=		yes
 
 NO_BUILD=			yes
-PLIST_SUB=			LOCALBASE=${LOCALBASE} \
-					LINUXBASE=${LINUXBASE}
+PLIST_SUB=			LOCALBASE=${LOCALBASE}
 
  SHEBANG_FILES=		${WRKSRC}/usr/lib64/beyondcompare/bcmount.sh \
  					${WRKSRC}/usr/lib64/beyondcompare/kde_context_menu
@@ -45,13 +44,18 @@ do-install:
 	${CP} -rp ${WRKSRC}/usr/lib64/beyondcompare ${STAGEDIR}${LOCALBASE}/lib/
 	${CP} -rp ${WRKSRC}/usr/bin ${STAGEDIR}${LOCALBASE}/
 	${CP} -rp ${WRKSRC}/usr/share ${STAGEDIR}${LOCALBASE}/
+	${MKDIR} ${STAGEDIR}${LOCALBASE}/share/icons/hicolor/16x16/apps
+	${MKDIR} ${STAGEDIR}${LOCALBASE}/share/icons/hicolor/32x32/apps
+	${MKDIR} ${STAGEDIR}${LOCALBASE}/share/icons/hicolor/48x48/apps
+	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${LOCALBASE}/share/icons/hicolor/16x16/apps/bcompare.png
+	${LN} -sf ../../../../pixmaps/bcomparefull32.png ${STAGEDIR}${LOCALBASE}/share/icons/hicolor/32x32/apps/bcompare.png
+	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${LOCALBASE}/share/icons/hicolor/48x48/apps/bcompare.png
 # 	${MKDIR} ${STAGEDIR}${LINUXBASE}/usr
 # 	${CP} -rp ${WRKSRC}/usr/lib ${STAGEDIR}${LINUXBASE}/usr/
 # 	${CP} -rp ${WRKSRC}/usr/lib64 ${STAGEDIR}${LINUXBASE}/usr/
 	[ ! -d "${STAGEDIR}${LOCALBASE}/lib/beyondcompare/ext" ] || ${FIND} ${STAGEDIR}${LOCALBASE}/lib/beyondcompare/ext -name *.so -exec ${LINUXBASE}/usr/bin/strip {} +
 	${LINUXBASE}/usr/bin/gcc -Wall -fPIC -shared ${FILESDIR}/nosched.c -ldl -o ${STAGEDIR}${LOCALBASE}/lib/beyondcompare/nosched.so
-	${MKDIR} ${STAGEDIR}${LINUXBASE}/usr/lib64
-	${LN} -sf libbz2.so.1.0.6 ${STAGEDIR}${LINUXBASE}/usr/lib64/libbz2.so.1.0
+	${LN} -sf ${LINUXBASE}/usr/lib64/libbz2.so.1.0.6 ${STAGEDIR}${LOCALBASE}/lib/beyondcompare/libbz2.so.1.0
 # 	${MKDIR} ${STAGEDIR}${LOCALBASE}/usr
 # 	${CP} -rp ${WRKSRC}/usr/bin ${STAGEDIR}${LOCALBASE}/
 # 	${CP} -rp ${WRKSRC}/usr/share ${STAGEDIR}${LOCALBASE}/
