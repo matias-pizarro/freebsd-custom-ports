@@ -1,44 +1,46 @@
 # $FreeBSD$
 
-PORTNAME=			bcompare
-DISTVERSION=		4.3.6
-CATEGORIES=			editors linux
-MASTER_SITES=		http://scootersoftware.com/
-PKGNAMEPREFIX=		linux-
+PORTNAME=				bcompare
+DISTVERSION=			4.3.6
+DISTVERSIONSUFFIX=		.25063
+CATEGORIES=				editors devel linux
+MASTER_SITES=			http://scootersoftware.com/
+PKGNAMEPREFIX=			linux-
+EXTRACT_SUFX=			.rpm
 
-MAINTAINER=			matias@pizarro.net
-COMMENT=			Compare, sync, and merge files and folders
+MAINTAINER=				matias@pizarro.net
+COMMENT=				Compare, sync, and merge files and folders (X11)
 
-LICENSE=			SCOOTERSOFTWARE
-LICENSE_NAME=		Scooter Software License
-LICENSE_FILE=		${FILESDIR}/LICENSE.txt
-LICENSE_PERMS=		dist-mirror no-dist-sell pkg-mirror no-pkg-sell no-auto-accept
+LICENSE=				SCOOTERSOFTWARE
+LICENSE_NAME=			Scooter Software License
+LICENSE_FILE=			${FILESDIR}/LICENSE.txt
+LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell no-auto-accept
 
-EXTRACT_SUFX=		.rpm
-USES=				linux:c7 desktop-file-utils shared-mime-info shebangfix
+ONLY_FOR_ARCHS=			amd64 i386
+ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
 
-USE_LINUX=			base:run xorglibs:run qt-x11:run devtools:build
-DISTREVISION=		25063
-DISTNAME_amd64=		${PORTNAME}-${DISTVERSION}.${DISTREVISION}.x86_64
-DISTNAME_i386=		${PORTNAME}-${DISTVERSION}.${DISTREVISION}.i386
+USES=					linux desktop-file-utils shared-mime-info shebangfix
+USE_LINUX=				base:run xorglibs:run qt-x11:run devtools:build
 
-NO_WRKSUBDIR=		true
+DISTNAME_amd64=			${DISTNAME}.x86_64
+DISTNAME_i386=			${DISTNAME}.i386
 
-INSTALLS_ICONS=		yes
+NO_WRKSUBDIR=			true
+NO_BUILD=				yes
+PLIST_SUB=				LOCALBASE=${LOCALBASE}
 
-NO_BUILD=			yes
-PLIST_SUB=			LOCALBASE=${LOCALBASE}
+INSTALLS_ICONS=			yes
 
 .include <bsd.port.options.mk>
 
 .if ${ARCH} == i386
-LIBDIR=				lib
+LIBDIR=					lib
 .elif ${ARCH} == amd64
-LIBDIR=				lib64
+LIBDIR=					lib64
 .endif
 
-SHEBANG_FILES=		${WRKSRC}/usr/${LIBDIR}/beyondcompare/bcmount.sh \
-					${WRKSRC}/usr/${LIBDIR}/beyondcompare/kde_context_menu
+SHEBANG_FILES=			${WRKSRC}/usr/${LIBDIR}/beyondcompare/bcmount.sh \
+						${WRKSRC}/usr/${LIBDIR}/beyondcompare/kde_context_menu
 
 do-install:
 	${MKDIR} ${STAGEDIR}${LOCALBASE}/lib
