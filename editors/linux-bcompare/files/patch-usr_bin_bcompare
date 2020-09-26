@@ -6,7 +6,7 @@
 -BC_LIB=/usr/lib64/beyondcompare
 +LINUXULATOR_LIB=/compat/linux/usr/lib64
 +
-+BC_LIB=$LINUXULATOR_LIB/beyondcompare
++BC_LIB=/usr/local/lib/beyondcompare
  export BC_LIB
  
 +_LD_PRELOAD="$BC_LIB/nosched.so"
