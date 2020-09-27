@@ -3,3 +3,5 @@
 **/*.txz
 *.shar
 **/venv3*
+*.diff
+*.core
