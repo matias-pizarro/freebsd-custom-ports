@@ -20,7 +20,7 @@ USE_LDCONFIG=	yes
 
 WRKSRC_SUBDIR=	cpp
 
-CMAKE_ARGS=	-DARROW_WITH_BACKTRACE=OFF -DARROW_PYTHON=OFF
+CMAKE_ARGS=	-DARROW_WITH_BACKTRACE=OFF
 CMAKE_OFF=	ARROW_BUILD_STATIC
 
 OPTIONS_GROUP=			COMPRESSION EXTENSIONS
@@ -91,23 +91,5 @@ GANDIVA_LIB_DEPENDS=		libgrpc.so:devel/grpc \
 
 BUILD_UTILITIES_DESC=		build Arrow commandline utilities
 BUILD_UTILITIES_CMAKE_BOOL=	ARROW_BUILD_UTILITIES
-
-ORC_DESC=			build the Arrow ORC adapter
-ORC_CMAKE_BOOL=			ARROW_ORC
-ORC_LIB_DEPENDS=		liborc-0.4.so:devel/orc
-
-S3_DESC=			build Arrow with S3 support
-S3_CMAKE_BOOL=			ARROW_S3
-S3_LIB_DEPENDS=			libaws-cpp-sdk-s3.so:devel/aws-sdk-cpp \
-				libaws-c-common.so:devel/aws-c-common \
-				libaws-c-event-stream.so:devel/aws-c-event-stream \
-				libaws-checksums.so:devel/aws-checksums
-
-# PYTHON_DESC=			build the Arrow CPython extensions
-# PYTHON_CMAKE_BOOL=		ARROW_PYTHON
-# PYTHON_BUILD_DEPENDS=		${PYTHON_PKGNAMEPREFIX}numpy>0:math/py-numpy@${PY_FLAVOR} \
-# 				${PYTHON_PKGNAMEPREFIX}cython>0:lang/cython@${PY_FLAVOR} \
-# 				${PYTHON_PKGNAMEPREFIX}setuptools>0:devel/py-setuptools@${PY_FLAVOR} \
-# 				${PYTHON_PKGNAMEPREFIX}setuptools_scm>0:devel/py-setuptools_scm@${PY_FLAVOR} \
 
 .include <bsd.port.mk>
