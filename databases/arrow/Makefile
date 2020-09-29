@@ -67,12 +67,14 @@ FILESYSTEM_DESC=		build the Arrow Filesystem Layer
 FILESYSTEM_CMAKE_BOOL=		ARROW_FILESYSTEM
 
 PARQUET_DESC=			build the Parquet libraries
+PARQUET_USES=			ssl
 PARQUET_CMAKE_BOOL=		ARROW_PARQUET PARQUET_REQUIRE_ENCRYPTION
 PARQUET_BUILD_DEPENDS=		${LOCALBASE}/lib/libutf8proc.so:textproc/utf8proc
 PARQUET_LIB_DEPENDS=		libutf8proc.so:textproc/utf8proc \
 				libthrift-0.11.0.so:devel/thrift-cpp
 
 FLIGHT_DESC=			build the Arrow Flight RPC System
+FLIGHT_USES=			ssl
 FLIGHT_CMAKE_BOOL=		ARROW_FLIGHT
 FLIGHT_LIB_DEPENDS=		libgflags.so:devel/gflags \
 				libprotobuf.so:devel/protobuf \
@@ -107,6 +109,24 @@ PYTHON_BUILD_DEPENDS=		${LOCALBASE}/lib/libutf8proc.so:textproc/utf8proc \
 PYTHON_LIB_DEPENDS=		libutf8proc.so:textproc/utf8proc
 
 TESTS_DESC=			build the Arrow TESTS adapter
+TESTS_CMAKE_ON=			-DARROW_BUILD_EXAMPLES:BOOL=ON \
+				-DARROW_BUILD_TESTS:BOOL=ON \
+				-DARROW_ENABLE_TIMING_TESTS:BOOL=ON \
+				-DARROW_BUILD_INTEGRATION:BOOL=ON \
+				-DARROW_BUILD_BENCHMARKS:BOOL=OFF \
+				-DARROW_BUILD_BENCHMARKS_REFERENCE=OFF \
+				-DARROW_TEST_LINKAGE:STRING=shared \
+				-DARROW_FUZZING:BOOL=OFF \
+				-DARROW_LARGE_MEMORY_TESTS:BOOL=ON
+TESTS_CMAKE_OFF=		-DARROW_BUILD_EXAMPLES:BOOL=OFF \
+				-DARROW_BUILD_TESTS:BOOL=OFF \
+				-DARROW_ENABLE_TIMING_TESTS:BOOL=ON \
+				-DARROW_BUILD_INTEGRATION:BOOL=OFF \
+				-DARROW_BUILD_BENCHMARKS:BOOL=OFF \
+				-DARROW_BUILD_BENCHMARKS_REFERENCE=OFF \
+				-DARROW_TEST_LINKAGE:STRING=shared \
+				-DARROW_FUZZING:BOOL=OFF \
+				-DARROW_LARGE_MEMORY_TESTS:BOOL=OFF
 TESTS_BUILD_DEPENDS=		${LOCALBASE}/include/gtest/gtest.h:devel/googletest \
 				${LOCALBASE}/include/benchmark/benchmark.h:devel/benchmark
 TESTS_LIB_DEPENDS=		${PYTHON_PKGNAMEPREFIX}setuptools>0:devel/py-setuptools@${PY_FLAVOR}
@@ -117,6 +137,7 @@ ORC_CMAKE_BOOL=			ARROW_ORC
 ORC_LIB_DEPENDS=		liborc-0.4.so:devel/orc
 
 S3_DESC=			build Arrow with S3 support
+S3_USES=			ssl
 S3_CMAKE_BOOL=			ARROW_S3
 S3_LIB_DEPENDS=			libaws-cpp-sdk-s3.so:devel/aws-sdk-cpp \
 				libaws-c-common.so:devel/aws-c-common \
@@ -166,24 +187,10 @@ pre-configure:
     PLIST_SUB+=	PYTHONFLIGHT="@comment "
 .endif
 
-.if ${PORT_OPTIONS:MPARQUET} == "PARQUET" || ${PORT_OPTIONS:MFLIGHT} == "FLIGHT" # || ${PORT_OPTIONS:MS3} == "S3"
-    USES+=	ssl
-.endif
-
-.if ${PORT_OPTIONS:MTESTS}
-CMAKE_ARGS+=	-DARROW_BUILD_EXAMPLES=ON \
-		-DARROW_BUILD_TESTS=ON \
-		-DARROW_ENABLE_TIMING_TESTS=ON \
-		-DARROW_BUILD_INTEGRATION=ON \
-		-DARROW_BUILD_BENCHMARKS=OFF \
-		-DARROW_BUILD_BENCHMARKS_REFERENCE=OFF \
-		-DARROW_TEST_LINKAGE=shared \
-		-DARROW_FUZZING=OFF \
-		-DARROW_LARGE_MEMORY_TESTS=ON
-.if ${PORT_OPTIONS:MFLIGHT} == "FLIGHT"
+.if ${PORT_OPTIONS:MTESTS} && ${PORT_OPTIONS:MFLIGHT} == "FLIGHT"
     PLIST_SUB+=	TESTSFLIGHT=""
 .else
     PLIST_SUB+=	TESTSFLIGHT="@comment "
 .endif
-.endif
+
 .include <bsd.port.mk>

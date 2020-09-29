@@ -463,4 +463,4 @@ lib/libarrow.so.100.1.0
 %%TESTS%%libdata/pkgconfig/arrow-testing.pc
 libdata/pkgconfig/arrow.pc
 %%GANDIVA%%libdata/pkgconfig/gandiva.pc
-libdata/pkgconfig/parquet.pc%%PARQUET%%
+%%PARQUET%%libdata/pkgconfig/parquet.pc
