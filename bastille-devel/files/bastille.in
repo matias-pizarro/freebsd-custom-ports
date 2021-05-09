@@ -1,8 +1,7 @@
 #!/bin/sh
 
 # Bastille jail startup script
-# $FreeBSD: head/sysutils/bastille/files/bastille.in 493313 2019-02-18 19:22:28Z pi $
-#
+
 # PROVIDE: bastille
 # REQUIRE: LOGIN
 # KEYWORD: shutdown
@@ -31,8 +30,8 @@ restart_cmd="bastille_stop && bastille_start"
 bastille_start()
 {
     if [ ! -n "${bastille_list}" ]; then
-        echo "bastille_list is empty"
-        return 0
+        echo "${bastille_list} is undefined"
+        return 1
     fi
 
     local _jail
@@ -46,8 +45,8 @@ bastille_start()
 bastille_stop()
 {
     if [ ! -n "${bastille_list}" ]; then
-        echo "bastille_list is empty"
-        return 0
+        echo "${bastille_list} is undefined"
+        return 1
     fi
 
     local _jail

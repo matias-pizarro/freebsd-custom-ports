@@ -1,9 +1,7 @@
-# $FreeBSD$
+# Created by: Christer Edwards <christer.edwards@gmail.com>
 
 PORTNAME=	bastille
-DISTVERSION=	0.7
-PORTREVISION=	2
-PKGNAMESUFFIX=	-devel
+PORTVERSION=	0.8.20210115
 CATEGORIES=	sysutils
 
 MAINTAINER=	christer.edwards@gmail.com
@@ -14,10 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bastillebsd
-GH_PROJECT=	bastille
-GH_TAGNAME=	b0c2732
-
-CONFLICTS_INSTALL=	sysutils/bastille
+GH_TAGNAME=	113beb5
 
 NO_BUILD=	yes
 NO_ARCH=	yes
@@ -25,14 +20,14 @@ NO_ARCH=	yes
 USE_RC_SUBR=	bastille
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}${PREFIX}/bin/bastille ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/${PREFIX}/bin/bastille ${STAGEDIR}${PREFIX}/bin
 
 post-install:
 	${MKDIR} ${STAGEDIR}${ETCDIR}
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	(cd ${WRKSRC}${DATADIR} && ${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR})
-	${INSTALL_MAN} ${WRKSRC}${PREFIX}/man/man8/bastille.8.gz \
+	(cd ${WRKSRC}/${DATADIR} && ${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR})
+	${INSTALL_MAN} ${WRKSRC}/${PREFIX}/man/man8/bastille.8.gz \
 		${STAGEDIR}${PREFIX}/man/man8/bastille.8.gz
-	${INSTALL_DATA} ${WRKSRC}${ETCDIR}/bastille.conf.sample ${STAGEDIR}${ETCDIR}/bastille.conf.sample
+	${INSTALL_DATA} ${WRKSRC}/${ETCDIR}/bastille.conf.sample ${STAGEDIR}${ETCDIR}/bastille.conf.sample
 
 .include <bsd.port.mk>
