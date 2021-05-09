@@ -6,7 +6,7 @@
  include(CMakeParseArguments)
 -include(ExternalProject)
 +#include(ExternalProject) # bundling isn't allowed
- include(FindPkgConfig)
+ include(FindPackageHandleStandardArgs)
  
  include(GNUInstallDirs)
 @@ -857,10 +857,10 @@ if(ARROW_BUILD_EXAMPLES)

@@ -1,8 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	arrow
-DISTVERSION=	1.0.1
-PORTREVISION=	2
+DISTVERSION=	2.0.0
 CATEGORIES=	databases
 MASTER_SITES=	https://mirrors.advancedhosters.com/apache/${PORTNAME}/${PORTNAME}-${DISTVERSION}/
 DISTNAME=	apache-${PORTNAME}-${DISTVERSION}
@@ -92,7 +91,7 @@ HDFS_CMAKE_BOOL=		ARROW_HDFS
 
 GANDIVA_DESC=			build the Gandiva libraries
 GANDIVA_CMAKE_BOOL=		ARROW_GANDIVA
-GANDIVA_BUILD_DEPENDS=		${LOCALBASE}/lib/clang10:devel/llvm10
+GANDIVA_BUILD_DEPENDS=		${LOCALBASE}/bin/clang10:devel/llvm10
 GANDIVA_LIB_DEPENDS=		libgrpc.so:devel/grpc \
 				libre2.so:devel/re2
 
@@ -156,13 +155,13 @@ pre-configure:
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/changelog
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/control
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/libarrow-python-dev.install
-	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/libarrow-python100.install
+	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/libarrow-python200.install
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/changelog
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/control
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-dev.install
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-flight-dev.install
-	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-flight100.install
-	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python100.install
+	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-flight200.install
+	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python200.install
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/yum/arrow.spec.in
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/tasks.yml
 	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../docs/source/developers/python.rst

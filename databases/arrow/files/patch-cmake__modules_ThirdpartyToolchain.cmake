@@ -8,7 +8,7 @@
  processorcount(NPROC)
  
  add_custom_target(rapidjson)
-@@ -2182,10 +2183,10 @@
+@@ -2235,10 +2236,10 @@
    file(MAKE_DIRECTORY ${CARES_INCLUDE_DIR})
  
    add_dependencies(toolchain cares_ep)
@@ -20,10 +20,10 @@
 +  # set_target_properties(c-ares::cares
 +  #                       PROPERTIES IMPORTED_LOCATION "${CARES_STATIC_LIB}"
 +  #                                  INTERFACE_INCLUDE_DIRECTORIES "${CARES_INCLUDE_DIR}")
+   add_dependencies(c-ares::cares cares_ep)
  
-   set(CARES_VENDORED TRUE)
  
-@@ -2194,7 +2195,7 @@
+@@ -2255,7 +2256,7 @@
  
  if(ARROW_WITH_GRPC)
    if(c-ares_SOURCE STREQUAL "AUTO")
@@ -32,7 +32,7 @@
      if(c-ares_FOUND)
        set(CARES_INCLUDE_DIR ${c-ares_INCLUDE_DIR})
      else()
-@@ -2203,7 +2204,7 @@
+@@ -2264,7 +2265,7 @@
    elseif(c-ares_SOURCE STREQUAL "BUNDLED")
      build_cares()
    elseif(c-ares_SOURCE STREQUAL "SYSTEM")
@@ -41,7 +41,7 @@
      set(CARES_INCLUDE_DIR ${c-ares_INCLUDE_DIR})
    endif()
  
-@@ -2658,6 +2659,7 @@
+@@ -2719,6 +2720,7 @@
  if(ARROW_S3)
    # See https://aws.amazon.com/blogs/developer/developer-experience-of-the-aws-sdk-for-c-now-simplified-by-cmake/
  
