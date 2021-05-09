@@ -3,6 +3,8 @@ bin/bastille
 %%DATADIR%%/bootstrap.sh
 %%DATADIR%%/clone.sh
 %%DATADIR%%/cmd.sh
+%%DATADIR%%/common.sh
+%%DATADIR%%/config.sh
 %%DATADIR%%/colors.pre.sh
 %%DATADIR%%/console.sh
 %%DATADIR%%/convert.sh
