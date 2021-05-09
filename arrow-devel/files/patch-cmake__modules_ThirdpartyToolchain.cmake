@@ -1,4 +1,4 @@
---- cmake_modules/ThirdpartyToolchain.cmake.orig	2020-08-17 17:58:35 UTC
+--- cmake_modules/ThirdpartyToolchain.cmake.orig	2021-04-21 16:14:36 UTC
 +++ cmake_modules/ThirdpartyToolchain.cmake
 @@ -16,6 +16,7 @@
  # under the License.
@@ -8,7 +8,7 @@
  processorcount(NPROC)
  
  add_custom_target(rapidjson)
-@@ -2235,10 +2236,10 @@
+@@ -2320,10 +2321,10 @@ macro(build_cares)
    file(MAKE_DIRECTORY ${CARES_INCLUDE_DIR})
  
    add_dependencies(toolchain cares_ep)
@@ -22,30 +22,12 @@
 +  #                                  INTERFACE_INCLUDE_DIRECTORIES "${CARES_INCLUDE_DIR}")
    add_dependencies(c-ares::cares cares_ep)
  
- 
-@@ -2255,7 +2256,7 @@
- 
- if(ARROW_WITH_GRPC)
-   if(c-ares_SOURCE STREQUAL "AUTO")
--    find_package(c-ares QUIET CONFIG)
-+    find_package(c-ares QUIET)
-     if(c-ares_FOUND)
-       set(CARES_INCLUDE_DIR ${c-ares_INCLUDE_DIR})
-     else()
-@@ -2264,7 +2265,7 @@
-   elseif(c-ares_SOURCE STREQUAL "BUNDLED")
-     build_cares()
-   elseif(c-ares_SOURCE STREQUAL "SYSTEM")
--    find_package(c-ares REQUIRED CONFIG)
-+    find_package(c-ares REQUIRED)
-     set(CARES_INCLUDE_DIR ${c-ares_INCLUDE_DIR})
+   if(APPLE)
+@@ -2904,6 +2905,7 @@ if(ARROW_S3)
+     set(BUILD_SHARED_LIBS "ON")
    endif()
- 
-@@ -2719,6 +2720,7 @@
- if(ARROW_S3)
-   # See https://aws.amazon.com/blogs/developer/developer-experience-of-the-aws-sdk-for-c-now-simplified-by-cmake/
  
 +  set(BUILD_SHARED_LIBS ON)
    # Need to customize the find_package() call, so cannot call resolve_dependency()
    if(AWSSDK_SOURCE STREQUAL "AUTO")
-     find_package(AWSSDK COMPONENTS config s3 transfer)
+     find_package(AWSSDK
