@@ -1,0 +1,13 @@
+# Target labels
+ lz4_ep
+# Source files and their labels
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/lz4_ep
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/lz4_ep.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/lz4_ep-complete.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-install.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-mkdir.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-download.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-update.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-patch.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-configure.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-build.rule

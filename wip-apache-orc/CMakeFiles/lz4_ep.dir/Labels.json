@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/lz4_ep"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/lz4_ep.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/lz4_ep-complete.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-install.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-mkdir.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-download.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-update.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-patch.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-configure.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/lz4_ep-prefix/src/lz4_ep-stamp/lz4_ep-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"lz4_ep"
+		],
+		"name" : "lz4_ep"
+	}
+}

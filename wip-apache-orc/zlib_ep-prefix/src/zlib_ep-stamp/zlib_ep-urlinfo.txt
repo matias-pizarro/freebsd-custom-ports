@@ -1,0 +1,3 @@
+repository='external project URL'
+module='http://zlib.net/fossils/zlib-1.2.11.tar.gz'
+tag=''

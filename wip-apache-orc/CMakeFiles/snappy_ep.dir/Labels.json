@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/snappy_ep"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/snappy_ep.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/snappy_ep-complete.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-install.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-mkdir.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-download.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-update.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-patch.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-configure.rule"
+		},
+		{
+			"file" : "/usr/home/mpizarro/devel/ports/databases/apache-orc/snappy_ep-prefix/src/snappy_ep-stamp/snappy_ep-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"snappy_ep"
+		],
+		"name" : "snappy_ep"
+	}
+}

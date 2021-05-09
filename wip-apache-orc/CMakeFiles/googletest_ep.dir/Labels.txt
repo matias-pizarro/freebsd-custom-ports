@@ -1,0 +1,13 @@
+# Target labels
+ googletest_ep
+# Source files and their labels
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/googletest_ep
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/googletest_ep.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/googletest_ep-complete.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-install.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-mkdir.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-download.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-update.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-patch.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-configure.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/googletest_ep-prefix/src/googletest_ep-stamp/googletest_ep-build.rule

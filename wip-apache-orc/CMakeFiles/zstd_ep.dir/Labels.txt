@@ -1,0 +1,13 @@
+# Target labels
+ zstd_ep
+# Source files and their labels
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/zstd_ep
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/zstd_ep.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/zstd_ep-complete.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-install.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-mkdir.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-download.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-update.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-patch.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-configure.rule
+/usr/home/mpizarro/devel/ports/databases/apache-orc/zstd_ep-prefix/src/zstd_ep-stamp/zstd_ep-build.rule

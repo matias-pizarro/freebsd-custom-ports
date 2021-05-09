@@ -1,0 +1,82 @@
+Performing C++ SOURCE FILE Test INT64_IS_LL failed with the following output:
+Change Dir: /usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/ninja cmTC_308df && [1/2] Building CXX object CMakeFiles/cmTC_308df.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_308df.dir/src.cxx.o 
+/usr/bin/c++   -O2 -pipe -fstack-protector-strong -fno-strict-aliasing -std=c++11 -Weverything -Wno-c++98-compat -Wno-missing-prototypes -Wno-c++98-compat-pedantic -Wno-padded -Wno-covered-switch-default -Wno-missing-noreturn -Wno-unknown-pragmas -Wno-gnu-zero-variadic-macro-arguments -Wconversion -Werror -std=c++11 -Weverything -Wno-c++98-compat -Wno-missing-prototypes -Wno-c++98-compat-pedantic -Wno-padded -Wno-covered-switch-default -Wno-missing-noreturn -Wno-unknown-pragmas -Wno-gnu-zero-variadic-macro-arguments -Wconversion -Werror -DINT64_IS_LL -MD -MT CMakeFiles/cmTC_308df.dir/src.cxx.o -MF CMakeFiles/cmTC_308df.dir/src.cxx.o.d -o CMakeFiles/cmTC_308df.dir/src.cxx.o -c src.cxx
+src.cxx:5:36: error: format specifies type 'long long' but the argument has type 'int64_t' (aka 'long') [-Werror,-Wformat]
+      int64_t x = 1; printf("%lld",x);
+                             ~~~~  ^
+                             %ld
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+
+    #include<stdint.h>
+    #include<stdio.h>
+    int main(int,char*[]){
+      int64_t x = 1; printf("%lld",x);
+    }
+Performing C++ SOURCE FILE Test NEEDS_REDUNDANT_MOVE failed with the following output:
+Change Dir: /usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/ninja cmTC_79601 && [1/2] Building CXX object CMakeFiles/cmTC_79601.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_79601.dir/src.cxx.o 
+/usr/bin/c++   -O2 -pipe -fstack-protector-strong -fno-strict-aliasing -std=c++11 -Weverything -Wno-c++98-compat -Wno-missing-prototypes -Wno-c++98-compat-pedantic -Wno-padded -Wno-covered-switch-default -Wno-missing-noreturn -Wno-unknown-pragmas -Wno-gnu-zero-variadic-macro-arguments -Wconversion -Werror -std=c++11 -Weverything -Wno-c++98-compat -Wno-missing-prototypes -Wno-c++98-compat-pedantic -Wno-padded -Wno-covered-switch-default -Wno-missing-noreturn -Wno-unknown-pragmas -Wno-gnu-zero-variadic-macro-arguments -Wconversion -Werror -DNEEDS_REDUNDANT_MOVE -MD -MT CMakeFiles/cmTC_79601.dir/src.cxx.o -MF CMakeFiles/cmTC_79601.dir/src.cxx.o.d -o CMakeFiles/cmTC_79601.dir/src.cxx.o -c src.cxx
+src.cxx:5:14: error: moving a local object in a return statement prevents copy elision [-Werror,-Wpessimizing-move]
+      return std::move(var);
+             ^
+src.cxx:5:14: note: remove std::move call here
+      return std::move(var);
+             ^~~~~~~~~~   ~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+
+    #include<string>
+    std::string func() {
+      std::string var = "test";
+      return std::move(var);
+    }
+    int main(int, char *[]) {}
+Performing C++ SOURCE FILE Test HAS_POST_2038 failed with the following output:
+Change Dir: /usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/ninja cmTC_0c2e3 && [1/2] Building CXX object CMakeFiles/cmTC_0c2e3.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_0c2e3
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+    #include<stdlib.h>
+    #include<time.h>
+    int main(int, char *[]) {
+      setenv("TZ", "America/Los_Angeles", 1);
+      tzset();
+      struct tm time2037;
+      struct tm time2038;
+      strptime("2037-05-05 12:34:56", "%Y-%m-%d %H:%M:%S", &time2037);
+      strptime("2038-05-05 12:34:56", "%Y-%m-%d %H:%M:%S", &time2038);
+      return mktime(&time2038) - mktime(&time2037) != 31536000;
+    }
+Performing C++ SOURCE FILE Test NEEDS_Z_PREFIX failed with the following output:
+Change Dir: /usr/home/mpizarro/devel/ports/databases/apache-orc/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/ninja cmTC_cecc1 && ninja: error: '/usr/home/mpizarro/devel/ports/databases/apache-orc/c++/libs/thirdparty/zlib_ep-install/lib/libz.a', needed by 'cmTC_cecc1', missing and no known rule to make it
+
+
+Source file was:
+
+    #define Z_PREFIX
+    #include<zlib.h>
+    z_stream strm;
+    int main(int, char *[]) {
+        deflateReset(&strm);
+    }
