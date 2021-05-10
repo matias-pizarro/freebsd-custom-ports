@@ -4,7 +4,7 @@ PORTNAME=	lumina-mediaplayer
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro
+CATEGORIES=	mpizarro deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Streaming media player from the Lumina Desktop

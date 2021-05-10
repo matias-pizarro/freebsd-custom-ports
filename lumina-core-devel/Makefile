@@ -5,7 +5,7 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro
+CATEGORIES=	mpizarro x11
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Lumina Desktop Environment

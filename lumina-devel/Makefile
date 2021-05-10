@@ -4,7 +4,7 @@ PORTNAME=	lumina
 PORTVERSION=	1.6.0
 PORTEPOCH=	3
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro
+CATEGORIES=	mpizarro x11
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Lumina Desktop Environment (meta-port)

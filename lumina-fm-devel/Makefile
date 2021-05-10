@@ -2,7 +2,7 @@ PORTNAME=	lumina-fm
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro
+CATEGORIES=	mpizarro deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Insight file manager from the Lumina Desktop

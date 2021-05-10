@@ -1,7 +1,7 @@
 PORTNAME=	lumina-calculator
 DISTVERSION=	1.6.0
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro
+CATEGORIES=	mpizarro deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Scientific calculator from the Lumina Desktop

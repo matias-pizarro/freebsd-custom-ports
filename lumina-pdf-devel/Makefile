@@ -2,7 +2,7 @@ PORTNAME=	lumina-pdf
 DISTVERSION=	1.6.0
 PORTREVISION=	15
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro
+CATEGORIES=	mpizarro deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	PDF viewer from the Lumina Desktop
