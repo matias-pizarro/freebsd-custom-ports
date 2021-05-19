@@ -1,6 +1,7 @@
 PORTNAME=	runj
-DISTVERSION=	g20210502
-CATEGORIES=	sysutils
+DISTVERSION=	g20210519
+PKGNAMESUFFIX= -devel
+CATEGORIES=	mpizarro sysutils
 
 MAINTAINER=	dch@FreeBSD.org
 COMMENT=	Experimental, proof-of-concept OCI-compatible runtime for jails
@@ -10,8 +11,8 @@ LICENSE_COMB=	multi
 
 USES=		go:modules
 USE_GITHUB=	yes
-GH_ACCOUNT=	samuelkarp
-GH_TAGNAME=	de37a70
+GH_ACCOUNT=	matias-pizarro
+GH_TAGNAME=	926dcfc
 
 .include "Makefile.deps"
 
