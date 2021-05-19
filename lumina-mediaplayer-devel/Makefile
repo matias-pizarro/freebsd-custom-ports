@@ -3,6 +3,7 @@
 PORTNAME=	lumina-mediaplayer
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
+PORTREVISION=	1
 PKGNAMESUFFIX= -devel
 CATEGORIES=	mpizarro deskutils
 
@@ -20,9 +21,9 @@ USE_GL=		gl
 USE_QT=		buildtools_build core concurrent gui \
 		multimedia network svg widgets x11extras
 USE_GITHUB=	yes
-GH_ACCOUNT=	lumina-desktop
+GH_ACCOUNT=	matias-pizarro
 GH_PROJECT=	lumina
-GH_TAGNAME=	1e0c1d8
+GH_TAGNAME=	51bc249a
 
 OPTIONS_DEFINE=	NLS
 OPTIONS_SUB=	yes

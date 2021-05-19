@@ -3,7 +3,7 @@
 PORTNAME=	lumina-core
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
-PORTREVISION=	2
+PORTREVISION=	3
 PKGNAMESUFFIX= -devel
 CATEGORIES=	mpizarro x11
 
@@ -36,18 +36,7 @@ USE_QT=		buildtools_build concurrent core dbus gui imageformats \
 USE_GITHUB=	yes
 GH_ACCOUNT=	matias-pizarro
 GH_PROJECT=	lumina
-GH_TAGNAME=	974014b6
-# GH_TAGNAME=	1e0c1d8 # https://github.com/matias-pizarro/lumina/commit/1e0c1d8
-# GH_TAGNAME=	3dbfc71 # https://github.com/matias-pizarro/lumina/commit/3dbfc71
-# GH_TAGNAME=	300ed02 # https://github.com/matias-pizarro/lumina/commit/300ed02
-# GH_TAGNAME=	82901d3 # https://github.com/matias-pizarro/lumina/commit/82901d3
-# GH_TAGNAME=	f4675cd # https://github.com/matias-pizarro/lumina/commit/f4675cd
-# GH_TAGNAME=	3b5852b # https://github.com/matias-pizarro/lumina/commit/3b5852b
-# GH_TAGNAME=	f747ac8 # https://github.com/matias-pizarro/lumina/commit/f747ac8
-# GH_TAGNAME=	a12bd68 # https://github.com/matias-pizarro/lumina/commit/a12bd68
-# GH_TAGNAME=	915e684 # https://github.com/matias-pizarro/lumina/commit/915e684
-# GH_TAGNAME=	bf545b9 # https://github.com/matias-pizarro/lumina/commit/bf545b9
-# GH_TAGNAME=	ee85f9b # https://github.com/matias-pizarro/lumina/commit/ee85f9b
+GH_TAGNAME=	5ef19699
 
 OPTIONS_DEFINE=		MULTIMEDIA TRUEOS NLS
 OPTIONS_DEFAULT=	MULTIMEDIA
