@@ -36,7 +36,7 @@ USE_QT=		buildtools_build concurrent core dbus gui imageformats \
 USE_GITHUB=	yes
 GH_ACCOUNT=	matias-pizarro
 GH_PROJECT=	lumina
-GH_TAGNAME=	5ef19699
+GH_TAGNAME=	7a8e540a
 
 OPTIONS_DEFINE=		MULTIMEDIA TRUEOS NLS
 OPTIONS_DEFAULT=	MULTIMEDIA
