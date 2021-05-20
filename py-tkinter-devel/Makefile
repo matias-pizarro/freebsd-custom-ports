@@ -3,7 +3,7 @@
 PORTNAME=	tkinter
 PORTVERSION=	${PYTHON_PORTVERSION}
 PORTREVISION=	6
-CATEGORIES=	x11-toolkits python
+CATEGORIES=	mpizarro x11-toolkits python
 MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DISTNAME=	Python-${PORTVERSION}
@@ -15,7 +15,7 @@ LICENSE=	PSFL
 
 PORTSCOUT=	ignore:1
 
-USES=		compiler:c11 python:2.7+ tar:xz tk
+USES=		compiler:c11 python:3.9 tar:xz tk
 USE_PYTHON=	distutils autoplist allflavors
 
 DIST_SUBDIR=	python

@@ -3,7 +3,7 @@
 PORTNAME=	sqlite3
 PORTVERSION=	${PYTHON_PORTVERSION}
 PORTREVISION=	7
-CATEGORIES=	databases python
+CATEGORIES=	mpizarro databases python
 MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DISTNAME=	Python-${PORTVERSION}
@@ -19,7 +19,7 @@ LIB_DEPENDS=	libsqlite3.so:databases/sqlite3
 
 PORTSCOUT=	ignore:1
 
-USES=		compiler:c11 python:2.7+ tar:xz
+USES=		compiler:c11 python:3.9 tar:xz
 USE_PYTHON=	autoplist distutils allflavors
 
 DISTINFO_FILE=	${PORTSDIR}/lang/python${PYTHON_SUFFIX}/distinfo
