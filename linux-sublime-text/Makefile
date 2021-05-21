@@ -2,7 +2,7 @@
 
 PORTNAME=	sublime-text
 DISTVERSION=	4107
-CATEGORIES=	mpizarro editors linux
+CATEGORIES= editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
 DISTNAME_amd64=	sublime_text_build_${DISTVERSION}_x64

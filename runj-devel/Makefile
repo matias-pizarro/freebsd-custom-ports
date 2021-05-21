@@ -1,7 +1,7 @@
 PORTNAME=	runj
 DISTVERSION=	g20210519
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro sysutils
+CATEGORIES= sysutils
 
 MAINTAINER=	dch@FreeBSD.org
 COMMENT=	Experimental, proof-of-concept OCI-compatible runtime for jails

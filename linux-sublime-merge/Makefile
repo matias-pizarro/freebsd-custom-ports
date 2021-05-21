@@ -2,7 +2,7 @@
 
 PORTNAME=	sublime-merge
 DISTVERSION=	2056
-CATEGORIES=	mpizarro editors linux
+CATEGORIES= editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
 DISTNAME_amd64=	sublime_merge_build_${DISTVERSION}_x64

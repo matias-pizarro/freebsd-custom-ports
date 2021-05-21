@@ -3,7 +3,7 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
 PKGNAMESUFFIX= -devel
-CATEGORIES=	mpizarro deskutils
+CATEGORIES= deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Image viewer utility from the Lumina Desktop
