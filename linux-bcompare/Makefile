@@ -1,4 +1,4 @@
-# $FreeBSD$
+# Created by: Matías Pizarro <matias@pizarro.net>
 
 PORTNAME=				bcompare
 DISTVERSION=			4.3.7
@@ -14,7 +14,7 @@ COMMENT=				Compare, sync, and merge files and folders (X11)
 LICENSE=				SCOOTERSOFTWARE
 LICENSE_NAME=			Scooter Software License
 LICENSE_FILE=			${FILESDIR}/LICENSE.txt
-LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell no-auto-accept
+LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell
 
 ONLY_FOR_ARCHS=			amd64 i386
 ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
