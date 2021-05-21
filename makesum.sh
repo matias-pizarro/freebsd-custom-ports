@@ -3,7 +3,7 @@
 basepath=/usr/local/poudriere/ports/main/mpizarro
 
 cd ${basepath};
-for package in $(\ls -d *-devel | grep -v lumina-devel) linux-bcompare; do
+for package in $(\ls -d *-devel | grep -v lumina-devel) linux-*; do
     # package=$(basename ${path})
     cd ${basepath}/${package};
     sudo make makesum;
