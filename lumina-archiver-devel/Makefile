@@ -3,7 +3,7 @@
 PORTNAME=	lumina-archiver
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
-PORTREVISION=	1
+PORTREVISION=	2
 PKGNAMESUFFIX= -devel
 CATEGORIES=	mpizarro deskutils
 
@@ -18,9 +18,9 @@ USE_QT=		buildtools_build concurrent core gui \
 		multimedia network svg widgets x11extras
 USE_GL=		gl
 USE_GITHUB=	yes
-GH_ACCOUNT=	lumina-desktop
+GH_ACCOUNT=	matias-pizarro
 GH_PROJECT=	lumina
-GH_TAGNAME=	121499b
+GH_TAGNAME=	424e3719
 
 OPTIONS_DEFINE=		NLS
 OPTIONS_SUB=		yes

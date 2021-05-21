@@ -3,7 +3,7 @@
 PORTNAME=	lumina-coreutils
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
-PORTREVISION=	1
+PORTREVISION=	2
 PKGNAMESUFFIX= -devel
 CATEGORIES=	mpizarro x11
 
@@ -22,7 +22,7 @@ USE_QT=		buildtools_build concurrent core gui \
 USE_GITHUB=	yes
 GH_ACCOUNT=	matias-pizarro
 GH_PROJECT=	lumina
-GH_TAGNAME=	7a8e540a
+GH_TAGNAME=	424e3719
 
 OPTIONS_DEFINE=		NLS
 OPTIONS_SUB=	yes
