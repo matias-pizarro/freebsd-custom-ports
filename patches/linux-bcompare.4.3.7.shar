@@ -1,0 +1,911 @@
+#!/bin/sh
+# This is a shell archive
+echo x linux-bcompare
+mkdir -p linux-bcompare > /dev/null 2>&1
+echo x linux-bcompare/distinfo
+sed 's/^X//' > linux-bcompare/distinfo << 'SHAR_END'
+XTIMESTAMP = 1601823220
+XSHA256 (bcompare-4.3.7.25118.i386.rpm) = 71a72fa4318b7afedb03ec7147523d3aa47e26b090e1a170316990eb88268828
+XSIZE (bcompare-4.3.7.25118.i386.rpm) = 12675958
+XSHA256 (bcompare-4.3.7.25118.x86_64.rpm) = c913df4d0df858c4d1de62ee269b82a3e231b7408e36ee43ba672fd07e97dee0
+XSIZE (bcompare-4.3.7.25118.x86_64.rpm) = 18808757
+SHAR_END
+echo x linux-bcompare/Makefile
+sed 's/^X//' > linux-bcompare/Makefile << 'SHAR_END'
+X# $FreeBSD$
+X
+XPORTNAME=				bcompare
+XDISTVERSION=			4.3.7
+XDISTVERSIONSUFFIX=		.25118
+XCATEGORIES=				editors devel linux
+XMASTER_SITES=			http://scootersoftware.com/
+XPKGNAMEPREFIX=			linux-
+XEXTRACT_SUFX=			.rpm
+X
+XMAINTAINER=				matias@pizarro.net
+XCOMMENT=				Compare, sync, and merge files and folders (X11)
+X
+XLICENSE=				SCOOTERSOFTWARE
+XLICENSE_NAME=			Scooter Software License
+XLICENSE_FILE=			${FILESDIR}/LICENSE.txt
+XLICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell no-auto-accept
+X
+XONLY_FOR_ARCHS=			amd64 i386
+XONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
+X
+XUSES=					linux desktop-file-utils shared-mime-info shebangfix
+XUSE_LINUX=				base:run xorglibs:run qt-x11:run devtools:build
+X
+XDISTNAME_amd64=			${DISTNAME}.x86_64
+XDISTNAME_i386=			${DISTNAME}.i386
+X
+XNO_WRKSUBDIR=			true
+XNO_BUILD=				yes
+X
+XINSTALLS_ICONS=			yes
+X
+XDATA_FILTER=			-type d \
+X						-o -name *\.html \
+X						-o -name *\.js \
+X						-o -name *\.css \
+X						-o -name *\.gif \
+X						-o -name *\.png \
+X						-o -name *\.jpg \
+X						-o -name *\.desktop \
+X						-o -name mime\.types \
+X						-o -name README \
+X						-o -name BCompare.mad \
+X						-o -name RPM-GPG-KEY-scootersoftware \
+X						-o -name scootersoftware.repo
+XPROGRAM_FILES=			BCompare \
+X						bcmount32 \
+X						bcmount64
+XSCRIPT_FILES=			bcmount.sh \
+X						kde_context_menu
+XLIB_FILES=				libQt4Pas.so.5 \
+X						lib7z.so \
+X						libunrar.so \
+X						nosched.so
+X
+X.include <bsd.port.options.mk>
+X
+X.if ${ARCH} == i386
+X    LIBDIR=				lib
+X.elif ${ARCH} == amd64
+X    LIBDIR=				lib64
+X.endif
+X
+XBCLIB_SRC=				${WRKSRC}/usr/${LIBDIR}/beyondcompare
+XBCLIB_STG=				${STAGEDIR}${PREFIX}/lib/beyondcompare
+X
+XSHEBANG_FILES=			${BCLIB_SRC}/bcmount.sh \
+X						${BCLIB_SRC}/kde_context_menu
+X
+Xpre-install:
+X	${LINUXBASE}/usr/bin/gcc -Wall -fPIC -shared ${FILESDIR}/nosched.c -ldl -o ${BCLIB_SRC}/nosched.so
+X
+Xdo-install:
+X	# bin
+X	(cd ${WRKSRC}/usr/bin && ${INSTALL_SCRIPT} bcompare ${STAGEDIR}${PREFIX}/bin)
+X	# lib
+X	(cd ${BCLIB_SRC}     && ${COPYTREE_SHARE}  .                ${BCLIB_STG} "${DATA_FILTER}")
+X	(cd ${BCLIB_SRC}     && ${INSTALL_PROGRAM} ${PROGRAM_FILES} ${BCLIB_STG})
+X	(cd ${BCLIB_SRC}     && ${INSTALL_SCRIPT}  ${SCRIPT_FILES}  ${BCLIB_STG})
+X	(cd ${BCLIB_SRC}     && ${INSTALL_LIB}     ${LIB_FILES}     ${BCLIB_STG})
+X	(cd ${BCLIB_SRC}/qt4 && ${INSTALL_LIB}     $$(ls *.so.4)    ${BCLIB_STG}/qt4)
+X	(cd ${BCLIB_SRC}/ext && ${INSTALL_LIB}     $$(ls *.so)      ${BCLIB_STG}/ext)
+X	${LN} -sf ${LINUXBASE}/usr/${LIBDIR}/libbz2.so.1.0.6 ${BCLIB_STG}/libbz2.so.1.0
+X	# data
+X	(cd ${WRKSRC}/usr/share && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/share)
+X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps
+X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps
+X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps
+X	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps/bcompare.png
+X	${LN} -sf ../../../../pixmaps/bcomparefull32.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps/bcompare.png
+X	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps/bcompare.png
+X
+X.include <bsd.port.mk>
+SHAR_END
+echo x linux-bcompare/files
+mkdir -p linux-bcompare/files > /dev/null 2>&1
+echo x linux-bcompare/linux-bcompare.4.3.7.shar
+test -e "linux-bcompare/linux-bcompare.4.3.7.shar" || :> "linux-bcompare/linux-bcompare.4.3.7.shar"
+echo x linux-bcompare/pkg-descr
+sed 's/^X//' > linux-bcompare/pkg-descr << 'SHAR_END'
+XCompare files and folders using simple, powerful commands that focus on
+Xthe differences you're interested in and ignore those you're not.  Merge
+Xchanges, synchronize files, and generate reports.
+X
+XWWW: https://www.scootersoftware.com/
+X
+XThanks to shkhln (https://forums.freebsd.org/members/shkhln.54069/) and
+Xaragats (https://forums.freebsd.org/members/aragats.37029/) for coming
+Xup with the nosched.c fix
+SHAR_END
+echo x linux-bcompare/pkg-plist
+sed 's/^X//' > linux-bcompare/pkg-plist << 'SHAR_END'
+X@dir bin
+Xbin/bcompare
+X@dir share
+X@dir share/applications
+Xshare/applications/bcompare.desktop
+X@dir share/mime
+X@dir share/mime/packages
+Xshare/mime/packages/bcompare.xml
+X@dir share/icons
+X@dir share/icons/hicolor
+X@dir share/icons/hicolor/16x16
+X@dir share/icons/hicolor/16x16/apps
+Xshare/icons/hicolor/16x16/apps/bcompare.png
+X@dir share/icons/hicolor/32x32
+X@dir share/icons/hicolor/32x32/apps
+Xshare/icons/hicolor/32x32/apps/bcompare.png
+X@dir share/icons/hicolor/48x48
+X@dir share/icons/hicolor/48x48/apps
+Xshare/icons/hicolor/48x48/apps/bcompare.png
+X@dir share/pixmaps
+Xshare/pixmaps/bcompare.png
+Xshare/pixmaps/bcomparefull32.png
+Xshare/pixmaps/bcomparehalf32.png
+X@dir lib/beyondcompare
+Xlib/beyondcompare/bcmount.sh
+Xlib/beyondcompare/bcmount32
+Xlib/beyondcompare/bcmount64
+Xlib/beyondcompare/BCompare
+Xlib/beyondcompare/BCompare.mad
+Xlib/beyondcompare/kde_context_menu
+Xlib/beyondcompare/lib7z.so
+Xlib/beyondcompare/libQt4Pas.so.5
+Xlib/beyondcompare/libunrar.so
+Xlib/beyondcompare/mime.types
+Xlib/beyondcompare/README
+Xlib/beyondcompare/RPM-GPG-KEY-scootersoftware
+Xlib/beyondcompare/scootersoftware.repo
+Xlib/beyondcompare/nosched.so
+Xlib/beyondcompare/libbz2.so.1.0
+X@dir lib/beyondcompare/ext
+X@(,,644) lib/beyondcompare/ext/bcompare_ext_kde.desktop
+X@(,,644) lib/beyondcompare/ext/bcompare_ext_konq.desktop
+Xlib/beyondcompare/ext/bcompare-ext-caja.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-caja.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-nautilus.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-nautilus.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-nemo.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-nemo.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-2.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-2.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-3.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-3.i386.so
+Xlib/beyondcompare/ext/bcompare_ext_kde.amd64.so
+Xlib/beyondcompare/ext/bcompare_ext_kde.i386.so
+Xlib/beyondcompare/ext/bcompare_ext_kde5.amd64.so
+Xlib/beyondcompare/ext/bcompare_ext_kde5.i386.so
+Xlib/beyondcompare/ext/bcompare_ext_konq.amd64.so
+Xlib/beyondcompare/ext/bcompare_ext_konq.i386.so
+X@dir lib/beyondcompare/help
+X@(,,644) lib/beyondcompare/help/3-way_merge_concepts.html
+X@(,,644) lib/beyondcompare/help/accept.png
+X@(,,644) lib/beyondcompare/help/archive_files.html
+X@(,,644) lib/beyondcompare/help/bcclipmain.html
+X@(,,644) lib/beyondcompare/help/bcclipmain.png
+X@(,,644) lib/beyondcompare/help/bcclipmain_zoom57.jpg
+X@(,,644) lib/beyondcompare/help/bcclipoptions.html
+X@(,,644) lib/beyondcompare/help/bcclipsystemtray.png
+X@(,,644) lib/beyondcompare/help/bclogo.png
+X@(,,644) lib/beyondcompare/help/browse.png
+X@(,,644) lib/beyondcompare/help/calling_bc_from_other_applications.html
+X@(,,644) lib/beyondcompare/help/cicon1.png
+X@(,,644) lib/beyondcompare/help/cicon2.png
+X@(,,644) lib/beyondcompare/help/cicon9.png
+X@(,,644) lib/beyondcompare/help/cicon_loadindex_ani.gif
+X@(,,644) lib/beyondcompare/help/ciconidx.gif
+X@(,,644) lib/beyondcompare/help/collapseall.png
+X@(,,644) lib/beyondcompare/help/command_line_reference.html
+X@(,,644) lib/beyondcompare/help/commands_reference.html
+X@(,,644) lib/beyondcompare/help/commandsbc.html
+X@(,,644) lib/beyondcompare/help/commandsdata.html
+X@(,,644) lib/beyondcompare/help/commandsdir.html
+X@(,,644) lib/beyondcompare/help/commandsdirmerge.html
+X@(,,644) lib/beyondcompare/help/commandsdirsync.html
+X@(,,644) lib/beyondcompare/help/commandshex.html
+X@(,,644) lib/beyondcompare/help/commandshome.html
+X@(,,644) lib/beyondcompare/help/commandsmp3.html
+X@(,,644) lib/beyondcompare/help/commandspix.html
+X@(,,644) lib/beyondcompare/help/commandsreg.html
+X@(,,644) lib/beyondcompare/help/commandstext.html
+X@(,,644) lib/beyondcompare/help/commandstextedit.html
+X@(,,644) lib/beyondcompare/help/commandstextmerge.html
+X@(,,644) lib/beyondcompare/help/commandstextpatch.html
+X@(,,644) lib/beyondcompare/help/commandsver.html
+X@(,,644) lib/beyondcompare/help/compare.png
+X@(,,644) lib/beyondcompare/help/conflict.png
+X@(,,644) lib/beyondcompare/help/conflictsectionnext.png
+X@(,,644) lib/beyondcompare/help/conflictsectionoffnext.png
+X@(,,644) lib/beyondcompare/help/conflictsectionprev.png
+X@(,,644) lib/beyondcompare/help/contentconflict.png
+X@(,,644) lib/beyondcompare/help/contentcopycentertooutput.png
+X@(,,644) lib/beyondcompare/help/contentcopyleft.png
+X@(,,644) lib/beyondcompare/help/contentcopylefttooutput.png
+X@(,,644) lib/beyondcompare/help/contentcopyright.png
+X@(,,644) lib/beyondcompare/help/contentcopyrighttooutput.png
+X@(,,644) lib/beyondcompare/help/contentdeleteleft.png
+X@(,,644) lib/beyondcompare/help/contentdeleteright.png
+X@(,,644) lib/beyondcompare/help/contentdifferent.png
+X@(,,644) lib/beyondcompare/help/contentdifferentbinary.png
+X@(,,644) lib/beyondcompare/help/contentmergeable.png
+X@(,,644) lib/beyondcompare/help/contentmerged.png
+X@(,,644) lib/beyondcompare/help/contentsame.png
+X@(,,644) lib/beyondcompare/help/contentsamebinary.png
+X@(,,644) lib/beyondcompare/help/contentsimilar.png
+X@(,,644) lib/beyondcompare/help/copy.png
+X@(,,644) lib/beyondcompare/help/copyfileleft.png
+X@(,,644) lib/beyondcompare/help/copyfileright.png
+X@(,,644) lib/beyondcompare/help/copyleft.png
+X@(,,644) lib/beyondcompare/help/copyleftorright.png
+X@(,,644) lib/beyondcompare/help/copyright.png
+X@(,,644) lib/beyondcompare/help/copyto.png
+X@(,,644) lib/beyondcompare/help/copytooutput.png
+X@(,,644) lib/beyondcompare/help/default.css
+X@(,,644) lib/beyondcompare/help/delete.png
+X@(,,644) lib/beyondcompare/help/difffilenext.png
+X@(,,644) lib/beyondcompare/help/difffileprev.png
+X@(,,644) lib/beyondcompare/help/dir_filtering_the_view.html
+X@(,,644) lib/beyondcompare/help/dir_how_to_compare.html
+X@(,,644) lib/beyondcompare/help/dir_merge_understanding_the_display.html
+X@(,,644) lib/beyondcompare/help/dir_reconciling_differences.html
+X@(,,644) lib/beyondcompare/help/dir_sync_how_to_sync.html
+X@(,,644) lib/beyondcompare/help/dir_sync_understanding_the_display.html
+X@(,,644) lib/beyondcompare/help/dir_understanding_the_display.html
+X@(,,644) lib/beyondcompare/help/dircomparefilesonly.png
+X@(,,644) lib/beyondcompare/help/dircomparesession.png
+X@(,,644) lib/beyondcompare/help/dircomparestructure.png
+X@(,,644) lib/beyondcompare/help/dirdisplayarchive.png
+X@(,,644) lib/beyondcompare/help/dirdisplaydir.png
+X@(,,644) lib/beyondcompare/help/dirdisplayex.png
+X@(,,644) lib/beyondcompare/help/dirdisplayfile.png
+X@(,,644) lib/beyondcompare/help/dirfavconflict.png
+X@(,,644) lib/beyondcompare/help/dirfavdiffnoorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavleft.png
+X@(,,644) lib/beyondcompare/help/dirfavleftnewer.png
+X@(,,644) lib/beyondcompare/help/dirfavleftnewerorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavleftorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavmergeable.png
+X@(,,644) lib/beyondcompare/help/dirfavnoorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavright.png
+X@(,,644) lib/beyondcompare/help/dirfavrightnewer.png
+X@(,,644) lib/beyondcompare/help/dirfavrightnewerorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavrightorphan.png
+X@(,,644) lib/beyondcompare/help/dirflatten.png
+X@(,,644) lib/beyondcompare/help/dirmerge.png
+X@(,,644) lib/beyondcompare/help/dirmergesession.png
+X@(,,644) lib/beyondcompare/help/dirshowall.png
+X@(,,644) lib/beyondcompare/help/dirsyncsession.png
+X@(,,644) lib/beyondcompare/help/display_filters.html
+X@(,,644) lib/beyondcompare/help/displayfont.png
+X@(,,644) lib/beyondcompare/help/displayfontdecrease.png
+X@(,,644) lib/beyondcompare/help/displayfontincrease.png
+X@(,,644) lib/beyondcompare/help/displayfontreset.png
+X@(,,644) lib/beyondcompare/help/dlgbrowsemachine.html
+X@(,,644) lib/beyondcompare/help/dlgdatacolhandling.html
+X@(,,644) lib/beyondcompare/help/dlgdiralignwithitem.html
+X@(,,644) lib/beyondcompare/help/dlgdirfind.html
+X@(,,644) lib/beyondcompare/help/dlgdirotherfilteritem.html
+X@(,,644) lib/beyondcompare/help/dlgexport.html
+X@(,,644) lib/beyondcompare/help/dlgfileformatmanager.html
+X@(,,644) lib/beyondcompare/help/dlgimport.html
+X@(,,644) lib/beyondcompare/help/dlgnag.html
+X@(,,644) lib/beyondcompare/help/dlgopenwithitem.html
+X@(,,644) lib/beyondcompare/help/dlgprofilebrowse.html
+X@(,,644) lib/beyondcompare/help/dlgprofilemanager.html
+X@(,,644) lib/beyondcompare/help/dlgprogoptions.html
+X@(,,644) lib/beyondcompare/help/dlgregister.html
+X@(,,644) lib/beyondcompare/help/dlgreport.html
+X@(,,644) lib/beyondcompare/help/dlgrestore.html
+X@(,,644) lib/beyondcompare/help/dlgsnapshot.html
+X@(,,644) lib/beyondcompare/help/dlgsourcecontrolmanager.html
+X@(,,644) lib/beyondcompare/help/dlgsupport.html
+X@(,,644) lib/beyondcompare/help/dlgtextfindinfiles.html
+X@(,,644) lib/beyondcompare/help/dlgtextgrammaritem.html
+X@(,,644) lib/beyondcompare/help/dlgtextreplacementitem.html
+X@(,,644) lib/beyondcompare/help/dlgworkspacemanager.html
+X@(,,644) lib/beyondcompare/help/down.png
+X@(,,644) lib/beyondcompare/help/dropdown.png
+X@(,,644) lib/beyondcompare/help/editing_text.html
+X@(,,644) lib/beyondcompare/help/expandall.png
+X@(,,644) lib/beyondcompare/help/favall.png
+X@(,,644) lib/beyondcompare/help/favdiff.png
+X@(,,644) lib/beyondcompare/help/favnone.png
+X@(,,644) lib/beyondcompare/help/favorleft.png
+X@(,,644) lib/beyondcompare/help/favorright.png
+X@(,,644) lib/beyondcompare/help/favsame.png
+X@(,,644) lib/beyondcompare/help/file_formats.html
+X@(,,644) lib/beyondcompare/help/file_masks.html
+X@(,,644) lib/beyondcompare/help/filecopyselright.png
+X@(,,644) lib/beyondcompare/help/filefavconflict.png
+X@(,,644) lib/beyondcompare/help/filefavleft.png
+X@(,,644) lib/beyondcompare/help/filefavmergeable.png
+X@(,,644) lib/beyondcompare/help/filefavright.png
+X@(,,644) lib/beyondcompare/help/fileformatmanager.png
+X@(,,644) lib/beyondcompare/help/filetakesectioncenter.png
+X@(,,644) lib/beyondcompare/help/filetakesectionleft.png
+X@(,,644) lib/beyondcompare/help/filetakesectionright.png
+X@(,,644) lib/beyondcompare/help/filteredlinecount.png
+X@(,,644) lib/beyondcompare/help/filters.png
+X@(,,644) lib/beyondcompare/help/find.png
+X@(,,644) lib/beyondcompare/help/findinfiles.png
+X@(,,644) lib/beyondcompare/help/findnext.png
+X@(,,644) lib/beyondcompare/help/findprev.png
+X@(,,644) lib/beyondcompare/help/formatdata.html
+X@(,,644) lib/beyondcompare/help/formatdataconversion.html
+X@(,,644) lib/beyondcompare/help/formatdatageneral.html
+X@(,,644) lib/beyondcompare/help/formatdataregional.html
+X@(,,644) lib/beyondcompare/help/formatdatatype.html
+X@(,,644) lib/beyondcompare/help/formatexternalgeneral.html
+X@(,,644) lib/beyondcompare/help/formathex.html
+X@(,,644) lib/beyondcompare/help/formathexconversion.html
+X@(,,644) lib/beyondcompare/help/formathexgeneral.html
+X@(,,644) lib/beyondcompare/help/formatpix.html
+X@(,,644) lib/beyondcompare/help/formatpixconversion.html
+X@(,,644) lib/beyondcompare/help/formatpixgeneral.html
+X@(,,644) lib/beyondcompare/help/formattext.html
+X@(,,644) lib/beyondcompare/help/formattextconversion.html
+X@(,,644) lib/beyondcompare/help/formattextgeneral.html
+X@(,,644) lib/beyondcompare/help/formattextgrammar.html
+X@(,,644) lib/beyondcompare/help/formattextmisc.html
+X@(,,644) lib/beyondcompare/help/fulledit.png
+X@(,,644) lib/beyondcompare/help/fullrefresh.png
+X@(,,644) lib/beyondcompare/help/fullscreen.png
+X@(,,644) lib/beyondcompare/help/glossary.html
+X@(,,644) lib/beyondcompare/help/goto.png
+X@(,,644) lib/beyondcompare/help/grammars.html
+X@(,,644) lib/beyondcompare/help/headerkey.png
+X@(,,644) lib/beyondcompare/help/helpcontents.png
+X@(,,644) lib/beyondcompare/help/helpman_navigation.js
+X@(,,644) lib/beyondcompare/help/helpman_settings.js
+X@(,,644) lib/beyondcompare/help/helpman_topicinit.js
+X@(,,644) lib/beyondcompare/help/highlight.js
+X@(,,644) lib/beyondcompare/help/hmcontent.html
+X@(,,644) lib/beyondcompare/help/hmcontextids.js
+X@(,,644) lib/beyondcompare/help/hmftsearch.html
+X@(,,644) lib/beyondcompare/help/hmkwindex.html
+X@(,,644) lib/beyondcompare/help/ignored.png
+X@(,,644) lib/beyondcompare/help/index.html
+X@(,,644) lib/beyondcompare/help/info.png
+X@(,,644) lib/beyondcompare/help/insigignored.png
+X@(,,644) lib/beyondcompare/help/jquery.js
+X@(,,644) lib/beyondcompare/help/license_agreement.html
+X@(,,644) lib/beyondcompare/help/license_agreement_7-zip.html
+X@(,,644) lib/beyondcompare/help/license_agreement_fpc.html
+X@(,,644) lib/beyondcompare/help/license_agreement_gpl3.html
+X@(,,644) lib/beyondcompare/help/license_agreement_htmlviewer.html
+X@(,,644) lib/beyondcompare/help/license_agreement_httpget.html
+X@(,,644) lib/beyondcompare/help/license_agreement_innosetup.html
+X@(,,644) lib/beyondcompare/help/license_agreement_intlck64.html
+X@(,,644) lib/beyondcompare/help/license_agreement_lgpl.html
+X@(,,644) lib/beyondcompare/help/license_agreement_mpl.html
+X@(,,644) lib/beyondcompare/help/license_agreement_pcre.html
+X@(,,644) lib/beyondcompare/help/license_agreement_regexpr.html
+X@(,,644) lib/beyondcompare/help/license_agreement_textdiff.html
+X@(,,644) lib/beyondcompare/help/license_agreement_wavpack.html
+X@(,,644) lib/beyondcompare/help/license_agreement_wix.html
+X@(,,644) lib/beyondcompare/help/license_agreement_zlib.html
+X@(,,644) lib/beyondcompare/help/linux.png
+X@(,,644) lib/beyondcompare/help/mac.png
+X@(,,644) lib/beyondcompare/help/maclineending.png
+X@(,,644) lib/beyondcompare/help/managing_sessions.html
+X@(,,644) lib/beyondcompare/help/mergebase.png
+X@(,,644) lib/beyondcompare/help/mergenobase.png
+X@(,,644) lib/beyondcompare/help/mirrorleft.png
+X@(,,644) lib/beyondcompare/help/mirrorright.png
+X@(,,644) lib/beyondcompare/help/moveboth.png
+X@(,,644) lib/beyondcompare/help/moveleftorright.png
+X@(,,644) lib/beyondcompare/help/moveright.png
+X@(,,644) lib/beyondcompare/help/moveto.png
+X@(,,644) lib/beyondcompare/help/moving_bc_to_another_computer.html
+X@(,,644) lib/beyondcompare/help/mp3play.png
+X@(,,644) lib/beyondcompare/help/mp3play2.png
+X@(,,644) lib/beyondcompare/help/newfolder.png
+X@(,,644) lib/beyondcompare/help/next-dis.png
+X@(,,644) lib/beyondcompare/help/next-hot.png
+X@(,,644) lib/beyondcompare/help/next.png
+X@(,,644) lib/beyondcompare/help/note.png
+X@(,,644) lib/beyondcompare/help/opattrib.html
+X@(,,644) lib/beyondcompare/help/opcompare.html
+X@(,,644) lib/beyondcompare/help/opcopy.html
+X@(,,644) lib/beyondcompare/help/opcopyto.html
+X@(,,644) lib/beyondcompare/help/opcopytooutput.html
+X@(,,644) lib/beyondcompare/help/opdelete.html
+X@(,,644) lib/beyondcompare/help/opexchange.html
+X@(,,644) lib/beyondcompare/help/opexclude.html
+X@(,,644) lib/beyondcompare/help/opmerge.html
+X@(,,644) lib/beyondcompare/help/opmove.html
+X@(,,644) lib/beyondcompare/help/opmoveto.html
+X@(,,644) lib/beyondcompare/help/opnewfolder.html
+X@(,,644) lib/beyondcompare/help/oprename.html
+X@(,,644) lib/beyondcompare/help/opsync.html
+X@(,,644) lib/beyondcompare/help/options.png
+X@(,,644) lib/beyondcompare/help/optionsarchive.html
+X@(,,644) lib/beyondcompare/help/optionsbackup.html
+X@(,,644) lib/beyondcompare/help/optionscolor.html
+X@(,,644) lib/beyondcompare/help/optionscommand.html
+X@(,,644) lib/beyondcompare/help/optionsdircolor.html
+X@(,,644) lib/beyondcompare/help/optionsfilecolor.html
+X@(,,644) lib/beyondcompare/help/optionsnextdiff.html
+X@(,,644) lib/beyondcompare/help/optionsop.html
+X@(,,644) lib/beyondcompare/help/optionsopenwith.html
+X@(,,644) lib/beyondcompare/help/optionspixcolor.html
+X@(,,644) lib/beyondcompare/help/optionsstartup.html
+X@(,,644) lib/beyondcompare/help/optionstab.html
+X@(,,644) lib/beyondcompare/help/optionstext.html
+X@(,,644) lib/beyondcompare/help/optionstweak.html
+X@(,,644) lib/beyondcompare/help/optouch.html
+X@(,,644) lib/beyondcompare/help/outputwindow.png
+X@(,,644) lib/beyondcompare/help/overunder.png
+X@(,,644) lib/beyondcompare/help/pin.png
+X@(,,644) lib/beyondcompare/help/pix_how_to_compare.html
+X@(,,644) lib/beyondcompare/help/pixautoscale.png
+X@(,,644) lib/beyondcompare/help/pixblendtoggle.png
+X@(,,644) lib/beyondcompare/help/pixcomparetags.png
+X@(,,644) lib/beyondcompare/help/pixdiffblend.png
+X@(,,644) lib/beyondcompare/help/pixdiffrange.png
+X@(,,644) lib/beyondcompare/help/pixdifftolerance.png
+X@(,,644) lib/beyondcompare/help/pixfliphorz.png
+X@(,,644) lib/beyondcompare/help/pixflipvert.png
+X@(,,644) lib/beyondcompare/help/pixrotateleft.png
+X@(,,644) lib/beyondcompare/help/pixrotateright.png
+X@(,,644) lib/beyondcompare/help/pixzoomactual.png
+X@(,,644) lib/beyondcompare/help/pixzoomfit.png
+X@(,,644) lib/beyondcompare/help/prefsinterface.png
+X@(,,644) lib/beyondcompare/help/prev-dis.png
+X@(,,644) lib/beyondcompare/help/prev-hot.png
+X@(,,644) lib/beyondcompare/help/prev.png
+X@(,,644) lib/beyondcompare/help/pro.png
+X@(,,644) lib/beyondcompare/help/profileamazons3.html
+X@(,,644) lib/beyondcompare/help/profiledropbox.html
+X@(,,644) lib/beyondcompare/help/profileftp.html
+X@(,,644) lib/beyondcompare/help/profileftpconnection.html
+X@(,,644) lib/beyondcompare/help/profileftpglobal.html
+X@(,,644) lib/beyondcompare/help/profileftplisting.html
+X@(,,644) lib/beyondcompare/help/profileftplogin.html
+X@(,,644) lib/beyondcompare/help/profileftpproxy.html
+X@(,,644) lib/beyondcompare/help/profileftpserver.html
+X@(,,644) lib/beyondcompare/help/profileftptransfer.html
+X@(,,644) lib/beyondcompare/help/profileonedrive.html
+X@(,,644) lib/beyondcompare/help/profilesvn.html
+X@(,,644) lib/beyondcompare/help/profilewebdav.html
+X@(,,644) lib/beyondcompare/help/recompare.png
+X@(,,644) lib/beyondcompare/help/red-bg.jpg
+X@(,,644) lib/beyondcompare/help/redo.png
+X@(,,644) lib/beyondcompare/help/refresh.png
+X@(,,644) lib/beyondcompare/help/regular_expression_reference.html
+X@(,,644) lib/beyondcompare/help/remote_services.html
+X@(,,644) lib/beyondcompare/help/rename.png
+X@(,,644) lib/beyondcompare/help/replace.png
+X@(,,644) lib/beyondcompare/help/report.png
+X@(,,644) lib/beyondcompare/help/rules.png
+X@(,,644) lib/beyondcompare/help/rules_vs_file_formats.html
+X@(,,644) lib/beyondcompare/help/rulesvsformats.png
+X@(,,644) lib/beyondcompare/help/sample_regular_expressions.html
+X@(,,644) lib/beyondcompare/help/sample_scripts.html
+X@(,,644) lib/beyondcompare/help/save.png
+X@(,,644) lib/beyondcompare/help/savesnapshot.png
+X@(,,644) lib/beyondcompare/help/scheduling_a_script.html
+X@(,,644) lib/beyondcompare/help/scripting_reference.html
+X@(,,644) lib/beyondcompare/help/scripts.html
+X@(,,644) lib/beyondcompare/help/searchedit.png
+X@(,,644) lib/beyondcompare/help/searching_for_text.html
+X@(,,644) lib/beyondcompare/help/selectall.png
+X@(,,644) lib/beyondcompare/help/selectallfiles.png
+X@(,,644) lib/beyondcompare/help/session_settings.html
+X@(,,644) lib/beyondcompare/help/sessiondata.html
+X@(,,644) lib/beyondcompare/help/sessiondataalignment.html
+X@(,,644) lib/beyondcompare/help/sessiondatacolumns.html
+X@(,,644) lib/beyondcompare/help/sessiondataformats.html
+X@(,,644) lib/beyondcompare/help/sessiondataspecs.html
+X@(,,644) lib/beyondcompare/help/sessiondir.html
+X@(,,644) lib/beyondcompare/help/sessiondircomparison.html
+X@(,,644) lib/beyondcompare/help/sessiondirhandling.html
+X@(,,644) lib/beyondcompare/help/sessiondirmerge.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergecomparison.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergehandling.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergemisc.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergenamefilter.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergeotherfilters.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergespecs.html
+X@(,,644) lib/beyondcompare/help/sessiondirmisc.html
+X@(,,644) lib/beyondcompare/help/sessiondirnamefilter.html
+X@(,,644) lib/beyondcompare/help/sessiondirotherfilters.html
+X@(,,644) lib/beyondcompare/help/sessiondirspecs.html
+X@(,,644) lib/beyondcompare/help/sessiondirsync.html
+X@(,,644) lib/beyondcompare/help/sessiondirsynccomparison.html
+X@(,,644) lib/beyondcompare/help/sessiondirsynchandling.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncmisc.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncnamefilter.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncops.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncotherfilters.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncspecs.html
+X@(,,644) lib/beyondcompare/help/sessionedit.png
+X@(,,644) lib/beyondcompare/help/sessionhex.html
+X@(,,644) lib/beyondcompare/help/sessionhexcomparison.html
+X@(,,644) lib/beyondcompare/help/sessionhexformats.html
+X@(,,644) lib/beyondcompare/help/sessionhexspecs.html
+X@(,,644) lib/beyondcompare/help/sessionlocked.png
+X@(,,644) lib/beyondcompare/help/sessionmp3.html
+X@(,,644) lib/beyondcompare/help/sessionmp3importance.html
+X@(,,644) lib/beyondcompare/help/sessionmp3specs.html
+X@(,,644) lib/beyondcompare/help/sessionpix.html
+X@(,,644) lib/beyondcompare/help/sessionpixformats.html
+X@(,,644) lib/beyondcompare/help/sessionpixreplacements.html
+X@(,,644) lib/beyondcompare/help/sessionpixspecs.html
+X@(,,644) lib/beyondcompare/help/sessionreg.html
+X@(,,644) lib/beyondcompare/help/sessionregspecs.html
+X@(,,644) lib/beyondcompare/help/sessionsave.png
+X@(,,644) lib/beyondcompare/help/sessionsaveas.png
+X@(,,644) lib/beyondcompare/help/sessiontext.html
+X@(,,644) lib/beyondcompare/help/sessiontextalignment.html
+X@(,,644) lib/beyondcompare/help/sessiontextformats.html
+X@(,,644) lib/beyondcompare/help/sessiontextimportance.html
+X@(,,644) lib/beyondcompare/help/sessiontextmerge.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergealignment.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergeformats.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergeimportance.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergespecs.html
+X@(,,644) lib/beyondcompare/help/sessiontextreplacements.html
+X@(,,644) lib/beyondcompare/help/sessiontextspecs.html
+X@(,,644) lib/beyondcompare/help/sessionver.html
+X@(,,644) lib/beyondcompare/help/sessionverimportance.html
+X@(,,644) lib/beyondcompare/help/sessionverspecs.html
+X@(,,644) lib/beyondcompare/help/settings.js
+X@(,,644) lib/beyondcompare/help/settings_reference.html
+X@(,,644) lib/beyondcompare/help/sharedsessions.png
+X@(,,644) lib/beyondcompare/help/sharing_sessions.html
+X@(,,644) lib/beyondcompare/help/showaligndetails.png
+X@(,,644) lib/beyondcompare/help/showcenter.png
+X@(,,644) lib/beyondcompare/help/showcontext.png
+X@(,,644) lib/beyondcompare/help/showhexdetails.png
+X@(,,644) lib/beyondcompare/help/showitemnum.png
+X@(,,644) lib/beyondcompare/help/showruler.png
+X@(,,644) lib/beyondcompare/help/showsyntaxhighlighting.png
+X@(,,644) lib/beyondcompare/help/showtextdetails.png
+X@(,,644) lib/beyondcompare/help/showthumbnail.png
+X@(,,644) lib/beyondcompare/help/showws.png
+X@(,,644) lib/beyondcompare/help/sidebyside.png
+X@(,,644) lib/beyondcompare/help/snapshots.html
+X@(,,644) lib/beyondcompare/help/space.png
+X@(,,644) lib/beyondcompare/help/specs.html
+X@(,,644) lib/beyondcompare/help/specsback.png
+X@(,,644) lib/beyondcompare/help/specsforward.png
+X@(,,644) lib/beyondcompare/help/standard_vs_pro.html
+X@(,,644) lib/beyondcompare/help/support_ordering_and_license.html
+X@(,,644) lib/beyondcompare/help/suppressfilters.png
+X@(,,644) lib/beyondcompare/help/swap.png
+X@(,,644) lib/beyondcompare/help/synccopydeleteleft.png
+X@(,,644) lib/beyondcompare/help/synccopydeleteright.png
+X@(,,644) lib/beyondcompare/help/synccopyleft.png
+X@(,,644) lib/beyondcompare/help/synccopyright.png
+X@(,,644) lib/beyondcompare/help/syncdelete.png
+X@(,,644) lib/beyondcompare/help/syncprompt.png
+X@(,,644) lib/beyondcompare/help/syncrun.png
+X@(,,644) lib/beyondcompare/help/tab.png
+X@(,,644) lib/beyondcompare/help/texteditsession.png
+X@(,,644) lib/beyondcompare/help/textmergesession.png
+X@(,,644) lib/beyondcompare/help/textpatchsession.png
+X@(,,644) lib/beyondcompare/help/todir.png
+X@(,,644) lib/beyondcompare/help/todirflatten.png
+X@(,,644) lib/beyondcompare/help/todirkeepbase.png
+X@(,,644) lib/beyondcompare/help/todirkeeprelative.png
+X@(,,644) lib/beyondcompare/help/toolbardropdown.png
+X@(,,644) lib/beyondcompare/help/toolbarfavorites.png
+X@(,,644) lib/beyondcompare/help/toolbarfilefilters.png
+X@(,,644) lib/beyondcompare/help/toolbartoggles.png
+X@(,,644) lib/beyondcompare/help/top-hot.png
+X@(,,644) lib/beyondcompare/help/top.png
+X@(,,644) lib/beyondcompare/help/touch.png
+X@(,,644) lib/beyondcompare/help/undo.png
+X@(,,644) lib/beyondcompare/help/unixlineending.png
+X@(,,644) lib/beyondcompare/help/up.png
+X@(,,644) lib/beyondcompare/help/updateboth.png
+X@(,,644) lib/beyondcompare/help/updateleft.png
+X@(,,644) lib/beyondcompare/help/updateright.png
+X@(,,644) lib/beyondcompare/help/uponelevel.png
+X@(,,644) lib/beyondcompare/help/using_bc.html
+X@(,,644) lib/beyondcompare/help/using_text_merge.html
+X@(,,644) lib/beyondcompare/help/viewdata.html
+X@(,,644) lib/beyondcompare/help/viewdata.jpg
+X@(,,644) lib/beyondcompare/help/viewdata_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewdir.html
+X@(,,644) lib/beyondcompare/help/viewdir.jpg
+X@(,,644) lib/beyondcompare/help/viewdir_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewdirmerge.html
+X@(,,644) lib/beyondcompare/help/viewdirmerge.jpg
+X@(,,644) lib/beyondcompare/help/viewdirmerge_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewdirsync.html
+X@(,,644) lib/beyondcompare/help/viewdirsync.jpg
+X@(,,644) lib/beyondcompare/help/viewdirsync_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewhex.html
+X@(,,644) lib/beyondcompare/help/viewhex.jpg
+X@(,,644) lib/beyondcompare/help/viewhex_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewhome.html
+X@(,,644) lib/beyondcompare/help/viewhome.jpg
+X@(,,644) lib/beyondcompare/help/viewhome_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewmp3.jpg
+X@(,,644) lib/beyondcompare/help/viewmp3_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewother.html
+X@(,,644) lib/beyondcompare/help/viewpix.html
+X@(,,644) lib/beyondcompare/help/viewpix.jpg
+X@(,,644) lib/beyondcompare/help/viewpix_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewreg.html
+X@(,,644) lib/beyondcompare/help/viewreg.jpg
+X@(,,644) lib/beyondcompare/help/viewreg_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtext.html
+X@(,,644) lib/beyondcompare/help/viewtext.jpg
+X@(,,644) lib/beyondcompare/help/viewtext_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtextedit.html
+X@(,,644) lib/beyondcompare/help/viewtextedit.jpg
+X@(,,644) lib/beyondcompare/help/viewtextedit_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtextmerge.html
+X@(,,644) lib/beyondcompare/help/viewtextmerge.jpg
+X@(,,644) lib/beyondcompare/help/viewtextmerge_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtextpatch.html
+X@(,,644) lib/beyondcompare/help/viewtextpatch.jpg
+X@(,,644) lib/beyondcompare/help/viewtextpatch_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewver.jpg
+X@(,,644) lib/beyondcompare/help/viewver_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/walking_through_differences.html
+X@(,,644) lib/beyondcompare/help/warning.png
+X@(,,644) lib/beyondcompare/help/webbrowser.png
+X@(,,644) lib/beyondcompare/help/welcome.html
+X@(,,644) lib/beyondcompare/help/whats_new.html
+X@(,,644) lib/beyondcompare/help/where_settings_are_stored.html
+X@(,,644) lib/beyondcompare/help/windows.png
+X@(,,644) lib/beyondcompare/help/windowslineending.png
+X@(,,644) lib/beyondcompare/help/zoom_index.js
+X@(,,644) lib/beyondcompare/help/zoom_pageinfo.js
+X@(,,644) lib/beyondcompare/help/zoom_search.js
+X@(,,644) lib/beyondcompare/help/zoomin.png
+X@(,,644) lib/beyondcompare/help/zoomout.png
+X@dir lib/beyondcompare/qt4
+Xlib/beyondcompare/qt4/libQtCore.so.4
+Xlib/beyondcompare/qt4/libQtGui.so.4
+SHAR_END
+echo x linux-bcompare/files/LICENSE.txt
+sed 's/^X//' > linux-bcompare/files/LICENSE.txt << 'SHAR_END'
+XLicense Agreement
+X
+Xhttps://www.scootersoftware.com/v4help/index.html?support_ordering_and_license.html
+X
+XYour use of Beyond Compare is governed by the following Terms and
+XConditions:
+X
+XAcceptance of License Agreement
+X
+XYou should carefully read the following terms and conditions before
+Xusing Beyond Compare 4 (the "Software").  Unless you have a different
+Xlicense agreement signed by Scooter Software, your use of this software
+Xindicates your agreement to these terms and conditions.  If you do not
+Xaccept all of these terms and conditions, you must cease using the
+XSoftware immediately.
+X
+XCopyright
+X
+XCustomer acknowledges that the Software, License Key and accompanying
+Xuser documentation ("Documentation") are copyrighted works owned by
+XScooter Software and that Customer has no rights in the foregoing except
+Xas expressly granted herein.
+X
+XFree 30-Day Trial
+X
+XThis is not free software.  Scooter Software hereby grants you a
+Xnon-exclusive, non-transferable, limited license to use the Software
+Xfree of charge for a period of thirty (30) days.  Use of the Software
+Xbeyond the thirty-day (30-day) trial period requires the purchase of a
+XLicense Key as described below.  Use of the Software beyond the
+Xthirty-day (30-day) trial period without purchase of a License Key is a
+Xviolation of U.S. and international copyright laws.
+X
+XLicense Key
+X
+XA unique key that will allow you to use the Software beyond the
+Xthirty-day (30-day) free trial period ("License Key") may be purchased
+Xfrom the Scooter Software website, which is currently
+Xhttp://www.scootersoftware.com.  A License Key may be purchased for
+Xsingle or multiple users, all users at a named site, or an entire
+Xenterprise.  A License Key is further categorized by feature set
+X(Standard Edition or Pro Edition), and operating system platform
+X(Windows Platform, Mac Platform, Linux Platform, or Multi Platform).  A
+Xprice list on the Scooter Software website details pricing for all
+Xlicense options.  Upon purchase of a License Key, Scooter Software
+Xhereby grants you a non-exclusive, non-transferable license to use the
+XSoftware with the applicable feature set on the applicable operating
+Xsystem platform as follows:
+X
+X   Per-User License Key:  A Per-User License Key may be purchased for a
+X   specific quantity of users.  Each user of the total quantity may be
+X   either (a) a person who has access to the Software on any number of
+X   computers, or (b) a computer on which the Software will be installed
+X   for use by any number of persons, one at a time, while physically
+X   present at the computer.  Each person so licensed must be the
+X   Customer, an employee of the Customer, an employee of a Customer's
+X   subsidiary company, or a third party consultant retained by the
+X   Customer to perform information technology functions (each, a "Third
+X   Party") to use the Software solely for Customer's internal business
+X   operations and benefit, and for no other purpose whatsoever. 
+X   Customer shall ensure that such Third Party complies with the terms
+X   of this License Agreement and will be responsible for any breach by
+X   such Third Party.
+X
+X   Site License Key:  An unlimited user, single-location License Key may
+X   be used at Customer locations within a 100-mile radius of the site
+X   identified in the License Key (the "Site"), by any and all of
+X   Customer's employees while personally present at the Site.  This
+X   license is likewise granted to Customer's employees who typically
+X   work at the Site, while performing Customer work at other locations
+X   such as client locations or home.  Customer shall have the right to
+X   sublicense its rights under this License Agreement to third party
+X   consultants that it retains to perform information technology
+X   functions (each, an "Onsite Consultant"), while personally present at
+X   the Site to use the Software solely for Customer's internal business
+X   operations and benefit, and for no other purpose whatsoever. 
+X   Customer shall ensure that such Onsite Consultant complies with the
+X   terms of this License Agreement and will be responsible for any
+X   breach by such Onsite Consultant.
+X
+X   Enterprise License Key:  An enterprise-wide ("Enterprise") License
+X   Key may be used world-wide, by any and all of Customer's employees. 
+X   Customer shall have the right to sublicense its rights under this
+X   License Agreement to third party consultants that it retains to
+X   perform information technology functions (each, an "Enterprise
+X   Consultant"), while personally present at any Customer location to
+X   use the Software solely for Customer's internal business operations
+X   and benefit, and for no other purpose whatsoever.  Customer shall
+X   ensure that such Enterprise Consultant complies with the terms of
+X   this License Agreement and will be responsible for any breach by such
+X   Enterprise Consultant.
+X
+XYou shall be responsible for maintaining the License Key in a safe
+Xlocation and are specifically prohibited from distributing the License
+XKey, intentionally or unintentionally, to any third party not authorized
+Xby this License Agreement.  Upon loss or distribution of the License
+XKey, Customer shall be required to pay a reinstatement fee at Scooter
+XSoftware's discretion.
+X
+XDistribution of the Software
+X
+XProvided that you do not copy or distribute the License Key, and you
+Xinclude a copy of this License Agreement, you may (a) make copies of the
+XSoftware; (b) give exact, unmodified copies of the Software to anyone;
+Xand (c) distribute the Software in its unmodified form via electronic
+Xmeans.  You are specifically prohibited from charging any fees for any
+Xsuch copies or distributions.
+X
+XTerm and Termination
+X
+XYou may continue to use the Software for as long as you comply with the
+Xterms and conditions of this License Agreement.  Scooter Software may
+Xterminate this License Agreement immediately upon notice to you in the
+Xevent that Scooter Software has reason to believe you have breached this
+XLicense Agreement.  Upon termination, you shall immediately cease all
+Xuse of the Software, License Key and Documentation and shall not be
+Xentitled to a refund of any fees paid.
+X
+XWarranties
+X
+XScooter Software warrants and represents that: (a) it has all right,
+Xtitle and interest in the Software, the right to enter into and provide
+Xthe license rights granted by this Agreement, and is not party to and
+Xwill not enter into any agreement, covenant or encumbrance that
+Xconflicts with this Agreement; (b) the Software does not, to the best of
+XScooter Software’s knowledge, infringe upon or violate any patent,
+Xcopyright, or trade secret or other proprietary right of any third
+Xparty; (c) the advent of any date or year shall not adversely affect the
+Xperformance of the Software; and (d) the Software is not contaminated by
+Xharmful code (e.g., self-propagating program instructions commonly
+Xcalled viruses, worms or Trojans).
+X
+XGeneral Disclaimer
+X
+XExcept for the limited warranties set forth herein, THE SOFTWARE AND
+XDOCUMENTATION ARE PROVIDED "AS IS".  TO THE MAXIMUM EXTENT PERMITTED BY
+XAPPLICABLE LAW, SCOOTER SOFTWARE DISCLAIMS ALL WARRANTIES, EITHER
+XEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF
+XMERCHANTABILITY, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. 
+XANY LIABILITY OF SCOOTER SOFTWARE WILL BE LIMITED EXCLUSIVELY TO REFUND
+XOF THE PURCHASE PRICE.
+X
+XMiscellaneous Provisions
+X
+XThe validity and interpretation of this Agreement shall be governed by
+Xthe laws of the United States of America and the State of Wisconsin. 
+XCustomer agrees that the state and federal courts located in the State
+Xof Wisconsin, Dane County, shall be the appropriate site of venue for
+Xactions relating to this Agreement, and hereby consents to the exclusive
+Xjurisdiction and venue of such courts.  If any provision of this
+XAgreement is declared by a court of competent jurisdiction to be
+Xinvalid, illegal or unenforceable, such provision or part thereof will
+Xbe severed from the Agreement and the remaining provisions will remain
+Xin full force and effect.
+SHAR_END
+echo x linux-bcompare/files/patch-usr_bin_bcompare
+sed 's/^X//' > linux-bcompare/files/patch-usr_bin_bcompare << 'SHAR_END'
+X--- usr/bin/bcompare.orig	2020-09-01 19:23:29 UTC
+X+++ usr/bin/bcompare
+X@@ -1,17 +1,22 @@
+X #!/bin/sh
+X 
+X-BC_LIB=/usr/lib64/beyondcompare
+X+LINUXULATOR_LIB=/compat/linux/usr/lib64
+X+
+X+BC_LIB=/usr/local/lib/beyondcompare
+X export BC_LIB
+X 
+X+_LD_PRELOAD="$BC_LIB/nosched.so"
+X+export _LD_PRELOAD
+X+
+X BC_PACKAGE_TYPE=rpm
+X export BC_PACKAGE_TYPE
+X 
+X EXEC="$BC_LIB/BCompare"
+X 
+X if [ -n "$LD_LIBRARY_PATH" ]; then
+X-export LD_LIBRARY_PATH="$BC_LIB:$LD_LIBRARY_PATH"
+X+export LD_LIBRARY_PATH="$BC_LIB:$LD_LIBRARY_PATH:$LINUXULATOR_LIB"
+X else
+X-export LD_LIBRARY_PATH="$BC_LIB"
+X+export LD_LIBRARY_PATH="$BC_LIB:$LINUXULATOR_LIB"
+X fi
+X 
+X #check to see if we have all of the shared libraries.
+X@@ -44,7 +49,7 @@ while [ "$#" -gt 0 ]; do
+X 	ARGS=$ARGS" \"$1\""
+X 	shift 1
+X done
+X-/bin/bash -c "exec -a $0 $EXEC $ARGS > /dev/null 2>&1" $0
+X+/usr/bin/env bash -c "exec -a $0 /usr/bin/env LD_PRELOAD=$_LD_PRELOAD $EXEC $ARGS > /dev/null 2>&1" $0
+X 
+X ########################################
+X # set exit code / wait on existing instance
+X@@ -54,4 +59,6 @@ if [ $EXIT = 99 ]; then
+X 	EXIT=`cat /tmp/BC4_.$$`
+X 	rm -f /tmp/BC4_.$$
+X fi
+X+[ ! -f bash.core ] || rm -f bash.core
+X+[ ! -f pgrep.core ] || rm -f pgrep.core
+X exit $EXIT
+SHAR_END
+echo x linux-bcompare/files/nosched.c
+sed 's/^X//' > linux-bcompare/files/nosched.c << 'SHAR_END'
+X#define _GNU_SOURCE
+X
+X#include <dlfcn.h>
+X#include <pthread.h>
+X#include <stdio.h>
+X#include <string.h>
+X
+Xint pthread_noop() {
+X  fprintf(stderr, "%s(...)\n", __func__);
+X  return 0;
+X}
+X
+X// https://stackoverflow.com/questions/15599026/how-can-i-intercept-dlsym-calls-using-ld-preload/18825060#18825060
+Xvoid* _dl_sym(void*, const char*, void*);
+X
+Xstatic void* (*libc_dlsym)(void*, const char*) = NULL;
+X
+Xvoid* dlsym(void* handle, const char* symbol) {
+X
+X  if (!libc_dlsym) {
+X    libc_dlsym = _dl_sym(RTLD_NEXT, "dlsym", dlsym);
+X  }
+X
+X  //~ fprintf(stderr, "%s(_, %s)\n", __func__, symbol);
+X
+X  if (strcmp(symbol, "pthread_attr_setinheritsched") == 0) {
+X    return pthread_noop;
+X  }
+X
+X  return libc_dlsym(handle, symbol);
+X}
+X
+SHAR_END
+exit

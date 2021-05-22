@@ -1,0 +1,623 @@
+--- databases/arrow/Makefile	2020-09-06 22:46:46.160354000 +0200
++++ databases/arrow/Makefile	2020-09-29 16:42:18.807811000 +0200
+@@ -2,6 +2,7 @@
+ 
+ PORTNAME=	arrow
+ DISTVERSION=	1.0.1
++PORTREVISION=	2
+ CATEGORIES=	databases
+ MASTER_SITES=	https://mirrors.advancedhosters.com/apache/${PORTNAME}/${PORTNAME}-${DISTVERSION}/
+ DISTNAME=	apache-${PORTNAME}-${DISTVERSION}
+@@ -14,35 +15,178 @@
+ 
+ LIB_DEPENDS=	libboost_system.so:devel/boost-libs
+ 
+-USES=		cmake compiler:c++11-lang pkgconfig
++USES=		cmake compiler:c++11-lang pkgconfig python
+ USE_LDCONFIG=	yes
+ 
+ WRKSRC_SUBDIR=	cpp
+ 
++CMAKE_ARGS=	-DARROW_WITH_BACKTRACE=OFF
+ CMAKE_OFF=	ARROW_BUILD_STATIC
+ 
+-OPTIONS_GROUP=		COMPRESSION
++OPTIONS_GROUP=			COMPRESSION EXTENSIONS
+ OPTIONS_GROUP_COMPRESSION=	BROTLI BZ2 LZ4 SNAPPY ZLIB ZSTD
+-OPTIONS_DEFAULT=	BROTLI BZ2 LZ4 SNAPPY ZLIB ZSTD
++OPTIONS_GROUP_EXTENSIONS=	PYTHON COMPUTE JSON CSV FILESYSTEM PARQUET FLIGHT DATASET HDFS S3 GANDIVA BUILD_UTILITIES TESTS
++OPTIONS_DEFAULT=		BROTLI BZ2 LZ4 SNAPPY ZLIB ZSTD PYTHON COMPUTE JSON CSV FILESYSTEM PARQUET FLIGHT DATASET HDFS
++OPTIONS_SUB=			yes
++PLIST_SUB=			PYTHON_SUFFIX=${PYTHON_SUFFIX}
+ 
+-COMPRESSION_DESC=	Compression support:
++COMPRESSION_DESC=		Compression support:
++EXTENSIONS_DESC=		Extensions:
+ 
+-BROTLI_CMAKE_BOOL=	ARROW_WITH_BROTLI
+-BROTLI_LIB_DEPENDS=	libbrotlicommon.so:archivers/brotli
++BROTLI_CMAKE_BOOL=		ARROW_WITH_BROTLI
++BROTLI_LIB_DEPENDS=		libbrotlicommon.so:archivers/brotli
+ 
+-BZ2_DESC=		bz2 compression support
+-BZ2_CMAKE_BOOL=		ARROW_WITH_BZ2
++BZ2_DESC=			bz2 compression support
++BZ2_CMAKE_BOOL=			ARROW_WITH_BZ2
+ 
+-LZ4_CMAKE_BOOL=		ARROW_WITH_LZ4
+-LZ4_LIB_DEPENDS=	liblz4.so:archivers/liblz4
++LZ4_CMAKE_BOOL=			ARROW_WITH_LZ4
++LZ4_LIB_DEPENDS=		liblz4.so:archivers/liblz4
+ 
+-SNAPPY_CMAKE_BOOL=	ARROW_WITH_SNAPPY
+-SNAPPY_LIB_DEPENDS=	libsnappy.so:archivers/snappy
++SNAPPY_CMAKE_BOOL=		ARROW_WITH_SNAPPY
++SNAPPY_LIB_DEPENDS=		libsnappy.so:archivers/snappy
+ 
+-ZLIB_CMAKE_BOOL=	ARROW_WITH_ZLIB
++ZLIB_CMAKE_BOOL=		ARROW_WITH_ZLIB
+ 
+-ZSTD_DESC=		zstd compression support
+-ZSTD_CMAKE_BOOL=	ARROW_WITH_ZSTD
+-ZSTD_LIB_DEPENDS=	libzstd.so:archivers/zstd
++ZSTD_DESC=			zstd compression support
++ZSTD_CMAKE_BOOL=		ARROW_WITH_ZSTD
++ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
++
++COMPUTE_DESC=			build the Arrow Compute Modules
++COMPUTE_CMAKE_BOOL=		ARROW_COMPUTE
++COMPUTE_BUILD_DEPENDS=		${LOCALBASE}/lib/libutf8proc.so:textproc/utf8proc
++COMPUTE_LIB_DEPENDS=		libutf8proc.so:textproc/utf8proc
++
++JSON_DESC=			build Arrow with JSON support
++JSON_CMAKE_BOOL=		ARROW_JSON
++JSON_BUILD_DEPENDS=		${LOCALBASE}/include/rapidjson/rapidjson.h:devel/rapidjson
++
++CSV_DESC=			build the Arrow CSV Parser Module
++CSV_CMAKE_BOOL=			ARROW_CSV
++
++FILESYSTEM_DESC=		build the Arrow Filesystem Layer
++FILESYSTEM_CMAKE_BOOL=		ARROW_FILESYSTEM
++
++PARQUET_DESC=			build the Parquet libraries
++PARQUET_USES=			ssl
++PARQUET_CMAKE_BOOL=		ARROW_PARQUET PARQUET_REQUIRE_ENCRYPTION
++PARQUET_BUILD_DEPENDS=		${LOCALBASE}/lib/libutf8proc.so:textproc/utf8proc
++PARQUET_LIB_DEPENDS=		libutf8proc.so:textproc/utf8proc \
++				libthrift-0.11.0.so:devel/thrift-cpp
++
++FLIGHT_DESC=			build the Arrow Flight RPC System
++FLIGHT_USES=			ssl
++FLIGHT_CMAKE_BOOL=		ARROW_FLIGHT
++FLIGHT_LIB_DEPENDS=		libgflags.so:devel/gflags \
++				libprotobuf.so:devel/protobuf \
++				libabsl_base.so:devel/abseil \
++				libcares.so:dns/c-ares \
++				libgrpc.so:devel/grpc
++
++DATASET_DESC=			build the Arrow Dataset Modules
++DATASET_CMAKE_BOOL=		ARROW_DATASET
++DATASET_BUILD_DEPENDS=		${LOCALBASE}/lib/libutf8proc.so:textproc/utf8proc
++DATASET_LIB_DEPENDS=		libutf8proc.so:textproc/utf8proc
++
++HDFS_DESC=			build the Arrow HDFS bridge
++HDFS_CMAKE_BOOL=		ARROW_HDFS
++
++GANDIVA_DESC=			build the Gandiva libraries
++GANDIVA_CMAKE_BOOL=		ARROW_GANDIVA
++GANDIVA_BUILD_DEPENDS=		${LOCALBASE}/bin/clang10:devel/llvm10
++GANDIVA_LIB_DEPENDS=		libgrpc.so:devel/grpc \
++				libre2.so:devel/re2
++
++BUILD_UTILITIES_DESC=		build Arrow commandline utilities
++BUILD_UTILITIES_CMAKE_BOOL=	ARROW_BUILD_UTILITIES
++
++PYTHON_DESC=			build the Arrow CPython extensions
++PYTHON_CMAKE_BOOL=		ARROW_PYTHON
++PYTHON_BUILD_DEPENDS=		${LOCALBASE}/lib/libutf8proc.so:textproc/utf8proc \
++				${PYTHON_PKGNAMEPREFIX}numpy>0:math/py-numpy@${PY_FLAVOR} \
++				${PYTHON_PKGNAMEPREFIX}cython>0:lang/cython@${PY_FLAVOR} \
++				${PYTHON_PKGNAMEPREFIX}setuptools>0:devel/py-setuptools@${PY_FLAVOR} \
++				${PYTHON_PKGNAMEPREFIX}setuptools_scm>0:devel/py-setuptools_scm@${PY_FLAVOR}
++PYTHON_LIB_DEPENDS=		libutf8proc.so:textproc/utf8proc
++
++TESTS_DESC=			build TESTS
++TESTS_CMAKE_ON=			-DARROW_BUILD_EXAMPLES:BOOL=ON \
++				-DARROW_BUILD_TESTS:BOOL=ON \
++				-DARROW_ENABLE_TIMING_TESTS:BOOL=ON \
++				-DARROW_BUILD_INTEGRATION:BOOL=ON \
++				-DARROW_BUILD_BENCHMARKS:BOOL=OFF \
++				-DARROW_BUILD_BENCHMARKS_REFERENCE=OFF \
++				-DARROW_TEST_LINKAGE:STRING=shared \
++				-DARROW_FUZZING:BOOL=OFF \
++				-DARROW_LARGE_MEMORY_TESTS:BOOL=ON
++TESTS_CMAKE_OFF=		-DARROW_BUILD_EXAMPLES:BOOL=OFF \
++				-DARROW_BUILD_TESTS:BOOL=OFF \
++				-DARROW_ENABLE_TIMING_TESTS:BOOL=ON \
++				-DARROW_BUILD_INTEGRATION:BOOL=OFF \
++				-DARROW_BUILD_BENCHMARKS:BOOL=OFF \
++				-DARROW_BUILD_BENCHMARKS_REFERENCE=OFF \
++				-DARROW_TEST_LINKAGE:STRING=shared \
++				-DARROW_FUZZING:BOOL=OFF \
++				-DARROW_LARGE_MEMORY_TESTS:BOOL=OFF
++TESTS_BUILD_DEPENDS=		${LOCALBASE}/include/gtest/gtest.h:devel/googletest \
++				${LOCALBASE}/include/benchmark/benchmark.h:devel/benchmark
++TESTS_LIB_DEPENDS=		${PYTHON_PKGNAMEPREFIX}setuptools>0:devel/py-setuptools@${PY_FLAVOR}
++TESTS_LIB_DEPENDS=		libgtest.so:devel/googletest
++
++S3_DESC=			build Arrow with S3 support
++S3_USES=			ssl
++S3_CMAKE_BOOL=			ARROW_S3
++S3_LIB_DEPENDS=			libaws-cpp-sdk-s3.so:devel/aws-sdk-cpp \
++				libaws-c-common.so:devel/aws-c-common \
++				libaws-c-event-stream.so:devel/aws-c-event-stream \
++				libaws-checksums.so:devel/aws-checksums
++
++pre-configure:
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../ci/appveyor-cpp-build.bat
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/cmake_modules/FindArrowPython.cmake
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/cmake_modules/FindArrowPythonFlight.cmake
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/src/arrow/python/arrow-python-flight.pc.in
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/src/arrow/python/arrow-python.pc.in
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/src/arrow/python/ArrowPythonConfig.cmake.in
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/src/arrow/python/ArrowPythonFlightConfig.cmake.in
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../cpp/src/arrow/python/CMakeLists.txt
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/release/rat_exclude_files.txt
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/release/verify-apt.sh
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/release/verify-yum.sh
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/conda-recipes/arrow-cpp/meta.yaml
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/changelog
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/control
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/libarrow-python-dev.install
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian.ubuntu-xenial/libarrow-python100.install
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/changelog
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/control
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-dev.install
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-flight-dev.install
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python-flight100.install
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/debian/libarrow-python100.install
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/linux-packages/apache-arrow/yum/arrow.spec.in
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../dev/tasks/tasks.yml
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../docs/source/developers/python.rst
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../python/cmake_modules/FindArrowPython.cmake
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../python/cmake_modules/FindArrowPythonFlight.cmake
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../python/CMakeLists.txt
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../python/pyarrow/__init__.py
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../python/pyarrow/plasma.py
++	@${REINPLACE_CMD} -e 's|arrow_python|arrow_python'${PYTHON_SUFFIX}'|g; s|arrow-python|arrow-python'${PYTHON_SUFFIX}'|g' ${WRKSRC}/../python/setup.py
++	@${MV} ${WRKSRC}/src/arrow/python/arrow-python.pc.in ${WRKSRC}/src/arrow/python/arrow-python${PYTHON_SUFFIX}.pc.in
++	@${MV} ${WRKSRC}/src/arrow/python/arrow-python-flight.pc.in ${WRKSRC}/src/arrow/python/arrow-python${PYTHON_SUFFIX}-flight.pc.in
++
++.include <bsd.port.options.mk>
++
++.if ${PORT_OPTIONS:MPYTHON} == "PYTHON" && ${PORT_OPTIONS:MFLIGHT} == "FLIGHT"
++    PLIST_SUB+=	PYTHONFLIGHT=""
++.else
++    PLIST_SUB+=	PYTHONFLIGHT="@comment "
++.endif
++
++.if ${PORT_OPTIONS:MTESTS} && ${PORT_OPTIONS:MFLIGHT} == "FLIGHT"
++    PLIST_SUB+=	TESTSFLIGHT=""
++.else
++    PLIST_SUB+=	TESTSFLIGHT="@comment "
++.endif
+ 
+ .include <bsd.port.mk>
+diff -ruN /usr/local/poudriere/ports/default/databases/arrow/files/patch-Findc-ares.cmake ./files/patch-Findc-ares.cmake
+--- databases/arrow/files/patch-Findc-ares.cmake	1970-01-01 01:00:00.000000000 +0100
++++ databases/arrow/files/patch-Findc-ares.cmake	2020-09-13 01:14:57.528906000 +0200
+@@ -0,0 +1,45 @@
++--- cmake_modules/Findc-ares.cmake.orig 2020-08-17 17:58:35 UTC
+++++ cmake_modules/Findc-ares.cmake
++@@ -0,0 +1,42 @@
+++# Licensed to the Apache Software Foundation (ASF) under one
+++# or more contributor license agreements.  See the NOTICE file
+++# distributed with this work for additional information
+++# regarding copyright ownership.  The ASF licenses this file
+++# to you under the Apache License, Version 2.0 (the
+++# "License"); you may not use this file except in compliance
+++# with the License.  You may obtain a copy of the License at
+++#
+++#   http://www.apache.org/licenses/LICENSE-2.0
+++#
+++# Unless required by applicable law or agreed to in writing,
+++# software distributed under the License is distributed on an
+++# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+++# KIND, either express or implied.  See the License for the
+++# specific language governing permissions and limitations
+++# under the License.
+++
+++if(c-ares_ROOT)
+++  find_library(CARES_STATIC_LIB
+++               NAMES cares
+++               PATHS ${c-ares_ROOT}
+++               PATH_SUFFIXES ${LIB_PATH_SUFFIXES}
+++               NO_DEFAULT_PATH)
+++  find_path(CARES_INCLUDE_DIR
+++            NAMES ares.h
+++            PATHS ${c-ares_ROOT}
+++            NO_DEFAULT_PATH
+++            PATH_SUFFIXES ${INCLUDE_PATH_SUFFIXES})
+++else()
+++  find_library(CARES_STATIC_LIB NAMES cares)
+++  find_path(CARES_INCLUDE_DIR NAMES ares.h PATH_SUFFIXES ${INCLUDE_PATH_SUFFIXES})
+++endif()
+++
+++find_package_handle_standard_args(c-ares REQUIRED_VARS CARES_STATIC_LIB CARES_INCLUDE_DIR)
+++
+++if(c-ares_FOUND)
+++  add_library(c-ares::cares STATIC IMPORTED)
+++  set_target_properties(c-ares::cares
+++                        PROPERTIES IMPORTED_LOCATION "${CARES_STATIC_LIB}"
+++                                   INTERFACE_INCLUDE_DIRECTORIES "${CARES_INCLUDE_DIR}")
+++endif()
+++
+diff -ruN /usr/local/poudriere/ports/default/databases/arrow/files/patch-ThirdpartyToolchain.cmake ./files/patch-ThirdpartyToolchain.cmake
+--- databases/arrow/files/patch-ThirdpartyToolchain.cmake	1970-01-01 01:00:00.000000000 +0100
++++ databases/arrow/files/patch-ThirdpartyToolchain.cmake	2020-09-29 16:25:03.830792000 +0200
+@@ -0,0 +1,51 @@
++--- cmake_modules/ThirdpartyToolchain.cmake.orig	2020-08-17 17:58:35 UTC
+++++ cmake_modules/ThirdpartyToolchain.cmake
++@@ -16,6 +16,7 @@
++ # under the License.
++ 
++ include(ProcessorCount)
+++include(ExternalProject)
++ processorcount(NPROC)
++ 
++ add_custom_target(rapidjson)
++@@ -2182,10 +2183,10 @@
++   file(MAKE_DIRECTORY ${CARES_INCLUDE_DIR})
++ 
++   add_dependencies(toolchain cares_ep)
++-  add_library(c-ares::cares STATIC IMPORTED)
++-  set_target_properties(c-ares::cares
++-                        PROPERTIES IMPORTED_LOCATION "${CARES_STATIC_LIB}"
++-                                   INTERFACE_INCLUDE_DIRECTORIES "${CARES_INCLUDE_DIR}")
+++  # add_library(c-ares::cares STATIC IMPORTED)
+++  # set_target_properties(c-ares::cares
+++  #                       PROPERTIES IMPORTED_LOCATION "${CARES_STATIC_LIB}"
+++  #                                  INTERFACE_INCLUDE_DIRECTORIES "${CARES_INCLUDE_DIR}")
++ 
++   set(CARES_VENDORED TRUE)
++ 
++@@ -2194,7 +2195,7 @@
++ 
++ if(ARROW_WITH_GRPC)
++   if(c-ares_SOURCE STREQUAL "AUTO")
++-    find_package(c-ares QUIET CONFIG)
+++    find_package(c-ares QUIET)
++     if(c-ares_FOUND)
++       set(CARES_INCLUDE_DIR ${c-ares_INCLUDE_DIR})
++     else()
++@@ -2203,7 +2204,7 @@
++   elseif(c-ares_SOURCE STREQUAL "BUNDLED")
++     build_cares()
++   elseif(c-ares_SOURCE STREQUAL "SYSTEM")
++-    find_package(c-ares REQUIRED CONFIG)
+++    find_package(c-ares REQUIRED)
++     set(CARES_INCLUDE_DIR ${c-ares_INCLUDE_DIR})
++   endif()
++ 
++@@ -2658,6 +2659,7 @@
++ if(ARROW_S3)
++   # See https://aws.amazon.com/blogs/developer/developer-experience-of-the-aws-sdk-for-c-now-simplified-by-cmake/
++ 
+++  set(BUILD_SHARED_LIBS ON)
++   # Need to customize the find_package() call, so cannot call resolve_dependency()
++   if(AWSSDK_SOURCE STREQUAL "AUTO")
++     find_package(AWSSDK COMPONENTS config s3 transfer)
+diff -ruN /usr/local/poudriere/ports/default/databases/arrow/pkg-plist ./pkg-plist
+--- databases/arrow/pkg-plist	2020-09-06 22:46:46.160798000 +0200
++++ databases/arrow/pkg-plist	2020-09-29 12:10:19.075708000 +0200
+@@ -28,10 +28,70 @@
+ include/arrow/c/helpers.h
+ include/arrow/chunked_array.h
+ include/arrow/compare.h
++%%COMPUTE%%include/arrow/compute/api.h
++%%COMPUTE%%include/arrow/compute/api_aggregate.h
++%%COMPUTE%%include/arrow/compute/api_scalar.h
++%%COMPUTE%%include/arrow/compute/api_vector.h
++%%COMPUTE%%include/arrow/compute/cast.h
++%%COMPUTE%%include/arrow/compute/exec.h
++%%COMPUTE%%include/arrow/compute/function.h
++%%COMPUTE%%include/arrow/compute/kernel.h
++%%COMPUTE%%include/arrow/compute/registry.h
++%%COMPUTE%%include/arrow/compute/type_fwd.h
+ include/arrow/config.h
++%%CSV%%include/arrow/csv/api.h
++%%CSV%%include/arrow/csv/chunker.h
++%%CSV%%include/arrow/csv/column_builder.h
++%%CSV%%include/arrow/csv/column_decoder.h
++%%CSV%%include/arrow/csv/converter.h
++%%CSV%%include/arrow/csv/options.h
++%%CSV%%include/arrow/csv/parser.h
++%%CSV%%include/arrow/csv/reader.h
++%%CSV%%include/arrow/csv/test_common.h
++%%DATASET%%include/arrow/dataset/api.h
++%%DATASET%%include/arrow/dataset/dataset.h
++%%DATASET%%include/arrow/dataset/discovery.h
++%%DATASET%%include/arrow/dataset/file_base.h
++%%DATASET%%include/arrow/dataset/file_csv.h
++%%DATASET%%include/arrow/dataset/file_ipc.h
++%%DATASET%%include/arrow/dataset/file_parquet.h
++%%DATASET%%include/arrow/dataset/filter.h
++%%DATASET%%include/arrow/dataset/partition.h
++%%DATASET%%include/arrow/dataset/pch.h
++%%DATASET%%include/arrow/dataset/projector.h
++%%DATASET%%include/arrow/dataset/scanner.h
++%%DATASET%%include/arrow/dataset/test_util.h
++%%DATASET%%include/arrow/dataset/type_fwd.h
++%%DATASET%%include/arrow/dataset/visibility.h
+ include/arrow/datum.h
+ include/arrow/device.h
+ include/arrow/extension_type.h
++%%FILESYSTEM%%include/arrow/filesystem/api.h
++%%FILESYSTEM%%include/arrow/filesystem/filesystem.h
++%%FILESYSTEM%%include/arrow/filesystem/hdfs.h
++%%FILESYSTEM%%include/arrow/filesystem/localfs.h
++%%FILESYSTEM%%include/arrow/filesystem/mockfs.h
++%%FILESYSTEM%%include/arrow/filesystem/path_forest.h
++%%FILESYSTEM%%include/arrow/filesystem/path_util.h
++%%FILESYSTEM%%include/arrow/filesystem/s3_test_util.h
++%%FILESYSTEM%%include/arrow/filesystem/s3fs.h
++%%FILESYSTEM%%include/arrow/filesystem/test_util.h
++%%FILESYSTEM%%include/arrow/filesystem/type_fwd.h
++%%FLIGHT%%include/arrow/flight/api.h
++%%FLIGHT%%include/arrow/flight/client.h
++%%FLIGHT%%include/arrow/flight/client_auth.h
++%%FLIGHT%%include/arrow/flight/client_middleware.h
++%%FLIGHT%%include/arrow/flight/customize_protobuf.h
++%%FLIGHT%%include/arrow/flight/middleware.h
++%%FLIGHT%%include/arrow/flight/pch.h
++%%FLIGHT%%include/arrow/flight/platform.h
++%%FLIGHT%%include/arrow/flight/server.h
++%%FLIGHT%%include/arrow/flight/server_auth.h
++%%FLIGHT%%include/arrow/flight/server_middleware.h
++%%FLIGHT%%include/arrow/flight/test_integration.h
++%%FLIGHT%%include/arrow/flight/test_util.h
++%%FLIGHT%%include/arrow/flight/types.h
++%%FLIGHT%%include/arrow/flight/visibility.h
+ include/arrow/io/api.h
+ include/arrow/io/buffered.h
+ include/arrow/io/caching.h
+@@ -57,10 +117,46 @@
+ include/arrow/ipc/type_fwd.h
+ include/arrow/ipc/util.h
+ include/arrow/ipc/writer.h
++%%JSON%%include/arrow/json/api.h
++%%JSON%%include/arrow/json/chunked_builder.h
++%%JSON%%include/arrow/json/chunker.h
++%%JSON%%include/arrow/json/converter.h
++%%JSON%%include/arrow/json/options.h
++%%JSON%%include/arrow/json/parser.h
++%%JSON%%include/arrow/json/rapidjson_defs.h
++%%JSON%%include/arrow/json/reader.h
++%%JSON%%include/arrow/json/test_common.h
+ include/arrow/memory_pool.h
+ include/arrow/memory_pool_test.h
+ include/arrow/pch.h
+ include/arrow/pretty_print.h
++%%PYTHON%%include/arrow/python/api.h
++%%PYTHON%%include/arrow/python/arrow_to_pandas.h
++%%PYTHON%%include/arrow/python/benchmark.h
++%%PYTHON%%include/arrow/python/common.h
++%%PYTHON%%include/arrow/python/datetime.h
++%%PYTHON%%include/arrow/python/decimal.h
++%%PYTHON%%include/arrow/python/deserialize.h
++%%PYTHON%%include/arrow/python/extension_type.h
++%%PYTHON%%include/arrow/python/filesystem.h
++%%PYTHON%%include/arrow/python/flight.h
++%%PYTHON%%include/arrow/python/helpers.h
++%%PYTHON%%include/arrow/python/inference.h
++%%PYTHON%%include/arrow/python/init.h
++%%PYTHON%%include/arrow/python/io.h
++%%PYTHON%%include/arrow/python/iterators.h
++%%PYTHON%%include/arrow/python/numpy_convert.h
++%%PYTHON%%include/arrow/python/numpy_interop.h
++%%PYTHON%%include/arrow/python/numpy_to_arrow.h
++%%PYTHON%%include/arrow/python/pch.h
++%%PYTHON%%include/arrow/python/platform.h
++%%PYTHON%%include/arrow/python/pyarrow.h
++%%PYTHON%%include/arrow/python/pyarrow_api.h
++%%PYTHON%%include/arrow/python/pyarrow_lib.h
++%%PYTHON%%include/arrow/python/python_to_arrow.h
++%%PYTHON%%include/arrow/python/serialize.h
++%%PYTHON%%include/arrow/python/type_traits.h
++%%PYTHON%%include/arrow/python/visibility.h
+ include/arrow/record_batch.h
+ include/arrow/result.h
+ include/arrow/scalar.h
+@@ -180,14 +276,191 @@
+ include/arrow/vendored/xxhash.h
+ include/arrow/visitor.h
+ include/arrow/visitor_inline.h
++%%GANDIVA%%include/gandiva/annotator.h
++%%GANDIVA%%include/gandiva/arrow.h
++%%GANDIVA%%include/gandiva/basic_decimal_scalar.h
++%%GANDIVA%%include/gandiva/bitmap_accumulator.h
++%%GANDIVA%%include/gandiva/cache.h
++%%GANDIVA%%include/gandiva/compiled_expr.h
++%%GANDIVA%%include/gandiva/condition.h
++%%GANDIVA%%include/gandiva/configuration.h
++%%GANDIVA%%include/gandiva/date_utils.h
++%%GANDIVA%%include/gandiva/decimal_ir.h
++%%GANDIVA%%include/gandiva/decimal_scalar.h
++%%GANDIVA%%include/gandiva/decimal_type_util.h
++%%GANDIVA%%include/gandiva/decimal_xlarge.h
++%%GANDIVA%%include/gandiva/dex.h
++%%GANDIVA%%include/gandiva/dex_visitor.h
++%%GANDIVA%%include/gandiva/engine.h
++%%GANDIVA%%include/gandiva/eval_batch.h
++%%GANDIVA%%include/gandiva/execution_context.h
++%%GANDIVA%%include/gandiva/exported_funcs.h
++%%GANDIVA%%include/gandiva/exported_funcs_registry.h
++%%GANDIVA%%include/gandiva/expr_decomposer.h
++%%GANDIVA%%include/gandiva/expr_validator.h
++%%GANDIVA%%include/gandiva/expression.h
++%%GANDIVA%%include/gandiva/expression_registry.h
++%%GANDIVA%%include/gandiva/field_descriptor.h
++%%GANDIVA%%include/gandiva/filter.h
++%%GANDIVA%%include/gandiva/func_descriptor.h
++%%GANDIVA%%include/gandiva/function_holder.h
++%%GANDIVA%%include/gandiva/function_holder_registry.h
++%%GANDIVA%%include/gandiva/function_ir_builder.h
++%%GANDIVA%%include/gandiva/function_registry.h
++%%GANDIVA%%include/gandiva/function_registry_arithmetic.h
++%%GANDIVA%%include/gandiva/function_registry_common.h
++%%GANDIVA%%include/gandiva/function_registry_datetime.h
++%%GANDIVA%%include/gandiva/function_registry_hash.h
++%%GANDIVA%%include/gandiva/function_registry_math_ops.h
++%%GANDIVA%%include/gandiva/function_registry_string.h
++%%GANDIVA%%include/gandiva/function_registry_timestamp_arithmetic.h
++%%GANDIVA%%include/gandiva/function_signature.h
++%%GANDIVA%%include/gandiva/gandiva_aliases.h
++%%GANDIVA%%include/gandiva/gdv_function_stubs.h
++%%GANDIVA%%include/gandiva/in_holder.h
++%%GANDIVA%%include/gandiva/like_holder.h
++%%GANDIVA%%include/gandiva/literal_holder.h
++%%GANDIVA%%include/gandiva/llvm_generator.h
++%%GANDIVA%%include/gandiva/llvm_includes.h
++%%GANDIVA%%include/gandiva/llvm_types.h
++%%GANDIVA%%include/gandiva/local_bitmaps_holder.h
++%%GANDIVA%%include/gandiva/lru_cache.h
++%%GANDIVA%%include/gandiva/lvalue.h
++%%GANDIVA%%include/gandiva/native_function.h
++%%GANDIVA%%include/gandiva/node.h
++%%GANDIVA%%include/gandiva/node_visitor.h
++%%GANDIVA%%include/gandiva/pch.h
++%%GANDIVA%%include/gandiva/projector.h
++%%GANDIVA%%include/gandiva/random_generator_holder.h
++%%GANDIVA%%include/gandiva/regex_util.h
++%%GANDIVA%%include/gandiva/selection_vector.h
++%%GANDIVA%%include/gandiva/selection_vector_impl.h
++%%GANDIVA%%include/gandiva/simple_arena.h
++%%GANDIVA%%include/gandiva/to_date_holder.h
++%%GANDIVA%%include/gandiva/tree_expr_builder.h
++%%GANDIVA%%include/gandiva/value_validity_pair.h
++%%GANDIVA%%include/gandiva/visibility.h
++%%PARQUET%%include/parquet/api/io.h
++%%PARQUET%%include/parquet/api/reader.h
++%%PARQUET%%include/parquet/api/schema.h
++%%PARQUET%%include/parquet/api/writer.h
++%%PARQUET%%include/parquet/arrow/reader.h
++%%PARQUET%%include/parquet/arrow/schema.h
++%%PARQUET%%include/parquet/arrow/test_util.h
++%%PARQUET%%include/parquet/arrow/writer.h
++%%PARQUET%%include/parquet/bloom_filter.h
++%%PARQUET%%include/parquet/column_page.h
++%%PARQUET%%include/parquet/column_reader.h
++%%PARQUET%%include/parquet/column_scanner.h
++%%PARQUET%%include/parquet/column_writer.h
++%%PARQUET%%include/parquet/deprecated_io.h
++%%PARQUET%%include/parquet/encoding.h
++%%PARQUET%%include/parquet/encryption.h
++%%PARQUET%%include/parquet/exception.h
++%%PARQUET%%include/parquet/file_reader.h
++%%PARQUET%%include/parquet/file_writer.h
++%%PARQUET%%include/parquet/hasher.h
++%%PARQUET%%include/parquet/level_conversion.h
++%%PARQUET%%include/parquet/metadata.h
++%%PARQUET%%include/parquet/murmur3.h
++%%PARQUET%%include/parquet/parquet_version.h
++%%PARQUET%%include/parquet/pch.h
++%%PARQUET%%include/parquet/platform.h
++%%PARQUET%%include/parquet/printer.h
++%%PARQUET%%include/parquet/properties.h
++%%PARQUET%%include/parquet/schema.h
++%%PARQUET%%include/parquet/statistics.h
++%%PARQUET%%include/parquet/stream_reader.h
++%%PARQUET%%include/parquet/stream_writer.h
++%%PARQUET%%include/parquet/test_encryption_util.h
++%%PARQUET%%include/parquet/test_util.h
++%%PARQUET%%include/parquet/type_fwd.h
++%%PARQUET%%include/parquet/types.h
++%%PARQUET%%include/parquet/windows_compatibility.h
++lib/cmake/arrow/arrow-config.cmake
+ lib/cmake/arrow/ArrowConfig.cmake
+ lib/cmake/arrow/ArrowConfigVersion.cmake
++%%DATASET%%lib/cmake/arrow/ArrowDatasetConfig.cmake
++%%DATASET%%lib/cmake/arrow/ArrowDatasetConfigVersion.cmake
++%%DATASET%%lib/cmake/arrow/ArrowDatasetTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%DATASET%%lib/cmake/arrow/ArrowDatasetTargets.cmake
++%%FLIGHT%%lib/cmake/arrow/ArrowFlightConfig.cmake
++%%FLIGHT%%lib/cmake/arrow/ArrowFlightConfigVersion.cmake
++%%FLIGHT%%lib/cmake/arrow/ArrowFlightTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%FLIGHT%%lib/cmake/arrow/ArrowFlightTargets.cmake
++%%TESTSFLIGHT%%lib/cmake/arrow/ArrowFlightTestingConfig.cmake
++%%TESTSFLIGHT%%lib/cmake/arrow/ArrowFlightTestingConfigVersion.cmake
++%%TESTSFLIGHT%%lib/cmake/arrow/ArrowFlightTestingTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%TESTSFLIGHT%%lib/cmake/arrow/ArrowFlightTestingTargets.cmake
+ lib/cmake/arrow/ArrowOptions.cmake
++%%PYTHON%%lib/cmake/arrow/ArrowPythonConfig.cmake
++%%PYTHON%%lib/cmake/arrow/ArrowPythonConfigVersion.cmake
++%%PYTHONFLIGHT%%lib/cmake/arrow/ArrowPythonFlightConfig.cmake
++%%PYTHONFLIGHT%%lib/cmake/arrow/ArrowPythonFlightConfigVersion.cmake
++%%PYTHONFLIGHT%%lib/cmake/arrow/ArrowPythonFlightTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%PYTHONFLIGHT%%lib/cmake/arrow/ArrowPythonFlightTargets.cmake
++%%PYTHON%%lib/cmake/arrow/ArrowPythonTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%PYTHON%%lib/cmake/arrow/ArrowPythonTargets.cmake
+ lib/cmake/arrow/ArrowTargets-%%CMAKE_BUILD_TYPE%%.cmake
+ lib/cmake/arrow/ArrowTargets.cmake
++%%TESTS%%lib/cmake/arrow/ArrowTestingConfig.cmake
++%%TESTS%%lib/cmake/arrow/ArrowTestingConfigVersion.cmake
++%%TESTS%%lib/cmake/arrow/ArrowTestingTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%TESTS%%lib/cmake/arrow/ArrowTestingTargets.cmake
+ lib/cmake/arrow/FindArrow.cmake
+-lib/cmake/arrow/arrow-config.cmake
++%%DATASET%%lib/cmake/arrow/FindArrowDataset.cmake
++%%FLIGHT%%lib/cmake/arrow/FindArrowFlight.cmake
++%%TESTSFLIGHT%%lib/cmake/arrow/FindArrowFlightTesting.cmake
++%%PYTHON%%lib/cmake/arrow/FindArrowPython.cmake
++%%PYTHONFLIGHT%%lib/cmake/arrow/FindArrowPythonFlight.cmake
++%%TESTS%%lib/cmake/arrow/FindArrowTesting.cmake
++%%GANDIVA%%lib/cmake/arrow/FindGandiva.cmake
++%%PARQUET%%lib/cmake/arrow/FindParquet.cmake
++%%GANDIVA%%lib/cmake/arrow/GandivaConfig.cmake
++%%GANDIVA%%lib/cmake/arrow/GandivaConfigVersion.cmake
++%%GANDIVA%%lib/cmake/arrow/GandivaTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%GANDIVA%%lib/cmake/arrow/GandivaTargets.cmake
++%%PARQUET%%lib/cmake/arrow/ParquetConfig.cmake
++%%PARQUET%%lib/cmake/arrow/ParquetConfigVersion.cmake
++%%PARQUET%%lib/cmake/arrow/ParquetTargets-%%CMAKE_BUILD_TYPE%%.cmake
++%%PARQUET%%lib/cmake/arrow/ParquetTargets.cmake
+ lib/libarrow.so
+ lib/libarrow.so.100
+ lib/libarrow.so.100.1.0
++%%DATASET%%lib/libarrow_dataset.so
++%%DATASET%%lib/libarrow_dataset.so.100
++%%DATASET%%lib/libarrow_dataset.so.100.1.0
++%%FLIGHT%%lib/libarrow_flight.so
++%%FLIGHT%%lib/libarrow_flight.so.100
++%%FLIGHT%%lib/libarrow_flight.so.100.1.0
++%%TESTSFLIGHT%%lib/libarrow_flight_testing.so
++%%TESTSFLIGHT%%lib/libarrow_flight_testing.so.100
++%%TESTSFLIGHT%%lib/libarrow_flight_testing.so.100.1.0
++%%PYTHON%%lib/libarrow_python%%PYTHON_SUFFIX%%.so
++%%PYTHON%%lib/libarrow_python%%PYTHON_SUFFIX%%.so.100
++%%PYTHON%%lib/libarrow_python%%PYTHON_SUFFIX%%.so.100.1.0
++%%PYTHONFLIGHT%%lib/libarrow_python%%PYTHON_SUFFIX%%_flight.so
++%%PYTHONFLIGHT%%lib/libarrow_python%%PYTHON_SUFFIX%%_flight.so.100
++%%PYTHONFLIGHT%%lib/libarrow_python%%PYTHON_SUFFIX%%_flight.so.100.1.0
++%%TESTS%%lib/libarrow_testing.so
++%%TESTS%%lib/libarrow_testing.so.100
++%%TESTS%%lib/libarrow_testing.so.100.1.0
++%%GANDIVA%%lib/libgandiva.so
++%%GANDIVA%%lib/libgandiva.so.100
++%%GANDIVA%%lib/libgandiva.so.100.1.0
++%%PARQUET%%lib/libparquet.so
++%%PARQUET%%lib/libparquet.so.100
++%%PARQUET%%lib/libparquet.so.100.1.0
++%%COMPUTE%%libdata/pkgconfig/arrow-compute.pc
++%%CSV%%libdata/pkgconfig/arrow-csv.pc
++%%DATASET%%libdata/pkgconfig/arrow-dataset.pc
++%%FILESYSTEM%%libdata/pkgconfig/arrow-filesystem.pc
++%%TESTSFLIGHT%%libdata/pkgconfig/arrow-flight-testing.pc
++%%FLIGHT%%libdata/pkgconfig/arrow-flight.pc
++%%JSON%%libdata/pkgconfig/arrow-json.pc
++%%PYTHONFLIGHT%%libdata/pkgconfig/arrow-python%%PYTHON_SUFFIX%%-flight.pc
++%%PYTHON%%libdata/pkgconfig/arrow-python%%PYTHON_SUFFIX%%.pc
++%%TESTS%%libdata/pkgconfig/arrow-testing.pc
+ libdata/pkgconfig/arrow.pc
++%%GANDIVA%%libdata/pkgconfig/gandiva.pc
++%%PARQUET%%libdata/pkgconfig/parquet.pc
