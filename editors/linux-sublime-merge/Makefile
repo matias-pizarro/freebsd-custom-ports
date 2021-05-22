@@ -2,7 +2,7 @@
 
 PORTNAME=	sublime-merge
 DISTVERSION=	2056
-CATEGORIES= editors linux
+CATEGORIES=	editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
 

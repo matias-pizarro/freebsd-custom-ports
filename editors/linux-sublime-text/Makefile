@@ -2,7 +2,7 @@
 
 PORTNAME=	sublime-text
 DISTVERSION=	4107
-CATEGORIES= editors linux
+CATEGORIES=	editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
 
