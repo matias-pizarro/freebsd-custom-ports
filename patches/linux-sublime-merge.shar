@@ -2,12 +2,6 @@
 # This is a shell archive
 echo x editors/linux-sublime-merge
 mkdir -p editors/linux-sublime-merge > /dev/null 2>&1
-echo x editors/linux-sublime-merge/pkg-descr
-sed 's/^X//' > editors/linux-sublime-merge/pkg-descr << 'SHAR_END'
-XSublime Text is a sophisticated text editor for code, markup and prose.
-X
-XWWW: http://www.sublimetext.com
-SHAR_END
 echo x editors/linux-sublime-merge/Makefile
 sed 's/^X//' > editors/linux-sublime-merge/Makefile << 'SHAR_END'
 X# Created by: Matías Pizarro <matias@pizarro.net>
@@ -132,40 +126,24 @@ X%%DATADIR%%/changelog.txt
 X%%DATADIR%%/crash_reporter
 X%%DATADIR%%/Packages/JSON.sublime-package
 SHAR_END
-echo x editors/linux-sublime-merge/files
-mkdir -p editors/linux-sublime-merge/files > /dev/null 2>&1
 echo x editors/linux-sublime-merge/distinfo
 sed 's/^X//' > editors/linux-sublime-merge/distinfo << 'SHAR_END'
 XTIMESTAMP = 1621624914
 XSHA256 (sublime_merge_build_2056_x64.tar.xz) = 29844c7305b7f192b8b0bea6a32eebb80e7317f00ff9c39b4bfdab4982108720
 XSIZE (sublime_merge_build_2056_x64.tar.xz) = 4713568
 SHAR_END
+echo x editors/linux-sublime-merge/files
+mkdir -p editors/linux-sublime-merge/files > /dev/null 2>&1
+echo x editors/linux-sublime-merge/pkg-descr
+sed 's/^X//' > editors/linux-sublime-merge/pkg-descr << 'SHAR_END'
+XSublime Text is a sophisticated text editor for code, markup and prose.
+X
+XWWW: http://www.sublimetext.com
+SHAR_END
 echo x editors/linux-sublime-merge/files/sublime.in
 sed 's/^X//' > editors/linux-sublime-merge/files/sublime.in << 'SHAR_END'
 X#! /bin/sh
 Xexec %%DATADIR%%/sublime_merge "$@"
-SHAR_END
-echo x editors/linux-sublime-merge/files/patch-sublime_merge.desktop
-sed 's/^X//' > editors/linux-sublime-merge/files/patch-sublime_merge.desktop << 'SHAR_END'
-X--- sublime_merge.desktop.orig	2021-05-17 02:56:17 UTC
-X+++ sublime_merge.desktop
-X@@ -4,15 +4,10 @@
-X Name=Sublime Merge
-X GenericName=Git Client
-X Comment=Sublime Merge is a Git client, from the makers of Sublime Text
-X-Exec=/opt/sublime_merge/sublime_merge %F
-X+Exec=sublime_merge %F
-X Terminal=false
-X MimeType=text/plain;
-X Icon=sublime-merge
-X Categories=Development;
-X StartupNotify=true
-X-Actions=new-window;
-X 
-X-[Desktop Action new-window]
-X-Name=New Window
-X-Exec=/opt/sublime_merge/sublime_merge --launch-or-new-window
-X-OnlyShowIn=Unity;
 SHAR_END
 echo x editors/linux-sublime-merge/files/LICENSE.txt
 sed 's/^X//' > editors/linux-sublime-merge/files/LICENSE.txt << 'SHAR_END'
@@ -190,5 +168,27 @@ X    NO WARRANTIES
 X    SUBLIME HQ PTY LTD expressly disclaims any warranty for the SOFTWARE PRODUCT, which is provided 'as is' without any express or implied warranty of any kind, including but not limited to any warranties of merchantability, non-infringement, or fitness of a particular purpose.
 X    LIMITATION OF LIABILITY
 X    In no event shall SUBLIME HQ PTY LTD be liable for any damages due to use of the SOFTWARE PRODUCT, to the maximum extent permitted by law. This includes without limitation, lost profits, business interruption, or lost information. In no event will SUBLIME HQ PTY LTD be liable for loss of data or for indirect, special, incidental, consequential (including lost profit), or other damages. SUBLIME HQ PTY LTD shall have no liability with respect to the content of the SOFTWARE PRODUCT or any part thereof, including but not limited to errors or omissions contained therein, libel, trademark rights, business interruption, loss of privacy or the disclosure of confidential information.
+SHAR_END
+echo x editors/linux-sublime-merge/files/patch-sublime_merge.desktop
+sed 's/^X//' > editors/linux-sublime-merge/files/patch-sublime_merge.desktop << 'SHAR_END'
+X--- sublime_merge.desktop.orig	2021-05-17 02:56:17 UTC
+X+++ sublime_merge.desktop
+X@@ -4,15 +4,10 @@
+X Name=Sublime Merge
+X GenericName=Git Client
+X Comment=Sublime Merge is a Git client, from the makers of Sublime Text
+X-Exec=/opt/sublime_merge/sublime_merge %F
+X+Exec=sublime_merge %F
+X Terminal=false
+X MimeType=text/plain;
+X Icon=sublime-merge
+X Categories=Development;
+X StartupNotify=true
+X-Actions=new-window;
+X 
+X-[Desktop Action new-window]
+X-Name=New Window
+X-Exec=/opt/sublime_merge/sublime_merge --launch-or-new-window
+X-OnlyShowIn=Unity;
 SHAR_END
 exit
