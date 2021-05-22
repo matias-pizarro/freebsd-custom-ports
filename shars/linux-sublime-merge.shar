@@ -1,15 +1,15 @@
 #!/bin/sh
 # This is a shell archive
-echo x linux-sublime-merge
-mkdir -p linux-sublime-merge > /dev/null 2>&1
-echo x linux-sublime-merge/pkg-descr
-sed 's/^X//' > linux-sublime-merge/pkg-descr << 'SHAR_END'
+echo x editors/linux-sublime-merge
+mkdir -p editors/linux-sublime-merge > /dev/null 2>&1
+echo x editors/linux-sublime-merge/pkg-descr
+sed 's/^X//' > editors/linux-sublime-merge/pkg-descr << 'SHAR_END'
 XSublime Text is a sophisticated text editor for code, markup and prose.
 X
 XWWW: http://www.sublimetext.com
 SHAR_END
-echo x linux-sublime-merge/Makefile
-sed 's/^X//' > linux-sublime-merge/Makefile << 'SHAR_END'
+echo x editors/linux-sublime-merge/Makefile
+sed 's/^X//' > editors/linux-sublime-merge/Makefile << 'SHAR_END'
 X# Created by: Matías Pizarro <matias@pizarro.net>
 X
 XPORTNAME=	sublime-merge
@@ -59,8 +59,8 @@ X	${INSTALL_SCRIPT} ${WRKDIR}/sublime ${STAGEDIR}${PREFIX}/bin/sublime_merge
 X
 X.include <bsd.port.mk>
 SHAR_END
-echo x linux-sublime-merge/pkg-plist
-sed 's/^X//' > linux-sublime-merge/pkg-plist << 'SHAR_END'
+echo x editors/linux-sublime-merge/pkg-plist
+sed 's/^X//' > editors/linux-sublime-merge/pkg-plist << 'SHAR_END'
 Xbin/sublime_merge
 Xshare/applications/sublime_merge.desktop
 Xshare/icons/hicolor/128x128/apps/sublime-merge.png
@@ -132,21 +132,21 @@ X%%DATADIR%%/changelog.txt
 X%%DATADIR%%/crash_reporter
 X%%DATADIR%%/Packages/JSON.sublime-package
 SHAR_END
-echo x linux-sublime-merge/files
-mkdir -p linux-sublime-merge/files > /dev/null 2>&1
-echo x linux-sublime-merge/distinfo
-sed 's/^X//' > linux-sublime-merge/distinfo << 'SHAR_END'
+echo x editors/linux-sublime-merge/files
+mkdir -p editors/linux-sublime-merge/files > /dev/null 2>&1
+echo x editors/linux-sublime-merge/distinfo
+sed 's/^X//' > editors/linux-sublime-merge/distinfo << 'SHAR_END'
 XTIMESTAMP = 1621624914
 XSHA256 (sublime_merge_build_2056_x64.tar.xz) = 29844c7305b7f192b8b0bea6a32eebb80e7317f00ff9c39b4bfdab4982108720
 XSIZE (sublime_merge_build_2056_x64.tar.xz) = 4713568
 SHAR_END
-echo x linux-sublime-merge/files/sublime.in
-sed 's/^X//' > linux-sublime-merge/files/sublime.in << 'SHAR_END'
+echo x editors/linux-sublime-merge/files/sublime.in
+sed 's/^X//' > editors/linux-sublime-merge/files/sublime.in << 'SHAR_END'
 X#! /bin/sh
 Xexec %%DATADIR%%/sublime_merge "$@"
 SHAR_END
-echo x linux-sublime-merge/files/patch-sublime_merge.desktop
-sed 's/^X//' > linux-sublime-merge/files/patch-sublime_merge.desktop << 'SHAR_END'
+echo x editors/linux-sublime-merge/files/patch-sublime_merge.desktop
+sed 's/^X//' > editors/linux-sublime-merge/files/patch-sublime_merge.desktop << 'SHAR_END'
 X--- sublime_merge.desktop.orig	2021-05-17 02:56:17 UTC
 X+++ sublime_merge.desktop
 X@@ -4,15 +4,10 @@
@@ -167,8 +167,8 @@ X-Name=New Window
 X-Exec=/opt/sublime_merge/sublime_merge --launch-or-new-window
 X-OnlyShowIn=Unity;
 SHAR_END
-echo x linux-sublime-merge/files/LICENSE.txt
-sed 's/^X//' > linux-sublime-merge/files/LICENSE.txt << 'SHAR_END'
+echo x editors/linux-sublime-merge/files/LICENSE.txt
+sed 's/^X//' > editors/linux-sublime-merge/files/LICENSE.txt << 'SHAR_END'
 X The SOFTWARE PRODUCT (SUBLIME TEXT and SUBLIME MERGE) is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. The SOFTWARE PRODUCT is licensed, not sold.
 X
 X    LICENSES

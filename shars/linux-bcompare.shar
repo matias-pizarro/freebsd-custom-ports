@@ -1,15 +1,15 @@
 #!/bin/sh
 # This is a shell archive
-echo x linux-bcompare
-mkdir -p linux-bcompare > /dev/null 2>&1
-echo x linux-bcompare/Makefile
-sed 's/^X//' > linux-bcompare/Makefile << 'SHAR_END'
+echo x editors/linux-bcompare
+mkdir -p editors/linux-bcompare > /dev/null 2>&1
+echo x editors/linux-bcompare/Makefile
+sed 's/^X//' > editors/linux-bcompare/Makefile << 'SHAR_END'
 X# Created by: MatÃ­as Pizarro <matias@pizarro.net>
 X
 XPORTNAME=				bcompare
 XDISTVERSION=			4.3.7
 XDISTVERSIONSUFFIX=		.25118
-XCATEGORIES=				mpizarro editors devel linux
+XCATEGORIES=			editors devel linux
 XMASTER_SITES=			http://scootersoftware.com/
 XPKGNAMEPREFIX=			linux-
 XEXTRACT_SUFX=			.rpm
@@ -98,10 +98,10 @@ X	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${PREFIX}/share/icons/hi
 X
 X.include <bsd.port.mk>
 SHAR_END
-echo x linux-bcompare/files
-mkdir -p linux-bcompare/files > /dev/null 2>&1
-echo x linux-bcompare/pkg-plist
-sed 's/^X//' > linux-bcompare/pkg-plist << 'SHAR_END'
+echo x editors/linux-bcompare/files
+mkdir -p editors/linux-bcompare/files > /dev/null 2>&1
+echo x editors/linux-bcompare/pkg-plist
+sed 's/^X//' > editors/linux-bcompare/pkg-plist << 'SHAR_END'
 X@dir bin
 Xbin/bcompare
 X@dir share
@@ -647,18 +647,18 @@ X@dir lib/beyondcompare/qt4
 Xlib/beyondcompare/qt4/libQtCore.so.4
 Xlib/beyondcompare/qt4/libQtGui.so.4
 SHAR_END
-echo x linux-bcompare/.git
-mkdir -p linux-bcompare/.git > /dev/null 2>&1
-echo x linux-bcompare/distinfo
-sed 's/^X//' > linux-bcompare/distinfo << 'SHAR_END'
+echo x editors/linux-bcompare/.git
+mkdir -p editors/linux-bcompare/.git > /dev/null 2>&1
+echo x editors/linux-bcompare/distinfo
+sed 's/^X//' > editors/linux-bcompare/distinfo << 'SHAR_END'
 XTIMESTAMP = 1601823220
 XSHA256 (bcompare-4.3.7.25118.i386.rpm) = 71a72fa4318b7afedb03ec7147523d3aa47e26b090e1a170316990eb88268828
 XSIZE (bcompare-4.3.7.25118.i386.rpm) = 12675958
 XSHA256 (bcompare-4.3.7.25118.x86_64.rpm) = c913df4d0df858c4d1de62ee269b82a3e231b7408e36ee43ba672fd07e97dee0
 XSIZE (bcompare-4.3.7.25118.x86_64.rpm) = 18808757
 SHAR_END
-echo x linux-bcompare/pkg-descr
-sed 's/^X//' > linux-bcompare/pkg-descr << 'SHAR_END'
+echo x editors/linux-bcompare/pkg-descr
+sed 's/^X//' > editors/linux-bcompare/pkg-descr << 'SHAR_END'
 XCompare files and folders using simple, powerful commands that focus on
 Xthe differences you're interested in and ignore those you're not.  Merge
 Xchanges, synchronize files, and generate reports.
@@ -669,28 +669,28 @@ XThanks to shkhln (https://forums.freebsd.org/members/shkhln.54069/) and
 Xaragats (https://forums.freebsd.org/members/aragats.37029/) for coming
 Xup with the nosched.c fix
 SHAR_END
-echo x linux-bcompare/.git/index
-sed 's/^X//' > linux-bcompare/.git/index << 'SHAR_END'
+echo x editors/linux-bcompare/.git/index
+sed 's/^X//' > editors/linux-bcompare/.git/index << 'SHAR_END'
 XDIRC      _yábIy_yábIy8öŠ° (4L  ¤  ò  ò  -Áão¿Ğ"íPiÄgÊwÈ«/ Makefile  _yáô.r_yáô.r8öŠ° (4K  ¤  ò  ò  OÓ‘\Z sÓƒ€ê4v”7`¸Ê½ distinfo  _yåN "M˜_yåN "M˜8öŠ° (	½  ¤  ò  ò  3Å… ”|QÉX/»e.¥3Úğií files/LICENSE.txt _n?S×g˜_n?S×g˜) ÿ# (´Ş  ¤  ò  ò  Å!-İ~)AT=Gdt–®¢‚ files/nosched.c   _pÀÕ+`_pÀÔ;Kuh8öŠ° *“©  ¤          £x:°&à_€Ê­‹{•½›a=Gä¿ files/patch-usr_bin_bcompare      _oHç*=È_oHç*=È) ÿ# (4M  ¤  ò  ò  ”]ŠÆ™×c„Z¿ Šš’<EÔ#[_ 	pkg-descr _pÂAÈ1˜_pÂAÈ1˜8öŠ° )  ¤  ò  ò  hÁŠƒ™RA@µXu8á­„¬t‡J•5£ 	pkg-plist TREE   7 7 1
 XpŒRP‚L§®ñÕ@¾7wä`şE±files 3 0
 Xå“”¾ ušŞ…æO/¿n2pÿM‚T`õH1æ’ôØè}
 SHAR_END
-echo x linux-bcompare/.git/logs
-mkdir -p linux-bcompare/.git/logs > /dev/null 2>&1
-echo x linux-bcompare/.git/branches
-mkdir -p linux-bcompare/.git/branches > /dev/null 2>&1
-echo x linux-bcompare/.git/description
-sed 's/^X//' > linux-bcompare/.git/description << 'SHAR_END'
+echo x editors/linux-bcompare/.git/logs
+mkdir -p editors/linux-bcompare/.git/logs > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/branches
+mkdir -p editors/linux-bcompare/.git/branches > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/description
+sed 's/^X//' > editors/linux-bcompare/.git/description << 'SHAR_END'
 XUnnamed repository; edit this file 'description' to name the repository.
 SHAR_END
-echo x linux-bcompare/.git/HEAD
-sed 's/^X//' > linux-bcompare/.git/HEAD << 'SHAR_END'
+echo x editors/linux-bcompare/.git/HEAD
+sed 's/^X//' > editors/linux-bcompare/.git/HEAD << 'SHAR_END'
 Xref: refs/heads/master
 SHAR_END
-echo x linux-bcompare/.git/refs
-mkdir -p linux-bcompare/.git/refs > /dev/null 2>&1
-echo x linux-bcompare/.git/config
-sed 's/^X//' > linux-bcompare/.git/config << 'SHAR_END'
+echo x editors/linux-bcompare/.git/refs
+mkdir -p editors/linux-bcompare/.git/refs > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/config
+sed 's/^X//' > editors/linux-bcompare/.git/config << 'SHAR_END'
 X[core]
 X	repositoryformatversion = 0
 X	filemode = true
@@ -703,18 +703,18 @@ X[branch "master"]
 X	remote = origin
 X	merge = refs/heads/master
 SHAR_END
-echo x linux-bcompare/.git/COMMIT_EDITMSG
-sed 's/^X//' > linux-bcompare/.git/COMMIT_EDITMSG << 'SHAR_END'
+echo x editors/linux-bcompare/.git/COMMIT_EDITMSG
+sed 's/^X//' > editors/linux-bcompare/.git/COMMIT_EDITMSG << 'SHAR_END'
 Xv4.3.7
 SHAR_END
-echo x linux-bcompare/.git/hooks
-mkdir -p linux-bcompare/.git/hooks > /dev/null 2>&1
-echo x linux-bcompare/.git/objects
-mkdir -p linux-bcompare/.git/objects > /dev/null 2>&1
-echo x linux-bcompare/.git/info
-mkdir -p linux-bcompare/.git/info > /dev/null 2>&1
-echo x linux-bcompare/.git/info/exclude
-sed 's/^X//' > linux-bcompare/.git/info/exclude << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks
+mkdir -p editors/linux-bcompare/.git/hooks > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects
+mkdir -p editors/linux-bcompare/.git/objects > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/info
+mkdir -p editors/linux-bcompare/.git/info > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/info/exclude
+sed 's/^X//' > editors/linux-bcompare/.git/info/exclude << 'SHAR_END'
 X# git ls-files --others --exclude-from=.git/info/exclude
 X# Lines that start with '#' are comments.
 X# For a project mostly in C, the following would be a good set of
@@ -722,100 +722,100 @@ X# exclude patterns (uncomment them if you want to use them):
 X# *.[oa]
 X# *~
 SHAR_END
-echo x linux-bcompare/.git/objects/ed
-mkdir -p linux-bcompare/.git/objects/ed > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/ff
-mkdir -p linux-bcompare/.git/objects/ff > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/f6
-mkdir -p linux-bcompare/.git/objects/f6 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/pack
-mkdir -p linux-bcompare/.git/objects/pack > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/36
-mkdir -p linux-bcompare/.git/objects/36 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/21
-mkdir -p linux-bcompare/.git/objects/21 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/56
-mkdir -p linux-bcompare/.git/objects/56 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/dd
-mkdir -p linux-bcompare/.git/objects/dd > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/99
-mkdir -p linux-bcompare/.git/objects/99 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/f5
-mkdir -p linux-bcompare/.git/objects/f5 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/6d
-mkdir -p linux-bcompare/.git/objects/6d > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/e0
-mkdir -p linux-bcompare/.git/objects/e0 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/5a
-mkdir -p linux-bcompare/.git/objects/5a > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/70
-mkdir -p linux-bcompare/.git/objects/70 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/f2
-mkdir -p linux-bcompare/.git/objects/f2 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/26
-mkdir -p linux-bcompare/.git/objects/26 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/d3
-mkdir -p linux-bcompare/.git/objects/d3 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/b5
-mkdir -p linux-bcompare/.git/objects/b5 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/37
-mkdir -p linux-bcompare/.git/objects/37 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/78
-mkdir -p linux-bcompare/.git/objects/78 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/5c
-mkdir -p linux-bcompare/.git/objects/5c > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/df
-mkdir -p linux-bcompare/.git/objects/df > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/5d
-mkdir -p linux-bcompare/.git/objects/5d > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/info
-mkdir -p linux-bcompare/.git/objects/info > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/6f
-mkdir -p linux-bcompare/.git/objects/6f > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/e5
-mkdir -p linux-bcompare/.git/objects/e5 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/c1
-mkdir -p linux-bcompare/.git/objects/c1 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/7e
-mkdir -p linux-bcompare/.git/objects/7e > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/c5
-mkdir -p linux-bcompare/.git/objects/c5 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/34
-mkdir -p linux-bcompare/.git/objects/34 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/e1
-mkdir -p linux-bcompare/.git/objects/e1 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/06
-mkdir -p linux-bcompare/.git/objects/06 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/95
-mkdir -p linux-bcompare/.git/objects/95 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/f9
-mkdir -p linux-bcompare/.git/objects/f9 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/a3
-mkdir -p linux-bcompare/.git/objects/a3 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/de
-mkdir -p linux-bcompare/.git/objects/de > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/8a
-mkdir -p linux-bcompare/.git/objects/8a > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/1b
-mkdir -p linux-bcompare/.git/objects/1b > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/12
-mkdir -p linux-bcompare/.git/objects/12 > /dev/null 2>&1
-echo x linux-bcompare/.git/objects/12/467db9f810e432b08df415e67014dbf6bc8040
-sed 's/^X//' > linux-bcompare/.git/objects/12/467db9f810e432b08df415e67014dbf6bc8040 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/ed
+mkdir -p editors/linux-bcompare/.git/objects/ed > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/ff
+mkdir -p editors/linux-bcompare/.git/objects/ff > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/f6
+mkdir -p editors/linux-bcompare/.git/objects/f6 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/pack
+mkdir -p editors/linux-bcompare/.git/objects/pack > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/36
+mkdir -p editors/linux-bcompare/.git/objects/36 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/21
+mkdir -p editors/linux-bcompare/.git/objects/21 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/56
+mkdir -p editors/linux-bcompare/.git/objects/56 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/dd
+mkdir -p editors/linux-bcompare/.git/objects/dd > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/99
+mkdir -p editors/linux-bcompare/.git/objects/99 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/f5
+mkdir -p editors/linux-bcompare/.git/objects/f5 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/6d
+mkdir -p editors/linux-bcompare/.git/objects/6d > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/e0
+mkdir -p editors/linux-bcompare/.git/objects/e0 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/5a
+mkdir -p editors/linux-bcompare/.git/objects/5a > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/70
+mkdir -p editors/linux-bcompare/.git/objects/70 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/f2
+mkdir -p editors/linux-bcompare/.git/objects/f2 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/26
+mkdir -p editors/linux-bcompare/.git/objects/26 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/d3
+mkdir -p editors/linux-bcompare/.git/objects/d3 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/b5
+mkdir -p editors/linux-bcompare/.git/objects/b5 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/37
+mkdir -p editors/linux-bcompare/.git/objects/37 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/78
+mkdir -p editors/linux-bcompare/.git/objects/78 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/5c
+mkdir -p editors/linux-bcompare/.git/objects/5c > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/df
+mkdir -p editors/linux-bcompare/.git/objects/df > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/5d
+mkdir -p editors/linux-bcompare/.git/objects/5d > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/info
+mkdir -p editors/linux-bcompare/.git/objects/info > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/6f
+mkdir -p editors/linux-bcompare/.git/objects/6f > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/e5
+mkdir -p editors/linux-bcompare/.git/objects/e5 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/c1
+mkdir -p editors/linux-bcompare/.git/objects/c1 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/7e
+mkdir -p editors/linux-bcompare/.git/objects/7e > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/c5
+mkdir -p editors/linux-bcompare/.git/objects/c5 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/34
+mkdir -p editors/linux-bcompare/.git/objects/34 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/e1
+mkdir -p editors/linux-bcompare/.git/objects/e1 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/06
+mkdir -p editors/linux-bcompare/.git/objects/06 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/95
+mkdir -p editors/linux-bcompare/.git/objects/95 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/f9
+mkdir -p editors/linux-bcompare/.git/objects/f9 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/a3
+mkdir -p editors/linux-bcompare/.git/objects/a3 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/de
+mkdir -p editors/linux-bcompare/.git/objects/de > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/8a
+mkdir -p editors/linux-bcompare/.git/objects/8a > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/1b
+mkdir -p editors/linux-bcompare/.git/objects/1b > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/12
+mkdir -p editors/linux-bcompare/.git/objects/12 > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/objects/12/467db9f810e432b08df415e67014dbf6bc8040
+sed 's/^X//' > editors/linux-bcompare/.git/objects/12/467db9f810e432b08df415e67014dbf6bc8040 << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIeˆy)ÖÏU0ËççeÎUË6eÔ]ˆ€ªIÉ,.ÉÌKËgø_÷*/FSÙ1e¿àôÍ;®É	3˜ Èˆb†Ÿ\1K–ó$M}0)W­ˆuo˜¥ğ'¨Ùéº)©ÅÉE±]Çf^On‰ß¯Ğ5k’ëåèx$E9@ÛÌÃy^9öüoê¶
 XË{¶óŸ=  GG©
 SHAR_END
-echo x linux-bcompare/.git/objects/1b/8774a9b5103add063833ba917ea4291d171af5
-mkdir -p linux-bcompare/.git/objects/1b > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/1b/8774a9b5103add063833ba917ea4291d171af5 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/1b/8774a9b5103add063833ba917ea4291d171af5
+mkdir -p editors/linux-bcompare/.git/objects/1b > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/1b/8774a9b5103add063833ba917ea4291d171af5 << 'SHAR_END'
 XxA
 XÂ0 =ç{d³I“]ñê3Ò$Õ‚mJ=øz‹úo3‡‰ešÆd»]«9CFò‡!	²çdÙp¯DIbĞ9Û¾ÃÄ¢–PóÜÀ%-DÈ"¢ÅÈ$ÆZb–>9ïmÔÜ*<Ú­T˜BÃ
 XËø
 Xµ8~ıüóÃœÛ	´CMD"öHˆ*~&[ş3W—i©å™aœ×î÷m¡Ì°á5«7şN
 SHAR_END
-echo x linux-bcompare/.git/objects/8a/8399524140b5587538e1ad84ac74874a9535a3
-mkdir -p linux-bcompare/.git/objects/8a > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/8a/8399524140b5587538e1ad84ac74874a9535a3 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/8a/8399524140b5587538e1ad84ac74874a9535a3
+mkdir -p editors/linux-bcompare/.git/objects/8a > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/8a/8399524140b5587538e1ad84ac74874a9535a3 << 'SHAR_END'
 Xx­]Árä¶Íy¿ÂÇ¤ÊeW²vssâ¸|H¹ÊÉ-'†Ä\‘€š‘¾>¯r¨]¬×ÜÖŞû¡ Ñèn@ûÎí¿ûp÷éıÇ?ıXµş»};¼ÃŸë}éúÑxû.ı44_şõÚŒc×–&¶nïÒ×/~t†ï*î£Ÿ5sİ·ıófÓ¿¯GSŞ›Ú.	Íùgkk§¾{ŞR[
 XûUÂëôƒëÿëœõÃõû»Óû»7>Ki¾h6£ÓçU°q¨_oïæÃéæÃŸ_g—Ğv·ŸN·Ÿ^g—>¿ÎnıüjïÆöÔ›³ræ}I§Ä×ŸS×İ|Ø‰².4¦;ÌiT»v½·n¨–éøâ'àÛ»iˆ»Ğ¼{õ#Ôÿê·»ÛßşñÓ<ı_Â–O»ŞT÷•-0-£=Å¢·Ãtm~|ÚwùÓ¿ãío&àóî‡ËÓà¿—e³‹#ÖÑKÁÿóóßÿùëÏ—>üöëÕ/¿ırõ¯Ÿÿ{Jç¢õÁâQÖüËf¾¢Øy;^êÉàBÙØê²œhuÿôAúø~÷×<U_2‚ßıøçï¿¿»½ıËw?Ÿç\!Ú†æWs£Á¹á÷3ğù\ÏUi>›é«»ÛËÍY°ĞŞ|º#é3Å¶›‚ŠÉ¤ad{§c" ƒØLƒñ§«*.+j«›M¬nÈ^'9şgz®'ùl'V€†LxU°0¸l˜¯Ûa—}ÙÉ÷ë›«£y„Yôu2’¥cØ5Qvõ7¦â´u¼IêË¦}°Å¡í,Ùú¾,»vìM;pÒ<£O;ÿÂ¯äÅ“sıwŸGøÊÉÉÒÈC´}ôæ‘Ò×¾ì\í8RïÁR¤¥éºv¨‹}Y¼ëë‹ç~#×¥Rœ¯÷K!ÍîÅ[ºM­şoµèœ©Ú¡²§Âí®no_bÑV'Øu\*¥qB¹¾7CU@Å¶ğö`½JKj4cÃVÜ¾Ôñ©L4JDëÕ€dTÔ¨ğ8({ÓØ“Kãà“Q6>®jèÇ ~¶àm­ˆ;«GØªİ€Ú0’"ŞhbÙèd|°ü<“Ã0¹4‡ÎÆÜ^ƒ•ˆƒ-ÅÌ¢ffGù
 Xç‡­ĞÑÛ–e´C\8ë0ãc	¬õÑ¹)İÉÌq|ììaf+?ßÖšamáXÙÎFüÑõ1£Ô’Ví!mªîAˆÏù˜)2|i9›}G¯3¨ÒÌ±``fÉ¥#„^ß™Ğöm‡Ó7Çhd5>Š³ª˜  {ÕÊÄÎëè¨#çr–n|T­©ÊÌÔÅ]|ÃÅÎKˆMY2H´] ´EøUÎ,°’â7Ã].Z{äv4Á6îXD‡àS
@@ -830,9 +830,9 @@ X O$L©`ŞY&neZ‰‡(/ê:òtB-§7D(Œh!QL²32•‘­ÕAI¦–³9iæ¥{N8QÂ9*Èg÷ŸRñ¥Tg±H¶e®
 X”·§-²&ß$0ŸéşJh	¹`=Ğ‘Ğ¯àÏJxÕs!õzÓ,ÚÒÛíı–>nêÚZGC0Û'  ·Î?ÁnÁmA»Q=çL”Ès~^?¦Š0™sºiÿTĞ$¾±Úø ¹Åş¦×BçÊ{²Ğ`îıÁJŸKöS D³¡“¾C@¨viĞoQ¶„FÖªmİ”Vß/øÈª~^Ï„÷³«"ôxİŒr3BãG¦e'€mş— ·­à6ÎXê}•3j{?Ó­Màoí±~²I·7¯!ëYÒqšÙv~£^€T‰Ç×Î-ÇõYQ^ı¬æ‘k9 AœõN÷Q=V¡¾íXVî¨(˜—»©À§RÊú€û£V"¹3L=ÍBB \Õ€t ~O4§f)k” 'Û™şÚÎà!¾~?`Dh.GrìÚÊîşËµ<ßÿb7M¹àÄ5¬8ü
 X©$‡ù†a]ñ†&W“™^^ ±Ò(&7î|S­p¥'²ìSÆ“`©\’oA›‹MÍ¦£9%À¹—åó6âÜ¯0>‘´àè»0@ÇBñfˆ0À`öäÃ…B\,¥[IP3ƒ%Ë^Î-³A¦1ùTŸ=0”àRqr¨jàšÊƒâş|À½µ#]ywFx>’3¡ì\·ÇÂÕÜ|Ä{6‚I÷ı°ap6s!ê©Y­3,çÇYN#ÏD=>©&)a`Šb.3íIYñ‰ÂJ„U¾LrJä´ÙÉä¼Ñ™F$ñ:‹RLNxäº¥L’Û ¦D-V"?ËÊ¡¤"‹Ÿ©™WOâôRêÍ•úK6*½ÓÂàa")7ĞÉ¢8ÓÍe„BªØ šl3ŠaÎï~hÆAhå‚«ÍË$Ä¬¢@«–…~±S†.½ïIKƒ¦µâHøŒm´ÚæS\œ×=-İ1+:hµ¢Ó.‘EˆYY@«•EL(¯ÅDÍJ“¬³Ò	&Å«©¸èçŒĞˆ%,¶hJiE6}<#¶H§xJvÑ\†hT—Zé$Å2­¦y¼u/Cl¼›ê¦‚Çü¬4yìÆYw`#¨ÊÏßpŞÿÑvÈŠ‘ELÇÆÄP n[ˆòx©ÏÉñ´!¯"½NCVgçR[Î±i•N«¬ü"ßÙ$nK&êï#á9Ç\¯L€ùf*Ù>Y,-£9{­8]ø%¿ÇK¿}?½ÆM²ÇŸä• ü–?$úej3Íÿ 0–ÒÏ
 SHAR_END
-echo x linux-bcompare/.git/objects/de/6997798f42bc381bf6d7290f9673224a64730d
-mkdir -p linux-bcompare/.git/objects/de > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/de/6997798f42bc381bf6d7290f9673224a64730d << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/de/6997798f42bc381bf6d7290f9673224a64730d
+mkdir -p editors/linux-bcompare/.git/objects/de > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/de/6997798f42bc381bf6d7290f9673224a64730d << 'SHAR_END'
 XxÍ}ëvãF’æü->E¶\ŞV5ER¼èÚS^«$V™Çº.®ö´çp@a‘ €ºTMíÙ×Ø×Û'™ï‹@J¤ª L·-’ˆŒÈÈ¸gd¢3:¦±µ×Øú—Nè{şÍ¾éNÂĞõcÓóB·á£ñ‘‹ı¾F¦#sâÜº}oèšëôÜp¿ğjèù“‡R§ŒÆNèš¿¼5…·oßş`>¸¾:1F6c'îì·¿xî=¿â æŞ‹æ‘äs)œœšÊ$
 X+ã Œ£ŠÛó@FTyŠ¢’ÑPÎş,”J%ä«êŞÎfi³ŠÌææ¾üSŞLÿgŠü«P,ÍÃ«Úf {¥Ú¶©V÷«Ûø§ÜØ©ï6x8ùñGSÚÜÀ§êÆÖ®ùñÇBñ;óú}èºï.^Š…âùÙÅÕéÁIóí«W¯R–ŠG­Ë«_š—­³SüĞ(×ËÛ…âáÁUóÃÙE«yÉ‡VaE¡xrpyÕ¼h_¶®äçA÷+•¨1–*èÇ÷X‹2Ö¤œ? Êó‹æûÖ?0–å&©99h^áÿÍ¢a±œèÇ±÷É	Ã ì»1ˆ8;9i^ñçC»À&zô»Æñ{fä†7®¡8Dò¹!‡>n6O/e—‡gg öòìıÕÇƒ‹fö[;aÄ¥¥Ú\&d›c¯ëú‘;}ğ}ë˜#½şÌ?.Z_*ÉøåøT&ÚçÍ‹r«çEqiäa¡ñƒ’|ŒÜáĞŒoof¾ç'ùÏ8“ÿêvİ1Æ+›ÿ¸º88¼j_^¿'ËÊáxT(^_Úµ°Üïî˜İÆÁ¸D”&±7ŒL4 ç{À2rKßğ…Ûqü›¾÷À1Fû¸uzÍQ_uœÈİ'¾yÂ›¡×‰äÃqéÆï{î]Ãh¿3ñ†=+(Í_Z‰¤Ô¶6·ëö[ò²íŒzÛaT*g_J¯?ÏH×—²ı˜ñ¥ü°»İŞnÌŒáÕw·uC‚S;=k¼øùòú#ÄáKX(¶N/¯/Û­Ã³S®Î£+‚Çß]·ğıêüj ¿ã7Çg‡Çï A¯?gáxeÏï'=×ük'ê•i(ÊÁ8ö?*n°OôÍëÏ‡?}1oßKßq+¡‹
 XĞÁ0îĞ{ò˜0²4ûYSv}X'|ùSóİÁé‡¶ˆ!¨|ı™¾8ü"6„
@@ -878,38 +878,38 @@ X–ú~0"ƒŒT×CŠU`«ÈòKL£ÃŒ1qJH[£±1­T.Í¯š×Xæ˜Ï÷Õ÷ÔØ­ë•İÁœ}a¬j¿·Ú;0ú
 X/Sã‹µh#Íû“oßğ€ÓÍ;Ÿ–z! ü·¸qµ((o-5òÄÇëÉ—œ¯¿,óö¢%®Á{Zùfû‹y#ˆYâ-‹Ì‡‰·$ÈEóàè¤ùíy^œŸ”>œ(ıÜüµut¿†QĞa
 Xğº×o]†ÿ ÌÕoC¥/^æEŒàTçSs®–7xöÛÌáĞÅ+§ğèÉ˜ßü`ø¶÷ÿor•f
 SHAR_END
-echo x linux-bcompare/.git/objects/a3/276f8e00a7b89fca4ac9bfdab956af0f69d769
-mkdir -p linux-bcompare/.git/objects/a3 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/a3/276f8e00a7b89fca4ac9bfdab956af0f69d769 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/a3/276f8e00a7b89fca4ac9bfdab956af0f69d769
+mkdir -p editors/linux-bcompare/.git/objects/a3 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/a3/276f8e00a7b89fca4ac9bfdab956af0f69d769 << 'SHAR_END'
 XxKJ1 ]ç½¤»gÒIà!.\z‰Î¤Îäûxzñs—µ(¨ÚÆqt^—;Ÿf°Ç–•R•]Rl+óNóª,dQ)V©•J)áªÓN]¶ÜÖlÑjbceN(’&4iR4æ‚1èÍ_Ç„C½ë;\û§Î9àòËOüpš?	-œc†{dÄ°ıDºıSÏÎáğÖ¿W}ÀK?o°¥ğİ·MF
 SHAR_END
-echo x linux-bcompare/.git/objects/a3/c8d48e5eb72e2a227066710d070e6d69a58905
-sed 's/^X//' > linux-bcompare/.git/objects/a3/c8d48e5eb72e2a227066710d070e6d69a58905 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/a3/c8d48e5eb72e2a227066710d070e6d69a58905
+sed 's/^X//' > editors/linux-bcompare/.git/objects/a3/c8d48e5eb72e2a227066710d070e6d69a58905 << 'SHAR_END'
 XxK
 X!³ö½µÕq „ —hµe\Ì§³Ééó=A–õ  ^^ç¹	XÒ™]±ˆ)¥ä\dÔhG÷ZiL1“w¡TŒdÔF——t&S¢!ù2X«}2\­Õ‡ì#Æó¨«¢»Lk‡™¤Ñ[{Pï+œ¿|ıñia¹€	Ú45µÕZåO¤ğŸººµ÷GYæĞR a@=OM8Ë½ó®¢„R¼
 SHAR_END
-echo x linux-bcompare/.git/objects/a3/1aae3283e31505453bec03d2bf1cdfe085571a
-sed 's/^X//' > linux-bcompare/.git/objects/a3/1aae3283e31505453bec03d2bf1cdfe085571a << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/a3/1aae3283e31505453bec03d2bf1cdfe085571a
+sed 's/^X//' > editors/linux-bcompare/.git/objects/a3/1aae3283e31505453bec03d2bf1cdfe085571a << 'SHAR_END'
 XxS]oÚ@ì+÷+&Õs»N[Sñ”DEMDAJ”DÄ6¶jîí •òã»gÒ IÕÄ'kwvvwn.LUÇñ¾~àœã!Ïì0‘v©ù"ÈDMeÉ¬âÖİ:¯û¼îÀñî§†ëc4ì2Ë²^U°VÜ©:_`9U×E«ÅpxP’æ1ãî¸ŞiÚºUš„Ÿ=;¿•œ<udVÿüÇèjÔo/d™),ÖÛ2f1kKEAª_ğA¬*+°ÁÒÖ¸2¾ôúí“¦anâ¶Ty‹I-W³Jv€ÔM3\¶»ßÛ§½ñğú²×Ìs¶Ã¾›£6è]õº[şNw£¨¡SÉ7à†I£ƒöàš¸‡gî¾¡ˆ…düi†€gÂÆ«Òç±ß]BûZÓp"ÍÅ›Í·ı§×+êi¢w?$™£_(r!´+8X
 Xi
 X5ÕÛ#É{ĞefA–ˆ¼VºÊóªä*Ï§“L¶Š“TŒ†yh€Ï
 XÔµvÅPiN6M}¸5LçÖ Å*yœL8Œ0’VÜø<Ècğ†X‹<€Y‡©/e9aOÄÒ–4›{üÑ1À¬Ò„ú™¹DøŠ= Iô×mæ£Şî£ÅzçGH’³ 7&"5°±
 Xè_IË‹DÎÈ¼d$J1¼ªëÈ¯i1KCÒâçC4áûÏ.DEÇš÷QPÀ.æ»ÓõÆ5Ó¼'=³9øt/Ê@Wlİà@'³L,j‘Êîğøˆ|ÕO‡,›²?±6Dd
 SHAR_END
-echo x linux-bcompare/.git/objects/f9/0a5ca4a70c629055e0926d267205bd563913f2
-mkdir -p linux-bcompare/.git/objects/f9 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/f9/0a5ca4a70c629055e0926d267205bd563913f2 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/f9/0a5ca4a70c629055e0926d267205bd563913f2
+mkdir -p editors/linux-bcompare/.git/objects/f9 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/f9/0a5ca4a70c629055e0926d267205bd563913f2 << 'SHAR_END'
 Xx+)JMU042c040031QğñtvõvÕ+©(a8Úª0¥&ğd³şîT½¥Æ·>d¾…*ËË/NÎHMÑKfPÔ½Û_§éÂlëÎ›R2mİ¢	¬MPE‰%Éº¥ÅEñI™yñIÉù¹‰E©‹¥Ö5?euµ~Ã|i¿Ìı­áR ì/í
 SHAR_END
-echo x linux-bcompare/.git/objects/95/3d4e7d7cb04cade7909a4155f03cea4d5a7412
-mkdir -p linux-bcompare/.git/objects/95 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/95/3d4e7d7cb04cade7909a4155f03cea4d5a7412 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/95/3d4e7d7cb04cade7909a4155f03cea4d5a7412
+mkdir -p editors/linux-bcompare/.git/objects/95 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/95/3d4e7d7cb04cade7909a4155f03cea4d5a7412 << 'SHAR_END'
 Xx¥Uks£6í×èW¨[j±±So&Ótjcœe‚Áx³¶Ãğ&€(-Y/ÿ½W"v›¤IëñI÷uÎ½sãáèıè›ïğ`^S:õg„–®8“…yz ¯8aEÕÍ,?øhz¾å:òàˆŒÈ“À<s=Ëô•1M3Ájó¬lZ´˜øé…¾ôÇ—BT'ºÎÆ­9[‹¿!0:ZŸÉ”KÏœ[Ÿd,BSY÷µ¶»Ò:m°½SPGú¥g~´d2?ŞÄB5WáH]*²œ >¦§Ê-"‘Eü—*ûÕ5#%ÈpÓ	Ô±Ñ#‹ùu™¼ÅQ™â‚ÖŠ×YN¹Z¯Y„lË0¿§Ì7\€ûî<¸˜xæî,Üáğ{°Ã ¶³„–œîç–­"¶òÉŸY^§ß$ ¢{»¥é-ñiÆ…Vd ¢Æ%ÓÔ’Ó<ÇÕÕæÎ¾\©m°‰_IB+ëØ¿†s×'ñAEŒŠt|„³ÑñøÁaè™_J`UqQÓ¨À¬Ì¯1oªŠÕXQ’+åŒVş6ú=IŞã”ò+Á*MÒ¨5"Ë9æ— „J-¨–•k4ÊÍ:ke„Ğ¶œ•ºÇƒ8âô¤nJÜ²z“g1W‹?…ÖªÇ”ş%ËùIÜdyŠ”‚vº×:üñİx´×U¨ê•û½‚äu¤=‡ã£[#	å¡MÏqÃïÜ_Má’¤…¨Š`sº²ì™Ü8¸¦-mhĞâTíØ®1±§PË`»î²?˜Ø¶Z†ë¨[¾ˆde’7)Å?Å<%’eÂ*‘±’“âêgy¾Æƒ­¼¹Ÿö´ÛÖ® ÙI1"4¿o¥`ƒî™dBË4[#ä0§ç,Tì¡KœÑé¯u(\¹vzL¯Y™Ş	=N
 XÖ”‚ğKü;’è%¯/q¼Ji˜°RĞV„-„RJà"ÊóAç² (ptfÊç»äé$XËkuf/Hú\0ıéhqV>éù´—Rø³~ÿ‚PĞ3 ‰ë—ğ“³Z?·‡c=ª*şŠ0¶£áÿ	ptÜïØĞÏ×˜}ÿ®²¶ˆ*ÒèÇ)©ÊÍ“<<Vã-È{1$â—ä[7y>¾:ë-3ÿ)ë«óİù ßoø[¬¥øÍ3ÊĞ„ĞCoğøË yn9³g»æk_¬•QAñ÷„3¬Ñ–&FÍ_9²úö‡ĞaúgŞvøur@ß7Ø$	Ö. ±¶^ZCyUÔî_­d<¹¤)Ë<Cö¤2 Á”ºóåì®¾ªUnÈ)×É,rHŞ‘ñ+Rİó|t"ËIü¹©Ş+
 SHAR_END
-echo x linux-bcompare/.git/objects/06/4c7018744cb97b8e0824b2a1e3c7b9dd2f4f79
-mkdir -p linux-bcompare/.git/objects/06 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/06/4c7018744cb97b8e0824b2a1e3c7b9dd2f4f79 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/06/4c7018744cb97b8e0824b2a1e3c7b9dd2f4f79
+mkdir -p editors/linux-bcompare/.git/objects/06 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/06/4c7018744cb97b8e0824b2a1e3c7b9dd2f4f79 << 'SHAR_END'
 Xx¥U[s£6îkô+Ô­ŸÚElì¬'“évŠ	Î2ÁàÜl§í0\d‡	H‰–¬×ÿ½G"÷MÒ¤õø"ÎíûÎÅYÅ3<ŒßóÍ[JgÑñ¡eÆ¾µp>ìÁ+Ëyİ¤-EÇnÿâ„‘øêâ€LÈô®0ZÍçî'¸"ã÷ï¦d[±s„®i?´(%o.è_´ÂUÉº-¬(vÂ$rãAé\ÊæÈ4EÎ¹¤­àkù7D&‰–§'*§eèQö´9ŸâĞ²ãÂ«à{¤mj]?†êàu*ËTüÜ”ŸÓ¶å„Q‰ì`±püX_ÛÄ·X\²ü-NYkÚn(^—úyÍ«RBÈsmÇn"; @Ìã3+t®ï’kò¢®`¯Ì)ôFqîzÚÓh«NÑ±îÌ« DöòFoé„McQ
 XiÔ%€h1ã†~´ªps±¹#WOZ:i'á+Ïi#
 X|ï×d„‰ÚµÇ´.¦¸œN\&¡cEªÖ«FÈ–¦5æ¬ºÄ¢kŞJ`E*®´1ZEW•*…’7†âĞèdY	,Î¡œäYS£dkš¥l³.{ex®¿ÒEÜËRAÚá·›ªÌ„~øSış¾>BIÎ+q”ueU İˆŠöD§¥ª:ÚªU²é§ÉôàVIeüPg@áÉYx­fP¥!Û"ÎV®w¬›å’
@@ -917,9 +917,9 @@ X´ôÀ5´ÜLK¼À¶¼™M1ÚŞœw¹~[%®øšle‹HÉòª+(ş1QdŞÈ’3Aê‹ŸÔı¶ª@;üáÃÀ®ç^'´ôfˆĞê
 X$hÙË6ÚÔ^ô9gæÓŞ²’=iù´•îågíş¡v`–@’0Ïá§â­¹?í÷§fÚ4â=æ`2î'ãÿãàà°?8¼qàù@¿XcBÌ›wSöuÚhak’†mäá±oAŞó¡¿$Şº«ªÉøÕQo™ùOQ_ï–Èñ~Ãßb£ÀoéüC3ôÿ¿|šç®üìÔ|m‹–ÖOÇíinô¦U+k–|Ùàíÿ +¡Vñ}…Mcãæë¥kCcèu®“ºşób\äç´  Y ÈŸìğ©^Û
 X~·¾ÊU	Ô–Û©‘},²OŞ‘é+Bİ³|t#«MüånÑc
 SHAR_END
-echo x linux-bcompare/.git/objects/e1/898e3d9ee2353ad7bb5530ee07af144a1171ec
-mkdir -p linux-bcompare/.git/objects/e1 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/e1/898e3d9ee2353ad7bb5530ee07af144a1171ec << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/e1/898e3d9ee2353ad7bb5530ee07af144a1171ec
+mkdir -p editors/linux-bcompare/.git/objects/e1 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/e1/898e3d9ee2353ad7bb5530ee07af144a1171ec << 'SHAR_END'
 Xx\Í’Û6Ş³Ÿ"/0šõŒí$·İÍ¦rØJU²·=± ¢à!	 %Í<ı~ÒØ#u7çàÄ?t7@£ÿÈmç·?<<|úòñoÿh\øaë†øs¿­}?š`?ä_ãşÛ¿Ş›qì\m’óCüŸ~óÓyø¦±ñ)ùñ™ûŞõ¯Éæß¦~2­]ˆæüÛ…Ú©ï^Sr5±¿HxŸ¸ßã7ÜürúøExLóY¤ù†l_‡ö6½Ç‡Óãƒğø6»<z»O?>ıt›]~|›İåñÍÙîÔ›³ræ}‹.[âûG»©ë6¤¬ë€½év3 ¯jç¶÷[ûì‡fÙo~ßŞOCÚÄı‡›¡ş›Ï¾|ºòì_¿ÌÛÿí°åÑ¦7Í•‘O­°-“=¥ª·Ãtš?¾l¢¿şèÏôéñxóù:`‚	×‡Ó±Ù¤ççè­àÿıõŸÿşı×kşøıî·?~»ûÏ¯ÿ»‹µ÷É†èwéHgş-™ï›`Çk3|¬÷¶¹.'¨n_h7/[õ-#hğ
 X{üzŞjwøÇ]m¾šé›/Ÿ®óº>À=şôE‰Ì”\7ÅULÎƒÖ0²½_Ç„¬`öÓ`Âéîa—Ë¨w°z|«Gå¬*,n…§erÆ/×ÒÕ]wŞ_g¸nâüóZq>¯š®şZÇ€¬™0á—_7Ã÷{ÛW'ı|ÿxw4Ï°}¡Í–°¶cŠ›}ÂÕıVÛy€©	“¯…[ˆPïİÁV;×YÖ¶®;7öÆ,ËW0ºn°½ ªïûÏ?n¾ØÙ'R0Ï1Ù>óÌÍ|[w¾õ,"øc´¢6]ç†¶ÚÖÕ.ø¾òioCõÚ…cÅ­ÉıùÈ2 D¹×oh2ÓøY¤QuŞ4nhì©2ƒÛ´nwki2A×œXŒï:ø)Óg9û¾7CSAG¶
 XvgƒjË«¤‰+áÛZEµ1Éè€.hqù8jÁñyĞIº·'Í½‡_Â™ ¸w´±U8x–*\°­
@@ -939,15 +939,15 @@ X-±#¥ìÉw£^uÿh—.ÏhÍZ¯˜ÉêI¼Cş5¢‹ÁøE]½;hĞÊÍACVh”à«µJƒü¨İM¯­•í·f˜z-dCŸœTW—+–É
 X%>À9R¨ğKòî&Üª;Ÿ¬X	‚¯Û<4B}‡Á«çY¬œHóÎÙ¨wMiíæ¥1jRÌ:ŸzÀÖM42ˆ‹k«õìé[5Í,44€$¿ıŒeMYnSG…¾As›ëÂş(·½Qã{îy@ÄÀ`À`í•l©	u˜z‰ …ŒlUŠ„Ã¥›Ìi¿4oP‚E“öRP|U¢ßĞ¤DóÈ«Ú5vûñ_–ÎÜŠ,X~jÌeÉÈÑ!¨Ğ!’©ÁVØ®’ü20”@–‰¿bJCtåÊ´©QÁí¹DHI•Å±âVøhFv^pé¨ğ§{ı”\ºZLä.p©;tÁ©Êo9è¾ç¿OA(”8åPE…Ñ-r@g[$AK€T®v	›ß)×Ğõ¨‘±Ä°“ßJ„{²v”zÎÀ`A•œœ†¼ï¶8Š¦w¼oJĞÜ ƒÈ‹D‹âÌèR¾èRj­sü„© Æh5.6³:î¤kCAY–ã3"S#öwL%Ï‚ç4"çİYtŒ°‚¡Cı¬›2ˆÎWù&¦31=v1_ƒY0ùÃ1\‚<C…tÕ‚‘8â­^ªb©ÊNõÌµ eÖ§çOFS^ŒòêŸBDNÉî”È˜0Â”Ñ2”¾BšÎI‘X‚’'ó5@”ÄrLÔ™»Ó,	#ˆˆR,)ğ&†„¢dHfDTC	,³=ÒU‚æÜĞLÏ@o"¸bÎ:[A¨ŒÅ¸BùÓ8‹
 XR¡„TŠ@Q²@1¼ìüD×VÚ?µûŠz7Ê'§øèÑÂ „`(ê–MY7îh;$‘ùbòqoR¬ĞtÆnvÄ¥ª«%„¯wWùÍP¾!«4ğ°ÎÓÑ9/tŠªÒ»->ƒF¼&ŒWA=Ó>Ÿqó«<5¾ˆè _){/7¾¡÷WºöåQüzöä?Ó/ôŠ-¾É‚~›\ÁüJM²İ
 SHAR_END
-echo x linux-bcompare/.git/objects/34/d236aeabbb448e30329434da9b8ca546df38a1
-mkdir -p linux-bcompare/.git/objects/34 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/34/d236aeabbb448e30329434da9b8ca546df38a1 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/34/d236aeabbb448e30329434da9b8ca546df38a1
+mkdir -p editors/linux-bcompare/.git/objects/34 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/34/d236aeabbb448e30329434da9b8ca546df38a1 << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe˜jëW[³Ágíó	³C?Ø¼ò*‚ªIÉ,.ÉÌKËgø_÷*/FSÙ1e¿àôÍ;®É	3˜ Èˆb†Ÿ\1K–ó$M}0)W­ˆuo˜¥ğ'¨Ùéº)©ÅÉE±]Çf^On‰ß¯Ğ5k’ëåèx$E9@ÛÌÃy^9öüoê¶
 XË{¶óŸ=  õkGV
 SHAR_END
-echo x linux-bcompare/.git/objects/c5/8520947c51c958032fbb65082ea533daf069ed
-mkdir -p linux-bcompare/.git/objects/c5 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/c5/8520947c51c958032fbb65082ea533daf069ed << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/c5/8520947c51c958032fbb65082ea533daf069ed
+mkdir -p editors/linux-bcompare/.git/objects/c5 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/c5/8520947c51c958032fbb65082ea533daf069ed << 'SHAR_END'
 XxÍYÛnÉÍó|EA/+”ì`ØÄ~h‰Ú%¢Hjm?-š3M²×ÃinÏŒhîS~#¿—/É9Õ3Ã‘Hy7ÉK çRU]uêÔeæ¹ŸË÷ıË÷ºv©-J+Ãe°vm‹*IVUµ)ß¾~½İnÏËÔûÊ†Ò/ª­	ö<õë×ß­l¾yíŠÌ~9_Uëüoe½ÙøPıìCfƒ+–?›"û9’õ‰$ùäë 5ù…¼·;_drá×ÈWÊÒ?ÚPØLæ;©VV>Ïı’dfÃºÈK.ğ«œ/Ê·I2LS»©L‘ªÀ#‡€>)W¾Î3I¡dQçùN‚5Ù3ù8\”/i'_æváƒMê’<³ö;9¥…'ÓÆ%'¯ÎEŠÜ–¥ì te­ÉÜbaıÙøALëa)İ²9ë4ºWZaŠèüT­àšÖõ	üíRSYUzâ*Ï3ÁµÇÎãÆ5,óRø*1ê91yÎP¼ü¢š"ëº¬$µÒ£7ğBÒZ+n½¶™ƒMùî<A€6»à–+@è¯ùµ…•éçÂos›-awµ2•º¿06r·;ÏaSìàyø2ŸÖÄ¥aèåôä²ÿûä•Ai«Úúğ¹¿N{Xµ¨!+SÂ3¢¦—â
 X5‘ XzÆß~!Ô<d¿lÂ -ƒ)*([!Ä®ÀÙ¯=òí›³K³“Yp&O’£‡pº,x»$Br`û*7âÈ$…/Î <‡ãí rŠ³
 XzKàÊÌs\ÉİÚÑŠa 3Œğl=œ¨f:]™°db!&²A–ú,Æß…j'§ß¾y%™Ù•ÄrLÒ'Ræ1cy Ägx˜oñÿWRñÄ­Ô`­ü¤vlê ÍQ¢ID»”Ì–ips¦½Eº×{ÊŞïêŞº
@@ -962,50 +962,50 @@ Xgİíà”µ/°¿àPt©ƒ}:I|¥ÁAfÁÿ®| ÿ€Á;`Ÿƒª“æ{$#İÕ+!ÒşvZm`O.Çâ·±Úâ¾Ì!yg?dz
 Xï¶ÃÉ/5vñøÄ¨›!ê€²¦¯àI€||NT
 X#­3:Ñ—¨•òkCf‘”Gæ:T€—ù »Kî“'ê`3Jœ+4ÄàNdÿŞCÂ×…åªµT?y©)pG«:hu óñ¬	b^rÛåİ÷‘½m<,ç :¬ÇšÀº§w`&<üTíT«dyşoIA–
 SHAR_END
-echo x linux-bcompare/.git/objects/7e/bb97a70d0b0a4b5e98c030c321b16b94ea4a3d
-mkdir -p linux-bcompare/.git/objects/7e > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/7e/bb97a70d0b0a4b5e98c030c321b16b94ea4a3d << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/7e/bb97a70d0b0a4b5e98c030c321b16b94ea4a3d
+mkdir -p editors/linux-bcompare/.git/objects/7e > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/7e/bb97a70d0b0a4b5e98c030c321b16b94ea4a3d << 'SHAR_END'
 Xx¥Uks£6í×èW¨[j±±S7“i:µ1Î2Áà¼ÙNÛaxÈ@,-Y/ÿ½W"v›¤IëñI÷uÎ½sãáè§ñ7ßáÁ¼¦têÏ-]/p&óô ^qÂŠ*ª)šY~ğÁô|ËuäÁ‘12&yæz–é+cšf‚Õ§ô/šã<+›-&~`z¡o½Ñ¥Õ‰®ó„1AkÎÖâoO –çg2ñÒ3çÖGQ…ĞTî}Eƒí®ÀNlï”Õ‘~é™,Yf‡Ì71‚Ğ_ÍU8RW‚Š,'€é©¢‹HdÿµÊ>GuÍHI2ÜÅÂtulôøßb~]&oqT¦¸ õ†âu–S®Ök–§ !Û2LÇï‰ó×à¾;.&¹;w8ü ìß0€í,¡%§{Ã¹e«Hƒ­|òg–×é7	ˆhÅŞnizEšq¡€¨qÉ4µä4Ïquµ¹³/Wjl¢FÀW’ĞJ ä:öoáÜõÂ‰g¼W£"ált<~pzæÄ—BXU\Ô4*0+ókÌ›ªbµ V”£äJ9£•£şFA üJ°J“jÈrù%È …:ªeåšÁ£r³ÎZéÚ–³R—xGœÔM‰[Voò,æjñIhíá¡zù	Ær~7Y"%Ÿ(ä|7íEªbå~/yAiÇáøèÖHâxhÓcsÜğÂ;÷WS¸!i!ê†"Øœ®,{&7®)GKú„8U;¶kLìé¤2ØîŸ;„,Ç&¶í‡–á:ê
 X¤/"Y™äMJñÏ1O‰¤˜°Jd¬ä¤¸úE¯ñ`+¯­Ã§§=ç¶µ+H¶QŒÍï[)Ø ¢{f ™Ğ2ÍÖùïÍéÄ9•úzè§gtzÃk
 XW®ÓkV¦7sB“‚5¥ üÿ$zÉëK¯R&¬´aAË¡”¸ˆòüAÅ¹ì 
 X™òù.yº	VÆ²ÃZ]Ù’>L:Zœ•Oz>í¥ş¬ß¿ TôHâú%üä¬ÖÇíáXªŠ¿€¢ÇŒ†íhø·GÇû ¶ôó5&Dß¿«¬-¢Šƒ4úYJªró$Õxò^‰ø%ùÖM†¯ÎzËÌÊúê|·D>È÷;şk)~óŒò4!ôĞü'şòh[ÎìÙ®ùÚkeTPü=ák´¥	„QóW¬¾ı¡tıY…·şAİ„Ğ÷6I‚µè_¬­—–ÂPC^µûK+O.iJÀ2OÁ=©hğ¥î|9»+…¯j•rÊurFÄŸ‡ ‹’wdüŠT÷<Èrÿ ’ßŠ
 SHAR_END
-echo x linux-bcompare/.git/objects/c1/1ae30d6f08bfd022ed508d69c467ca77c8ab2f
-mkdir -p linux-bcompare/.git/objects/c1 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/c1/1ae30d6f08bfd022ed508d69c467ca77c8ab2f << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/c1/1ae30d6f08bfd022ed508d69c467ca77c8ab2f
+mkdir -p editors/linux-bcompare/.git/objects/c1 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/c1/1ae30d6f08bfd022ed508d69c467ca77c8ab2f << 'SHAR_END'
 XxVënÛ6Şßğ)ˆÖ(š¢¢æØu‚`&+Š#Ä¶<IY[ € í¨‘DU¤7§†ß}‡”ïQ»¥‚íˆç~ùÎa¢ŒE¸ÓnŸÿò·®+JûŞU¡‰ãúccd½?'ŠY^†EW¶çÿe¹íŒ%£K:ä|Ÿèİ]_ÛEÎŞµÛÈ4|kà¸¶å);4I«8Nèß4ÃYZÌhdx¾åí×B÷B”—ºÎcÆ­8›ŠÀ3t4¹È˜&®U{9Q&4d}ô]Ãôp/ŸªÌX¶Ç>|-W9ÏC‘†ü2ıV#ÈtF#kì+¶Y§øóÇ"~‹Ã"Á9­fOÓŒru²,ğëíö)BCÛ´Æ^]!ÏtHÃs®ı†kmxÁ¦„^öÖùàaÓ‚Ó­àµ=T–ZKùæ]ÙîJ_; b!¶rË©b&)ZB*.˜¦œf.f{tyRd	ç~â˜–!g<ü\;n`¸æ²æI¯‹ÓÎEïˆ¸–áÉß•\T4Ì1+²GÌçeÉ*µQŠ²bJİyë~×ıvóÁJMVR›‹4ã˜ßCSˆ3§ZZLh³iºêÁĞß©VD!§—Õ¼ÀVÍ²4âêğUh‹v[½˜c¿Œæi– GYö@…%{ÛZJÜJÚŠ,.zA¯»’ËÔYŒàƒ{ëİõ¡RBTsŠ€Ø¿³‡W
 X2”#d=ß½À6±ª£"_¾@+RV%Å	şŒà ÏkE˜Süæ3¹yÖÈøÂÉ1o¦ÏÒi£|YÌé_Êfúº]Oud·>™IC €‘«‘õT©¿,’‡é»“‘6˜´[ë“v4òOM	Š–M\gà#Yëu‡[ı(ÎÙ¼³c
 XàÀ3]{âï”×²„ßo…Ä¬t!‚œsÅşN ı)º“ÎÈ»­Ï¿iŸ0/ª°Ú§ŒÇ÷4B$-âlPü[Ä"‹°R¤¬à$ø]ò§¸µ”ÃºÂïß×“†áhÖ •¡ B³CA5è©$$Oh‘¤S„ú¦LÉsM…êÖRÂŞ5WúœWzkY;Xé}dE²¹	Ö:ş`­C0°äÖj-ëõ¼Ò!œ#%äİX}c<Ø•¯µÜ:u£ö‹ÀÒ	TVr}pfÙ%‚9Wk£oxV|”ú,±ö°6Ø&ÖêÕµÜ-ÚM@2K@w/®[¶)a{_bğ€N^Ç	(ìWÈøÕ+ ®·CPãl…77)°*j§èä%ÜŒÑÆê.ÙÂÚ¨éL>ù®eŞÜ5+Œ‰âíılÃ÷+üößn­^€‹:â&Û›€×cµ‚@&LÖz`û™Úä.sŞ7ˆûÙ¦ ‹ ‚e£á‡Qé_E÷°#;S­×p!½‘ãÛ=­mïLI½†$uXÿiN;LRê9ˆ~¼$Ê‰>‚¬JLİş ‚èÛ™«M~%½ƒbÉÙÚ1%d’P„›¾î#Q¡½6L6€Pi¨ G·2Hé),F®ßÃŸŒUz»·h÷ô°,¹Lñ¹Ú³Eçì§µ»‹îÅV{S^Bôí§LyXrØ2õzDŞ‹ß¯Àws;0°ßË­'x9v6gYçìy.wù)—Ïs¶«ß¡³¦{IŞGÿì³‰l
 SHAR_END
-echo x linux-bcompare/.git/objects/e5/19069394bea0759a81de851de6104f2fbf1c6e
-mkdir -p linux-bcompare/.git/objects/e5 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/e5/19069394bea0759a81de851de6104f2fbf1c6e << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/e5/19069394bea0759a81de851de6104f2fbf1c6e
+mkdir -p editors/linux-bcompare/.git/objects/e5 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/e5/19069394bea0759a81de851de6104f2fbf1c6e << 'SHAR_END'
 Xx+)JMU042c040031QğñtvõvÕ+©(a8Úª0¥&ğd³şîT½¥Æ·>d¾…*ËË/NÎHMÑKfPÔ½Û_§éÂlëÎ›R2mİ¢	¬MPE‰%Éº¥ÅEñI™yñIÉù¹‰E©VÔÄ7œZÛ]=uïìD[wî'ûü1C
 SHAR_END
-echo x linux-bcompare/.git/objects/6f/7035bc2e8f19defa175e636c739e0bc5272fc5
-mkdir -p linux-bcompare/.git/objects/6f > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/6f/7035bc2e8f19defa175e636c739e0bc5272fc5 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/6f/7035bc2e8f19defa175e636c739e0bc5272fc5
+mkdir -p editors/linux-bcompare/.git/objects/6f > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/6f/7035bc2e8f19defa175e636c739e0bc5272fc5 << 'SHAR_END'
 XxÎMj1@á¬}
 XíÁò¿ ”@O"Ûf 3!§´=A—ßâÁkcß7—ÂI§ñ²Ø˜KD!Ii¶ç.¶/‰"¶š«¹ñ”CkÉ90ÕˆÖsï6ùâ}eÂ,aÇŒ¼DÃ]Ç„uã;Ü¶Ï9àó×—?ŸÑ/ÀdÑ¹˜Á‡uÖšö3©òÏÜ|¯ûè°lW¹ƒ®¬ĞCáé ª€<¥=”ëUÌàĞUŸ
 SHAR_END
-echo x linux-bcompare/.git/objects/5d/8ac699d763845a17bf208a9a923c45d4235b5f
-mkdir -p linux-bcompare/.git/objects/5d > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/5d/8ac699d763845a17bf208a9a923c45d4235b5f << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/5d/8ac699d763845a17bf208a9a923c45d4235b5f
+mkdir -p editors/linux-bcompare/.git/objects/5d > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/5d/8ac699d763845a17bf208a9a923c45d4235b5f << 'SHAR_END'
 Xx‘ÍNÃ0„9û)öH•AÑ+gnH=;ÎúG½‘w£PMiïÜ,û›ÙÙñ0Ñ û~÷Aev!ä	\!Ğ4bcX8×œË<áfZ±…eO¥(Æ É‰Â~a j$!Œ9lX½:i¹WÛ\EoXpÔãÅ>ÇJú ‰oT%± ŸØ"Ÿ\È;àsõ©QÍ?×t»‹>bÅæ¡áLMØs<Df>tİº®–=‘Îe
 X²êrV3wÆ|©óIsp:¥©ÂÃM¨-…mhˆ–Zì
 X–Aº?Ô¾ìû×÷îqK`\sÑ	ÿK~eíó[ÿ´éuÒÖ 6k–Ö,I›@¨Ä>áh½şÃ·ù‹´’f
 SHAR_END
-echo x linux-bcompare/.git/objects/df/58fffb86eda6bc70cf5576c1b8ce37db780263
-mkdir -p linux-bcompare/.git/objects/df > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/df/58fffb86eda6bc70cf5576c1b8ce37db780263 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/df/58fffb86eda6bc70cf5576c1b8ce37db780263
+mkdir -p editors/linux-bcompare/.git/objects/df > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/df/58fffb86eda6bc70cf5576c1b8ce37db780263 << 'SHAR_END'
 Xx¥UÛnÛFí«÷+¶©ÒpKªjuQ‰¦Â%T -^VòÂ$—å.:
 Xÿ½³+Y¾ÄvíĞe/3gfÏ“œ'¸ß¿û÷¦5¥“à´‡Ğbî‡ŞxfŸ$)/ª¸¦èÔ	Â¶8sÎ‡d@FÈ‡öÙÜwì@™ÒŒI^œ³²iÑl„¶N¨o/¥¬MS¤œKZ¾’Ÿ• º‰çg*ÜÂ·§Î'@Ò Çákû
 X¾ˆ%‹Åoû×5'%•ÈšÏf¶ª[k›æ;,®ËôË´^S¼b9z¿ây¡rËö]^`Íçf0Ÿ†cß¾¹ŠvåÛtq°Ë»,¥¥ {»©ã*œŞF-‚SÇïÌ:‘­Ü›-l¦8Ê˜FÁ ÿ—ÜĞ[AóWWë;çj§Á&n$ü¤)­$Bö§Ğ[a,§Š(RWZ[ú·´§?ãŒŠ+É+C•n4’å‹K`;ƒ5X¹âp@“¸\¯X‹Bä:ŞRA$± ÇuSâ–×ëœ%Boş’F{x¨—ı[r‹ã¤ay¦uáÛ0ú?½ô¡¢0Š‹l4Ôİˆª3z›;ZêÈv{Ñ‘öh†·lp4z‚ò@È›Gşy°œÀSY7!ÇÂ±ë‘cÍ=õD®)L'KÇ=…½>X¸ v y¢Ü¹5v'cĞKo³_wV¦y“QüK"2RñZ^IÆKAŠ«_Õı
 X÷6cßúĞá“¬“r]6Jä	"4¿o¤éÕÜµ.-3¶B(ø`OÆŞY¤Å¹õ6ªBßêÌFÔ&¤§;3¡×¼Ìvk&iÁ›Rq‰ÿ@PĞKı®2¥¼”´•QAË¡Œƒx„ŒóüAğÙ¹<	œÙj}—!SUVÖ¢ÃF]Ù’}Ì|-aå“O{é¦xÖï_*Ô &’„y	9¯ÍÃQ{82ãª/ è1€A¿ôÿÀğ¨í\è+Lˆ¹ÿT¬-âJ€2¶S“TåúIËñ¶È{ªâ—Ä[5y>è¿:ê-3ÿ)ê«ãİù Şïø{ldøÍ3ÊĞƒĞCoğŸøëW yêx§ÏvÍ·¾Ø(ã‚â·DplĞ–¦ £'¶šKÛî‡0…¬Y…7şQ?	5Òï¬ÓĞ¿ØX-„¡ß:©›÷WÉEzI3–y†üIe@ƒ?HõÆWğ»Rø&Wu F\§fDò¥e‘CòŒ^êç£ÓXMá ¶'ÅN
 SHAR_END
-echo x linux-bcompare/.git/objects/5c/e9168f0a709a4cf9d309aa4888a6b2687ed058
-mkdir -p linux-bcompare/.git/objects/5c > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/5c/e9168f0a709a4cf9d309aa4888a6b2687ed058 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/5c/e9168f0a709a4cf9d309aa4888a6b2687ed058
+mkdir -p editors/linux-bcompare/.git/objects/5c > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/5c/e9168f0a709a4cf9d309aa4888a6b2687ed058 << 'SHAR_END'
 Xx¥U[s£6îkô+Ô­¶í"ÖvêÉdšN1ÁY&<€›tÚÃE¶™ b‘hÉzıß÷Hä¾Iš´_ÄÑ¹}ß¹8)X‚Gãñğ›ïğ`ÖP:-<?t¹u´¯$ee7ÛAø›å¶çÊ‹}2&“»Â`9›ÙçpEF?½ŸŒ‘i„Ö‰çÛV üĞ,¬á8£ÓyÕvhn¡åGöJ!êC]ç)c‚6œ­Ä?™@:ZœÈœ¾ÕGÙS.4d‡¾a†„—Á÷HS—<ÛnËWÁËXä1ÿµÎ?ÅMÃHE2½ùÜrCumößa~Y¥ïp\e¸¤ÍšâU^P®W¬È %üö|8ü!Ç6-7è
 XLÏ7Ïßº¾‹®)z88¸Âƒ<¥§7Š3ÛQ[y
 Xm§_ ¢7zËŸ+2³œ­ÌJƒ+¦©GN‹×ë;rù¤Ä ·¾Ò”Ö!Ïu~f¾ùAyŒËl²óñÁäÁeä[F +¾¬¹hh\bV—˜·uÍÜ(CÉ˜2FËàªŞ}} ÜüB°Z“Lj­ÈùŠšA%ÕòjÅ@@“¸Z¯òNšGí.U)÷’˜ÓÃ¦­pÇšu‘'\=|Z7ª#4“`¬à‡I›Rí(iTZ²¶ƒ­ì[)Û‘î`Möo•dÆuz®ù§Ár
@@ -1014,16 +1014,16 @@ X>XSÃ=‰TŸõĞ%NßÜé-otH\™îô„^²*»}=IKÖV‚ğşğl_bx‘Ñ(e• ˆJZµejÎE\‡œÌOe·PàèÄ
 XnÔ¦•+«–|^ãíÿ¨*!Wñ}…ušbíæk«…mBc¨u®’ºşóªO74# Yd Èìğ©^Ûrv·¾ÊU
 Xä–ÛÉ‘|,2$ïÉä¡îY>º‘å&ş$1Ò‹
 SHAR_END
-echo x linux-bcompare/.git/objects/78/3ab026e05f80caad8b7b95bd9b613d470be4bf
-mkdir -p linux-bcompare/.git/objects/78 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/78/3ab026e05f80caad8b7b95bd9b613d470be4bf << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/78/3ab026e05f80caad8b7b95bd9b613d470be4bf
+mkdir -p editors/linux-bcompare/.git/objects/78 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/78/3ab026e05f80caad8b7b95bd9b613d470be4bf << 'SHAR_END'
 XxSÛNÛ@íkö+Æê‹³qì¨©‚r!Ô¨Di@€‚ílb«Înd›K%>¾³Nš©
 X~XY3gÎÌœ=¦*„ã|=úÄ9ÇcÙa"í0R³y‰šÊ’iÅ­»u^÷yİã»_]WÃ³,k§‚5›àNÕ9‚åT]Í&Ãş^IšÇŒ·;£ŞE»aëVizv(~+9^vdVïâÇÕõU¯5¼,e¦ °||Y—1‹Y[\*
 XRÍø†âe®²,M`z§£ş Û»l6s·¥Ê£XŒk¹2˜µ,Ù R7ÍĞou¾·Îº£áM¿ÛÈæ3¶Á¾™£6è^w;kşvg¡¨¡SÉ·à†I£ƒÖà†¸‡çî¿¡ˆ…d|9ÃÀŠğx§t5ö‡Kˆc[kN¤¹x·ùZ¢ÿôÚ¡$z÷}’9ú…B!B+ñ,OAšBMôöÈcòŞt™Y%"¯•®ò¼*¹Êóé$“=ÇI*HFÃÜ7À§êZ»±b¨´g?¦>Ü¦sgĞb•<N&FI+.|ä1xC¼ˆ<€Y‡©/e9N`Å“-i6÷ä³c€Y¥	õ3ò	á?(¶ $Ñ_·™z¿ëƒ!IÎ‚Ü˜ˆÔXÀÆs@ÿJêX^$rŠDæE #QŠyàU=X~õP‹Y’¿¢ß_¹k<DA»˜ÍívÇÕLóôÌfà“­(]±u‹=ĞºÔ"•	Üãõô*¸‚Í§™˜ïàÖQıÂhr6ölP]
 SHAR_END
-echo x linux-bcompare/.git/objects/37/570de1d4c6e7fd65b6a0200040a78cb70fcdc0
-mkdir -p linux-bcompare/.git/objects/37 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/37/570de1d4c6e7fd65b6a0200040a78cb70fcdc0 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/37/570de1d4c6e7fd65b6a0200040a78cb70fcdc0
+mkdir -p editors/linux-bcompare/.git/objects/37 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/37/570de1d4c6e7fd65b6a0200040a78cb70fcdc0 << 'SHAR_END'
 Xx­]ËvÜ6u¾"/ÕŠ-¿f7IÆ'‹IÎd2«Yñ I4	‹$T·üõsdwËj)Â-z‘§yQ…PU¨zÛúí÷7?üğáÃßşQ¹ğı«W¿şûçıéÇÿ~zõêzëúïøß­Û^oí½ï«Òwƒ	6ë£k{ˆy6¶ò¾ü3¾}êÃ±y†©ô×fZWšè|?>¿î\÷äÄæ1äO¯SŞšÚşÅ ®üKé¯ü£õáyV¾úìúõûÃë÷ÔÇ2ã—˜<rq}óæpó&wøô15üÛ‡·s‡O¿0üàÁô.¶îõö¸=¿ş£ËMpúrSÙñ6úáÑ`O,ùrèÚ'?bÑÒLÎÈ¡¯3g³È³ô^F.Rä?ÜMm{ófóÜ\Û˜v÷äçJ¬t~êãflIéÙO±o¿^êg¿|ÿöÅ/úyQn/yüpÓ™êÅQ¡O2¾Â\•æ³Ù˜®zÿv3z%Üİ||¯B÷fŠ®Æœ†Ğ3a;¿†«‰ÇfêM8\½YÁÁyŒÕlÜ|6nTÒ(°‹ÛÊê8¡ŸV —çğá985â;‚ß­cüİ
 X¡ùşÏ5Ä®› så&ÕõÍÕŞÜµ-à”vˆã¦‰VìrÍÜ”‚xBß?÷}(wg‹k-Cg[–­:ãz‚¹ KƒôƒgLñÅûîİ‡Íçá±]şK¨’'I³9ŞÑv1˜û|inËÖ×ø>øıhó¿/MÛº¾.¶e±¾+|ll(:ÌÄ4Kq^Äåû§\‰gÄŸÆÿ;9~ÑzS¹¾²‡ÂônS»İ‹F7íûDÌUáÛ©…H	}×™¾*°
 X¶vgƒÅe„>0®oKÅÊD£¹ C%¦ƒ÷½f†=(è5¾Ó,`7Ü(ˆÁßV ‚­¨#®„ÙÊi¡ÚenËFÁò%÷¨DE˜Cßï‘ ¬*eBŒ¶ãÓËJd[¼G`¿Û­ÂÁŞQÄ£íã‘p¸/1€Ñû)7ñ™öpßÚ¸Šrpu£#jÚ•mmÄ_ŠyÏPã•Û%#ÆOù„DÒÂIÂŞ’eNŠÂl[î ½5GEÏœB¡% åG×¹Ö†ä@‰q¸¯İ23ŠŞ-ü™œ>(H) ‘p»K?Üóµ²;3µqS£™Ï8Àó¹Ì_9Q²¢œº?¢8=l‚Üù §å>kDqçì°½2@ã÷Eô¸¦¦4	¯¸\ı0FøÔG>*7-.]ùw^a%X¨•Ò¥ÛÑQ3•ÔVFÇó8+Ò	=Á¿ÕŒ¾Ñ8Ëâ¤û½ï[BÁ`Fx´ã7†ÙÉ'hS'Æİİe˜98AÑ] DÃ"ÛBœùáR¸¹ã=,ĞN6wï}Ã-°œ©˜é	¦·{xØŒ`b	¨çU‡T8óTµbÕ±IÚ¸™ÅR-Ç¹‚]´5µ{æ;$³ßB£¦FØ0*„uË  •ÌÚbt™Pë¢Ñvp›)&rªl¬aÂŒ(º~8ØÑ2<·õ6D;ƒ tÏDeª¶–øõP‹•xŒÿ °¦uu¿w±qûÒèb–4(…o/Œ&jƒL”2Cµó¡3QL”F0aÀ]Ç“N.~°Êe‚—	Î{ˆ#º@UR¶æ“'Âz9r‚å1zø`„OİÖcğxãÉ-6ú)”âŒÇà[•<Çiàg(áC9ƒ®—-@©×¶pBû?üÆš´¦´ü {nGÔ*Y…´ü±¬Á…8pº—I 3ó@5ASf#û½xÂùz›’íU àç1'é×Ã¦d³g¶y‚uf¼eA,mËNK,æ–#|H
@@ -1035,72 +1035,72 @@ XÂQR—ÏÑ€È:Y1=%§îf©ì¦çÖ¢>›˜
 X=¤bš0PS‚ˆNš_{' ÒC&SNì×ÓˆôìúÍM~²:©ÆÁñ†÷ú¤&GÁ{m^ø›a,“	¥åT"»1æªèõR*6q-!Y%F t¬qo{Ë:§çÀ9æ@DÅJ)J ¨¥Ü
 X¹F\\T$'j: ¨¦Ã…1…5AP¬ bMÔ9)è¡˜K6C£ú˜rù¡‘Ş	Fs)ÄÔrÔhiaU¡¦O05³ìÓõG¹Î8Z°	¦bVb9 hBxRñV¢Ø?ÕM!ÏóOe0±Dz*ˆ„Ò½ùñ7ââ´·-R¸Lqá¾1q,ĞNCtÄî‚TÆÍÔÎ"½ÈÆ´…ÌÅúÄ%dhœyÑ.ÅÜ]ŸÛÈ Äl>»ı=¡–ÇJLWĞ@¿C–7ŸØ’Ÿ]… ·¼Ÿ^üõ4ò~ø’óënøğ?ñíïÈm~ó.gÜ©x>>ãgçä×.7òèÎËÏ[à'9¯'?Ë{€àäå_Ú;A~™\âO?şó·O/Nñß»úå÷_®şõéWcéQ;F¿‹8ööEì£ï7Ràù"İüRN˜#RÈhûåL÷õæ‡ïşé‰®h
 SHAR_END
-echo x linux-bcompare/.git/objects/b5/e37213c2734c7a45838674528e798f4ba206d6
-mkdir -p linux-bcompare/.git/objects/b5 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/b5/e37213c2734c7a45838674528e798f4ba206d6 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/b5/e37213c2734c7a45838674528e798f4ba206d6
+mkdir -p editors/linux-bcompare/.git/objects/b5 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/b5/e37213c2734c7a45838674528e798f4ba206d6 << 'SHAR_END'
 Xx9Â@ ©÷î‘"ïáu"!ÄWÇ+RäĞ²PğzğÊ)F3º-ËÜ :´jŒ½âD°I…ÅŠŸ(áh‘™-e,–hôn—jkƒ\#¬/~˜¬ˆg²³rG¥À¡(9¹·ëVa‘6Ëöù)µnpúòåÇİjí>£×=F8b@tú™lö§î©‹»ÅG<
 SHAR_END
-echo x linux-bcompare/.git/objects/d3/915c5a2073d3838005ea347694153760b8cabd
-mkdir -p linux-bcompare/.git/objects/d3 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/d3/915c5a2073d3838005ea347694153760b8cabd << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/d3/915c5a2073d3838005ea347694153760b8cabd
+mkdir -p editors/linux-bcompare/.git/objects/d3 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/d3/915c5a2073d3838005ea347694153760b8cabd << 'SHAR_END'
 Xx=KA†­÷Wl©…C>f’LaqÅW{•Lv² xÜq•?ßi,,‹R$<O^ÿ¸øÌ\îN‡ã~9í/óÓŒhÄD0-Ï;*2ßûz9_Û-sâ¤‰
 X¢¥w6I·ëùaÜ(6¥­eFsm[tU1k!îÜZÖ q¨ØPQê˜İŒdÄ¦åğºÿI´Ô2öÿ2û4y“üí¶Vä¾å}³bkîØC(†Ou£ÆAŒ®,X"2{“ñKª=b´ğ»ÛOšiÑé	œY¢
 SHAR_END
-echo x linux-bcompare/.git/objects/26/7341caba7b5d72205b1ef12ff56c58387ec90f
-mkdir -p linux-bcompare/.git/objects/26 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/26/7341caba7b5d72205b1ef12ff56c58387ec90f << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/26/7341caba7b5d72205b1ef12ff56c58387ec90f
+mkdir -p editors/linux-bcompare/.git/objects/26 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/26/7341caba7b5d72205b1ef12ff56c58387ec90f << 'SHAR_END'
 XxA
 XÂ0E]ç³¤Ó´q
 X"İzŒ1™`À4%›Ş`=Ÿ¿ù‹ÿ/9'¤ñ U¢#¶ÁR?öd9ÆV–|ÄñÙ†{œH¿õQ*dÖÄ/XÓÆµ¸ì{şíÓ"zt6¡ƒc×büWªòçİÜ–Ô¬OØ9æ	>I
 SHAR_END
-echo x linux-bcompare/.git/objects/f2/1e150af1896a4155a5105bc1f0f54074bebff8
-mkdir -p linux-bcompare/.git/objects/f2 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/f2/1e150af1896a4155a5105bc1f0f54074bebff8 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/f2/1e150af1896a4155a5105bc1f0f54074bebff8
+mkdir -p editors/linux-bcompare/.git/objects/f2 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/f2/1e150af1896a4155a5105bc1f0f54074bebff8 << 'SHAR_END'
 XxÎÁJ1ÆqÏûs$³›L² â¡-ìE¡k‹×Ùdbî¦dS>½Z}ø}ğù<Ï©BëÜM-" ÁwÒ®%
 X±Eì¹3Îâ¤C˜öQ‘F¶Á7g.²T0¬{£¿eJt`&åØ"	­œØè©áK=å3×Ä+œÓ'—’áş·ÿún‘ú H
 X±3HnU«Tã¯'«üsŞV7Y¤$›a|9n÷ãğü4v»áÒ²Vá 9‚¿¬5ÏğÁ%ñô.W¼ß‡İ|¹®]f
 SHAR_END
-echo x linux-bcompare/.git/objects/70/8c0d5250824ca7aef1d540be3777e460fe45b1
-mkdir -p linux-bcompare/.git/objects/70 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/70/8c0d5250824ca7aef1d540be3777e460fe45b1 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/70/8c0d5250824ca7aef1d540be3777e460fe45b1
+mkdir -p editors/linux-bcompare/.git/objects/70 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/70/8c0d5250824ca7aef1d540be3777e460fe45b1 << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe8(õ˜7Ÿcÿ¥·½™GÒO•ŸX­U“’Y\’™—–ÏpybL”BñåæÖW&eSDÍvœÚkb 
 X #ŠJ²M²oAé¬Æ{­²Ïüõ÷ËäAÍ(ÈN×MI-N.bˆí:6ózrK”ø~…®Y“l\¯(GÇ#)*ÈÚÆĞÕ<3ÈÑakD©ÅÃµ-kJÚ½¦š. Ë¬Hq
 SHAR_END
-echo x linux-bcompare/.git/objects/5a/4954f21fd0e4da6ea60c87ba716e6d408e7fc6
-mkdir -p linux-bcompare/.git/objects/5a > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/5a/4954f21fd0e4da6ea60c87ba716e6d408e7fc6 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/5a/4954f21fd0e4da6ea60c87ba716e6d408e7fc6
+mkdir -p editors/linux-bcompare/.git/objects/5a > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/5a/4954f21fd0e4da6ea60c87ba716e6d408e7fc6 << 'SHAR_END'
 XxÎM
 X1@a×=Eö‚ô7m@D’¶©8Ô*èéõ.¿ÅƒW–yXW£‹@ÀFÁÃ>5IÚgÌŞ’ÃhÈaNĞ8auå.—ìlÄ–Dk9Q+ì¹Pn•3ä¦RHŠïã´t˜yL|ƒëôâŞØ~½ÿys‘±ƒÚçÈGXk«µ*ŸÉ!æêP+TyÈ
 X9.ı©ŞšöL¸
 SHAR_END
-echo x linux-bcompare/.git/objects/e0/279cffd90878d4838b169c9d930664bf750d89
-mkdir -p linux-bcompare/.git/objects/e0 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/e0/279cffd90878d4838b169c9d930664bf750d89 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/e0/279cffd90878d4838b169c9d930664bf750d89
+mkdir -p editors/linux-bcompare/.git/objects/e0 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/e0/279cffd90878d4838b169c9d930664bf750d89 << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe¸{øîƒwÎ&½Òj_+V\oı6³ª&%³¸$3/-Ÿáİ«¼MeÇ”ı‚Ó7ï,¸&'Ì`b 
 X #Š~rÅ,YÎ“4!ôÁ¤\µ"Ö½a–ÂŸ fd§ë¦¤'1Äv›y=¹%J|¿B×¬I6®W”£ã‘ä mcxØÙg;ï‘©Õõİ¡ïØ×‹x	¾ %ÌHd
 SHAR_END
-echo x linux-bcompare/.git/objects/6d/1959c1d2400040c8293442889bd6774c185a0a
-mkdir -p linux-bcompare/.git/objects/6d > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/6d/1959c1d2400040c8293442889bd6774c185a0a << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/6d/1959c1d2400040c8293442889bd6774c185a0a
+mkdir -p editors/linux-bcompare/.git/objects/6d > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/6d/1959c1d2400040c8293442889bd6774c185a0a << 'SHAR_END'
 Xx;Â0D©}Ší‘Ğnâ_$„¸­íì
 Xq"ÇpzÂçtó¤™ÑKó4å¶»V™¶äÆ8ˆ'dİwı(š[‡¤Ç(6&Õ*—Ò“Á ä¶¢	†ĞÄD‚b4:9Šxîí6W˜BËa…%?C­3¿|şñ¡p;Y$ê­v{ìUúH6şs®.§,¸^WÈŞ—›ÿª^÷ÖO<
 SHAR_END
-echo x linux-bcompare/.git/objects/f5/d8a17b6f675d422f19084a261e5a15b6bb1999
-mkdir -p linux-bcompare/.git/objects/f5 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/f5/d8a17b6f675d422f19084a261e5a15b6bb1999 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/f5/d8a17b6f675d422f19084a261e5a15b6bb1999
+mkdir -p editors/linux-bcompare/.git/objects/f5 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/f5/d8a17b6f675d422f19084a261e5a15b6bb1999 << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe0kL{Û°ö*ï©ï	·e,Û¤i	U“’Y\’™—–Ïğ¿îU^Œ¦²cÊ~Áé›w\“f01 Å?¹b–,çIšú`R®ZëŞ0KáOP3
 X²ÓuSR‹“‹b»Í¼Ü%¾_¡kÖ$×+ÊÑñHŠ
 Xr€¶1˜‡ó>¼rìùßÔm–÷lç?{  e­H
 SHAR_END
-echo x linux-bcompare/.git/objects/99/af47e05788e319946e8c0d7de0df6951cb691b
-mkdir -p linux-bcompare/.git/objects/99 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/99/af47e05788e319946e8c0d7de0df6951cb691b << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/99/af47e05788e319946e8c0d7de0df6951cb691b
+mkdir -p editors/linux-bcompare/.git/objects/99 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/99/af47e05788e319946e8c0d7de0df6951cb691b << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe¸{øîƒwÎ&½Òj_+V\oı6³ª&%³¸$3/-Ÿáİ«¼MeÇ”ı‚Ó7ï,¸&'Ì`b 
 X #ŠJ²M²oAé¬Æ{­²Ïüõ÷ËäAÍ(ÈN×MI-N.bˆí:6ózrK”ø~…®Y“l\¯(GÇ#)*ÈÚÆĞÕ<3ÈÑakD©ÅÃµ-kJÚ½¦š. MHè
 SHAR_END
-echo x linux-bcompare/.git/objects/dd/c3dde0ee4334888d1b26f57910a8d785f69981
-mkdir -p linux-bcompare/.git/objects/dd > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/dd/c3dde0ee4334888d1b26f57910a8d785f69981 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/dd/c3dde0ee4334888d1b26f57910a8d785f69981
+mkdir -p editors/linux-bcompare/.git/objects/dd > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/dd/c3dde0ee4334888d1b26f57910a8d785f69981 << 'SHAR_END'
 XxVën›HŞ¿™§µVÕTe¨c×¢íjmB\Ûxl[©â2vh€¡ÌĞubùİ÷Ìà{hwSd;Ì¹_¾s&aÊBÜi·ßıö·®JJîe¡©íx“şØ|O±¬JŠ.-×ûÛt\ËHF—tHoŸèŞ\]YŸ€EÎŞ¾éuÑ÷Ì¡íX¦«ìĞ8¬ä8¦ßiŠÓ$¯hÜw=Óñ]Ë«…n…(.tGŒ	Zr6ÿ€gèhz=”1M³ör¢LhÈüä9}ÃóÁ½t~BÊ"C`Ùšxğ5å<Dğ?‹ä!(KFr*aÇæÄSl£Nñ5æ÷yôyŒ3ZÎ)%)åê<ci!á—ŸÚíS„F–aNÜºB®aÛ†k_yû¹áù›ºu:Ø]çƒGIDsN·‚WÖHYj-å›{i9+}í€ˆ…ØÊMMg¬Š'\hY©”8gš:rš¦¸¸›ïÑåI‘A&¨üD-BödôÙ¿²¿ï”Å ‹{]œtÎ{GLß1û®ìøMÁEIƒ³<½Ç¼*
 XV
 X¨R”SÊèÆ]÷»î´›ß	Vh²’Z%’”c~M!ÎŒjI>c@ aÏgÉBªû#kr£Zyœ^”U¬œ§IÈÕá›Ğí¶z0	ÆR~VI#GYv_…%{ÛZJÜJÚŠ,Î{~¯»’ËÔYLlÿ£síŞ RB”E@ÜX£K™{Ê²&®×\ß2ì‰ª£"_ö½¾­PHYMÜÇø‚ƒ<3¬åAFñ«/äVdi#ã+o$G¼™>OfòE>o¤-šéëv=Ö‘İúBd& F.Çæc¥Áz°H4¤ïLÇÚp:Ô®ÍÏÚÑÈ?6u$@JZ04uì¡ÓËZ×¨Û8Üê‡QÆª\tÎ)€×p¬©·S^Ë~»¾‹©±\Ğ…ğ3šW0Šƒ@<üKt§'œ‘·[- ¿{ Ò>¡ÊË Ü§åŒG·4B$É£´Š)ş=ä1‘ƒEX!–s’İı!ù3ÜZÊa]á÷ïëIÃğ@4k€ÊP¡é¡ šôX’'4“BC¦ä:†Buk)aï+½â¥ŞZÖVzHïYon‚µ7\ëÀM¹µZËz=¯tçH	¹ÌA2Ü•¯µÜ:u£ö‹ÀÔ	T”r}p¤é‚9WkcĞwÍ:ø0Éõyaí#`m6µ¬Õ«j¹[´›>€dƒ î^\¶lSÌö>Çà¼ŒbPØ¯ñ‹@\o¿ÆÙ
@@ -1109,47 +1109,47 @@ X=˜0IXëíÿej“»ÌyoÜ î'›,‚<
 X–5Œ6„ŸF¥İÃìLµ^Â…ôJo÷´¶½3%õ’Ôaü§9eì0I©æ úÉ
 X('ú²*1uûÂ‡3V›¼!½ƒbÉÙÚ1%dâ@›¾î#Q¡½6L6€Pi¨ Ç×2ŸHé	,F®ßÂŸ”•z»·h÷ô (¸Lñ©Ú³Eçì—µ»ç‹îùV{S^Bôí§HYPpØ2õzDŞ‹?®Às;0°ßË­'x9v6«Ò´sö4—»‚ü’Ë§9ÛÕïĞYÓ½$ï£Ôã‰j
 SHAR_END
-echo x linux-bcompare/.git/objects/56/f95251a48fe804b6b429367191e96b8a5613ea
-mkdir -p linux-bcompare/.git/objects/56 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/56/f95251a48fe804b6b429367191e96b8a5613ea << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/56/f95251a48fe804b6b429367191e96b8a5613ea
+mkdir -p editors/linux-bcompare/.git/objects/56 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/56/f95251a48fe804b6b429367191e96b8a5613ea << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe¨Û=}9/7—wÜŒ‡7fOyåeU“’Y\’™—–Ïğ¿îU^Œ¦²cÊ~Áé›w\“f01 Å?¹b–,çIšú`R®ZëŞ0KáOP3
 X²ÓuSR‹“‹b»Í¼Ü%¾_¡kÖ$×+ÊÑñHŠ
 Xr€¶1˜‡ó>¼rìùßÔm–÷lç?{  lšFy
 SHAR_END
-echo x linux-bcompare/.git/objects/21/2ddd8f7e294154033d470d647496aea2900582
-mkdir -p linux-bcompare/.git/objects/21 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/21/2ddd8f7e294154033d470d647496aea2900582 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/21/2ddd8f7e294154033d470d647496aea2900582
+mkdir -p editors/linux-bcompare/.git/objects/21 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/21/2ddd8f7e294154033d470d647496aea2900582 << 'SHAR_END'
 XxmRÑNÛ0İ³¿â®RR%q@*£0xÙĞ^ªN*ía’•Ú±æÚÁ¾MÓöí»M ˆ7ûèŸãsîÆú|*¦J×ÆißVkqû}}óåš±©qÒvJÃgekéŠæêÔbt¥ÁˆÊø·P0î~‡1ãö4á¼o“ş0€º¥	¬"ë2˜Å¤(Šô§›d Dİ9)DzA“Ac”ì/cœCƒØÆsÎ#Vò—Ô¡¶ş©~Ë:Ñxùñ|¾X”'§¼ñO¹¬\nrRÓAêseãï-¡ÖÆ¼‹ä3·*oƒ¶¾Rüøììd^–ÓñÀ½Q3Ê
 X¢%ı-I*²©Â,ƒ#¯Œ,¡‘Ã’™5I<¢¥ïğR¸„Õz¹$Ş ÑOƒĞTNY} ôÎÆÛ]|”Š©!ùøJ à¡×GÏ7wË¯buıãbîE(âÁÖ._J€óïV"28Š‡¥d£2>øˆä¶M¤1Ö]!5×è`0ÊF«	}ûÊa	Ë»yö´/şåKÉ˜Ê>‰~#ş‹+æ«
 SHAR_END
-echo x linux-bcompare/.git/objects/36/8166ed80add50dcaf760f1b6685010a6b22939
-mkdir -p linux-bcompare/.git/objects/36 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/36/8166ed80add50dcaf760f1b6685010a6b22939 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/36/8166ed80add50dcaf760f1b6685010a6b22939
+mkdir -p editors/linux-bcompare/.git/objects/36 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/36/8166ed80add50dcaf760f1b6685010a6b22939 << 'SHAR_END'
 Xx¥Uks£6í×èW¨[Ú."±³n&Ótjœe‚Áx³¶Ãğ&€X$Z²^ş{¯Dì<6I“Öã’îë{ç,ÆÃÑOûßı€³šÒ©:@ház3™›'{ğŠVTQMÑ©åMÏ·\G’#c˜g®g™¾2¦i&XÍq•M‹æ?0½Ğ·‚şøRˆêX×yÂ˜ 5g+ñ7&@G‹ó3™rá™3ë“Œ¥Bh*ë®–Áf[Z§6w
 XêH¿ôÌ–,°Cæ§À›Aè/g*©«AE–ÀÇôT¹E$²ˆÿZe_¢ºf¤¤î|n::6zäï0¿.“w8*S\ĞzMñ*Ë)WëËS€‚m¦ã÷”ù†ëpßÏÜ…[~O öoÀv–Ğ’ÓáÌ²U¤ÁF>ù§–×é7	ˆhÅÎnazsE|šq¡€¨qÉ4µä4Ïquµ¾³/Wjl¢FÀW’ĞJ ä:öoáÌõÂ‰g|P£"âlt4~pzæÄ—XV\Ô4*0+ókÌ›ªbµ V”£äJ9£¥£şFqJù•`•&9Ô‘åóKA
 XuTËÊƒGåz•µÒ=´-g©.q/8=®›·¬^çYÌÕâ³ĞÚƒõ˜Ò¿c9?›,O‘’ÏVòN‡ï÷Ç£¨BU¬Üïå#/¨#íÑ8ŞImzl^xçşr
 X7$-DİP›Ó¥eŸÊ½kÊÑÂ†Î!NÕí{:©6»ç!Ëñƒ‰mû¡e¸ºé‹HV&y“RüsÌS")&¬+9)®~‘ç+<ØÈkëğÉIÏ¹mm’m#BóûV
 X6¨è@&´L³Bşs:qÎB¥¾ºÄéŞğZ‡Â•k§Çôš•éÍ„Ğã¤`M)¿Ä ‰^òúÇ«”†	+mEXĞ²A(e .¢<?Fd~.{ €Gg¦|¾K.A‚•±è°VW`ö‚¤ÏÓŸgå“O{)…?ë÷/U =’¸~	?9«õƒq{0Ö£ªâ/ è± £a;şŸ ‡GíáÑ.€í ı|…	Ñwï*k‹¨â ~–’ª\?ÉÃc5Ş‚¼C"~I¾U“ç£á«³Ş2óŸ²¾:ß-‘òı¿ÇZŠß<£üM=ôÿ‰¿~šg–súl×|ë‹µ2*(~K8ÃmiaÔü•#«ohFVáM‡T7!ô}ƒu’`íúk«…e€0ÔWEmÿÒJÆ“Kš°ÌS0dO*üA©[_ÎîJá›Zå†œrœñ—!À"dŸŒ_‘êç£YNâ ÃwİT
 SHAR_END
-echo x linux-bcompare/.git/objects/f6/8a3d3829541283affaffc138cd4e6a73dbf98e
-mkdir -p linux-bcompare/.git/objects/f6 > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/f6/8a3d3829541283affaffc138cd4e6a73dbf98e << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/f6/8a3d3829541283affaffc138cd4e6a73dbf98e
+mkdir -p editors/linux-bcompare/.git/objects/f6 > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/f6/8a3d3829541283affaffc138cd4e6a73dbf98e << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe¸ñÿwÛÛe{
 XÎ‡–ÜqÎüvS2TMJfqIf^Z>ÃÿºWy1šÊ)û§oŞYpMN˜ÁÄ @F3üäŠY²œ'iBèƒI¹jE¬{Ã,…?AÍ(ÈN×MI-N.bˆí:6ózrK”ø~…®Y“l\¯(GÇ#)*ÈÚÆ`ÎûğÊ±çS·-P`pXŞ³ÿì €Iğ
 SHAR_END
-echo x linux-bcompare/.git/objects/ff/7eea6e5c29234164bf301197b3b970d61e1300
-mkdir -p linux-bcompare/.git/objects/ff > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/ff/7eea6e5c29234164bf301197b3b970d61e1300 << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/ff/7eea6e5c29234164bf301197b3b970d61e1300
+mkdir -p editors/linux-bcompare/.git/objects/ff > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/ff/7eea6e5c29234164bf301197b3b970d61e1300 << 'SHAR_END'
 Xx=k1DSß¯¸Ò)rhWû¥"…C\ç*M´bl\ùçG)R¤1igŞcÊ×¥Ì1òÓqØ­Çíá}~)‘¡LëÛYæM©—ó5ßÚ-q‘9H\NÑd¹]ÏÏcU8×FÆÔÙ²24Ö0ú^Ü0EÉ0‚Ö°j* Ö1ÔiİìşÁåDôØìnò)ôëÖz7†²4úñrèê¥PñŠÈ6^CÀÚs MÅ%zòGnI`68ÀÓ7oÉXv
 SHAR_END
-echo x linux-bcompare/.git/objects/ed/c33048266df2119a35871b4ddb519f0641a7dc
-mkdir -p linux-bcompare/.git/objects/ed > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/objects/ed/c33048266df2119a35871b4ddb519f0641a7dc << 'SHAR_END'
+echo x editors/linux-bcompare/.git/objects/ed/c33048266df2119a35871b4ddb519f0641a7dc
+mkdir -p editors/linux-bcompare/.git/objects/ed > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/objects/ed/c33048266df2119a35871b4ddb519f0641a7dc << 'SHAR_END'
 Xx+)JMU04·`040031QğMÌNMËÌIe`ó)(ñÙYİÇ¡²iáãã;ïêûWBÕ¤d—dæ¥å3ü¯{•£©ì˜²ß@púæ×ä„L€@dD1ÃO®˜%Ëy’&„>˜”«VÄº7ÌRøÔŒ‚ìtİ”Ôâä"†Ø®c3¯'·D‰ïWèš5ÉÆõŠrt<’¢‚ mæá¼¯{ş7uÛ‡å=ÛùÏ  Š6F¼
 SHAR_END
-echo x linux-bcompare/.git/hooks/fsmonitor-watchman.sample
-mkdir -p linux-bcompare/.git/hooks > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/hooks/fsmonitor-watchman.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/fsmonitor-watchman.sample
+mkdir -p editors/linux-bcompare/.git/hooks > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/fsmonitor-watchman.sample << 'SHAR_END'
 X#!/usr/local/bin/perl
 X
 Xuse strict;
@@ -1324,8 +1324,8 @@ X
 X	return $working_dir;
 X}
 SHAR_END
-echo x linux-bcompare/.git/hooks/pre-commit.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/pre-commit.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/pre-commit.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/pre-commit.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to verify what is about to be committed.
@@ -1376,8 +1376,8 @@ X
 X# If there are whitespace errors, print the offending file names and fail.
 Xexec git diff-index --check --cached $against --
 SHAR_END
-echo x linux-bcompare/.git/hooks/pre-rebase.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/pre-rebase.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/pre-rebase.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/pre-rebase.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# Copyright (c) 2006, 2008 Junio C Hamano
@@ -1548,8 +1548,8 @@ X	if this is empty, it is fully merged to "master".
 X
 XDOC_END
 SHAR_END
-echo x linux-bcompare/.git/hooks/update.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/update.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/update.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/update.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to block unannotated tags from entering.
@@ -1679,8 +1679,8 @@ X
 X# --- Finished
 Xexit 0
 SHAR_END
-echo x linux-bcompare/.git/hooks/pre-push.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/pre-push.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/pre-push.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/pre-push.sample << 'SHAR_END'
 X#!/bin/sh
 X
 X# An example hook script to verify what is about to be pushed.  Called by "git
@@ -1735,8 +1735,8 @@ Xdone
 X
 Xexit 0
 SHAR_END
-echo x linux-bcompare/.git/hooks/applypatch-msg.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/applypatch-msg.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/applypatch-msg.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/applypatch-msg.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to check the commit log message taken by
@@ -1753,8 +1753,8 @@ Xcommitmsg="$(git rev-parse --git-path hooks/commit-msg)"
 Xtest -x "$commitmsg" && exec "$commitmsg" ${1+"$@"}
 X:
 SHAR_END
-echo x linux-bcompare/.git/hooks/commit-msg.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/commit-msg.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/commit-msg.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/commit-msg.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to check the commit log message.
@@ -1780,8 +1780,8 @@ X	echo >&2 Duplicate Signed-off-by lines.
 X	exit 1
 X}
 SHAR_END
-echo x linux-bcompare/.git/hooks/post-update.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/post-update.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/post-update.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/post-update.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to prepare a packed repository for use over
@@ -1791,8 +1791,8 @@ X# To enable this hook, rename this file to "post-update".
 X
 Xexec git update-server-info
 SHAR_END
-echo x linux-bcompare/.git/hooks/pre-merge-commit.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/pre-merge-commit.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/pre-merge-commit.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/pre-merge-commit.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to verify what is about to be committed.
@@ -1807,8 +1807,8 @@ Xtest -x "$GIT_DIR/hooks/pre-commit" &&
 X        exec "$GIT_DIR/hooks/pre-commit"
 X:
 SHAR_END
-echo x linux-bcompare/.git/hooks/pre-applypatch.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/pre-applypatch.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/pre-applypatch.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/pre-applypatch.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to verify what is about to be committed
@@ -1824,8 +1824,8 @@ Xprecommit="$(git rev-parse --git-path hooks/pre-commit)"
 Xtest -x "$precommit" && exec "$precommit" ${1+"$@"}
 X:
 SHAR_END
-echo x linux-bcompare/.git/hooks/prepare-commit-msg.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/prepare-commit-msg.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/prepare-commit-msg.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/prepare-commit-msg.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to prepare the commit log message.
@@ -1869,8 +1869,8 @@ X# then
 X#   /usr/local/bin/perl -i.bak -pe 'print "\n" if !$first_line++' "$COMMIT_MSG_FILE"
 X# fi
 SHAR_END
-echo x linux-bcompare/.git/hooks/pre-receive.sample
-sed 's/^X//' > linux-bcompare/.git/hooks/pre-receive.sample << 'SHAR_END'
+echo x editors/linux-bcompare/.git/hooks/pre-receive.sample
+sed 's/^X//' > editors/linux-bcompare/.git/hooks/pre-receive.sample << 'SHAR_END'
 X#!/bin/sh
 X#
 X# An example hook script to make use of push options.
@@ -1896,27 +1896,27 @@ X		i=$((i + 1))
 X	done
 Xfi
 SHAR_END
-echo x linux-bcompare/.git/refs/remotes
-mkdir -p linux-bcompare/.git/refs/remotes > /dev/null 2>&1
-echo x linux-bcompare/.git/refs/heads
-mkdir -p linux-bcompare/.git/refs/heads > /dev/null 2>&1
-echo x linux-bcompare/.git/refs/tags
-mkdir -p linux-bcompare/.git/refs/tags > /dev/null 2>&1
-echo x linux-bcompare/.git/refs/heads/master
-mkdir -p linux-bcompare/.git/refs/heads > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/refs/heads/master << 'SHAR_END'
+echo x editors/linux-bcompare/.git/refs/remotes
+mkdir -p editors/linux-bcompare/.git/refs/remotes > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/refs/heads
+mkdir -p editors/linux-bcompare/.git/refs/heads > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/refs/tags
+mkdir -p editors/linux-bcompare/.git/refs/tags > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/refs/heads/master
+mkdir -p editors/linux-bcompare/.git/refs/heads > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/refs/heads/master << 'SHAR_END'
 Xb5e37213c2734c7a45838674528e798f4ba206d6
 SHAR_END
-echo x linux-bcompare/.git/refs/remotes/origin
-mkdir -p linux-bcompare/.git/refs/remotes/origin > /dev/null 2>&1
-echo x linux-bcompare/.git/refs/remotes/origin/master
-sed 's/^X//' > linux-bcompare/.git/refs/remotes/origin/master << 'SHAR_END'
+echo x editors/linux-bcompare/.git/refs/remotes/origin
+mkdir -p editors/linux-bcompare/.git/refs/remotes/origin > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/refs/remotes/origin/master
+sed 's/^X//' > editors/linux-bcompare/.git/refs/remotes/origin/master << 'SHAR_END'
 Xb5e37213c2734c7a45838674528e798f4ba206d6
 SHAR_END
-echo x linux-bcompare/.git/logs/refs
-mkdir -p linux-bcompare/.git/logs/refs > /dev/null 2>&1
-echo x linux-bcompare/.git/logs/HEAD
-sed 's/^X//' > linux-bcompare/.git/logs/HEAD << 'SHAR_END'
+echo x editors/linux-bcompare/.git/logs/refs
+mkdir -p editors/linux-bcompare/.git/logs/refs > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/logs/HEAD
+sed 's/^X//' > editors/linux-bcompare/.git/logs/HEAD << 'SHAR_END'
 X0000000000000000000000000000000000000000 267341caba7b5d72205b1ef12ff56c58387ec90f matias pizarro <matias@pizarro.net> 1601128816 +0000	commit (initial): Initial commit
 X267341caba7b5d72205b1ef12ff56c58387ec90f a3c8d48e5eb72e2a227066710d070e6d69a58905 matias pizarro <matias@pizarro.net> 1601131380 +0200	commit: Limit to amd64 and i386 architectures
 Xa3c8d48e5eb72e2a227066710d070e6d69a58905 a3276f8e00a7b89fca4ac9bfdab956af0f69d769 matias pizarro <matias@pizarro.net> 1601132858 +0200	commit: Do not limit to Linux c7
@@ -1927,14 +1927,14 @@ X6d1959c1d2400040c8293442889bd6774c185a0a 1b8774a9b5103add063833ba917ea4291d171a
 X1b8774a9b5103add063833ba917ea4291d171af5 6f7035bc2e8f19defa175e636c739e0bc5272fc5 matias pizarro <matias@pizarro.net> 1601225649 +0200	commit: Chmod files that do not need to be executable
 X6f7035bc2e8f19defa175e636c739e0bc5272fc5 b5e37213c2734c7a45838674528e798f4ba206d6 matias pizarro <matias@pizarro.net> 1601824103 +0200	commit: v4.3.7
 SHAR_END
-echo x linux-bcompare/.git/logs/refs/heads
-mkdir -p linux-bcompare/.git/logs/refs/heads > /dev/null 2>&1
-echo x linux-bcompare/.git/logs/refs/remotes
-mkdir -p linux-bcompare/.git/logs/refs/remotes > /dev/null 2>&1
-echo x linux-bcompare/.git/logs/refs/remotes/origin
-mkdir -p linux-bcompare/.git/logs/refs/remotes/origin > /dev/null 2>&1
-echo x linux-bcompare/.git/logs/refs/remotes/origin/master
-sed 's/^X//' > linux-bcompare/.git/logs/refs/remotes/origin/master << 'SHAR_END'
+echo x editors/linux-bcompare/.git/logs/refs/heads
+mkdir -p editors/linux-bcompare/.git/logs/refs/heads > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/logs/refs/remotes
+mkdir -p editors/linux-bcompare/.git/logs/refs/remotes > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/logs/refs/remotes/origin
+mkdir -p editors/linux-bcompare/.git/logs/refs/remotes/origin > /dev/null 2>&1
+echo x editors/linux-bcompare/.git/logs/refs/remotes/origin/master
+sed 's/^X//' > editors/linux-bcompare/.git/logs/refs/remotes/origin/master << 'SHAR_END'
 X0000000000000000000000000000000000000000 267341caba7b5d72205b1ef12ff56c58387ec90f matias pizarro <matias@pizarro.net> 1601129024 +0200	update by push
 X267341caba7b5d72205b1ef12ff56c58387ec90f a3276f8e00a7b89fca4ac9bfdab956af0f69d769 matias pizarro <matias@pizarro.net> 1601132865 +0200	update by push
 Xa3276f8e00a7b89fca4ac9bfdab956af0f69d769 f21e150af1896a4155a5105bc1f0f54074bebff8 matias pizarro <matias@pizarro.net> 1601135176 +0200	update by push
@@ -1943,9 +1943,9 @@ X6d1959c1d2400040c8293442889bd6774c185a0a 1b8774a9b5103add063833ba917ea4291d171a
 X1b8774a9b5103add063833ba917ea4291d171af5 6f7035bc2e8f19defa175e636c739e0bc5272fc5 matias pizarro <matias@pizarro.net> 1601225657 +0200	update by push
 X6f7035bc2e8f19defa175e636c739e0bc5272fc5 b5e37213c2734c7a45838674528e798f4ba206d6 matias pizarro <matias@pizarro.net> 1601824110 +0200	update by push
 SHAR_END
-echo x linux-bcompare/.git/logs/refs/heads/master
-mkdir -p linux-bcompare/.git/logs/refs/heads > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/.git/logs/refs/heads/master << 'SHAR_END'
+echo x editors/linux-bcompare/.git/logs/refs/heads/master
+mkdir -p editors/linux-bcompare/.git/logs/refs/heads > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/.git/logs/refs/heads/master << 'SHAR_END'
 X0000000000000000000000000000000000000000 267341caba7b5d72205b1ef12ff56c58387ec90f matias pizarro <matias@pizarro.net> 1601128816 +0000	commit (initial): Initial commit
 X267341caba7b5d72205b1ef12ff56c58387ec90f a3c8d48e5eb72e2a227066710d070e6d69a58905 matias pizarro <matias@pizarro.net> 1601131380 +0200	commit: Limit to amd64 and i386 architectures
 Xa3c8d48e5eb72e2a227066710d070e6d69a58905 a3276f8e00a7b89fca4ac9bfdab956af0f69d769 matias pizarro <matias@pizarro.net> 1601132858 +0200	commit: Do not limit to Linux c7
@@ -1956,9 +1956,9 @@ X6d1959c1d2400040c8293442889bd6774c185a0a 1b8774a9b5103add063833ba917ea4291d171a
 X1b8774a9b5103add063833ba917ea4291d171af5 6f7035bc2e8f19defa175e636c739e0bc5272fc5 matias pizarro <matias@pizarro.net> 1601225649 +0200	commit: Chmod files that do not need to be executable
 X6f7035bc2e8f19defa175e636c739e0bc5272fc5 b5e37213c2734c7a45838674528e798f4ba206d6 matias pizarro <matias@pizarro.net> 1601824103 +0200	commit: v4.3.7
 SHAR_END
-echo x linux-bcompare/files/nosched.c
-mkdir -p linux-bcompare/files > /dev/null 2>&1
-sed 's/^X//' > linux-bcompare/files/nosched.c << 'SHAR_END'
+echo x editors/linux-bcompare/files/nosched.c
+mkdir -p editors/linux-bcompare/files > /dev/null 2>&1
+sed 's/^X//' > editors/linux-bcompare/files/nosched.c << 'SHAR_END'
 X#define _GNU_SOURCE
 X
 X#include <dlfcn.h>
@@ -1992,8 +1992,8 @@ X  return libc_dlsym(handle, symbol);
 X}
 X
 SHAR_END
-echo x linux-bcompare/files/LICENSE.txt
-sed 's/^X//' > linux-bcompare/files/LICENSE.txt << 'SHAR_END'
+echo x editors/linux-bcompare/files/LICENSE.txt
+sed 's/^X//' > editors/linux-bcompare/files/LICENSE.txt << 'SHAR_END'
 XLicense Agreement
 X
 Xhttps://www.scootersoftware.com/v4help/index.html?support_ordering_and_license.html
@@ -2149,8 +2149,8 @@ Xinvalid, illegal or unenforceable, such provision or part thereof will
 Xbe severed from the Agreement and the remaining provisions will remain
 Xin full force and effect.
 SHAR_END
-echo x linux-bcompare/files/patch-usr_bin_bcompare
-sed 's/^X//' > linux-bcompare/files/patch-usr_bin_bcompare << 'SHAR_END'
+echo x editors/linux-bcompare/files/patch-usr_bin_bcompare
+sed 's/^X//' > editors/linux-bcompare/files/patch-usr_bin_bcompare << 'SHAR_END'
 X--- usr/bin/bcompare.orig	2020-09-01 19:23:29 UTC
 X+++ usr/bin/bcompare
 X@@ -1,17 +1,22 @@
