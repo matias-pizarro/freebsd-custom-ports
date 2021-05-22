@@ -4,8 +4,8 @@ PORTNAME=	lumina-screenshot
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
-PKGNAMESUFFIX= -devel
-CATEGORIES= deskutils
+PKGNAMESUFFIX=	-devel
+CATEGORIES=	deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Screenshot utility from the Lumina Desktop

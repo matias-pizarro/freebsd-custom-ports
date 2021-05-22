@@ -4,8 +4,8 @@ PORTNAME=	lumina-fileinfo
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
-PKGNAMESUFFIX= -devel
-CATEGORIES= deskutils
+PKGNAMESUFFIX=	-devel
+CATEGORIES=	deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	File properties utility from the Lumina Desktop

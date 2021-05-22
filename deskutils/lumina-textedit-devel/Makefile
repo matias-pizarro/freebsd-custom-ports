@@ -4,8 +4,8 @@ PORTNAME=	lumina-textedit
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
-PKGNAMESUFFIX= -devel
-CATEGORIES= deskutils
+PKGNAMESUFFIX=	-devel
+CATEGORIES=	deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Plaintext editor from the Lumina Desktop

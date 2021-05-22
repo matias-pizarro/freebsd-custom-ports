@@ -4,8 +4,8 @@ PORTNAME=	lumina-mediaplayer
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
-PKGNAMESUFFIX= -devel
-CATEGORIES= deskutils
+PKGNAMESUFFIX=	-devel
+CATEGORIES=	deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org
 COMMENT=	Streaming media player from the Lumina Desktop
