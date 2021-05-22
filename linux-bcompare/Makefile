@@ -14,7 +14,7 @@ COMMENT=				Compare, sync, and merge files and folders (X11)
 LICENSE=				SCOOTERSOFTWARE
 LICENSE_NAME=			Scooter Software License
 LICENSE_FILE=			${FILESDIR}/LICENSE.txt
-LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell
+LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
 
 ONLY_FOR_ARCHS=			amd64 i386
 ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
