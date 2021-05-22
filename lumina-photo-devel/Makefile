@@ -2,7 +2,7 @@ PORTNAME=	lumina-photo
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.6.0
 PORTREVISION=	2
-PKGNAMESUFFIX= -devel
+PKGNAMESUFFIX=	-devel
 CATEGORIES=	mpizarro deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org

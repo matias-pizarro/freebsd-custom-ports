@@ -1,6 +1,6 @@
 PORTNAME=	runj
 DISTVERSION=	g20210519
-PKGNAMESUFFIX= -devel
+PKGNAMESUFFIX=	-devel
 CATEGORIES=	mpizarro sysutils
 
 MAINTAINER=	dch@FreeBSD.org

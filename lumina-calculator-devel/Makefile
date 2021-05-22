@@ -1,6 +1,6 @@
 PORTNAME=	lumina-calculator
 DISTVERSION=	1.6.0
-PKGNAMESUFFIX= -devel
+PKGNAMESUFFIX=	-devel
 CATEGORIES=	mpizarro deskutils
 
 MAINTAINER=	lbartoletti@FreeBSD.org

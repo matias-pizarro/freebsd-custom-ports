@@ -3,7 +3,7 @@
 PORTNAME=	lumina
 PORTVERSION=	1.6.0
 PORTEPOCH=	4
-PKGNAMESUFFIX= -devel
+PKGNAMESUFFIX=	-devel
 CATEGORIES=	mpizarro x11
 
 MAINTAINER=	lbartoletti@FreeBSD.org

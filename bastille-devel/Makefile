@@ -3,7 +3,7 @@
 PORTNAME=	bastille
 DISTVERSION=    0.8
 PORTREVISION=   20210505
-PKGNAMESUFFIX= -devel
+PKGNAMESUFFIX=	-devel
 CATEGORIES=	mpizarro sysutils
 
 MAINTAINER=	christer.edwards@gmail.com
