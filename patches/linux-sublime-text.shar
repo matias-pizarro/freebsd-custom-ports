@@ -2,12 +2,14 @@
 # This is a shell archive
 echo x editors/linux-sublime-text
 mkdir -p editors/linux-sublime-text > /dev/null 2>&1
-echo x editors/linux-sublime-text/distinfo
-sed 's/^X//' > editors/linux-sublime-text/distinfo << 'SHAR_END'
-XTIMESTAMP = 1621601965
-XSHA256 (sublime_text_build_4107_x64.tar.xz) = c7d9e7520ea91c2db6c026d1f48e9067457d55158393be042100a1161a3e5915
-XSIZE (sublime_text_build_4107_x64.tar.xz) = 17096632
+echo x editors/linux-sublime-text/pkg-descr
+sed 's/^X//' > editors/linux-sublime-text/pkg-descr << 'SHAR_END'
+XSublime Text is a sophisticated text editor for code, markup and prose.
+X
+XWWW: http://www.sublimetext.com
 SHAR_END
+echo x editors/linux-sublime-text/files
+mkdir -p editors/linux-sublime-text/files > /dev/null 2>&1
 echo x editors/linux-sublime-text/Makefile
 sed 's/^X//' > editors/linux-sublime-text/Makefile << 'SHAR_END'
 X# Created by: Matías Pizarro <matias@pizarro.net>
@@ -63,12 +65,6 @@ Xpost-install:
 X	${STRIP_CMD} ${STAGEDIR}${PREFIX}/share/sublime-text/libcrypto.so.1.1
 X
 X.include <bsd.port.mk>
-SHAR_END
-echo x editors/linux-sublime-text/pkg-descr
-sed 's/^X//' > editors/linux-sublime-text/pkg-descr << 'SHAR_END'
-XSublime Text is a sophisticated text editor for code, markup and prose.
-X
-XWWW: http://www.sublimetext.com
 SHAR_END
 echo x editors/linux-sublime-text/pkg-plist
 sed 's/^X//' > editors/linux-sublime-text/pkg-plist << 'SHAR_END'
@@ -158,8 +154,17 @@ X%%DATADIR%%/plugin_host-3.8
 X@(,,555) %%DATADIR%%/sublime_text
 X%%DATADIR%%/sublime_text.desktop
 SHAR_END
-echo x editors/linux-sublime-text/files
-mkdir -p editors/linux-sublime-text/files > /dev/null 2>&1
+echo x editors/linux-sublime-text/distinfo
+sed 's/^X//' > editors/linux-sublime-text/distinfo << 'SHAR_END'
+XTIMESTAMP = 1621601965
+XSHA256 (sublime_text_build_4107_x64.tar.xz) = c7d9e7520ea91c2db6c026d1f48e9067457d55158393be042100a1161a3e5915
+XSIZE (sublime_text_build_4107_x64.tar.xz) = 17096632
+SHAR_END
+echo x editors/linux-sublime-text/files/sublime.in
+sed 's/^X//' > editors/linux-sublime-text/files/sublime.in << 'SHAR_END'
+X#! /bin/sh
+Xexec %%DATADIR%%/sublime_text "$@"
+SHAR_END
 echo x editors/linux-sublime-text/files/LICENSE.txt
 sed 's/^X//' > editors/linux-sublime-text/files/LICENSE.txt << 'SHAR_END'
 X The SOFTWARE PRODUCT (SUBLIME TEXT and SUBLIME MERGE) is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. The SOFTWARE PRODUCT is licensed, not sold.
@@ -183,11 +188,6 @@ X    NO WARRANTIES
 X    SUBLIME HQ PTY LTD expressly disclaims any warranty for the SOFTWARE PRODUCT, which is provided 'as is' without any express or implied warranty of any kind, including but not limited to any warranties of merchantability, non-infringement, or fitness of a particular purpose.
 X    LIMITATION OF LIABILITY
 X    In no event shall SUBLIME HQ PTY LTD be liable for any damages due to use of the SOFTWARE PRODUCT, to the maximum extent permitted by law. This includes without limitation, lost profits, business interruption, or lost information. In no event will SUBLIME HQ PTY LTD be liable for loss of data or for indirect, special, incidental, consequential (including lost profit), or other damages. SUBLIME HQ PTY LTD shall have no liability with respect to the content of the SOFTWARE PRODUCT or any part thereof, including but not limited to errors or omissions contained therein, libel, trademark rights, business interruption, loss of privacy or the disclosure of confidential information.
-SHAR_END
-echo x editors/linux-sublime-text/files/sublime.in
-sed 's/^X//' > editors/linux-sublime-text/files/sublime.in << 'SHAR_END'
-X#! /bin/sh
-Xexec %%DATADIR%%/sublime_text "$@"
 SHAR_END
 echo x editors/linux-sublime-text/files/patch-sublime_text.desktop
 sed 's/^X//' > editors/linux-sublime-text/files/patch-sublime_text.desktop << 'SHAR_END'
