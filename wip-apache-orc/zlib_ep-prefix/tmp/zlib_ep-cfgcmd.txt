@@ -1,1 +1,0 @@
-cmd='/usr/local/bin/cmake;-DCMAKE_INSTALL_PREFIX=/usr/home/mpizarro/devel/ports/databases/apache-orc/c++/libs/thirdparty/zlib_ep-install;-DBUILD_SHARED_LIBS=OFF;-GNinja;<SOURCE_DIR><SOURCE_SUBDIR>'
