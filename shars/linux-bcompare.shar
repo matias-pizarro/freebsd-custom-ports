@@ -1,0 +1,2199 @@
+#!/bin/sh
+# This is a shell archive
+echo x linux-bcompare
+mkdir -p linux-bcompare > /dev/null 2>&1
+echo x linux-bcompare/Makefile
+sed 's/^X//' > linux-bcompare/Makefile << 'SHAR_END'
+X# Created by: MatÃ­as Pizarro <matias@pizarro.net>
+X
+XPORTNAME=				bcompare
+XDISTVERSION=			4.3.7
+XDISTVERSIONSUFFIX=		.25118
+XCATEGORIES=				mpizarro editors devel linux
+XMASTER_SITES=			http://scootersoftware.com/
+XPKGNAMEPREFIX=			linux-
+XEXTRACT_SUFX=			.rpm
+X
+XMAINTAINER=				matias@pizarro.net
+XCOMMENT=				Compare, sync, and merge files and folders (X11)
+X
+XLICENSE=				SCOOTERSOFTWARE
+XLICENSE_NAME=			Scooter Software License
+XLICENSE_FILE=			${FILESDIR}/LICENSE.txt
+XLICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
+X
+XONLY_FOR_ARCHS=			amd64 i386
+XONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
+X
+XUSES=					linux desktop-file-utils shared-mime-info shebangfix
+XUSE_LINUX=				base:run xorglibs:run qt-x11:run devtools:build
+X
+XDISTNAME_amd64=			${DISTNAME}.x86_64
+XDISTNAME_i386=			${DISTNAME}.i386
+X
+XNO_WRKSUBDIR=			true
+XNO_BUILD=				yes
+X
+XINSTALLS_ICONS=			yes
+X
+XDATA_FILTER=			-type d \
+X						-o -name *\.html \
+X						-o -name *\.js \
+X						-o -name *\.css \
+X						-o -name *\.gif \
+X						-o -name *\.png \
+X						-o -name *\.jpg \
+X						-o -name *\.desktop \
+X						-o -name mime\.types \
+X						-o -name README \
+X						-o -name BCompare.mad \
+X						-o -name RPM-GPG-KEY-scootersoftware \
+X						-o -name scootersoftware.repo
+XPROGRAM_FILES=			BCompare \
+X						bcmount32 \
+X						bcmount64
+XSCRIPT_FILES=			bcmount.sh \
+X						kde_context_menu
+XLIB_FILES=				libQt4Pas.so.5 \
+X						lib7z.so \
+X						libunrar.so \
+X						nosched.so
+X
+X.include <bsd.port.options.mk>
+X
+X.if ${ARCH} == i386
+X    LIBDIR=				lib
+X.elif ${ARCH} == amd64
+X    LIBDIR=				lib64
+X.endif
+X
+XBCLIB_SRC=				${WRKSRC}/usr/${LIBDIR}/beyondcompare
+XBCLIB_STG=				${STAGEDIR}${PREFIX}/lib/beyondcompare
+X
+XSHEBANG_FILES=			${BCLIB_SRC}/bcmount.sh \
+X						${BCLIB_SRC}/kde_context_menu
+X
+Xpre-install:
+X	${LINUXBASE}/usr/bin/gcc -Wall -fPIC -shared ${FILESDIR}/nosched.c -ldl -o ${BCLIB_SRC}/nosched.so
+X
+Xdo-install:
+X	# bin
+X	(cd ${WRKSRC}/usr/bin && ${INSTALL_SCRIPT} bcompare ${STAGEDIR}${PREFIX}/bin)
+X	# lib
+X	(cd ${BCLIB_SRC}     && ${COPYTREE_SHARE}  .                ${BCLIB_STG} "${DATA_FILTER}")
+X	(cd ${BCLIB_SRC}     && ${INSTALL_PROGRAM} ${PROGRAM_FILES} ${BCLIB_STG})
+X	(cd ${BCLIB_SRC}     && ${INSTALL_SCRIPT}  ${SCRIPT_FILES}  ${BCLIB_STG})
+X	(cd ${BCLIB_SRC}     && ${INSTALL_LIB}     ${LIB_FILES}     ${BCLIB_STG})
+X	(cd ${BCLIB_SRC}/qt4 && ${INSTALL_LIB}     $$(ls *.so.4)    ${BCLIB_STG}/qt4)
+X	(cd ${BCLIB_SRC}/ext && ${INSTALL_LIB}     $$(ls *.so)      ${BCLIB_STG}/ext)
+X	${LN} -sf ${LINUXBASE}/usr/${LIBDIR}/libbz2.so.1.0.6 ${BCLIB_STG}/libbz2.so.1.0
+X	# data
+X	(cd ${WRKSRC}/usr/share && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/share)
+X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps
+X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps
+X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps
+X	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps/bcompare.png
+X	${LN} -sf ../../../../pixmaps/bcomparefull32.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps/bcompare.png
+X	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps/bcompare.png
+X
+X.include <bsd.port.mk>
+SHAR_END
+echo x linux-bcompare/files
+mkdir -p linux-bcompare/files > /dev/null 2>&1
+echo x linux-bcompare/pkg-plist
+sed 's/^X//' > linux-bcompare/pkg-plist << 'SHAR_END'
+X@dir bin
+Xbin/bcompare
+X@dir share
+X@dir share/applications
+Xshare/applications/bcompare.desktop
+X@dir share/mime
+X@dir share/mime/packages
+Xshare/mime/packages/bcompare.xml
+X@dir share/icons
+X@dir share/icons/hicolor
+X@dir share/icons/hicolor/16x16
+X@dir share/icons/hicolor/16x16/apps
+Xshare/icons/hicolor/16x16/apps/bcompare.png
+X@dir share/icons/hicolor/32x32
+X@dir share/icons/hicolor/32x32/apps
+Xshare/icons/hicolor/32x32/apps/bcompare.png
+X@dir share/icons/hicolor/48x48
+X@dir share/icons/hicolor/48x48/apps
+Xshare/icons/hicolor/48x48/apps/bcompare.png
+X@dir share/pixmaps
+Xshare/pixmaps/bcompare.png
+Xshare/pixmaps/bcomparefull32.png
+Xshare/pixmaps/bcomparehalf32.png
+X@dir lib/beyondcompare
+Xlib/beyondcompare/bcmount.sh
+Xlib/beyondcompare/bcmount32
+Xlib/beyondcompare/bcmount64
+Xlib/beyondcompare/BCompare
+Xlib/beyondcompare/BCompare.mad
+Xlib/beyondcompare/kde_context_menu
+Xlib/beyondcompare/lib7z.so
+Xlib/beyondcompare/libQt4Pas.so.5
+Xlib/beyondcompare/libunrar.so
+Xlib/beyondcompare/mime.types
+Xlib/beyondcompare/README
+Xlib/beyondcompare/RPM-GPG-KEY-scootersoftware
+Xlib/beyondcompare/scootersoftware.repo
+Xlib/beyondcompare/nosched.so
+Xlib/beyondcompare/libbz2.so.1.0
+X@dir lib/beyondcompare/ext
+X@(,,644) lib/beyondcompare/ext/bcompare_ext_kde.desktop
+X@(,,644) lib/beyondcompare/ext/bcompare_ext_konq.desktop
+Xlib/beyondcompare/ext/bcompare-ext-caja.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-caja.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-nautilus.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-nautilus.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-nemo.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-nemo.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-2.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-2.i386.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-3.amd64.so
+Xlib/beyondcompare/ext/bcompare-ext-thunarx-3.i386.so
+Xlib/beyondcompare/ext/bcompare_ext_kde.amd64.so
+Xlib/beyondcompare/ext/bcompare_ext_kde.i386.so
+Xlib/beyondcompare/ext/bcompare_ext_kde5.amd64.so
+Xlib/beyondcompare/ext/bcompare_ext_kde5.i386.so
+Xlib/beyondcompare/ext/bcompare_ext_konq.amd64.so
+Xlib/beyondcompare/ext/bcompare_ext_konq.i386.so
+X@dir lib/beyondcompare/help
+X@(,,644) lib/beyondcompare/help/3-way_merge_concepts.html
+X@(,,644) lib/beyondcompare/help/accept.png
+X@(,,644) lib/beyondcompare/help/archive_files.html
+X@(,,644) lib/beyondcompare/help/bcclipmain.html
+X@(,,644) lib/beyondcompare/help/bcclipmain.png
+X@(,,644) lib/beyondcompare/help/bcclipmain_zoom57.jpg
+X@(,,644) lib/beyondcompare/help/bcclipoptions.html
+X@(,,644) lib/beyondcompare/help/bcclipsystemtray.png
+X@(,,644) lib/beyondcompare/help/bclogo.png
+X@(,,644) lib/beyondcompare/help/browse.png
+X@(,,644) lib/beyondcompare/help/calling_bc_from_other_applications.html
+X@(,,644) lib/beyondcompare/help/cicon1.png
+X@(,,644) lib/beyondcompare/help/cicon2.png
+X@(,,644) lib/beyondcompare/help/cicon9.png
+X@(,,644) lib/beyondcompare/help/cicon_loadindex_ani.gif
+X@(,,644) lib/beyondcompare/help/ciconidx.gif
+X@(,,644) lib/beyondcompare/help/collapseall.png
+X@(,,644) lib/beyondcompare/help/command_line_reference.html
+X@(,,644) lib/beyondcompare/help/commands_reference.html
+X@(,,644) lib/beyondcompare/help/commandsbc.html
+X@(,,644) lib/beyondcompare/help/commandsdata.html
+X@(,,644) lib/beyondcompare/help/commandsdir.html
+X@(,,644) lib/beyondcompare/help/commandsdirmerge.html
+X@(,,644) lib/beyondcompare/help/commandsdirsync.html
+X@(,,644) lib/beyondcompare/help/commandshex.html
+X@(,,644) lib/beyondcompare/help/commandshome.html
+X@(,,644) lib/beyondcompare/help/commandsmp3.html
+X@(,,644) lib/beyondcompare/help/commandspix.html
+X@(,,644) lib/beyondcompare/help/commandsreg.html
+X@(,,644) lib/beyondcompare/help/commandstext.html
+X@(,,644) lib/beyondcompare/help/commandstextedit.html
+X@(,,644) lib/beyondcompare/help/commandstextmerge.html
+X@(,,644) lib/beyondcompare/help/commandstextpatch.html
+X@(,,644) lib/beyondcompare/help/commandsver.html
+X@(,,644) lib/beyondcompare/help/compare.png
+X@(,,644) lib/beyondcompare/help/conflict.png
+X@(,,644) lib/beyondcompare/help/conflictsectionnext.png
+X@(,,644) lib/beyondcompare/help/conflictsectionoffnext.png
+X@(,,644) lib/beyondcompare/help/conflictsectionprev.png
+X@(,,644) lib/beyondcompare/help/contentconflict.png
+X@(,,644) lib/beyondcompare/help/contentcopycentertooutput.png
+X@(,,644) lib/beyondcompare/help/contentcopyleft.png
+X@(,,644) lib/beyondcompare/help/contentcopylefttooutput.png
+X@(,,644) lib/beyondcompare/help/contentcopyright.png
+X@(,,644) lib/beyondcompare/help/contentcopyrighttooutput.png
+X@(,,644) lib/beyondcompare/help/contentdeleteleft.png
+X@(,,644) lib/beyondcompare/help/contentdeleteright.png
+X@(,,644) lib/beyondcompare/help/contentdifferent.png
+X@(,,644) lib/beyondcompare/help/contentdifferentbinary.png
+X@(,,644) lib/beyondcompare/help/contentmergeable.png
+X@(,,644) lib/beyondcompare/help/contentmerged.png
+X@(,,644) lib/beyondcompare/help/contentsame.png
+X@(,,644) lib/beyondcompare/help/contentsamebinary.png
+X@(,,644) lib/beyondcompare/help/contentsimilar.png
+X@(,,644) lib/beyondcompare/help/copy.png
+X@(,,644) lib/beyondcompare/help/copyfileleft.png
+X@(,,644) lib/beyondcompare/help/copyfileright.png
+X@(,,644) lib/beyondcompare/help/copyleft.png
+X@(,,644) lib/beyondcompare/help/copyleftorright.png
+X@(,,644) lib/beyondcompare/help/copyright.png
+X@(,,644) lib/beyondcompare/help/copyto.png
+X@(,,644) lib/beyondcompare/help/copytooutput.png
+X@(,,644) lib/beyondcompare/help/default.css
+X@(,,644) lib/beyondcompare/help/delete.png
+X@(,,644) lib/beyondcompare/help/difffilenext.png
+X@(,,644) lib/beyondcompare/help/difffileprev.png
+X@(,,644) lib/beyondcompare/help/dir_filtering_the_view.html
+X@(,,644) lib/beyondcompare/help/dir_how_to_compare.html
+X@(,,644) lib/beyondcompare/help/dir_merge_understanding_the_display.html
+X@(,,644) lib/beyondcompare/help/dir_reconciling_differences.html
+X@(,,644) lib/beyondcompare/help/dir_sync_how_to_sync.html
+X@(,,644) lib/beyondcompare/help/dir_sync_understanding_the_display.html
+X@(,,644) lib/beyondcompare/help/dir_understanding_the_display.html
+X@(,,644) lib/beyondcompare/help/dircomparefilesonly.png
+X@(,,644) lib/beyondcompare/help/dircomparesession.png
+X@(,,644) lib/beyondcompare/help/dircomparestructure.png
+X@(,,644) lib/beyondcompare/help/dirdisplayarchive.png
+X@(,,644) lib/beyondcompare/help/dirdisplaydir.png
+X@(,,644) lib/beyondcompare/help/dirdisplayex.png
+X@(,,644) lib/beyondcompare/help/dirdisplayfile.png
+X@(,,644) lib/beyondcompare/help/dirfavconflict.png
+X@(,,644) lib/beyondcompare/help/dirfavdiffnoorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavleft.png
+X@(,,644) lib/beyondcompare/help/dirfavleftnewer.png
+X@(,,644) lib/beyondcompare/help/dirfavleftnewerorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavleftorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavmergeable.png
+X@(,,644) lib/beyondcompare/help/dirfavnoorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavright.png
+X@(,,644) lib/beyondcompare/help/dirfavrightnewer.png
+X@(,,644) lib/beyondcompare/help/dirfavrightnewerorphan.png
+X@(,,644) lib/beyondcompare/help/dirfavrightorphan.png
+X@(,,644) lib/beyondcompare/help/dirflatten.png
+X@(,,644) lib/beyondcompare/help/dirmerge.png
+X@(,,644) lib/beyondcompare/help/dirmergesession.png
+X@(,,644) lib/beyondcompare/help/dirshowall.png
+X@(,,644) lib/beyondcompare/help/dirsyncsession.png
+X@(,,644) lib/beyondcompare/help/display_filters.html
+X@(,,644) lib/beyondcompare/help/displayfont.png
+X@(,,644) lib/beyondcompare/help/displayfontdecrease.png
+X@(,,644) lib/beyondcompare/help/displayfontincrease.png
+X@(,,644) lib/beyondcompare/help/displayfontreset.png
+X@(,,644) lib/beyondcompare/help/dlgbrowsemachine.html
+X@(,,644) lib/beyondcompare/help/dlgdatacolhandling.html
+X@(,,644) lib/beyondcompare/help/dlgdiralignwithitem.html
+X@(,,644) lib/beyondcompare/help/dlgdirfind.html
+X@(,,644) lib/beyondcompare/help/dlgdirotherfilteritem.html
+X@(,,644) lib/beyondcompare/help/dlgexport.html
+X@(,,644) lib/beyondcompare/help/dlgfileformatmanager.html
+X@(,,644) lib/beyondcompare/help/dlgimport.html
+X@(,,644) lib/beyondcompare/help/dlgnag.html
+X@(,,644) lib/beyondcompare/help/dlgopenwithitem.html
+X@(,,644) lib/beyondcompare/help/dlgprofilebrowse.html
+X@(,,644) lib/beyondcompare/help/dlgprofilemanager.html
+X@(,,644) lib/beyondcompare/help/dlgprogoptions.html
+X@(,,644) lib/beyondcompare/help/dlgregister.html
+X@(,,644) lib/beyondcompare/help/dlgreport.html
+X@(,,644) lib/beyondcompare/help/dlgrestore.html
+X@(,,644) lib/beyondcompare/help/dlgsnapshot.html
+X@(,,644) lib/beyondcompare/help/dlgsourcecontrolmanager.html
+X@(,,644) lib/beyondcompare/help/dlgsupport.html
+X@(,,644) lib/beyondcompare/help/dlgtextfindinfiles.html
+X@(,,644) lib/beyondcompare/help/dlgtextgrammaritem.html
+X@(,,644) lib/beyondcompare/help/dlgtextreplacementitem.html
+X@(,,644) lib/beyondcompare/help/dlgworkspacemanager.html
+X@(,,644) lib/beyondcompare/help/down.png
+X@(,,644) lib/beyondcompare/help/dropdown.png
+X@(,,644) lib/beyondcompare/help/editing_text.html
+X@(,,644) lib/beyondcompare/help/expandall.png
+X@(,,644) lib/beyondcompare/help/favall.png
+X@(,,644) lib/beyondcompare/help/favdiff.png
+X@(,,644) lib/beyondcompare/help/favnone.png
+X@(,,644) lib/beyondcompare/help/favorleft.png
+X@(,,644) lib/beyondcompare/help/favorright.png
+X@(,,644) lib/beyondcompare/help/favsame.png
+X@(,,644) lib/beyondcompare/help/file_formats.html
+X@(,,644) lib/beyondcompare/help/file_masks.html
+X@(,,644) lib/beyondcompare/help/filecopyselright.png
+X@(,,644) lib/beyondcompare/help/filefavconflict.png
+X@(,,644) lib/beyondcompare/help/filefavleft.png
+X@(,,644) lib/beyondcompare/help/filefavmergeable.png
+X@(,,644) lib/beyondcompare/help/filefavright.png
+X@(,,644) lib/beyondcompare/help/fileformatmanager.png
+X@(,,644) lib/beyondcompare/help/filetakesectioncenter.png
+X@(,,644) lib/beyondcompare/help/filetakesectionleft.png
+X@(,,644) lib/beyondcompare/help/filetakesectionright.png
+X@(,,644) lib/beyondcompare/help/filteredlinecount.png
+X@(,,644) lib/beyondcompare/help/filters.png
+X@(,,644) lib/beyondcompare/help/find.png
+X@(,,644) lib/beyondcompare/help/findinfiles.png
+X@(,,644) lib/beyondcompare/help/findnext.png
+X@(,,644) lib/beyondcompare/help/findprev.png
+X@(,,644) lib/beyondcompare/help/formatdata.html
+X@(,,644) lib/beyondcompare/help/formatdataconversion.html
+X@(,,644) lib/beyondcompare/help/formatdatageneral.html
+X@(,,644) lib/beyondcompare/help/formatdataregional.html
+X@(,,644) lib/beyondcompare/help/formatdatatype.html
+X@(,,644) lib/beyondcompare/help/formatexternalgeneral.html
+X@(,,644) lib/beyondcompare/help/formathex.html
+X@(,,644) lib/beyondcompare/help/formathexconversion.html
+X@(,,644) lib/beyondcompare/help/formathexgeneral.html
+X@(,,644) lib/beyondcompare/help/formatpix.html
+X@(,,644) lib/beyondcompare/help/formatpixconversion.html
+X@(,,644) lib/beyondcompare/help/formatpixgeneral.html
+X@(,,644) lib/beyondcompare/help/formattext.html
+X@(,,644) lib/beyondcompare/help/formattextconversion.html
+X@(,,644) lib/beyondcompare/help/formattextgeneral.html
+X@(,,644) lib/beyondcompare/help/formattextgrammar.html
+X@(,,644) lib/beyondcompare/help/formattextmisc.html
+X@(,,644) lib/beyondcompare/help/fulledit.png
+X@(,,644) lib/beyondcompare/help/fullrefresh.png
+X@(,,644) lib/beyondcompare/help/fullscreen.png
+X@(,,644) lib/beyondcompare/help/glossary.html
+X@(,,644) lib/beyondcompare/help/goto.png
+X@(,,644) lib/beyondcompare/help/grammars.html
+X@(,,644) lib/beyondcompare/help/headerkey.png
+X@(,,644) lib/beyondcompare/help/helpcontents.png
+X@(,,644) lib/beyondcompare/help/helpman_navigation.js
+X@(,,644) lib/beyondcompare/help/helpman_settings.js
+X@(,,644) lib/beyondcompare/help/helpman_topicinit.js
+X@(,,644) lib/beyondcompare/help/highlight.js
+X@(,,644) lib/beyondcompare/help/hmcontent.html
+X@(,,644) lib/beyondcompare/help/hmcontextids.js
+X@(,,644) lib/beyondcompare/help/hmftsearch.html
+X@(,,644) lib/beyondcompare/help/hmkwindex.html
+X@(,,644) lib/beyondcompare/help/ignored.png
+X@(,,644) lib/beyondcompare/help/index.html
+X@(,,644) lib/beyondcompare/help/info.png
+X@(,,644) lib/beyondcompare/help/insigignored.png
+X@(,,644) lib/beyondcompare/help/jquery.js
+X@(,,644) lib/beyondcompare/help/license_agreement.html
+X@(,,644) lib/beyondcompare/help/license_agreement_7-zip.html
+X@(,,644) lib/beyondcompare/help/license_agreement_fpc.html
+X@(,,644) lib/beyondcompare/help/license_agreement_gpl3.html
+X@(,,644) lib/beyondcompare/help/license_agreement_htmlviewer.html
+X@(,,644) lib/beyondcompare/help/license_agreement_httpget.html
+X@(,,644) lib/beyondcompare/help/license_agreement_innosetup.html
+X@(,,644) lib/beyondcompare/help/license_agreement_intlck64.html
+X@(,,644) lib/beyondcompare/help/license_agreement_lgpl.html
+X@(,,644) lib/beyondcompare/help/license_agreement_mpl.html
+X@(,,644) lib/beyondcompare/help/license_agreement_pcre.html
+X@(,,644) lib/beyondcompare/help/license_agreement_regexpr.html
+X@(,,644) lib/beyondcompare/help/license_agreement_textdiff.html
+X@(,,644) lib/beyondcompare/help/license_agreement_wavpack.html
+X@(,,644) lib/beyondcompare/help/license_agreement_wix.html
+X@(,,644) lib/beyondcompare/help/license_agreement_zlib.html
+X@(,,644) lib/beyondcompare/help/linux.png
+X@(,,644) lib/beyondcompare/help/mac.png
+X@(,,644) lib/beyondcompare/help/maclineending.png
+X@(,,644) lib/beyondcompare/help/managing_sessions.html
+X@(,,644) lib/beyondcompare/help/mergebase.png
+X@(,,644) lib/beyondcompare/help/mergenobase.png
+X@(,,644) lib/beyondcompare/help/mirrorleft.png
+X@(,,644) lib/beyondcompare/help/mirrorright.png
+X@(,,644) lib/beyondcompare/help/moveboth.png
+X@(,,644) lib/beyondcompare/help/moveleftorright.png
+X@(,,644) lib/beyondcompare/help/moveright.png
+X@(,,644) lib/beyondcompare/help/moveto.png
+X@(,,644) lib/beyondcompare/help/moving_bc_to_another_computer.html
+X@(,,644) lib/beyondcompare/help/mp3play.png
+X@(,,644) lib/beyondcompare/help/mp3play2.png
+X@(,,644) lib/beyondcompare/help/newfolder.png
+X@(,,644) lib/beyondcompare/help/next-dis.png
+X@(,,644) lib/beyondcompare/help/next-hot.png
+X@(,,644) lib/beyondcompare/help/next.png
+X@(,,644) lib/beyondcompare/help/note.png
+X@(,,644) lib/beyondcompare/help/opattrib.html
+X@(,,644) lib/beyondcompare/help/opcompare.html
+X@(,,644) lib/beyondcompare/help/opcopy.html
+X@(,,644) lib/beyondcompare/help/opcopyto.html
+X@(,,644) lib/beyondcompare/help/opcopytooutput.html
+X@(,,644) lib/beyondcompare/help/opdelete.html
+X@(,,644) lib/beyondcompare/help/opexchange.html
+X@(,,644) lib/beyondcompare/help/opexclude.html
+X@(,,644) lib/beyondcompare/help/opmerge.html
+X@(,,644) lib/beyondcompare/help/opmove.html
+X@(,,644) lib/beyondcompare/help/opmoveto.html
+X@(,,644) lib/beyondcompare/help/opnewfolder.html
+X@(,,644) lib/beyondcompare/help/oprename.html
+X@(,,644) lib/beyondcompare/help/opsync.html
+X@(,,644) lib/beyondcompare/help/options.png
+X@(,,644) lib/beyondcompare/help/optionsarchive.html
+X@(,,644) lib/beyondcompare/help/optionsbackup.html
+X@(,,644) lib/beyondcompare/help/optionscolor.html
+X@(,,644) lib/beyondcompare/help/optionscommand.html
+X@(,,644) lib/beyondcompare/help/optionsdircolor.html
+X@(,,644) lib/beyondcompare/help/optionsfilecolor.html
+X@(,,644) lib/beyondcompare/help/optionsnextdiff.html
+X@(,,644) lib/beyondcompare/help/optionsop.html
+X@(,,644) lib/beyondcompare/help/optionsopenwith.html
+X@(,,644) lib/beyondcompare/help/optionspixcolor.html
+X@(,,644) lib/beyondcompare/help/optionsstartup.html
+X@(,,644) lib/beyondcompare/help/optionstab.html
+X@(,,644) lib/beyondcompare/help/optionstext.html
+X@(,,644) lib/beyondcompare/help/optionstweak.html
+X@(,,644) lib/beyondcompare/help/optouch.html
+X@(,,644) lib/beyondcompare/help/outputwindow.png
+X@(,,644) lib/beyondcompare/help/overunder.png
+X@(,,644) lib/beyondcompare/help/pin.png
+X@(,,644) lib/beyondcompare/help/pix_how_to_compare.html
+X@(,,644) lib/beyondcompare/help/pixautoscale.png
+X@(,,644) lib/beyondcompare/help/pixblendtoggle.png
+X@(,,644) lib/beyondcompare/help/pixcomparetags.png
+X@(,,644) lib/beyondcompare/help/pixdiffblend.png
+X@(,,644) lib/beyondcompare/help/pixdiffrange.png
+X@(,,644) lib/beyondcompare/help/pixdifftolerance.png
+X@(,,644) lib/beyondcompare/help/pixfliphorz.png
+X@(,,644) lib/beyondcompare/help/pixflipvert.png
+X@(,,644) lib/beyondcompare/help/pixrotateleft.png
+X@(,,644) lib/beyondcompare/help/pixrotateright.png
+X@(,,644) lib/beyondcompare/help/pixzoomactual.png
+X@(,,644) lib/beyondcompare/help/pixzoomfit.png
+X@(,,644) lib/beyondcompare/help/prefsinterface.png
+X@(,,644) lib/beyondcompare/help/prev-dis.png
+X@(,,644) lib/beyondcompare/help/prev-hot.png
+X@(,,644) lib/beyondcompare/help/prev.png
+X@(,,644) lib/beyondcompare/help/pro.png
+X@(,,644) lib/beyondcompare/help/profileamazons3.html
+X@(,,644) lib/beyondcompare/help/profiledropbox.html
+X@(,,644) lib/beyondcompare/help/profileftp.html
+X@(,,644) lib/beyondcompare/help/profileftpconnection.html
+X@(,,644) lib/beyondcompare/help/profileftpglobal.html
+X@(,,644) lib/beyondcompare/help/profileftplisting.html
+X@(,,644) lib/beyondcompare/help/profileftplogin.html
+X@(,,644) lib/beyondcompare/help/profileftpproxy.html
+X@(,,644) lib/beyondcompare/help/profileftpserver.html
+X@(,,644) lib/beyondcompare/help/profileftptransfer.html
+X@(,,644) lib/beyondcompare/help/profileonedrive.html
+X@(,,644) lib/beyondcompare/help/profilesvn.html
+X@(,,644) lib/beyondcompare/help/profilewebdav.html
+X@(,,644) lib/beyondcompare/help/recompare.png
+X@(,,644) lib/beyondcompare/help/red-bg.jpg
+X@(,,644) lib/beyondcompare/help/redo.png
+X@(,,644) lib/beyondcompare/help/refresh.png
+X@(,,644) lib/beyondcompare/help/regular_expression_reference.html
+X@(,,644) lib/beyondcompare/help/remote_services.html
+X@(,,644) lib/beyondcompare/help/rename.png
+X@(,,644) lib/beyondcompare/help/replace.png
+X@(,,644) lib/beyondcompare/help/report.png
+X@(,,644) lib/beyondcompare/help/rules.png
+X@(,,644) lib/beyondcompare/help/rules_vs_file_formats.html
+X@(,,644) lib/beyondcompare/help/rulesvsformats.png
+X@(,,644) lib/beyondcompare/help/sample_regular_expressions.html
+X@(,,644) lib/beyondcompare/help/sample_scripts.html
+X@(,,644) lib/beyondcompare/help/save.png
+X@(,,644) lib/beyondcompare/help/savesnapshot.png
+X@(,,644) lib/beyondcompare/help/scheduling_a_script.html
+X@(,,644) lib/beyondcompare/help/scripting_reference.html
+X@(,,644) lib/beyondcompare/help/scripts.html
+X@(,,644) lib/beyondcompare/help/searchedit.png
+X@(,,644) lib/beyondcompare/help/searching_for_text.html
+X@(,,644) lib/beyondcompare/help/selectall.png
+X@(,,644) lib/beyondcompare/help/selectallfiles.png
+X@(,,644) lib/beyondcompare/help/session_settings.html
+X@(,,644) lib/beyondcompare/help/sessiondata.html
+X@(,,644) lib/beyondcompare/help/sessiondataalignment.html
+X@(,,644) lib/beyondcompare/help/sessiondatacolumns.html
+X@(,,644) lib/beyondcompare/help/sessiondataformats.html
+X@(,,644) lib/beyondcompare/help/sessiondataspecs.html
+X@(,,644) lib/beyondcompare/help/sessiondir.html
+X@(,,644) lib/beyondcompare/help/sessiondircomparison.html
+X@(,,644) lib/beyondcompare/help/sessiondirhandling.html
+X@(,,644) lib/beyondcompare/help/sessiondirmerge.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergecomparison.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergehandling.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergemisc.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergenamefilter.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergeotherfilters.html
+X@(,,644) lib/beyondcompare/help/sessiondirmergespecs.html
+X@(,,644) lib/beyondcompare/help/sessiondirmisc.html
+X@(,,644) lib/beyondcompare/help/sessiondirnamefilter.html
+X@(,,644) lib/beyondcompare/help/sessiondirotherfilters.html
+X@(,,644) lib/beyondcompare/help/sessiondirspecs.html
+X@(,,644) lib/beyondcompare/help/sessiondirsync.html
+X@(,,644) lib/beyondcompare/help/sessiondirsynccomparison.html
+X@(,,644) lib/beyondcompare/help/sessiondirsynchandling.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncmisc.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncnamefilter.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncops.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncotherfilters.html
+X@(,,644) lib/beyondcompare/help/sessiondirsyncspecs.html
+X@(,,644) lib/beyondcompare/help/sessionedit.png
+X@(,,644) lib/beyondcompare/help/sessionhex.html
+X@(,,644) lib/beyondcompare/help/sessionhexcomparison.html
+X@(,,644) lib/beyondcompare/help/sessionhexformats.html
+X@(,,644) lib/beyondcompare/help/sessionhexspecs.html
+X@(,,644) lib/beyondcompare/help/sessionlocked.png
+X@(,,644) lib/beyondcompare/help/sessionmp3.html
+X@(,,644) lib/beyondcompare/help/sessionmp3importance.html
+X@(,,644) lib/beyondcompare/help/sessionmp3specs.html
+X@(,,644) lib/beyondcompare/help/sessionpix.html
+X@(,,644) lib/beyondcompare/help/sessionpixformats.html
+X@(,,644) lib/beyondcompare/help/sessionpixreplacements.html
+X@(,,644) lib/beyondcompare/help/sessionpixspecs.html
+X@(,,644) lib/beyondcompare/help/sessionreg.html
+X@(,,644) lib/beyondcompare/help/sessionregspecs.html
+X@(,,644) lib/beyondcompare/help/sessionsave.png
+X@(,,644) lib/beyondcompare/help/sessionsaveas.png
+X@(,,644) lib/beyondcompare/help/sessiontext.html
+X@(,,644) lib/beyondcompare/help/sessiontextalignment.html
+X@(,,644) lib/beyondcompare/help/sessiontextformats.html
+X@(,,644) lib/beyondcompare/help/sessiontextimportance.html
+X@(,,644) lib/beyondcompare/help/sessiontextmerge.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergealignment.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergeformats.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergeimportance.html
+X@(,,644) lib/beyondcompare/help/sessiontextmergespecs.html
+X@(,,644) lib/beyondcompare/help/sessiontextreplacements.html
+X@(,,644) lib/beyondcompare/help/sessiontextspecs.html
+X@(,,644) lib/beyondcompare/help/sessionver.html
+X@(,,644) lib/beyondcompare/help/sessionverimportance.html
+X@(,,644) lib/beyondcompare/help/sessionverspecs.html
+X@(,,644) lib/beyondcompare/help/settings.js
+X@(,,644) lib/beyondcompare/help/settings_reference.html
+X@(,,644) lib/beyondcompare/help/sharedsessions.png
+X@(,,644) lib/beyondcompare/help/sharing_sessions.html
+X@(,,644) lib/beyondcompare/help/showaligndetails.png
+X@(,,644) lib/beyondcompare/help/showcenter.png
+X@(,,644) lib/beyondcompare/help/showcontext.png
+X@(,,644) lib/beyondcompare/help/showhexdetails.png
+X@(,,644) lib/beyondcompare/help/showitemnum.png
+X@(,,644) lib/beyondcompare/help/showruler.png
+X@(,,644) lib/beyondcompare/help/showsyntaxhighlighting.png
+X@(,,644) lib/beyondcompare/help/showtextdetails.png
+X@(,,644) lib/beyondcompare/help/showthumbnail.png
+X@(,,644) lib/beyondcompare/help/showws.png
+X@(,,644) lib/beyondcompare/help/sidebyside.png
+X@(,,644) lib/beyondcompare/help/snapshots.html
+X@(,,644) lib/beyondcompare/help/space.png
+X@(,,644) lib/beyondcompare/help/specs.html
+X@(,,644) lib/beyondcompare/help/specsback.png
+X@(,,644) lib/beyondcompare/help/specsforward.png
+X@(,,644) lib/beyondcompare/help/standard_vs_pro.html
+X@(,,644) lib/beyondcompare/help/support_ordering_and_license.html
+X@(,,644) lib/beyondcompare/help/suppressfilters.png
+X@(,,644) lib/beyondcompare/help/swap.png
+X@(,,644) lib/beyondcompare/help/synccopydeleteleft.png
+X@(,,644) lib/beyondcompare/help/synccopydeleteright.png
+X@(,,644) lib/beyondcompare/help/synccopyleft.png
+X@(,,644) lib/beyondcompare/help/synccopyright.png
+X@(,,644) lib/beyondcompare/help/syncdelete.png
+X@(,,644) lib/beyondcompare/help/syncprompt.png
+X@(,,644) lib/beyondcompare/help/syncrun.png
+X@(,,644) lib/beyondcompare/help/tab.png
+X@(,,644) lib/beyondcompare/help/texteditsession.png
+X@(,,644) lib/beyondcompare/help/textmergesession.png
+X@(,,644) lib/beyondcompare/help/textpatchsession.png
+X@(,,644) lib/beyondcompare/help/todir.png
+X@(,,644) lib/beyondcompare/help/todirflatten.png
+X@(,,644) lib/beyondcompare/help/todirkeepbase.png
+X@(,,644) lib/beyondcompare/help/todirkeeprelative.png
+X@(,,644) lib/beyondcompare/help/toolbardropdown.png
+X@(,,644) lib/beyondcompare/help/toolbarfavorites.png
+X@(,,644) lib/beyondcompare/help/toolbarfilefilters.png
+X@(,,644) lib/beyondcompare/help/toolbartoggles.png
+X@(,,644) lib/beyondcompare/help/top-hot.png
+X@(,,644) lib/beyondcompare/help/top.png
+X@(,,644) lib/beyondcompare/help/touch.png
+X@(,,644) lib/beyondcompare/help/undo.png
+X@(,,644) lib/beyondcompare/help/unixlineending.png
+X@(,,644) lib/beyondcompare/help/up.png
+X@(,,644) lib/beyondcompare/help/updateboth.png
+X@(,,644) lib/beyondcompare/help/updateleft.png
+X@(,,644) lib/beyondcompare/help/updateright.png
+X@(,,644) lib/beyondcompare/help/uponelevel.png
+X@(,,644) lib/beyondcompare/help/using_bc.html
+X@(,,644) lib/beyondcompare/help/using_text_merge.html
+X@(,,644) lib/beyondcompare/help/viewdata.html
+X@(,,644) lib/beyondcompare/help/viewdata.jpg
+X@(,,644) lib/beyondcompare/help/viewdata_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewdir.html
+X@(,,644) lib/beyondcompare/help/viewdir.jpg
+X@(,,644) lib/beyondcompare/help/viewdir_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewdirmerge.html
+X@(,,644) lib/beyondcompare/help/viewdirmerge.jpg
+X@(,,644) lib/beyondcompare/help/viewdirmerge_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewdirsync.html
+X@(,,644) lib/beyondcompare/help/viewdirsync.jpg
+X@(,,644) lib/beyondcompare/help/viewdirsync_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewhex.html
+X@(,,644) lib/beyondcompare/help/viewhex.jpg
+X@(,,644) lib/beyondcompare/help/viewhex_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewhome.html
+X@(,,644) lib/beyondcompare/help/viewhome.jpg
+X@(,,644) lib/beyondcompare/help/viewhome_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewmp3.jpg
+X@(,,644) lib/beyondcompare/help/viewmp3_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewother.html
+X@(,,644) lib/beyondcompare/help/viewpix.html
+X@(,,644) lib/beyondcompare/help/viewpix.jpg
+X@(,,644) lib/beyondcompare/help/viewpix_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewreg.html
+X@(,,644) lib/beyondcompare/help/viewreg.jpg
+X@(,,644) lib/beyondcompare/help/viewreg_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtext.html
+X@(,,644) lib/beyondcompare/help/viewtext.jpg
+X@(,,644) lib/beyondcompare/help/viewtext_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtextedit.html
+X@(,,644) lib/beyondcompare/help/viewtextedit.jpg
+X@(,,644) lib/beyondcompare/help/viewtextedit_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtextmerge.html
+X@(,,644) lib/beyondcompare/help/viewtextmerge.jpg
+X@(,,644) lib/beyondcompare/help/viewtextmerge_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewtextpatch.html
+X@(,,644) lib/beyondcompare/help/viewtextpatch.jpg
+X@(,,644) lib/beyondcompare/help/viewtextpatch_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/viewver.jpg
+X@(,,644) lib/beyondcompare/help/viewver_zoom33.jpg
+X@(,,644) lib/beyondcompare/help/walking_through_differences.html
+X@(,,644) lib/beyondcompare/help/warning.png
+X@(,,644) lib/beyondcompare/help/webbrowser.png
+X@(,,644) lib/beyondcompare/help/welcome.html
+X@(,,644) lib/beyondcompare/help/whats_new.html
+X@(,,644) lib/beyondcompare/help/where_settings_are_stored.html
+X@(,,644) lib/beyondcompare/help/windows.png
+X@(,,644) lib/beyondcompare/help/windowslineending.png
+X@(,,644) lib/beyondcompare/help/zoom_index.js
+X@(,,644) lib/beyondcompare/help/zoom_pageinfo.js
+X@(,,644) lib/beyondcompare/help/zoom_search.js
+X@(,,644) lib/beyondcompare/help/zoomin.png
+X@(,,644) lib/beyondcompare/help/zoomout.png
+X@dir lib/beyondcompare/qt4
+Xlib/beyondcompare/qt4/libQtCore.so.4
+Xlib/beyondcompare/qt4/libQtGui.so.4
+SHAR_END
+echo x linux-bcompare/.git
+mkdir -p linux-bcompare/.git > /dev/null 2>&1
+echo x linux-bcompare/distinfo
+sed 's/^X//' > linux-bcompare/distinfo << 'SHAR_END'
+XTIMESTAMP = 1601823220
+XSHA256 (bcompare-4.3.7.25118.i386.rpm) = 71a72fa4318b7afedb03ec7147523d3aa47e26b090e1a170316990eb88268828
+XSIZE (bcompare-4.3.7.25118.i386.rpm) = 12675958
+XSHA256 (bcompare-4.3.7.25118.x86_64.rpm) = c913df4d0df858c4d1de62ee269b82a3e231b7408e36ee43ba672fd07e97dee0
+XSIZE (bcompare-4.3.7.25118.x86_64.rpm) = 18808757
+SHAR_END
+echo x linux-bcompare/pkg-descr
+sed 's/^X//' > linux-bcompare/pkg-descr << 'SHAR_END'
+XCompare files and folders using simple, powerful commands that focus on
+Xthe differences you're interested in and ignore those you're not.  Merge
+Xchanges, synchronize files, and generate reports.
+X
+XWWW: https://www.scootersoftware.com/
+X
+XThanks to shkhln (https://forums.freebsd.org/members/shkhln.54069/) and
+Xaragats (https://forums.freebsd.org/members/aragats.37029/) for coming
+Xup with the nosched.c fix
+SHAR_END
+echo x linux-bcompare/.git/index
+sed 's/^X//' > linux-bcompare/.git/index << 'SHAR_END'
+XDIRC      _yábIy_yábIy8öŠ° (4L  ¤  ò  ò  -Áão¿Ğ"íPiÄgÊwÈ«/ Makefile  _yáô.r_yáô.r8öŠ° (4K  ¤  ò  ò  OÓ‘\Z sÓƒ€ê4v”7`¸Ê½ distinfo  _yåN "M˜_yåN "M˜8öŠ° (	½  ¤  ò  ò  3Å… ”|QÉX/»e.¥3Úğií files/LICENSE.txt _n?S×g˜_n?S×g˜) ÿ# (´Ş  ¤  ò  ò  Å!-İ~)AT=Gdt–®¢‚ files/nosched.c   _pÀÕ+`_pÀÔ;Kuh8öŠ° *“©  ¤          £x:°&à_€Ê­‹{•½›a=Gä¿ files/patch-usr_bin_bcompare      _oHç*=È_oHç*=È) ÿ# (4M  ¤  ò  ò  ”]ŠÆ™×c„Z¿ Šš’<EÔ#[_ 	pkg-descr _pÂAÈ1˜_pÂAÈ1˜8öŠ° )  ¤  ò  ò  hÁŠƒ™RA@µXu8á­„¬t‡J•5£ 	pkg-plist TREE   7 7 1
+XpŒRP‚L§®ñÕ@¾7wä`şE±files 3 0
+Xå“”¾ ušŞ…æO/¿n2pÿM‚T`õH1æ’ôØè}
+SHAR_END
+echo x linux-bcompare/.git/logs
+mkdir -p linux-bcompare/.git/logs > /dev/null 2>&1
+echo x linux-bcompare/.git/branches
+mkdir -p linux-bcompare/.git/branches > /dev/null 2>&1
+echo x linux-bcompare/.git/description
+sed 's/^X//' > linux-bcompare/.git/description << 'SHAR_END'
+XUnnamed repository; edit this file 'description' to name the repository.
+SHAR_END
+echo x linux-bcompare/.git/HEAD
+sed 's/^X//' > linux-bcompare/.git/HEAD << 'SHAR_END'
+Xref: refs/heads/master
+SHAR_END
+echo x linux-bcompare/.git/refs
+mkdir -p linux-bcompare/.git/refs > /dev/null 2>&1
+echo x linux-bcompare/.git/config
+sed 's/^X//' > linux-bcompare/.git/config << 'SHAR_END'
+X[core]
+X	repositoryformatversion = 0
+X	filemode = true
+X	bare = false
+X	logallrefupdates = true
+X[remote "origin"]
+X	url = git@github.com:rebost/freebsd-ports-bcompare.git
+X	fetch = +refs/heads/*:refs/remotes/origin/*
+X[branch "master"]
+X	remote = origin
+X	merge = refs/heads/master
+SHAR_END
+echo x linux-bcompare/.git/COMMIT_EDITMSG
+sed 's/^X//' > linux-bcompare/.git/COMMIT_EDITMSG << 'SHAR_END'
+Xv4.3.7
+SHAR_END
+echo x linux-bcompare/.git/hooks
+mkdir -p linux-bcompare/.git/hooks > /dev/null 2>&1
+echo x linux-bcompare/.git/objects
+mkdir -p linux-bcompare/.git/objects > /dev/null 2>&1
+echo x linux-bcompare/.git/info
+mkdir -p linux-bcompare/.git/info > /dev/null 2>&1
+echo x linux-bcompare/.git/info/exclude
+sed 's/^X//' > linux-bcompare/.git/info/exclude << 'SHAR_END'
+X# git ls-files --others --exclude-from=.git/info/exclude
+X# Lines that start with '#' are comments.
+X# For a project mostly in C, the following would be a good set of
+X# exclude patterns (uncomment them if you want to use them):
+X# *.[oa]
+X# *~
+SHAR_END
+echo x linux-bcompare/.git/objects/ed
+mkdir -p linux-bcompare/.git/objects/ed > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/ff
+mkdir -p linux-bcompare/.git/objects/ff > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/f6
+mkdir -p linux-bcompare/.git/objects/f6 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/pack
+mkdir -p linux-bcompare/.git/objects/pack > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/36
+mkdir -p linux-bcompare/.git/objects/36 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/21
+mkdir -p linux-bcompare/.git/objects/21 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/56
+mkdir -p linux-bcompare/.git/objects/56 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/dd
+mkdir -p linux-bcompare/.git/objects/dd > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/99
+mkdir -p linux-bcompare/.git/objects/99 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/f5
+mkdir -p linux-bcompare/.git/objects/f5 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/6d
+mkdir -p linux-bcompare/.git/objects/6d > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/e0
+mkdir -p linux-bcompare/.git/objects/e0 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/5a
+mkdir -p linux-bcompare/.git/objects/5a > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/70
+mkdir -p linux-bcompare/.git/objects/70 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/f2
+mkdir -p linux-bcompare/.git/objects/f2 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/26
+mkdir -p linux-bcompare/.git/objects/26 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/d3
+mkdir -p linux-bcompare/.git/objects/d3 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/b5
+mkdir -p linux-bcompare/.git/objects/b5 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/37
+mkdir -p linux-bcompare/.git/objects/37 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/78
+mkdir -p linux-bcompare/.git/objects/78 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/5c
+mkdir -p linux-bcompare/.git/objects/5c > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/df
+mkdir -p linux-bcompare/.git/objects/df > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/5d
+mkdir -p linux-bcompare/.git/objects/5d > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/info
+mkdir -p linux-bcompare/.git/objects/info > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/6f
+mkdir -p linux-bcompare/.git/objects/6f > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/e5
+mkdir -p linux-bcompare/.git/objects/e5 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/c1
+mkdir -p linux-bcompare/.git/objects/c1 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/7e
+mkdir -p linux-bcompare/.git/objects/7e > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/c5
+mkdir -p linux-bcompare/.git/objects/c5 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/34
+mkdir -p linux-bcompare/.git/objects/34 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/e1
+mkdir -p linux-bcompare/.git/objects/e1 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/06
+mkdir -p linux-bcompare/.git/objects/06 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/95
+mkdir -p linux-bcompare/.git/objects/95 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/f9
+mkdir -p linux-bcompare/.git/objects/f9 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/a3
+mkdir -p linux-bcompare/.git/objects/a3 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/de
+mkdir -p linux-bcompare/.git/objects/de > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/8a
+mkdir -p linux-bcompare/.git/objects/8a > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/1b
+mkdir -p linux-bcompare/.git/objects/1b > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/12
+mkdir -p linux-bcompare/.git/objects/12 > /dev/null 2>&1
+echo x linux-bcompare/.git/objects/12/467db9f810e432b08df415e67014dbf6bc8040
+sed 's/^X//' > linux-bcompare/.git/objects/12/467db9f810e432b08df415e67014dbf6bc8040 << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIeˆy)ÖÏU0ËççeÎUË6eÔ]ˆ€ªIÉ,.ÉÌKËgø_÷*/FSÙ1e¿àôÍ;®É	3˜ Èˆb†Ÿ\1K–ó$M}0)W­ˆuo˜¥ğ'¨Ùéº)©ÅÉE±]Çf^On‰ß¯Ğ5k’ëåèx$E9@ÛÌÃy^9öüoê¶
+XË{¶óŸ=  GG©
+SHAR_END
+echo x linux-bcompare/.git/objects/1b/8774a9b5103add063833ba917ea4291d171af5
+mkdir -p linux-bcompare/.git/objects/1b > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/1b/8774a9b5103add063833ba917ea4291d171af5 << 'SHAR_END'
+XxA
+XÂ0 =ç{d³I“]ñê3Ò$Õ‚mJ=øz‹úo3‡‰ešÆd»]«9CFò‡!	²çdÙp¯DIbĞ9Û¾ÃÄ¢–PóÜÀ%-DÈ"¢ÅÈ$ÆZb–>9ïmÔÜ*<Ú­T˜BÃ
+XËø
+Xµ8~ıüóÃœÛ	´CMD"öHˆ*~&[ş3W—i©å™aœ×î÷m¡Ì°á5«7şN
+SHAR_END
+echo x linux-bcompare/.git/objects/8a/8399524140b5587538e1ad84ac74874a9535a3
+mkdir -p linux-bcompare/.git/objects/8a > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/8a/8399524140b5587538e1ad84ac74874a9535a3 << 'SHAR_END'
+Xx­]Árä¶Íy¿ÂÇ¤ÊeW²vssâ¸|H¹ÊÉ-'†Ä\‘€š‘¾>¯r¨]¬×ÜÖŞû¡ Ñèn@ûÎí¿ûp÷éıÇ?ıXµş»};¼ÃŸë}éúÑxû.ı44_şõÚŒc×–&¶nïÒ×/~t†ï*î£Ÿ5sİ·ıófÓ¿¯GSŞ›Ú.	Íùgkk§¾{ŞR[
+XûUÂëôƒëÿëœõÃõû»Óû»7>Ki¾h6£ÓçU°q¨_oïæÃéæÃŸ_g—Ğv·ŸN·Ÿ^g—>¿ÎnıüjïÆöÔ›³ræ}I§Ä×ŸS×İ|Ø‰².4¦;ÌiT»v½·n¨–éøâ'àÛ»iˆ»Ğ¼{õ#Ôÿê·»ÛßşñÓ<ı_Â–O»ŞT÷•-0-£=Å¢·Ãtm~|ÚwùÓ¿ãío&àóî‡ËÓà¿—e³‹#ÖÑKÁÿóóßÿùëÏ—>üöëÕ/¿ırõ¯Ÿÿ{Jç¢õÁâQÖüËf¾¢Øy;^êÉàBÙØê²œhuÿôAúø~÷×<U_2‚ßıøçï¿¿»½ıËw?Ÿç\!Ú†æWs£Á¹á÷3ğù\ÏUi>›é«»ÛËÍY°ĞŞ|º#é3Å¶›‚ŠÉ¤ad{§c" ƒØLƒñ§«*.+j«›M¬nÈ^'9şgz®'ùl'V€†LxU°0¸l˜¯Ûa—}ÙÉ÷ë›«£y„Yôu2’¥cØ5Qvõ7¦â´u¼IêË¦}°Å¡í,Ùú¾,»vìM;pÒ<£O;ÿÂ¯äÅ“sıwŸGøÊÉÉÒÈC´}ôæ‘Ò×¾ì\í8RïÁR¤¥éºv¨‹}Y¼ëë‹ç~#×¥Rœ¯÷K!ÍîÅ[ºM­şoµèœ©Ú¡²§Âí®no_bÑV'Øu\*¥qB¹¾7CU@Å¶ğö`½JKj4cÃVÜ¾Ôñ©L4JDëÕ€dTÔ¨ğ8({ÓØ“Kãà“Q6>®jèÇ ~¶àm­ˆ;«GØªİ€Ú0’"ŞhbÙèd|°ü<“Ã0¹4‡ÎÆÜ^ƒ•ˆƒ-ÅÌ¢ffGù
+Xç‡­ĞÑÛ–e´C\8ë0ãc	¬õÑ¹)İÉÌq|ììaf+?ßÖšamáXÙÎFüÑõ1£Ô’Ví!mªîAˆÏù˜)2|i9›}G¯3¨ÒÌ±``fÉ¥#„^ß™Ğöm‡Ó7Çhd5>Š³ª˜  {ÕÊÄÎëè¨#çr–n|T­©ÊÌÔÅ]|ÃÅÎKˆMY2H´] ´EøUÎ,°’â7Ã].Z{äv4Á6îXD‡àS
+XÜò¸|›àÜúá,Ü«6ŒÎ”ï"x‹%_¶Éí_FÉÁ¤ñÆ–nğÙùèÂ·71«?>İĞq ]˜qÁ† G€œ’gTôS'ÒC·ylM>*³ÜfğJ|fÆb®‚‰úXÈÁ<¨œpD&èàœCk0ÚFg.B>Ø#üL²ÿ3‹„Ù$œ¤ÛŸs·6(N-¿›d™½V×+h›|JTg"|v.äƒ9q±ÒzllÄJ“¬ã6yS#Cq³9Ày$õ”˜}eKoŸzÆ§¶á¼–²«÷)tÖÄ&2PuµÄNÌ„ªd[%÷bàZoº¶mlZ5Àâ\úÙ›+{'ãP…l	ç{$Aª˜<ºÙö*Fhœî¾­^Ç£wÒ™<#hV3JÛyÀjU
+XCx¨E™×°ä C‰…œÎ³ìê0 6Ú8~®7ùR¼Ñè]§ÕX˜FUo$ø$k¦dTY3×Õ‚«½AÌÏ«–¨à ğÎ”	æ¨Â¿¨µ°:¥¸#¹iy7V,±DÓYC‚^ÔT€Å€!dw,¸R
+XRñ©Í&œÙ—Aë<í2&jŞí9ô™YdëINĞ„èM¸WĞËY=ØNÑ±éJ÷]†×j¦×¹¹3eO¾Ø¨ùÙ¢¹‡‘Â¿9FÊÍ¬/‘*m<ã¨ê v+n«Ü*´ğ;¸FWcËÒÓa±ätÈ&¯(>ÁµÒcoBö!õ)Ó·"k„ àÜqs…Éî=Nª‰4¼`Ì­ŸbÒ©µÜ+oÓ"€¤£“lY:o“ÀÒ‰S &¡ß&_r[ôs0Á²·£•³o™¤•Ã”t¤Ìˆ‘:‡3Úpfô'Eò _w.É•Pë»vd<|öÉ]¹±aİ{Ë…!¥F“"¥G(• d1˜‡¶NÕÀ»ÏoGİNÏâ µÄmÙÈ+3ŒÅÃ)™<†¸Ÿ»ÎX“ÉO±­¸ô‡ˆú\Ùöï©à„#ÇY'*nÿÔ4;¸4M;„¶Öñù÷Ébqƒdº‚-Î¥éÄÃiä¬øxõÔ[Á‡‘´A/ùÖcw³•­I±‡ñ—Ü›Çq*Ê½„·*ymœ6+®bWŞ£Xv£ Ô·Ûo‡°ô[ÙÂ×ÂQ•Ÿ¼T¹l•é8ºQcGó ×)¶Jd«‰^Jş„òi–í0qI!„L©½tr6±)I"ê“ÄÔ&÷Ôt’Ü³qæD=8¾õ^3è9Œëİƒİ#bË)Är²Ô8¤ãƒ†e¬POŠ$·r=©dM':R‰Âº”Ñf¼Ã™–+'EÚéà:xZ”Zå,z…üO,±OFhú”õq,‡²ºèÙUíà>*ª„52”™Ë´˜+*ê¹ÚŒÄÌå $5ŸÈËÔä.LÁ©ì&ÜQ!›O†ƒ&ÆªÓĞòz\§6)7*‘¥‹¤æË<–$³fÚ¥¼”%Úï±s²ÎÎÌ&İ6d;œ˜`•àØDfÙf.HééIS3Â; ³|ôÏä9s¦Ò[
+Xªàj§
+X„¢&Oû¯³tÑ~ÌB©„ŠGkH,ÜÄ³Á““£;R[†l×©ê‰¢qC†Y€¨¥Kµ# ‡Ëo¸:hÈú PZ:TÑÕ5™eŠÁ²;²'À§ıAÁ!ºÁ]¹ÊA‚P=>6Î?iè1âœ;åz¢4ùŒà]@@äR”Aı¢Ód·q@ˆ"G/àjQöÅ*Eñ´‡&Ù‚+ÖC£SÈÛ“½KÅ¦7O¸OÆæZ‚
+XéÚ½#ïÌ˜C$íüJ¸rF²ñq&rE"†ºgS+ªCñ
+XZf¸ÇŞÿ[yáo'Òƒ]AÁz¬A­|¸Ğ7”î«pÈTW·!U ğ ©£İWæc!EÂùˆÀ¬]„4¯ö5u]¤ÜŠÑÄüÉ™Pïk¶X¸©2W{kÎãÊt´1øÄ1ÉÃìCsJ• ”­˜Ët¨f')e¡)‹‡îÛêj¼0y9aÆqCÅÃˆR†—ãBjvÆ#ÓÒwƒÁúaT!„çZ%
+X O$L©`ŞY&neZ‰‡(/ê:òtB-§7D(Œh!QL²32•‘­ÕAI¦–³9iæ¥{N8QÂ9*Èg÷ŸRñ¥Tg±H¶e®öœúÍ¹c‚[‘¶ka´¥’{;wÑÇr¹¡¬°"u•¯+N=ù
+X”·§-²&ß$0ŸéşJh	¹`=Ğ‘Ğ¯àÏJxÕs!õzÓ,ÚÒÛíı–>nêÚZGC0Û'  ·Î?ÁnÁmA»Q=çL”Ès~^?¦Š0™sºiÿTĞ$¾±Úø ¹Åş¦×BçÊ{²Ğ`îıÁJŸKöS D³¡“¾C@¨viĞoQ¶„FÖªmİ”Vß/øÈª~^Ï„÷³«"ôxİŒr3BãG¦e'€mş— ·­à6ÎXê}•3j{?Ó­Màoí±~²I·7¯!ëYÒqšÙv~£^€T‰Ç×Î-ÇõYQ^ı¬æ‘k9 AœõN÷Q=V¡¾íXVî¨(˜—»©À§RÊú€û£V"¹3L=ÍBB \Õ€t ~O4§f)k” 'Û™şÚÎà!¾~?`Dh.GrìÚÊîşËµ<ßÿb7M¹àÄ5¬8ü
+X©$‡ù†a]ñ†&W“™^^ ±Ò(&7î|S­p¥'²ìSÆ“`©\’oA›‹MÍ¦£9%À¹—åó6âÜ¯0>‘´àè»0@ÇBñfˆ0À`öäÃ…B\,¥[IP3ƒ%Ë^Î-³A¦1ùTŸ=0”àRqr¨jàšÊƒâş|À½µ#]ywFx>’3¡ì\·ÇÂÕÜ|Ä{6‚I÷ı°ap6s!ê©Y­3,çÇYN#ÏD=>©&)a`Šb.3íIYñ‰ÂJ„U¾LrJä´ÙÉä¼Ñ™F$ñ:‹RLNxäº¥L’Û ¦D-V"?ËÊ¡¤"‹Ÿ©™WOâôRêÍ•úK6*½ÓÂàa")7ĞÉ¢8ÓÍe„BªØ šl3ŠaÎï~hÆAhå‚«ÍË$Ä¬¢@«–…~±S†.½ïIKƒ¦µâHøŒm´ÚæS\œ×=-İ1+:hµ¢Ó.‘EˆYY@«•EL(¯ÅDÍJ“¬³Ò	&Å«©¸èçŒĞˆ%,¶hJiE6}<#¶H§xJvÑ\†hT—Zé$Å2­¦y¼u/Cl¼›ê¦‚Çü¬4yìÆYw`#¨ÊÏßpŞÿÑvÈŠ‘ELÇÆÄP n[ˆòx©ÏÉñ´!¯"½NCVgçR[Î±i•N«¬ü"ßÙ$nK&êï#á9Ç\¯L€ùf*Ù>Y,-£9{­8]ø%¿ÇK¿}?½ÆM²ÇŸä• ü–?$úej3Íÿ 0–ÒÏ
+SHAR_END
+echo x linux-bcompare/.git/objects/de/6997798f42bc381bf6d7290f9673224a64730d
+mkdir -p linux-bcompare/.git/objects/de > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/de/6997798f42bc381bf6d7290f9673224a64730d << 'SHAR_END'
+XxÍ}ëvãF’æü->E¶\ŞV5ER¼èÚS^«$V™Çº.®ö´çp@a‘ €ºTMíÙ×Ø×Û'™ï‹@J¤ª L·-’ˆŒÈÈ¸gd¢3:¦±µ×Øú—Nè{şÍ¾éNÂĞõcÓóB·á£ñ‘‹ı¾F¦#sâÜº}oèšëôÜp¿ğjèù“‡R§ŒÆNèš¿¼5…·oßş`>¸¾:1F6c'îì·¿xî=¿â æŞ‹æ‘äs)œœšÊ$
+X+ã Œ£ŠÛó@FTyŠ¢’ÑPÎş,”J%ä«êŞÎfi³ŠÌææ¾üSŞLÿgŠü«P,ÍÃ«Úf {¥Ú¶©V÷«Ûø§ÜØ©ï6x8ùñGSÚÜÀ§êÆÖ®ùñÇBñ;óú}èºï.^Š…âùÙÅÕéÁIóí«W¯R–ŠG­Ë«_š—­³SüĞ(×ËÛ…âáÁUóÃÙE«yÉ‡VaE¡xrpyÕ¼h_¶®äçA÷+•¨1–*èÇ÷X‹2Ö¤œ? Êó‹æûÖ?0–å&©99h^áÿÍ¢a±œèÇ±÷É	Ã ì»1ˆ8;9i^ñçC»À&zô»Æñ{fä†7®¡8Dò¹!‡>n6O/e—‡gg öòìıÕÇƒ‹fö[;aÄ¥¥Ú\&d›c¯ëú‘;}ğ}ë˜#½şÌ?.Z_*ÉøåøT&ÚçÍ‹r«çEqiäa¡ñƒ’|ŒÜáĞŒoof¾ç'ùÏ8“ÿêvİ1Æ+›ÿ¸º88¼j_^¿'ËÊáxT(^_Úµ°Üïî˜İÆÁ¸D”&±7ŒL4 ç{À2rKßğ…Ûqü›¾÷À1Fû¸uzÍQ_uœÈİ'¾yÂ›¡×‰äÃqéÆï{î]Ãh¿3ñ†=+(Í_Z‰¤Ô¶6·ëö[ò²íŒzÛaT*g_J¯?ÏH×—²ı˜ñ¥ü°»İŞnÌŒáÕw·uC‚S;=k¼øùòú#ÄáKX(¶N/¯/Û­Ã³S®Î£+‚Çß]·ğıêüj ¿ã7Çg‡Çï A¯?gáxeÏï'=×ük'ê•i(ÊÁ8ö?*n°OôÍëÏ‡?}1oßKßq+¡‹
+XĞÁ0îĞ{ò˜0²4ûYSv}X'|ùSóİÁé‡¶ˆ!¨|ı™¾8ü"6„
+Xì—JÇ}ü^b+î(˜øq9˜ß
+XEÌmYÀÛÛî~ì>Äí‘ëOHB/€TE±3îc¬×ŸO~¦:`º`ò‡&ÿå,'¦ŠÇÏ¿˜R8ÆsKPüµÑ`O^®ãù/‚~L4æë€ß˜¥ŒPñÀ«¨2À†AX©n?T·+Îxaû6ŸP¯=Ôk+ĞØ}hìNG8>Å"D}S.W²ÆŞÃÈGk^Ëc8Ç—Vs•Óy>C&½Âşd8¬×Ôh§ÌÉ‡VpÊËçÿişbJ=³ö× Ï4
+XµfşÃü×Óï[§G_ÕŸyXS’¸èoå(0%÷Áíb±é´WÖ@*Qzcóù‹ÚB<qÓíšÒGè²)õÏ[‡qBUêèü êÜ^O{x0xQ:æç™ÂFÁq˜£…_Ğê}¡½è|ªabåjy³¼­Àõò;Mû¬	ôè¸Å‡–+éŸKzéãŠ@/yèmÖ÷ë;åZµ^ßaT¸ Ğ“8ïªuÒ„	>97oMuk§ÖØkìÖà/:¨mm›õT¿Kİ•Ås—é™Z¼P}g{Ëéºİ­íj£ÚØÜémí:;[U··½µS¯Vñ{¿ÓÛ­íÕ·*¾pİZwÇÙntª;»ıÚf¨ZÿŞ\Qµ¶½ƒ¸í«´ÙÀ ¥Îí÷w«›»µÆ¦³í6HY¯Úßéu:N¯[«míÖë {»ßİÜ¬uûÎfug¯QİÜÚîõjÛõŞB—¯P÷Uuwˆª[*I‘t6(Dä>÷İ’²3§¢yØLšêLêõıÍíòÎv}ww{¡4U·"OIln=ÀùKTÊ0?Bœ_^ëß5îp\ñüûPÄ£áÿ&cFHí D`¼«°½=´ñµ<AMı5˜„f¹&è›wº˜$Ø7^dn‚;7ôİé<šx€p?Éá®Üp$?òÄ;aK
+XÅ	¤¿+c.œ"4&Ãé"b¦z4!’ÊgHÏX$î=Áa:n?]N"æ’Ïhn˜uÒ¹–ækoÊÆ\ûHR"ó¬çÎ5N’Ö
+Xg†'e¶‰¼›dÊÏ³“‘±+€Ci¾U(‚ó^×‰‘ÉCÓñâ€Ó‹MäµúBZ/@¾‚¥¶‰ˆ¡gÀš¼)Ä˜Ñ$ŠM×E2U$C  …KÓ)o4Böª†e.Îa0~½›ˆÔ!`äqÆéŞúÁıĞíİ€úxàÄ%ËÉ6Ò¤Ìüì>J®±ø@È…À½ ;¡¨"|³¾v4ûyíay ›"‡@İámd‚{ËiPü<d)¤dTœ2B~do’HÊÂMÀ‰»6ÃSîÃ8ÄŠC¨nB1t‹Ğõ|aSrSß,9æ*ôœ!ùrÅµÄ?XÔ:ğ@º®XŸ9Ò8BÆ¶båŠ~à#@vywîòK1G(Ÿ8!¾z#¤¤± ŞÍrºPÜXö.‚¦×Hb3†ú=+^?šõúæÓs#
+X·Õİ§ÃØ$DÆ†”¤„§	Æÿ¾1N$ÄvØĞıc‚¢Ş5ãIÔvHL*Õ^Yøˆ)o7ô:´.ìÀbìø‡+¿‰e `?EüDà°* äÎ†V¶ÀëòeYÑÃâ†¾|	eòe†Î}$‹=3±Mfâ{L\sIéº÷ gĞµà^”pÁ¢|s>²fOXº¾6ƒÂ?ó;SæÂ#J=MÖì¹Üß»r²aî‘Í(“IinøX(&µ| Öãà	ëã¥<Š4(âA´F“aìñ7U8B]¼?L€#ÀÌ!©¡ ú
+XQ)ñ_7‡^äÎáÁıIˆ©…°í1t3ô>Q`Mßuâ	Ì@ÄâÒúewÂiZÃNça~|c«L„Ëõ£Ø™1¤ ³@Efı#,np™óä«(»3ŸYœœù'œpö}ÃA¡ˆyÀWo˜®¯-
+X vXè!‰ıÂ‚¤JV# —cöDf—fcÎª`qçÍŠ˜‘¯X•ÆdÆøK‰•óA&i†f!íÌ¯»!%Oùm`V­÷ÄËcÎİ°ëÎÎkŸ"¸è‡9°¼+1P4v»^ßëš?&°Öt\äÔt üxC¨€Lµ2.ã¸°%xnİ»¡u‹°÷ƒ N&Q	b ë‹3×FÀ2ê‡Îm‡F@fÖ;.ıV3EPR?+f*Ôg\¨8&Fñ éş'Xâ8¾Õ¡®Å¨ŠÎcÆƒÇË… HF¡/ƒÂñ9âL)Iy“Lùh"„¨Í2( 5x\FH](uÊ¸£ñ0x„‹³Ñ…yñG'ûé¯¨£p&0Mˆ&°9øk€Çƒ"c KÇB´‰ˆÚ2ŸÂ• åTe0ÿ±Ö=v»EœØ‹‰ß•°Ò¬»oÖà§CËÛsbƒm]d±£`ˆ€GØŸÎî¯ŒÄYM‡‘¤AJDTƒ9tl>ö8bk}¸~ˆ8+èò8ÀbŞ#>ŠqÙ<2xP”¯iåÄ»D¯Ğl„^áÛĞƒ³Ít4JíÁ|¦¾#ÿ…°TÂ °,‘'Êú(XÄÎ@Ô±òò©8B,ß%y68<:uÕ‡CL**üâJÃ Ö›¡\JC èšÌ¢…‡{”È”¿&°SCtæ˜êæ&jáèĞéyD{ÎŠC‘a¼ıIßÃHI47‹,	äAôœA¢B\"29@MSJ±cuS±şqZµ ÁZ?Q òÊƒe±|OÔ†®vèİb‹
+X‹œÆ®p ¨Ïh)ÚTE‰!Sf+äôéHüòY+XçdJ²z0X]ˆ	t(û‘¦h€h”gãX“œ†–A"c(D2N'›X¥Qóéaø’˜‰qÌ4YF™js’x©Z‹-ıºËóZì›µ30„ñ0³\â¯¬›ŒÄ)ŠÿÏWù¹ùÍ+¾’$¸¢y_ÆÈ”öF`uªşÍ,f›Õik iI<Wº‡V"›>›¨¥ Kì İ‹Ø Èı°'P”4ÕY]l6ç¤˜îæ«,ä$¤Mk%ÖÅgR<ãI°Œñu)^à‡ ÁSşÈKK²ØëLSíN•–Á‚ˆyW,éÉÌÔ‹	9zO–­71ÑÂºÎy²é¤gTw^´“BGb£Wõi"ÖBÏBô"Ş¶ DÇ ±|î!GBˆĞ“¹©ÈP’ÅOENqR¶âc˜§$aiâC‚×ÑêÙ^VŒ‘
+Xcß÷é¨…"†İX¾-ğ˜a ĞÇnöÕÅ”®ÜÉB'°=°)S¡Ÿ·˜yğ’^„´|Jvâe3z2‰³.C¸$i?òtbÈOğM¢WdY ‰‚D¦IñcšU@“®‹Ø³æe¬˜bOPLº‘ÕİÁ¨$åVál©‚3F¨?C¾ş™õ±a@X^³;¿Å	öR°””ÅXî@0BË
+XrYÆLgòw	íoP®AÁÈé"æ›ø£ {HÀLó»jˆÚÿBb‘õ.
+X1éüŸé.dËƒçT¢İ;Ï1îM6aà{(İ\T‰°¢”aVÉ¾*vR¢ÈQv°DLÊ$DÂFëŸ’=ÃT,“­…\ÁÙ ®gø‡g«&\"f_iFqd‘4â¶E/æ ˆ®ÒHÅñfÄ€¡Òrí‹…)ÏUÖ$Àä0$ì\ègŠšfÂ4ŠÃtSºl,‰"ÅåXâğ9DL	43CªYhñCÖ§ŠÈ2HL%2‹ÈSLI­ÜYõš%ĞÖfÅ¤Òº'Ú™êÇ|mõIáT–ËIãĞ±¥/F©–tSg_Ii0ˆ±ãõD/ÑÛÅê'DŸ«<Çt	ñg›ö„n$['¹/ÊƒXORg˜U	-7°ÄÄ-TI6å"ÏLB÷éŒfCQVŒpâaš;äˆÖ°0È’‹ôú¤±is§f/ã¶µòÀf™v¸BQ²"~ı¬YZÍß€,B˜BQ\Uê¦MiAW(BRû lHäh2ÄÖB<qÈ½ :„bÀùK‡< «{Îàÿÿÿ_d²º:]BŸ»0›(² Æ–4ÉM¤(w?ƒiÜ,³ù*ÈˆÆ"—æ–Ÿ“L4P€BrDÜÆüªÌ™  ÅÔ´Ã6‘B§'Š<Ó£ba¨G×	­¯¶ò¡Q`:şºRjÀH6yI7sf9ñwYÏõÅ‘®~ZC§-q¬³ö‡â–°ÏƒÕ`xé–oÊH5İa¿‰;7¶Æ‡¿!,À¹N’äffø¬…°$Á¿óBhŠ'=±=„¹\…Áï0¢oDìmïáĞÀ-u‡Ê*(y¢©KvÄZriÎ›(İÊ’ü]‰,ÄyPè«Ÿš&í\3§Gè”:;¼fOÜÁÚõÌÁEÓœ_œıÒ:j™µƒKÓº\ƒe¸:È“ƒ´N®OÚÉ aØŸÖººÂ“ï~Å&Ù9:Ş7ÍñÁGTmŸÜ·Z'—ıS½s§WèÜ0Íèº`›ºú./ÍÙ…i`´æÑ†i_µN?˜w×WæôìÊ·€HATòÔÌ`æì=›h–ÂàïZÇ­«_7 vZj¾¿À0MN–S7ï[W§ÄöèPá;¸¸j^\˜óë‹ó³Ë&ƒúƒÓ_/cÏÏêc“y‡9'T5ÿz/[¿4%…èR¼&›JŞchPvI&££P÷‹Šf>Çw$²ˆèà¸ÄWX×;gˆ
+XÊP46b¢`×’M©Ôeêˆ?‚¡™}ÎÄ4a!µÕ×¾„}(Xss£@¦ùQ	şÂ>‚:ƒ&p#¹Ä%ÉG'}Ù¸l\ bNçÊŠyV„…âì¸æSGğ2D™Y0ÇaQÆ»ÀÁ%» şRÍmE[K]î£0hå¶ä¬µ³f6©Bs°H’åsô¬](ş>Aá{Râ4, KBNz€}M1m4ù\$ËOúÓé
+X Ï…š¢mRJ<°€æ“Œ.\Eó¨¦ô|YiXU˜„°V`â»,$ÂáÊ~›–¤ÈCq´ˆ¡‹ñé9bÓºÂò}¶%3¥“ãäC—9™–GA¿(¿¤‰ø,øemÑ53Z.üfN±±ëŞ£ókDG%îšÍ9ºÒ®nÖã}£êpÈ ÔıSÈ¬»aËT÷ö7û[Õr+;[»ê5ÛİC}¬h8½n_AÅ›TŞïÒøş_{Ã~×/ĞÍ9ınØğìÛ(îyÁÜwt²ò%Wñ‚mûA0^c>3“ìÃ}úq¸!jkßGëårùÍoşÚ†i·Y²j·ß Ä7X`ìYùf¤µR1i'ô¸{Ë‰>÷B!¯ì,¢i	šS©nmíímÖ¶+ƒà¾Ôuü’‡ÖMDBÜ¢.õ†Ñãß‡QI6íÑİ?ˆ-U§WA„6¿KÿÀŞgàõşfÚ½apëò‰aœ¤ìÿmÃÈw$i ­]×~cÖÿ†Ö¬. øf$›N¯Ò¢‘gí£ˆşü·®gpanÔ	†ÂHò}´ë™Ablà`S¼@‘’~qu|Ô>…CËØmi^ƒ©TşÏÂjo˜ï£§kÄ†t!G&`©AèĞ×í@”
+X€ÇaNŞóa˜±³µ-4	c3ı³ÒÕNA(3³”%Â0ÛzÊ¡)œ„¦ÏÍvÉ)	CØF÷`;mË”|ñÏ*_<„Zı_&³Ûf³¶_İA³S¹
+X[°W_hu±<¸Áì˜Lç\Fõã&;p3°-µú~mÏ\_ò\Fq¤PäÙ‹êFu‡‡/jÖÎ˜ïş"ãF,m¡XzwˆŞûwo¥[¸İxÚÛ‰‘¥I1ÍÕÙ…}”.È‰í	”)Ä?O†ƒß²}òùlDADiìÃBG±@àv|vpôvíµı¥’Õ(XÃØ	ÔÌ“‚“Ãœş|ğ¡Ù¾úõ¼ùV&Ìà˜ıQ!ölN±¼;ä„B8¸sÕı'ÚYÑ<’À›‹ƒ‹_àê'ôÇş~ÏÛZ=‘¹?;¥iÂSSÖ“@wÈS ßÂ?Ã®¯ ›½ïY|+Ğ½e,¡ŞÜãt“ôˆÁ™#J ÷G”Åø ë:H»XL¡¼5·ÆşvóâŸ`æwk¦t›M2±Ç½˜W.ß¾æ¿×Ìok¯«¿­q‚¯¢×MöPPÂ\­88+Pêš5i..9æõ¦yÍu42‚ùÁTp2¤â3Ú¨ığ¿ªkx <ù¤¹şÁÙ’¹1< ^¥2øzFÌ–@DÁùnÉÿñQI«Ü”$ó«˜{#Äwlğ½‘d	¦åêVc£aŠ[{[äªˆ(fßº‚ÙÛ›Ê¥yÅ/ßş'fS‰GãÊ»ÃF»üúõ’±(s•úO¾Æ·\ñ¢´‹÷ÍÕ1<6ªmÒ	n¦ßâq!Y0«¬¹˜Ç²ØÿreúaIK=PØå +\­ïoíì×jåzm·¾½»Ğ
+X[#Œ2CÛœG ‹‹Î Ô¸EÏ’v3øÀìïeÙ˜Âj¸˜ÁÌ1±ºUfÓu}qX»',±¬óçáà¬(ä‘‡Z)"©qpxQê £¢«$-ì£[©%.ù„”:!…Ö¿BL%xDpi³Cæ%hR¥üb· UE”=ùêRÈ»Nx2ÕÄ&èçdˆäw,6B*ˆ´_q€{F“Ùœ¸”üúãÇûY€ûB›1Ùv|4pÒpnC´|¦a1R É(*³+‡´pº­2rÙ^Uì£å­Ææö^]5>Z9œÕŸh)øäÙ2Úñk ¨˜'‚ÁèB§<ò!=7Á“wZ±C¯"k+vò·Bìäy¥ØY˜Y±ÛÜoìîWëe´şoî, ¶¶WüGØ5ßŸ“ûş{zØÒùï(Ë<UÁ‰™åÆ«°}ÉGÿˆŸgûò/<P…r­´¦ °€~ Â#˜ßøæ¹{ë@C¾òœ+ûÖïé±³eŸ³ÇÓtO'É^œïÓóor@kiÓã\KƒÈ,İÓßšAr®Pœæ,5xş›]êY‰È-'§sƒP:²åŸÂ<ŒPzŠŞ¢xÊİOİ}tÊê)Vú[ë‹gàa]t²p1’çO²Še.÷<šú‹ŸŸ37˜rzöùØ/>[¯-ı(ë>åÅü¨i´ü“å‘'õ­qa"³EÊ£¸ó»S–SÅ8O—^ˆå÷ÑFàá(Â*$dc¬@†;
+XV"ğùÑÇƒ‰ï„¥Ú*4LYúŸAH=GÚË6N•ç$!Á°ÎëÚ¬NdĞ¹x˜Bo­HûÖ*œü?VBOøxGğ¥™''ë¥{çw àM¬<GÉ±¿o™3gÇü8æYíoÛ/€£Ch¦iK¡ÁÔé¢ÙuÌ-–œPËÓ8EÕş£­òïãeçgaÓ<b¹$c, =PıGO;]´Â€Gb\ ·!@¡æÜæX[ZÚ³A•fQº•ªô+–d¦`ØÓbhsoEÎÆâ¬W¾áKi óz’Åµ.«!mHˆq@×wÛhë± ïíÑjĞnœè*qrÁyaN01l9aYÉ:HV/+;É‚Ø¶¯°(iHmh4®çCHŸçhó€ñ†š¼p¼Ø*/lîõ'Á¶fšcIxêGÆ•°ıh9@Ğ&ÆÍgŸ²¼G„ùµp:è÷W ûØw:ôlòH©È9~D!öÖq[Ö$ÆÁ½|cİş
+X«á–&¾|dh~ì=t"ãr€\s·°9iOkÜ9x¢Ğ‰H=ßÄt°I('(n[:(†`S¾#\¦˜*ï$±ãà¡¯J…t¬cæø‘¡¾Zx,˜^nÆ9P$ó ËkBu¶úæĞ\ôO98`[îò ëR1¬UT…$PÃ¸´JO‚)] v*˜3Â‚3ÁXû…jÜ,G@£U;éJ‹ƒÚ¦Ér:T8¼P‚³¸qàQ;îPEÆíIb•š+ìæi‡aœšNL³’'ÿ§MêÏ(Y")°±[%˜apö”æƒ•ærÒÖA'²àØ2G.X,J.8äË» IH%‹u€}ç.G(Œ ¤ £c.ckXUiÚ-F¡µ1¹Š; 5ƒ\Üœ y¢;İÜÌÍI©ÖZ**ßªLAW¡8,šâ§éäÈ¦ *Ñ\¶÷¥İë*JX:€<ØÄé%NYéµ´¨WÅË
+X§x.Og¶2h4‘¯ Ík"Tdo:Rnáö”íTî}xÃšî«•bÄZh'GĞÄck8Ÿ2Òƒ£õË—±{ Ù¥>œ„kz´¶T‰•n­>¸!e1tl¨J0 ½W¼)Z7U RBà~ŞÕÀ±NÒJ“m›5 ¾É±£¦¢\ˆ6)õZØf3å¡˜Hâ´úù¨ÂĞ§[ø'ºŒßq@{˜«ÉÍ›JÄ,LR'qP² 3»ÃBóğä=Êz½$4–fˆ[hyú?Çr¡#Zªp J¯£¸Rã.pÎ7¿i@Xi–œÅQ…<À^!Ôù]„—j ÆÎ
+X .˜Ô8I@à¢]O`´A €”Å.J{ÛÚw•ĞÜÈ‰nÕP¬¼àğ±zjôC¹$’
+XH-ÿ-T„!A˜k†O<íòÑ-QÆ¸n#Ù†°5yL?…ÏÁ«ì9&_æö¸ûŠ#¨ªèl¤š*"/g§NA¥,àÑû(‹wVoµÛ¿S(øY^<ÀRÂ,Oámû00c^Ñ“÷¿©BK4¯¬æ&\¹	m±hN<7½ÊíhK/€V¡à¹ée(¤B­B±„or"#‡4
+X°ıòQ>ÂÅ*Ht	Ëæ½Âm-åÓ(^6¥*ÍÜğ^,î*,ÊM Ú»I"mUäaßšvëj
+XŞl¬ƒXÉ¢‚mCŞö;w«Àºş¾ìnQ
+X‹ZCæH‰·by¸½Ë#Åô¨f4 £„1šeX ‡Øëi&6êÇèçBá_‡ë¯JH_Ç°ä^=Ö¥‰ô(pK†B–pw£'ëw\† \Z’Ë Úr[
+XsP«ç€Û;¥OŞxµ!úc•Mœ§áf<¬¯F7Cue–yJx6ïµM…AœÄóq®×a¬ÈVevo·«3sW2W`¿´Úˆ?Q`P•3ç—…Î_Ê+-î½sÇóp«Íç^×y8?—O8F #Wü+l
+Xõº§™ò€(Ï/êHŒÕ¦dëE%H¶üšâÀøJ^’©Ì³í›5µéõ×ät°s a"@H›¾y‡Èò¨
+X „+Œ®y488xKe¤ù„/Ğˆ0š|¥ÃD!^BÓ4íXû~VÅ°vÀ×§jAXq_~2Ê
+X­Q\-ˆ[t6%@À­î!"ºç&ØB@ærÀ$}®*È¤	Lƒ¢\" £Q®ŠÃA3*1aJè¹BËñ©ê¨æƒëØò©‚Ñ¶x¥wËk[‘¶0©¨“‹Í:ˆt`‚R^Ìªc‡ „.Âªö©ŒØ«Î‹”¥ì¼°4hÚp,¡8PEÖİuÎÁ[)²á}¹9@Ñ$*3„ŞØQEx)¸šƒÌøŞuT1-Ğ¸G[…J0ÓÇ-€
+XUD"•
+X˜1NH.Ë›6æğh€æ{Ñ#œÔx\€¡±ŞïÅÁ^2¦£6¡2vPtRM“ú&Xõ`¸úFI&±ÅxÃ\#­Ãˆ“6c\ïÿIiÑ„UXtêà*XexŸÁih ò@-n™`?Eµz„Ã+—4@($ãZ%DÚ}4è ï”1-÷ÃJº˜V¹…†Õ¤UÈ9Ÿp¨ª¾”t
+XõĞ>Ñ	TgÈ~¬òPS(Tj±¯*uhEÌ1…GE¿£Û¦›Âò6'æï¹ãôµîTú/şzPeSP¼ˆúâô¥£9 ÑQÒq‚?ht§Ú¿M¦Šw]öœ;:¬°ÉÙò&Ûú¥Îâ ? 4©ßÕBİo‚³Y¸×¦BÎ1ä;³Û§‘£ÌŞáU
+Xª2S’Ÿh¸(İa
+XK•´ú)PLØö¦|¾}Éy:ˆB"¼‹ì–³3:œpíù:ªÖ …ïÔUŞÍáŠR£øxÖ¹<å½‰brÚ–J®ZVÉr]g‡-²G§Ü˜¶{$rĞf5]5IDX]¼Tó õÌÂ0ÏT‰]b,²­Y…OKjÑÚN0i7×îÌÍÀ#£Œğ.¢|D§Jšš/UÊ…Yw?E:[–è¦<¼`(Ï|½0Ï©€)vu5íèªÔş?a
+XÚ¾”gÓ`	Îvçå[™ÆÌ‡œ$Ã¬ ù¹°*VŸû
+XÓÖ–C§‹OÈUE˜c¬&Á!ÿÒzÕåãÁ8§Ô
+X0·µÒşÖ–79–Óøª¹„ÒÊşÈDj¤Ar“øü
+XÀyõïºu5íBÉ|•wM¡ìa*^ØÃ¦kŞ‰¢À”! ò/‹aÓ31yÔ#ä/r‹óT^„ÚœÂÆ¢„rrÄ°ú8[”›`«Ä¡„Ï/„^Iş9@ŞØ,ƒ]uşBÀjL!şNäW²cEíäyÑ+ës‰ıÔJ\|‚µ}¼iz™3o—×¥$VY 2Ï@5‡œG—jg¼¡mp¯>¬ÄÓøÒ~Œj¢ (øú|4òL¦?)Ñ±Ä¥¹ƒCä;ƒ´%›Åsİ©Xù&‰Û–G+¨Äx¯Zq¼ºóáß,Éib]À±$êH™ lÊĞ"ıÇ»OU#ïE®¨ß«‚“É˜'ğÛAˆ÷íQÅ1.:•·ÿjÇaÁ<ÍHRyïŒ5,BâÄ†®\×ã1qšk7RShåÆm
+X–ú~0"ƒŒT×CŠU`«ÈòKL£ÃŒ1qJH[£±1­T.Í¯š×Xæ˜Ï÷Õ÷ÔØ­ë•İÁœ}a¬j¿·Ú;0úsú	¤œ<‡ÃÓXõ5u½}H€m×ŠëXÙ€ÓQ“v¤åµ -Eš½Ë‰ï=äêqG ‚¨1¶´àRšA¤5‚|#;ödĞp®™_ì…p“—É“½˜_Ës@Úİ›fù[îS¹oñTBêöK@ÔHrS§Î¾-œšNËM,]¦ZDlÍUÏR"ËG)R-•Ñ19©SŞ¾Î—Û•ôM>YŠÕáD>T²Ÿ£]+eå•ü#ˆnJ€È7%e”ÔDG òQÇ TËoÑÑGüÊ>‹¢ØB¦Ñ¶’‘)X~bsp¢ÍcÁ3¸üôª_5r×êå@àòÑË¢¦! ô¨på-c§o%ÜÚl¨NŞwªÑÔ/øâZEÈ†~C{Å&ïºw‡ØKVívİğFÓ6N©¦ƒ­VöòÙjm¯hË­wª³/ö‚&I r%ìÜnÛû–>ç/0cÜâˆkî‚å¯°ä.Õ‘	bÁáºåD
+X/Sã‹µh#Íû“oßğ€ÓÍ;Ÿ–z! ü·¸qµ((o-5òÄÇëÉ—œ¯¿,óö¢%®Á{Zùfû‹y#ˆYâ-‹Ì‡‰·$ÈEóàè¤ùíy^œŸ”>œ(ıÜüµut¿†QĞa
+Xğº×o]†ÿ ÌÕoC¥/^æEŒàTçSs®–7xöÛÌáĞÅ+§ğèÉ˜ßü`ø¶÷ÿor•f
+SHAR_END
+echo x linux-bcompare/.git/objects/a3/276f8e00a7b89fca4ac9bfdab956af0f69d769
+mkdir -p linux-bcompare/.git/objects/a3 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/a3/276f8e00a7b89fca4ac9bfdab956af0f69d769 << 'SHAR_END'
+XxKJ1 ]ç½¤»gÒIà!.\z‰Î¤Îäûxzñs—µ(¨ÚÆqt^—;Ÿf°Ç–•R•]Rl+óNóª,dQ)V©•J)áªÓN]¶ÜÖlÑjbceN(’&4iR4æ‚1èÍ_Ç„C½ë;\û§Î9àòËOüpš?	-œc†{dÄ°ıDºıSÏÎáğÖ¿W}ÀK?o°¥ğİ·MF
+SHAR_END
+echo x linux-bcompare/.git/objects/a3/c8d48e5eb72e2a227066710d070e6d69a58905
+sed 's/^X//' > linux-bcompare/.git/objects/a3/c8d48e5eb72e2a227066710d070e6d69a58905 << 'SHAR_END'
+XxK
+X!³ö½µÕq „ —hµe\Ì§³Ééó=A–õ  ^^ç¹	XÒ™]±ˆ)¥ä\dÔhG÷ZiL1“w¡TŒdÔF——t&S¢!ù2X«}2\­Õ‡ì#Æó¨«¢»Lk‡™¤Ñ[{Pï+œ¿|ıñia¹€	Ú45µÕZåO¤ğŸººµ÷GYæĞR a@=OM8Ë½ó®¢„R¼
+SHAR_END
+echo x linux-bcompare/.git/objects/a3/1aae3283e31505453bec03d2bf1cdfe085571a
+sed 's/^X//' > linux-bcompare/.git/objects/a3/1aae3283e31505453bec03d2bf1cdfe085571a << 'SHAR_END'
+XxS]oÚ@ì+÷+&Õs»N[Sñ”DEMDAJ”DÄ6¶jîí •òã»gÒ IÕÄ'kwvvwn.LUÇñ¾~àœã!Ïì0‘v©ù"ÈDMeÉ¬âÖİ:¯û¼îÀñî§†ëc4ì2Ë²^U°VÜ©:_`9U×E«ÅpxP’æ1ãî¸ŞiÚºUš„Ÿ=;¿•œ<udVÿüÇèjÔo/d™),ÖÛ2f1kKEAª_ğA¬*+°ÁÒÖ¸2¾ôúí“¦anâ¶Ty‹I-W³Jv€ÔM3\¶»ßÛ§½ñğú²×Ìs¶Ã¾›£6è]õº[şNw£¨¡SÉ7à†I£ƒöàš¸‡gî¾¡ˆ…düi†€gÂÆ«Òç±ß]BûZÓp"ÍÅ›Í·ı§×+êi¢w?$™£_(r!´+8X
+Xi
+X5ÕÛ#É{ĞefA–ˆ¼VºÊóªä*Ï§“L¶Š“TŒ†yh€Ï
+XÔµvÅPiN6M}¸5LçÖ Å*yœL8Œ0’VÜø<Ècğ†X‹<€Y‡©/e9aOÄÒ–4›{üÑ1À¬Ò„ú™¹DøŠ= Iô×mæ£Şî£ÅzçGH’³ 7&"5°±
+Xè_IË‹DÎÈ¼d$J1¼ªëÈ¯i1KCÒâçC4áûÏ.DEÇš÷QPÀ.æ»ÓõÆ5Ó¼'=³9øt/Ê@Wlİà@'³L,j‘Êîğøˆ|ÕO‡,›²?±6Dd
+SHAR_END
+echo x linux-bcompare/.git/objects/f9/0a5ca4a70c629055e0926d267205bd563913f2
+mkdir -p linux-bcompare/.git/objects/f9 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/f9/0a5ca4a70c629055e0926d267205bd563913f2 << 'SHAR_END'
+Xx+)JMU042c040031QğñtvõvÕ+©(a8Úª0¥&ğd³şîT½¥Æ·>d¾…*ËË/NÎHMÑKfPÔ½Û_§éÂlëÎ›R2mİ¢	¬MPE‰%Éº¥ÅEñI™yñIÉù¹‰E©‹¥Ö5?euµ~Ã|i¿Ìı­áR ì/í
+SHAR_END
+echo x linux-bcompare/.git/objects/95/3d4e7d7cb04cade7909a4155f03cea4d5a7412
+mkdir -p linux-bcompare/.git/objects/95 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/95/3d4e7d7cb04cade7909a4155f03cea4d5a7412 << 'SHAR_END'
+Xx¥Uks£6í×èW¨[j±±So&Ótjcœe‚Áx³¶Ãğ&€(-Y/ÿ½W"v›¤IëñI÷uÎ½sãáèıè›ïğ`^S:õg„–®8“…yz ¯8aEÕÍ,?øhz¾å:òàˆŒÈ“À<s=Ëô•1M3Ájó¬lZ´˜øé…¾ôÇ—BT'ºÎÆ­9[‹¿!0:ZŸÉ”KÏœ[Ÿd,BSY÷µ¶»Ò:m°½SPGú¥g~´d2?ŞÄB5WáH]*²œ >¦§Ê-"‘Eü—*ûÕ5#%ÈpÓ	Ô±Ñ#‹ùu™¼ÅQ™â‚ÖŠ×YN¹Z¯Y„lË0¿§Ì7\€ûî<¸˜xæî,Üáğ{°Ã ¶³„–œîç–­"¶òÉŸY^§ß$ ¢{»¥é-ñiÆ…Vd ¢Æ%ÓÔ’Ó<ÇÕÕæÎ¾\©m°‰_IB+ëØ¿†s×'ñAEŒŠt|„³ÑñøÁaè™_J`UqQÓ¨À¬Ì¯1oªŠÕXQ’+åŒVş6ú=IŞã”ò+Á*MÒ¨5"Ë9æ— „J-¨–•k4ÊÍ:ke„Ğ¶œ•ºÇƒ8âô¤nJÜ²z“g1W‹?…ÖªÇ”ş%ËùIÜdyŠ”‚vº×:üñİx´×U¨ê•û½‚äu¤=‡ã£[#	å¡MÏqÃïÜ_Má’¤…¨Š`sº²ì™Ü8¸¦-mhĞâTíØ®1±§PË`»î²?˜Ø¶Z†ë¨[¾ˆde’7)Å?Å<%’eÂ*‘±’“âêgy¾Æƒ­¼¹Ÿö´ÛÖ® ÙI1"4¿o¥`ƒî™dBË4[#ä0§ç,Tì¡KœÑé¯u(\¹vzL¯Y™Ş	=N
+XÖ”‚ğKü;’è%¯/q¼Ji˜°RĞV„-„RJà"ÊóAç² (ptfÊç»äé$XËkuf/Hú\0ıéhqV>éù´—Rø³~ÿ‚PĞ3 ‰ë—ğ“³Z?·‡c=ª*şŠ0¶£áÿ	ptÜïØĞÏ×˜}ÿ®²¶ˆ*ÒèÇ)©ÊÍ“<<Vã-È{1$â—ä[7y>¾:ë-3ÿ)ë«óİù ßoø[¬¥øÍ3ÊĞ„ĞCoğøË yn9³g»æk_¬•QAñ÷„3¬Ñ–&FÍ_9²úö‡ĞaúgŞvøur@ß7Ø$	Ö. ±¶^ZCyUÔî_­d<¹¤)Ë<Cö¤2 Á”ºóåì®¾ªUnÈ)×É,rHŞ‘ñ+Rİó|t"ËIü¹©Ş+
+SHAR_END
+echo x linux-bcompare/.git/objects/06/4c7018744cb97b8e0824b2a1e3c7b9dd2f4f79
+mkdir -p linux-bcompare/.git/objects/06 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/06/4c7018744cb97b8e0824b2a1e3c7b9dd2f4f79 << 'SHAR_END'
+Xx¥U[s£6îkô+Ô­ŸÚElì¬'“évŠ	Î2ÁàÜl§í0\d‡	H‰–¬×ÿ½G"÷MÒ¤õø"ÎíûÎÅYÅ3<ŒßóÍ[JgÑñ¡eÆ¾µp>ìÁ+Ëyİ¤-EÇnÿâ„‘øêâ€LÈô®0ZÍçî'¸"ã÷ï¦d[±s„®i?´(%o.è_´ÂUÉº-¬(vÂ$rãAé\ÊæÈ4EÎ¹¤­àkù7D&‰–§'*§eèQö´9ŸâĞ²ãÂ«à{¤mj]?†êàu*ËTüÜ”ŸÓ¶å„Q‰ì`±püX_ÛÄ·X\²ü-NYkÚn(^—úyÍ«RBÈsmÇn"; @Ìã3+t®ï’kò¢®`¯Ì)ôFqîzÚÓh«NÑ±îÌ« DöòFoé„McQ
+XiÔ%€h1ã†~´ªps±¹#WOZ:i'á+Ïi#
+X|ï×d„‰ÚµÇ´.¦¸œN\&¡cEªÖ«FÈ–¦5æ¬ºÄ¢kŞJ`E*®´1ZEW•*…’7†âĞèdY	,Î¡œäYS£dkš¥l³.{ex®¿ÒEÜËRAÚá·›ªÌ„~øSış¾>BIÎ+q”ueU İˆŠöD§¥ª:ÚªU²é§ÉôàVIeüPg@áÉYx­fP¥!Û"ÎV®w¬›å’
+X´ôÀ5´ÜLK¼À¶¼™M1ÚŞœw¹~[%®øšle‹HÉòª+(ş1QdŞÈ’3Aê‹ŸÔı¶ª@;üáÃÀ®ç^'´ôfˆĞê¾–†ırO ÊŠrPôÑ™YşI¢ûl€®p†öÎìDkBâÚtgfô’³âjèÍ,¯yÇ$çøwtÀk´}‰áEA“œ3I{™Ô”uj.dZUGœ,NU·PàèÄQç»ä™
+X$hÙË6ÚÔ^ô9gæÓŞ²’=iù´•îågíş¡v`–@’0Ïá§â­¹?í÷§fÚ4â=æ`2î'ãÿãàà°?8¼qàù@¿XcBÌ›wSöuÚhak’†mäá±oAŞó¡¿$Şº«ªÉøÕQo™ùOQ_ï–Èñ~Ãßb£ÀoéüC3ôÿ¿|šç®üìÔ|m‹–ÖOÇíinô¦U+k–|Ùàíÿ +¡Vñ}…Mcãæë¥kCcèu®“ºşób\äç´  Y ÈŸìğ©^Û
+X~·¾ÊU	Ô–Û©‘},²OŞ‘é+Bİ³|t#«MüånÑc
+SHAR_END
+echo x linux-bcompare/.git/objects/e1/898e3d9ee2353ad7bb5530ee07af144a1171ec
+mkdir -p linux-bcompare/.git/objects/e1 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/e1/898e3d9ee2353ad7bb5530ee07af144a1171ec << 'SHAR_END'
+Xx\Í’Û6Ş³Ÿ"/0šõŒí$·İÍ¦rØJU²·=± ¢à!	 %Í<ı~ÒØ#u7çàÄ?t7@£ÿÈmç·?<<|úòñoÿh\øaë†øs¿­}?š`?ä_ãşÛ¿Ş›qì\m’óCüŸ~óÓyø¦±ñ)ùñ™ûŞõ¯Éæß¦~2­]ˆæüÛ…Ú©ï^Sr5±¿HxŸ¸ßã7ÜürúøExLóY¤ù†l_‡ö6½Ç‡Óãƒğø6»<z»O?>ıt›]~|›İåñÍÙîÔ›³ræ}‹.[âûG»©ë6¤¬ë€½év3 ¯jç¶÷[ûì‡fÙo~ßŞOCÚÄı‡›¡ş›Ï¾|ºòì_¿ÌÛÿí°åÑ¦7Í•‘O­°-“=¥ª·Ãtš?¾l¢¿şèÏôéñxóù:`‚	×‡Ó±Ù¤ççè­àÿıõŸÿşı×kşøıî·?~»ûÏ¯ÿ»‹µ÷É†èwéHgş-™ï›`Çk3|¬÷¶¹.'¨n_h7/[õ-#hğ
+X{üzŞjwøÇ]m¾šé›/Ÿ®óº>À=şôE‰Ì”\7ÅULÎƒÖ0²½_Ç„¬`öÓ`Âéîa—Ë¨w°z|«Gå¬*,n…§erÆ/×ÒÕ]wŞ_g¸nâüóZq>¯š®şZÇ€¬™0á—_7Ã÷{ÛW'ı|ÿxw4Ï°}¡Í–°¶cŠ›}ÂÕıVÛy€©	“¯…[ˆPïİÁV;×YÖ¶®;7öÆ,ËW0ºn°½ ªïûÏ?n¾ØÙ'R0Ï1Ù>óÌÍ|[w¾õ,"øc´¢6]ç†¶ÚÖÕ.ø¾òioCõÚ…cÅ­ÉıùÈ2 D¹×oh2ÓøY¤QuŞ4nhì©2ƒÛ´nwki2A×œXŒï:ø)Óg9û¾7CSAG¶
+XvgƒjË«¤‰+áÛZEµ1Éè€.hqù8jÁñyĞIº·'Í½‡_Â™ ¸w´±U8x–*\°­
+XGîšh§ëO2Œ&Õ{• +®=ÅoüÆvˆâXË‹ƒ1ÑÖdØÒc1¿ƒûİnåˆ1ØƒÀ Ù!-|TĞñ¹Æ’÷S'i…şøÜÙİèJêÁµ{-ùŒ]A¿±Mø£’¿€µâ4n—¤Fô3	ØkëIjÏ‡Ål;iÛ±bDãÃïY¢G0µ Ñõ®CÆ’…)ÏäÏÈËTpŠÒìÙ‚ñAENJ¬{RûñY³u»3S—6u¼»f?±ìTNç´ãH§’ÑYp’µAFŒ|NØòŸà6Ug¬}¦!{¬’G §ĞDxq•'¸=!&Ü‚¯ÆÅ±ƒ{È]œÄ.XŸÚeo9sµà'Ó8ºæYÅ+ÿ<àır¾{ä¬Èìıû¡cäœáÑÆˆ+‹ß/gp
+XS&şÂíyML	HÚ3Ãt@xSŒA¹p'EÈ9hîHĞ’6Íà}÷FRĞ’Á*4	5Ø#¼~J3Á]#«ºRŠÈzh™‹ö³0Î0¥².ØUBèÀI¸
+X…+-¿ª£;€ÖRˆĞ %²O*zÙdÎF›OÌ§s×ƒŸq&I°ÆÖÁ>Ø~EÕ«àÁFËKÒµÛì÷é¨š®¥8•ê†îşÜÓ¹v8º´wHM(ğ;Äê
+XXN8Ì÷¨‚°=>ğfGFpçCo"G”øp\¯!RÒŒühÕJƒ'AËºI„g°r>@·št¦0Ø!Û$ªˆrù²æ±Q“ÇMÉú%]$_ö^\Èè§P““‚ï”sÓ¨‘”BjÚ£n EÌA×¼©ˆ 9 ‡Æ:S[Tz’fÈÑ‡§ˆZ§UÍÓy[üØÊUd’wnÁpè`'CŒËZF7ÁT<¬sƒ âƒägdxÃ%€´7ªbJø-’½‰O2ŒÂh;Y<²b:_¸*ª¥ÀT~ÏLR'å7¶–[<Ìn³œ2*¹vµ¿ ™à+úáaú,İ°2T*æ…8ò\z,‰‹Á`RœJ¶KŠQËÆsÆ,-’‡94âÂe@‹x®k>.hºkü †SµZAæËPÕË"å¦‹Ä@­Òğz¤,u¨U" ¯î(…z	¶Jˆ|Uª÷EF—‹U)Lï"_‚ ^’œˆç0(èÀ_Ù³°W|ÚÎÇHiLîĞ´Ï†ÍŞì­A*èÉ²yÊˆaÅræ’›áàlTƒ9¸67lm¾ŞÌ°-`"ä5DÍ]®v*"YäºY ßÍ`úy6¬~÷uJ®a…ëw	u?$ijOÇ\mdQ‰àí²&_AdØ±iR7D×*8}ık²Øƒ·õˆ‚¢­œşì–²s{ƒ®~¼{qãÊ1»‘?«o¹´c÷¸’	;Ê¾
+XQÌ[^û”Æ‘5wnßr:˜lšÖêÂ©«ŸĞŒ´]¬Ò¯1ÂÈ­d‚Û‘8¾UÙû¬SÂÑ¨t¥ˆG¡üV¼t)L†‰ÍÅ"Ã]<&oÓæ\>D¾â³9·Å_Ù§ß
+X	¨¼s!È1VŸQ¢‹İûƒİ"ËÃNrí¥'"§âÉ_¶ CªEÛŠ1f(m/T˜¤TÚrå…ñ-fÛõ‚”îÎw¸Ë9½Pp‡¬¡ˆ¡T
+X#K`şlÌíÑ{‚p0<|¹¨E(?¹Ã_ X?h.ÛóĞ¹:Èƒàí#ÚòVù½SİMh+ä‰å“&a°•Q—­ÄË„Ş%*wó ±Ø·¤™í6C–BÏ0÷ÄmaÚ…ët&šÛ÷…9d’ØŒğmùôLÙm5YJ‹¨ÁtîÄ»nÂóŞÄUòËäà/;h°(.É¡™EH†¿ æ®áœÖğ×:úIp×‹ İ9KH·G®5s ¢Ìö†^—Ò¸Æâ.q´¼¾2º[†&ù¶‘3ãdˆñ¢ÒşËt¸íŸL/ùYê„ä±h÷>¼(`Xö
+Xƒv‚OFn]:E/Hjİ5¨í#%ÅÏ„€;²
+Xé„ß¢l.hlÒµN©½;áZ—Ò¨ñçú“éÍŞ•âc®¹üÔ ¬°õ|åİ%Ş ]`î‘}%£ÍÚ‹Ë ¤[¶BñîPİ‚«§$j¡=üB;ñÌmÀW
+XÆï!¢•NGµ¤	è×`ãA¥á£İ6æÀ¤¶¢âë1‰‘»mËõÅÁîPE‚Aè„n;¼_Ó›z”×/È$‹à*áƒ«Ùsbçšk}Üq›¨‘‰
+X‘ :Äü²ƒª,ˆä!–l2K•°µ®·úäU3CÔIïrDƒmÊÌŸÃ^›rK›©
+Xcv³…{º~Õ\rQJ2—<#qÆT”ùàE\'¡ŠŠÊa‘'Ê¯è|Î[ÎŸ“b­è.w„Pu[˜T>•sÃÉÔÂ~*B|Ù´J±ãhkmáÕˆeŠK· ‹ÂÍt ê§¹Àå(ñ;l±º+ÊŞ#•XdùN2
+X-±#¥ìÉw£^uÿh—.ÏhÍZ¯˜ÉêI¼Cş5¢‹ÁøE]½;hĞÊÍACVh”à«µJƒü¨İM¯­•í·f˜z-dCŸœTW—+–É}ÒdXaVO¬óõ_¿še–Ş¾ºÀJ/]–tÕÂ"`Ó\5€­ĞÅ‹—F-ÕîÁµÌğ§42¦&)úQå
+X%>À9R¨ğKòî&Üª;Ÿ¬X	‚¯Û<4B}‡Á«çY¬œHóÎÙ¨wMiíæ¥1jRÌ:ŸzÀÖM42ˆ‹k«õìé[5Í,44€$¿ıŒeMYnSG…¾As›ëÂş(·½Qã{îy@ÄÀ`À`í•l©	u˜z‰ …ŒlUŠ„Ã¥›Ìi¿4oP‚E“öRP|U¢ßĞ¤DóÈ«Ú5vûñ_–ÎÜŠ,X~jÌeÉÈÑ!¨Ğ!’©ÁVØ®’ü20”@–‰¿bJCtåÊ´©QÁí¹DHI•Å±âVøhFv^pé¨ğ§{ı”\ºZLä.p©;tÁ©Êo9è¾ç¿OA(”8åPE…Ñ-r@g[$AK€T®v	›ß)×Ğõ¨‘±Ä°“ßJ„{²v”zÎÀ`A•œœ†¼ï¶8Š¦w¼oJĞÜ ƒÈ‹D‹âÌèR¾èRj­sü„© Æh5.6³:î¤kCAY–ã3"S#öwL%Ï‚ç4"çİYtŒ°‚¡Cı¬›2ˆÎWù&¦31=v1_ƒY0ùÃ1\‚<C…tÕ‚‘8â­^ªb©ÊNõÌµ eÖ§çOFS^ŒòêŸBDNÉî”È˜0Â”Ñ2”¾BšÎI‘X‚’'ó5@”ÄrLÔ™»Ó,	#ˆˆR,)ğ&†„¢dHfDTC	,³=ÒU‚æÜĞLÏ@o"¸bÎ:[A¨ŒÅ¸BùÓ8‹
+XR¡„TŠ@Q²@1¼ìüD×VÚ?µûŠz7Ê'§øèÑÂ „`(ê–MY7îh;$‘ùbòqoR¬ĞtÆnvÄ¥ª«%„¯wWùÍP¾!«4ğ°ÎÓÑ9/tŠªÒ»->ƒF¼&ŒWA=Ó>Ÿqó«<5¾ˆè _){/7¾¡÷WºöåQüzöä?Ó/ôŠ-¾É‚~›\ÁüJM²İ
+SHAR_END
+echo x linux-bcompare/.git/objects/34/d236aeabbb448e30329434da9b8ca546df38a1
+mkdir -p linux-bcompare/.git/objects/34 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/34/d236aeabbb448e30329434da9b8ca546df38a1 << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe˜jëW[³Ágíó	³C?Ø¼ò*‚ªIÉ,.ÉÌKËgø_÷*/FSÙ1e¿àôÍ;®É	3˜ Èˆb†Ÿ\1K–ó$M}0)W­ˆuo˜¥ğ'¨Ùéº)©ÅÉE±]Çf^On‰ß¯Ğ5k’ëåèx$E9@ÛÌÃy^9öüoê¶
+XË{¶óŸ=  õkGV
+SHAR_END
+echo x linux-bcompare/.git/objects/c5/8520947c51c958032fbb65082ea533daf069ed
+mkdir -p linux-bcompare/.git/objects/c5 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/c5/8520947c51c958032fbb65082ea533daf069ed << 'SHAR_END'
+XxÍYÛnÉÍó|EA/+”ì`ØÄ~h‰Ú%¢Hjm?-š3M²×ÃinÏŒhîS~#¿—/É9Õ3Ã‘Hy7ÉK çRU]uêÔeæ¹ŸË÷ıË÷ºv©-J+Ãe°vm‹*IVUµ)ß¾~½İnÏËÔûÊ†Ò/ª­	ö<õë×ß­l¾yíŠÌ~9_Uëüoe½ÙøPıìCfƒ+–?›"û9’õ‰$ùäë 5ù…¼·;_drá×ÈWÊÒ?ÚPØLæ;©VV>Ïı’dfÃºÈK.ğ«œ/Ê·I2LS»©L‘ªÀ#‡€>)W¾Î3I¡dQçùN‚5Ù3ù8\”/i'_æváƒMê’<³ö;9¥…'ÓÆ%'¯ÎEŠÜ–¥ì te­ÉÜbaıÙøALëa)İ²9ë4ºWZaŠèüT­àšÖõ	üíRSYUzâ*Ï3ÁµÇÎãÆ5,óRø*1ê91yÎP¼ü¢š"ëº¬$µÒ£7ğBÒZ+n½¶™ƒMùî<A€6»à–+@è¯ùµ…•éçÂos›-awµ2•º¿06r·;ÏaSìàyø2ŸÖÄ¥aèåôä²ÿûä•Ai«Úúğ¹¿N{Xµ¨!+SÂ3¢¦—â
+X5‘ XzÆß~!Ô<d¿lÂ -ƒ)*([!Ä®ÀÙ¯=òí›³K³“Yp&O’£‡pº,x»$Br`û*7âÈ$…/Î <‡ãí rŠ³
+XzKàÊÌs\ÉİÚÑŠa 3Œğl=œ¨f:]™°db!&²A–ú,Æß…j'§ß¾y%™Ù•ÄrLÒ'Ræ1cy Ägx˜oñÿWRñÄ­Ô`­ü¤vlê ÍQ¢ID»”Ì–ips¦½Eº×{ÊŞïêŞº
+X9_ÉµO@†€˜äÑù<â	y8Ÿ+*B
+X½Ót˜’ÜlK„¸g<øGêÂıZ[ùà*œ¶…¬ò[Í¶#±ø½“h¨¸òô¤§X_ÃésÛ.Ctı:Æû‘ÈÖÎK€c Û•KWÄaZòQ¾S‚™ß†á—=×J%¤Æä@yå6ø›éZ”YôOA¶)8”G[¾B`ğ‘à?6Á•ö@#¬]Ô ï
+XyÜoDÉNÖT52¾´Ur:EÈLÈdåßßş|[@)hGP‘Éå®¬ìZ6ˆ=°NN?€Sı¶”ûæÊ@nLÚûuíŠúKï7äßğ´İ%rÿ0Á!P‡rªEiâ¼@¾2./…¯Ğ$ÍÇ<ïŠ„ßh…c*l ëE($9B!Ê_¡#Ì±'wæ’Æl6`RNßıíQ{w;O'Ï<- ÏXÒY»EäŞ†3ğLèãì-qwìÆì£×(§ÜØÔ-\*¿Ö d&CB+øàÁ‘ğù£)tRù
+X‰İ=qM1GÅc§å„4VÂõÛ•G-[ ^¢´Ç"Ûñ*O*%E½«Šaéªj$r:§´ö_ˆ©¨øhšQÖ@J»¢„m¨“”CPÀnâı‰Æ4Š/Ğc0»*·9àlV»qB£C!,UH1>F­­_šS–¾Å@k=lÁãĞÖGf‘Øõ&÷;±Ø3¼|Ót·¾))¥¬ÁCèÂNMÀy"@‹Cæ¢DĞĞz•È+„-dß	öa`6Sşâ‘Ã+›®
+XŸû%è¡.RM 9µˆ>L—Ôá n½§.°è1j.}&F=ßûöZr™³ùhNƒr˜¬ô2·…]¸*r#‡VÂ+œ¼0nÑö”Ş¢Ã=—'ç)WìÂĞ~“Ñ´ˆ”5 «‹Z«>ËŠi—°hí`÷¦lKD×Á«Y-°€Ié4{a5G=sÅÉs•¨t8ä|İIFsÆä,PóÚ–ƒi5 «³œå,Íî¬5…İ²‹‚€'<‹Æ®ê€!íóñTh¸ŒüùÍ›³µˆƒÉ\şM[S-”â2…ƒ ¦?ë«jr˜|Îo²F»Imrû>GP[(CûŠc&0mç€|A<Ôá A•àóÜ}¶[T®®¦z¸é«@s¾ÛìÓ’íi›“”¯:ZAD³&´‚´•å³N×xØ)85İ=Ï
+X7ÌîÄD˜é\B&Ğ>IÅÌ»SUeÛ×˜ìÂKàR"ìR—BöÙÛ´ø®Mc¥Í¯§,fm!'w -0xÑQcû•ˆQ§ÈıOñƒÃ&ºG‡SÍ…ÿ&Ñ)¢Ëõ™Å1İG]/ÖÏá˜ôÀWÓ§m‘‡ÁöOƒM›D¤®&í»œÖóL_:’•>û)y” Ë¢òUØÒ˜Æ®ıb#–ğ¹¿[Šø:rÃvïJøÃèU^î2¶Mç&KÙ(´Û®áV«^©¢1dÄÿ¬Zu1Â*I!ÕjàŞiáÜ,'ü‚Bş×º¥X¦ £Êé¸ıauEıy^×h0ØdkéÖ)„¯£Ò,lÒÅ@	G¦×l*…_¹9*Ãl,CóQ¶Ö9£'4Ğö¨_¾ĞwÙİAye»Kb“•éš"îLyV‡Ÿeí¸Û@õ:+äm*dïMAEnêh›¤jM³XÔC:²c7†3¦Ï´#Å¸+Ñök»Ùl-º™e)Z6^¿ìœ°×Ü-"Lfà.àPÓ¸*‹)`eƒ¾½gxD{/,±¹Â+X‚abcÍ·^êší—hê×æ³.‰ØHEtgx§}ú¬wLŠ>®.ÖÛ;öĞ±eßûÇ`¡—§)v'íÑŸe*ğäPX{2µ}}tFlnÓ*øÂ¥ÉÚb­ƒ8¶Üg}jºÉ!v	D†£•öu‰6­Í=":\`ÌPM”ø‡‹‹˜*œ„PÅ^l4ÕNÕ€¶ÇSmÜOq @ËÔö¥‰ö¥*’šEíËñÁav`ì)…¦ÑGK^oå(5Gd¤	§oXMHÅî0A³Ø*ĞÔp¨CÌ/aóäğ´¾¬…&L…)Ú¾„]sİf[k(|±“©o^\›’7IàM&¶ùp¸ú|²ØTGF‘ä¹®K\…‘F3?Ñ4é¯CÁÆ¸Qş`—“Àmr¸üÄŸ7ãäl3#Æ¶í­¦
+Xz7zAÚ(ŒÕèO	t‡,¶M¾?¯í+¹ßAûˆ‡ÉiñbŞcyÇIl¡›]k»Fm¹­órLx €‡3b”–è\Ã«O´€²Úíú HFô9K"-líñg&DÀ;	À¹€pAƒ\(éÔF2 ¡íÑÀQH0èSŠæ9€2öWÿúÇ?Ké–İäü?…`ü!JaJ\:Ò“4€ğ¢Àšfe®C1¶» ¶Ò’QùF3FmÆbŒĞÑÇ€RW,õ	Ñ<“)ô›G2f$í¬	±†«GùP(9ğ|¥HuC4İNûM¥ï…wÈÓ,ªè|ÓÄ‡ÌabÖrG—`Ó¼Æ÷Äİ¢=_cR´ùâHØ˜eÜÅáoDŸƒ<
+Xgİíà”µ/°¿àPt©ƒ}:I|¥ÁAfÁÿ®| ÿ€Á;`Ÿƒª“æ{$#İÕ+!ÒşvZm`O.Çâ·±Úâ¾Ì!yg?dzw5û0œŒdx{™\Ş]<ÜŒngÃÙøîVxõ~r÷Óørt)'Ã©Œ§' Ù¾x3ü8¾y¸‘ÑÇŞûÑäf<›áÉ÷Ÿ’áııõøbøşz$×ÃØØ]ÜİÍF“½²Ëñôâz8¾™ÊğúZ 2¼GÓŒÆ°j’Œ>ŞOFÓ©ÜMd|a£ËŒo/®.Ç·?Èû‡™ÜŞÍäzP	“š§z²äî*¹M.~„èáûñõxöi€·nÏÆ·WHñ¤<¶\g·TvmXÄ'³ñÅÃõp"÷“û»é½ùğö´5b ùğHÆ8É{¸±iôÖNÇ?®?Ñ¾ÉèêÆ›ô:Ã®)ı;¾!¤7¥ÍsSX€6%‹?¦Xy496IXu\şj¾)»öS¹A;š›Ş·ÅÈAXç·lüPh‡E2¿«AÈ0Â°®*4x‡7>À4X‚=ÒûºEÒi†^>¦y‹Z¿"`ÍÂÉ=v·¼P}I_ê@.qjtĞuQ¡aì:3JÅ†U)€²u&Æ‹Hr”j ßóâÂ+X~Ò`KËÏ}WD2mÖÃ<¨G's
+Xï¶ÃÉ/5vñøÄ¨›!ê€²¦¯àI€||NT
+X#­3:Ñ—¨•òkCf‘”Gæ:T€—ù »Kî“'ê`3Jœ+4ÄàNdÿŞCÂ×…åªµT?y©)pG«:hu óñ¬	b^rÛåİ÷‘½m<,ç :¬ÇšÀº§w`&<üTíT«dyşoIA–
+SHAR_END
+echo x linux-bcompare/.git/objects/7e/bb97a70d0b0a4b5e98c030c321b16b94ea4a3d
+mkdir -p linux-bcompare/.git/objects/7e > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/7e/bb97a70d0b0a4b5e98c030c321b16b94ea4a3d << 'SHAR_END'
+Xx¥Uks£6í×èW¨[j±±S7“i:µ1Î2Áà¼ÙNÛaxÈ@,-Y/ÿ½W"v›¤IëñI÷uÎ½sãáè§ñ7ßáÁ¼¦têÏ-]/p&óô ^qÂŠ*ª)šY~ğÁô|ËuäÁ‘12&yæz–é+cšf‚Õ§ô/šã<+›-&~`z¡o½Ñ¥Õ‰®ó„1AkÎÖâoO –çg2ñÒ3çÖGQ…ĞTî}Eƒí®ÀNlï”Õ‘~é™,Yf‡Ì71‚Ğ_ÍU8RW‚Š,'€é©¢‹HdÿµÊ>GuÍHI2ÜÅÂtulôøßb~]&oqT¦¸ õ†âu–S®Ök–§ !Û2LÇï‰ó×à¾;.&¹;w8ü ìß0€í,¡%§{Ã¹e«Hƒ­|òg–×é7	ˆhÅŞnizEšq¡€¨qÉ4µä4Ïquµ¹³/Wjl¢FÀW’ĞJ ä:öoáÜõÂ‰g¼W£"ált<~pzæÄ—BXU\Ô4*0+ókÌ›ªbµ V”£äJ9£•£şFA üJ°J“jÈrù%È …:ªeåšÁ£r³ÎZéÚ–³R—xGœÔM‰[Voò,æjñIhíá¡zù	Ær~7Y"%Ÿ(ä|7íEªbå~/yAiÇáøèÖHâxhÓcsÜğÂ;÷WS¸!i!ê†"Øœ®,{&7®)GKú„8U;¶kLìé¤2ØîŸ;„,Ç&¶í‡–á:ê
+X¤/"Y™äMJñÏ1O‰¤˜°Jd¬ä¤¸úE¯ñ`+¯­Ã§§=ç¶µ+H¶QŒÍï[)Ø ¢{f ™Ğ2ÍÖùïÍéÄ9•úzè§gtzÃk
+XW®ÓkV¦7sB“‚5¥ üÿ$zÉëK¯R&¬´aAË¡”¸ˆòüAÅ¹ì 
+X™òù.yº	VÆ²ÃZ]Ù’>L:Zœ•Oz>í¥ş¬ß¿ TôHâú%üä¬ÖÇíáXªŠ¿€¢ÇŒ†íhø·GÇû ¶ôó5&Dß¿«¬-¢Šƒ4úYJªró$Õxò^‰ø%ùÖM†¯ÎzËÌÊúê|·D>È÷;şk)~óŒò4!ôĞü'şòh[ÎìÙ®ùÚkeTPü=ák´¥	„QóW¬¾ı¡tıY…·şAİ„Ğ÷6I‚µè_¬­—–ÂPC^µûK+O.iJÀ2OÁ=©hğ¥î|9»+…¯j•rÊurFÄŸ‡ ‹’wdüŠT÷<Èrÿ ’ßŠ
+SHAR_END
+echo x linux-bcompare/.git/objects/c1/1ae30d6f08bfd022ed508d69c467ca77c8ab2f
+mkdir -p linux-bcompare/.git/objects/c1 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/c1/1ae30d6f08bfd022ed508d69c467ca77c8ab2f << 'SHAR_END'
+XxVënÛ6Şßğ)ˆÖ(š¢¢æØu‚`&+Š#Ä¶<IY[ € í¨‘DU¤7§†ß}‡”ïQ»¥‚íˆç~ùÎa¢ŒE¸ÓnŸÿò·®+JûŞU¡‰ãúccd½?'ŠY^†EW¶çÿe¹íŒ%£K:ä|Ÿèİ]_ÛEÎŞµÛÈ4|kà¸¶å);4I«8Nèß4ÃYZÌhdx¾åí×B÷B”—ºÎcÆ­8›ŠÀ3t4¹È˜&®U{9Q&4d}ô]Ãôp/ŸªÌX¶Ç>|-W9ÏC‘†ü2ıV#ÈtF#kì+¶Y§øóÇ"~‹Ã"Á9­fOÓŒru²,ğëíö)BCÛ´Æ^]!ÏtHÃs®ı†kmxÁ¦„^öÖùàaÓ‚Ó­àµ=T–ZKùæ]ÙîJ_; b!¶rË©b&)ZB*.˜¦œf.f{tyRd	ç~â˜–!g<ü\;n`¸æ²æI¯‹ÓÎEïˆ¸–áÉß•\T4Ì1+²GÌçeÉ*µQŠ²bJİyë~×ıvóÁJMVR›‹4ã˜ßCSˆ3§ZZLh³iºêÁĞß©VD!§—Õ¼ÀVÍ²4âêğUh‹v[½˜c¿Œæi– GYö@…%{ÛZJÜJÚŠ,.zA¯»’ËÔYŒàƒ{ëİõ¡RBTsŠ€Ø¿³‡W
+X2”#d=ß½À6±ª£"_¾@+RV%Å	şŒà ÏkE˜Süæ3¹yÖÈøÂÉ1o¦ÏÒi£|YÌé_Êfúº]Oud·>™IC €‘«‘õT©¿,’‡é»“‘6˜´[ë“v4òOM	Š–M\gà#Yëu‡[ı(ÎÙ¼³c
+XàÀ3]{âï”×²„ßo…Ä¬t!‚œsÅşN ı)º“ÎÈ»­Ï¿iŸ0/ª°Ú§ŒÇ÷4B$-âlPü[Ä"‹°R¤¬à$ø]ò§¸µ”ÃºÂïß×“†áhÖ •¡ B³CA5è©$$Oh‘¤S„ú¦LÉsM…êÖRÂŞ5WúœWzkY;Xé}dE²¹	Ö:ş`­C0°äÖj-ëõ¼Ò!œ#%äİX}c<Ø•¯µÜ:u£ö‹ÀÒ	TVr}pfÙ%‚9Wk£oxV|”ú,±ö°6Ø&ÖêÕµÜ-ÚM@2K@w/®[¶)a{_bğ€N^Ç	(ìWÈøÕ+ ®·CPãl…77)°*j§èä%ÜŒÑÆê.ÙÂÚ¨éL>ù®eŞÜ5+Œ‰âíılÃ÷+üößn­^€‹:â&Û›€×cµ‚@&LÖz`û™Úä.sŞ7ˆûÙ¦ ‹ ‚e£á‡Qé_E÷°#;S­×p!½‘ãÛ=­mïLI½†$uXÿiN;LRê9ˆ~¼$Ê‰>‚¬JLİş ‚èÛ™«M~%½ƒbÉÙÚ1%d’P„›¾î#Q¡½6L6€Pi¨ G·2Hé),F®ßÃŸŒUz»·h÷ô°,¹Lñ¹Ú³Eçì§µ»‹îÅV{S^Bôí§LyXrØ2õzDŞ‹ß¯Àws;0°ßË­'x9v6gYçìy.wù)—Ïs¶«ß¡³¦{IŞGÿì³‰l
+SHAR_END
+echo x linux-bcompare/.git/objects/e5/19069394bea0759a81de851de6104f2fbf1c6e
+mkdir -p linux-bcompare/.git/objects/e5 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/e5/19069394bea0759a81de851de6104f2fbf1c6e << 'SHAR_END'
+Xx+)JMU042c040031QğñtvõvÕ+©(a8Úª0¥&ğd³şîT½¥Æ·>d¾…*ËË/NÎHMÑKfPÔ½Û_§éÂlëÎ›R2mİ¢	¬MPE‰%Éº¥ÅEñI™yñIÉù¹‰E©VÔÄ7œZÛ]=uïìD[wî'ûü1C
+SHAR_END
+echo x linux-bcompare/.git/objects/6f/7035bc2e8f19defa175e636c739e0bc5272fc5
+mkdir -p linux-bcompare/.git/objects/6f > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/6f/7035bc2e8f19defa175e636c739e0bc5272fc5 << 'SHAR_END'
+XxÎMj1@á¬}
+XíÁò¿ ”@O"Ûf 3!§´=A—ßâÁkcß7—ÂI§ñ²Ø˜KD!Ii¶ç.¶/‰"¶š«¹ñ”CkÉ90ÕˆÖsï6ùâ}eÂ,aÇŒ¼DÃ]Ç„uã;Ü¶Ï9àó×—?ŸÑ/ÀdÑ¹˜Á‡uÖšö3©òÏÜ|¯ûè°lW¹ƒ®¬ĞCáé ª€<¥=”ëUÌàĞUŸ
+SHAR_END
+echo x linux-bcompare/.git/objects/5d/8ac699d763845a17bf208a9a923c45d4235b5f
+mkdir -p linux-bcompare/.git/objects/5d > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/5d/8ac699d763845a17bf208a9a923c45d4235b5f << 'SHAR_END'
+Xx‘ÍNÃ0„9û)öH•AÑ+gnH=;ÎúG½‘w£PMiïÜ,û›ÙÙñ0Ñ û~÷Aev!ä	\!Ğ4bcX8×œË<áfZ±…eO¥(Æ É‰Â~a j$!Œ9lX½:i¹WÛ\EoXpÔãÅ>ÇJú ‰oT%± ŸØ"Ÿ\È;àsõ©QÍ?×t»‹>bÅæ¡áLMØs<Df>tİº®–=‘Îe
+X²êrV3wÆ|©óIsp:¥©ÂÃM¨-…mhˆ–Zì
+X–Aº?Ô¾ìû×÷îqK`\sÑ	ÿK~eíó[ÿ´éuÒÖ 6k–Ö,I›@¨Ä>áh½şÃ·ù‹´’f
+SHAR_END
+echo x linux-bcompare/.git/objects/df/58fffb86eda6bc70cf5576c1b8ce37db780263
+mkdir -p linux-bcompare/.git/objects/df > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/df/58fffb86eda6bc70cf5576c1b8ce37db780263 << 'SHAR_END'
+Xx¥UÛnÛFí«÷+¶©ÒpKªjuQ‰¦Â%T -^VòÂ$—å.:
+Xÿ½³+Y¾ÄvíĞe/3gfÏ“œ'¸ß¿û÷¦5¥“à´‡Ğbî‡ŞxfŸ$)/ª¸¦èÔ	Â¶8sÎ‡d@FÈ‡öÙÜwì@™ÒŒI^œ³²iÑl„¶N¨o/¥¬MS¤œKZ¾’Ÿ• º‰çg*ÜÂ·§Î'@Ò Çákû
+X¾ˆ%‹Åoû×5'%•ÈšÏf¶ª[k›æ;,®ËôË´^S¼b9z¿ây¡rËö]^`Íçf0Ÿ†cß¾¹ŠvåÛtq°Ë»,¥¥ {»©ã*œŞF-‚SÇïÌ:‘­Ü›-l¦8Ê˜FÁ ÿ—ÜĞ[AóWWë;çj§Á&n$ü¤)­$Bö§Ğ[a,§Š(RWZ[ú·´§?ãŒŠ+É+C•n4’å‹K`;ƒ5X¹âp@“¸\¯X‹Bä:ŞRA$± ÇuSâ–×ëœ%Boş’F{x¨—ı[r‹ã¤ay¦uáÛ0ú?½ô¡¢0Š‹l4Ôİˆª3z›;ZêÈv{Ñ‘öh†·lp4z‚ò@È›Gşy°œÀSY7!ÇÂ±ë‘cÍ=õD®)L'KÇ=…½>X¸ v y¢Ü¹5v'cĞKo³_wV¦y“QüK"2RñZ^IÆKAŠ«_Õı
+X÷6cßúĞá“¬“r]6Jä	"4¿o¤éÕÜµ.-3¶B(ø`OÆŞY¤Å¹õ6ªBßêÌFÔ&¤§;3¡×¼Ìvk&iÁ›Rq‰ÿ@PĞKı®2¥¼”´•QAË¡Œƒx„ŒóüAğÙ¹<	œÙj}—!SUVÖ¢ÃF]Ù’}Ì|-aå“O{é¦xÖï_*Ô &’„y	9¯ÍÃQ{82ãª/ è1€A¿ôÿÀğ¨í\è+Lˆ¹ÿT¬-âJ€2¶S“TåúIËñ¶È{ªâ—Ä[5y>è¿:ê-3ÿ)ê«ãİù Şïø{ldøÍ3ÊĞƒĞCoğŸøëW yêx§ÏvÍ·¾Ø(ã‚â·DplĞ–¦ £'¶šKÛî‡0…¬Y…7şQ?	5Òï¬ÓĞ¿ØX-„¡ß:©›÷WÉEzI3–y†üIe@ƒ?HõÆWğ»Rø&Wu F\§fDò¥e‘CòŒ^êç£ÓXMá ¶'ÅN
+SHAR_END
+echo x linux-bcompare/.git/objects/5c/e9168f0a709a4cf9d309aa4888a6b2687ed058
+mkdir -p linux-bcompare/.git/objects/5c > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/5c/e9168f0a709a4cf9d309aa4888a6b2687ed058 << 'SHAR_END'
+Xx¥U[s£6îkô+Ô­¶í"ÖvêÉdšN1ÁY&<€›tÚÃE¶™ b‘hÉzıß÷Hä¾Iš´_ÄÑ¹}ß¹8)X‚Gãñğ›ïğ`ÖP:-<?t¹u´¯$ee7ÛAø›å¶çÊ‹}2&“»Â`9›ÙçpEF?½ŸŒ‘i„Ö‰çÛV üĞ,¬á8£ÓyÕvhn¡åGöJ!êC]ç)c‚6œ­Ä?™@:ZœÈœ¾ÕGÙS.4d‡¾a†„—Á÷HS—<ÛnËWÁËXä1ÿµÎ?ÅMÃHE2½ùÜrCumößa~Y¥ïp\e¸¤ÍšâU^P®W¬È %üö|8ü!Ç6-7è
+XLÏ7Ïßº¾‹®)z88¸Âƒ<¥§7Š3ÛQ[y
+Xm§_ ¢7zËŸ+2³œ­ÌJƒ+¦©GN‹×ë;rù¤Ä ·¾Ò”Ö!Ïu~f¾ùAyŒËl²óñÁäÁeä[F +¾¬¹hh\bV—˜·uÍÜ(CÉ˜2FËàªŞ}} ÜüB°Z“Lj­ÈùŠšA%ÕòjÅ@@“¸Z¯òNšGí.U)÷’˜ÓÃ¦­pÇšu‘'\=|Z7ª#4“`¬à‡I›Rí(iTZ²¶ƒ­ì[)Û‘î`Möo•dÆuz®ù§Ár
+Xµ¢i)áti;Çªe.)G\CãM•ÄñLÃ™ĞƒíÍy‡í¡á8Ad›«È–¶ˆäUZ´Å?'<#’LÂj‘³Š“òây¿Âƒ­,Ğõì:öuB{@o‚-îk)ØĞ/÷Ô 2¡U–¯
+X>XSÃ=‰TŸõĞ%NßÜé-otH\™îô„^²*»}=IKÖV‚ğşğl_bx‘Ñ(e• ˆJZµejÎE\‡œÌOe·PàèÄ’ç»äé$h™‹ÖšÔ^ô9gúÓŞ’¼zÒòi+ÕËÏÚıBå@Ï$®oà§`>œtÃ‰×5E9ºñèÿ8Ø?èön8.ĞÏW˜ıæ]ç]×Z£ß¤®ÖOòğX· ïùˆ_oÕÅxôê¨·Ìü§¨¯wKäƒxào±–á7Ïtşƒ!„zƒÿÂŸ?Í3Û=~vj¾¶ÅZ—ÿ@8Ãíh
+XnÔ¦•+«–|^ãíÿ¨*!Wñ}…ušbíæk«…mBc¨u®’ºşóªO74# Yd Èìğ©^Ûrv·¾ÊU
+Xä–ÛÉ‘|,2$ïÉä¡îY>º‘å&ş$1Ò‹
+SHAR_END
+echo x linux-bcompare/.git/objects/78/3ab026e05f80caad8b7b95bd9b613d470be4bf
+mkdir -p linux-bcompare/.git/objects/78 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/78/3ab026e05f80caad8b7b95bd9b613d470be4bf << 'SHAR_END'
+XxSÛNÛ@íkö+Æê‹³qì¨©‚r!Ô¨Di@€‚ílb«Înd›K%>¾³Nš©
+X~XY3gÎÌœ=¦*„ã|=úÄ9ÇcÙa"í0R³y‰šÊ’iÅ­»u^÷yİã»_]WÃ³,k§‚5›àNÕ9‚åT]Í&Ãş^IšÇŒ·;£ŞE»aëVizv(~+9^vdVïâÇÕõU¯5¼,e¦ °||Y—1‹Y[\*
+XRÍø†âe®²,M`z§£ş Û»l6s·¥Ê£XŒk¹2˜µ,Ù R7ÍĞou¾·Îº£áM¿ÛÈæ3¶Á¾™£6è^w;kşvg¡¨¡SÉ·à†I£ƒÖà†¸‡çî¿¡ˆ…d|9ÃÀŠğx§t5ö‡Kˆc[kN¤¹x·ùZ¢ÿôÚ¡$z÷}’9ú…B!B+ñ,OAšBMôöÈcòŞt™Y%"¯•®ò¼*¹Êóé$“=ÇI*HFÃÜ7À§êZ»±b¨´g?¦>Ü¦sgĞb•<N&FI+.|ä1xC¼ˆ<€Y‡©/e9N`Å“-i6÷ä³c€Y¥	õ3ò	á?(¶ $Ñ_·™z¿ëƒ!IÎ‚Ü˜ˆÔXÀÆs@ÿJêX^$rŠDæE #QŠyàU=X~õP‹Y’¿¢ß_¹k<DA»˜ÍívÇÕLóôÌfà“­(]±u‹=ĞºÔ"•	Üãõô*¸‚Í§™˜ïàÖQıÂhr6ölP]
+SHAR_END
+echo x linux-bcompare/.git/objects/37/570de1d4c6e7fd65b6a0200040a78cb70fcdc0
+mkdir -p linux-bcompare/.git/objects/37 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/37/570de1d4c6e7fd65b6a0200040a78cb70fcdc0 << 'SHAR_END'
+Xx­]ËvÜ6u¾"/ÕŠ-¿f7IÆ'‹IÎd2«Yñ I4	‹$T·üõsdwËj)Â-z‘§yQ…PU¨zÛúí÷7?üğáÃßşQ¹ğı«W¿şûçıéÇÿ~zõêzëúïøß­Û^oí½ï«Òwƒ	6ë£k{ˆy6¶ò¾ü3¾}êÃ±y†©ô×fZWšè|?>¿î\÷äÄæ1äO¯SŞšÚşÅ ®üKé¯ü£õáyV¾úìúõûÃë÷ÔÇ2ã—˜<rq}óæpó&wøô15üÛ‡·s‡O¿0üàÁô.¶îõö¸=¿ş£ËMpúrSÙñ6úáÑ`O,ùrèÚ'?bÑÒLÎÈ¡¯3g³È³ô^F.Rä?ÜMm{ófóÜ\Û˜v÷äçJ¬t~êãflIéÙO±o¿^êg¿|ÿöÅ/úyQn/yüpÓ™êÅQ¡O2¾Â\•æ³Ù˜®zÿv3z%Üİ||¯B÷fŠ®Æœ†Ğ3a;¿†«‰ÇfêM8\½YÁÁyŒÕlÜ|6nTÒ(°‹ÛÊê8¡ŸV —çğá985â;‚ß­cüİ
+X¡ùşÏ5Ä®› så&ÕõÍÕŞÜµ-à”vˆã¦‰VìrÍÜ”‚xBß?÷}(wg‹k-Cg[–­:ãz‚¹ KƒôƒgLñÅûîİ‡Íçá±]şK¨’'I³9ŞÑv1˜û|inËÖ×ø>øıhó¿/MÛº¾.¶e±¾+|ll(:ÌÄ4Kq^Äåû§\‰gÄŸÆÿ;9~ÑzS¹¾²‡ÂônS»İ‹F7íûDÌUáÛ©…H	}×™¾*°
+X¶vgƒÅe„>0®oKÅÊD£¹ C%¦ƒ÷½f†=(è5¾Ó,`7Ü(ˆÁßV ‚­¨#®„ÙÊi¡ÚenËFÁò%÷¨DE˜Cßï‘ ¬*eBŒ¶ãÓËJd[¼G`¿Û­ÂÁŞQÄ£íã‘p¸/1€Ñû)7ñ™öpßÚ¸Šrpu£#jÚ•mmÄ_ŠyÏPã•Û%#ÆOù„DÒÂIÂŞ’eNŠÂl[î ½5GEÏœB¡% åG×¹Ö†ä@‰q¸¯İ23ŠŞ-ü™œ>(H) ‘p»K?Üóµ²;3µqS£™Ï8Àó¹Ì_9Q²¢œº?¢8=l‚Üù §å>kDqçì°½2@ã÷Eô¸¦¦4	¯¸\ı0FøÔG>*7-.]ùw^a%X¨•Ò¥ÛÑQ3•ÔVFÇó8+Ò	=Á¿ÕŒ¾Ñ8Ëâ¤û½ï[BÁ`Fx´ã7†ÙÉ'hS'Æİİe˜98AÑ] DÃ"ÛBœùáR¸¹ã=,ĞN6wï}Ã-°œ©˜é	¦·{xØŒ`b	¨çU‡T8óTµbÕ±IÚ¸™ÅR-Ç¹‚]´5µ{æ;$³ßB£¦FØ0*„uË  •ÌÚbt™Pë¢Ñvp›)&rªl¬aÂŒ(º~8ØÑ2<·õ6D;ƒ tÏDeª¶–øõP‹•xŒÿ °¦uu¿w±qûÒèb–4(…o/Œ&jƒL”2Cµó¡3QL”F0aÀ]Ç“N.~°Êe‚—	Î{ˆ#º@UR¶æ“'Âz9r‚å1zø`„OİÖcğxãÉ-6ú)”âŒÇà[•<Çiàg(áC9ƒ®—-@©×¶pBû?üÆš´¦´ü {nGÔ*Y…´ü±¬Á…8pº—I 3ó@5ASf#û½xÂùz›’íU àç1'é×Ã¦d³g¶y‚uf¼eA,mËNK,æ–#|H
+X~)<ÿ…œfv_ÙÑümV£¹…g”Rs¬œØ•_Ãy1= ÍOÆÊŠwı.¥_Ì¤ Ü)bø³â§@\¤Mìe›)™y=ƒ`E‘ÚJ¡—|å{†×ˆ$Â­%÷+¾‰ï•àx?0¾ÆL&ÆPÔrÍegšÀ¬1ĞZf¹<ğÌ,0+˜ZË¬x8ô&Ğ
+Xv“K¦Ü¿	;»s*¶;72åRb›æùªÀ+o%ĞˆË8K©[?’œËWµg2)‹×Ìø5ùßZ"->ØK)—/0AÁ¥.zsçêÔN°ùœ™¹9B¾ÿw¤(Rw¥ëQE‘MygD {ÎFt‹LˆÕmfÌ!ºŠ˜T·‹¨“B0¢t»Ou\ÜR	ÃOèwDšĞõ£«i>ÿ9Yœ¸ÜUDa‰íG[„Ò’×¶øpõÅ«FØŒî»ä Ú›Uˆª’\$¹ä£‰q¨}Ì×|—c¸¾÷PÓ:‰º>¶å-Ö°ÒB®«èVâ˜UÀ£D\€	v].ˆXötí_#Ê½¹“Î°U“ÙSu|—ù‚’Š~"2“ˆŸç›I|,7:›2ğ‘]‰-™ÆH÷ô-•’HŞ“ Ãé†¼wşÎnÍ'Ä„\Şéò!¥àqê@BEæ(î0ı\d.¥ ¬F‰lªäÈö‹ QcTèÎ·ğ'ó%/wş+d¸H„Â³'ÂÅ a".éQ%¥><¼g¶DG0(GËW´3 ûŒ‡,…¢p©­b ¸ë#9X3V¹¨CÙNh»b%]Å!p¨i )êóQaæ‚ş)›d dáÔ1u–}¸À±8ˆa-umaü)—n!˜ºÀ)I$r8z¸…2Éá…rÒJ’ÔVBEs‘ÖÂ®g¼äfÎõòRMÁ0tåóHÎ¥_˜†qÙ È“ç1î­aTóu=ŸU®ÜĞı>ß®‰ï‘êó!:³6VõX~É[,€Ñ/íG4Éæ(Ô ÷UôuMâ£A€ˆ™¢œ¯D“F…d¿XZÑ·ÈHŸƒDËĞøğ…a®ä|4lëÃ	FúÂÀI©AM*’Œ<¶C@/ƒïˆË¿EÙ&%{4ìpª$¥®(•Kc¡Â…™vªÂ1ù‚ÇU˜XĞR„S¡Laë™>¹¸‹Œ	:ƒFEFSŒ5¡©ÏpÙ·T¢ìmQÿƒ«–Š,:©æë3UüÛñìÏÈÑœn»h¤îG´ñ`TmT=ê<r¼S¬èŞn+sG“Öƒùv•­ä¾ÚÖùìø8tj	¡¹	Jx«z!•ú«Ú“úˆ¡p‡ 6Zn„üR½U¾RZŠæò	LRDÆ}^ÜéEqNrwãœç%è¢rh@5Ğåú1Â_AnÑqoMŒ‡2[Fòõ©¤0U6¶šR[)f‰£9$˜¥éÕWH$eÉ¸dğœY±ü…D¸™	"ˆXFªrµ\3Dn‰Ì^[4Ã)'šñ^BÄdÌTªÍ–êJJ4I“-eáS×Sgb¬€‡R5İq°¥†.õèÂQPÇ~-7RÌ®¨?ƒÙ¨×#älCÕ¬'êëù'K?ÍABe8U\”üÑzt'IB¿ïÔX9ùÕóÖO™XL€+÷­±jÛÊ ê5ğÊu“!ü Ûª	+OÍ‡F?ˆríYC
+XWg¸l–Th(—‚\m†€UŠ§õå-S³Ì•{çš»‹RœŠ¶µ ©œ$B¼Sz=$runQìy œ+î	ü\R’#ï³Ë% Ã»¥´ßœÎ² Vø–Wï¯Ùò‚Wú\'èÊ¹'ò«Fø&RPîQÅºã(#(‰s±´ES´F`€óÜ’U°Ç+¢îÖ-¯ƒWËdE œÜ¢OHÂˆ¤&pTzVhÍq-EÔïÙi9O•»¸éçÇA ‚%W1(-‰ıÔqÄ$$ETÕÈ¤àÎEsh…ÌØ¦æ''I5A¼ğÛm{¬GoÏ,´«ìö~Äß	K-eã¥” ÁÆä{)€ I@ÉïM *³Ó“>@HPùÆí˜ÛPÖ%Åxo3UI“ÃH0ûxµÈß‰{3ÒÁõG
+X¥4Ï·ÉõçŒ%™G0×xD)ˆ±¯Y	)¬|Ç¼F,ä‹_j2²WVô‹\ùÁç°Êì£rÈôª%OÓ£ş‡ $ŸïØ·V¢ n­¸ºÚ,XP”Ô\şxßn¡èVt¼×&ÀÔbƒF¨î#ánZ,Ø¹8„¢9p	y41B”bŸl™£b‡ÈN½;h
+XÂQR—ÏÑ€È:Y1=%§îf©ì¦çÖ¢>›˜
+X=¤bš0PS‚ˆNš_{' ÒC&SNì×ÓˆôìúÍM~²:©ÆÁñ†÷ú¤&GÁ{m^ø›a,“	¥åT"»1æªèõR*6q-!Y%F t¬qo{Ë:§çÀ9æ@DÅJ)J ¨¥Ü
+X¹F\\T$'j: ¨¦Ã…1…5AP¬ bMÔ9)è¡˜K6C£ú˜rù¡‘Ş	Fs)ÄÔrÔhiaU¡¦O05³ìÓõG¹Î8Z°	¦bVb9 hBxRñV¢Ø?ÕM!ÏóOe0±Dz*ˆ„Ò½ùñ7ââ´·-R¸Lqá¾1q,ĞNCtÄî‚TÆÍÔÎ"½ÈÆ´…ÌÅúÄ%dhœyÑ.ÅÜ]ŸÛÈ Äl>»ı=¡–ÇJLWĞ@¿C–7ŸØ’Ÿ]… ·¼Ÿ^üõ4ò~ø’óënøğ?ñíïÈm~ó.gÜ©x>>ãgçä×.7òèÎËÏ[à'9¯'?Ë{€àäå_Ú;A~™\âO?şó·O/Nñß»úå÷_®şõéWcéQ;F¿‹8ööEì£ï7Ràù"İüRN˜#RÈhûåL÷õæ‡ïşé‰®h
+SHAR_END
+echo x linux-bcompare/.git/objects/b5/e37213c2734c7a45838674528e798f4ba206d6
+mkdir -p linux-bcompare/.git/objects/b5 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/b5/e37213c2734c7a45838674528e798f4ba206d6 << 'SHAR_END'
+Xx9Â@ ©÷î‘"ïáu"!ÄWÇ+RäĞ²PğzğÊ)F3º-ËÜ :´jŒ½âD°I…ÅŠŸ(áh‘™-e,–hôn—jkƒ\#¬/~˜¬ˆg²³rG¥À¡(9¹·ëVa‘6Ëöù)µnpúòåÇİjí>£×=F8b@tú™lö§î©‹»ÅG<
+SHAR_END
+echo x linux-bcompare/.git/objects/d3/915c5a2073d3838005ea347694153760b8cabd
+mkdir -p linux-bcompare/.git/objects/d3 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/d3/915c5a2073d3838005ea347694153760b8cabd << 'SHAR_END'
+Xx=KA†­÷Wl©…C>f’LaqÅW{•Lv² xÜq•?ßi,,‹R$<O^ÿ¸øÌ\îN‡ã~9í/óÓŒhÄD0-Ï;*2ßûz9_Û-sâ¤‰
+X¢¥w6I·ëùaÜ(6¥­eFsm[tU1k!îÜZÖ q¨ØPQê˜İŒdÄ¦åğºÿI´Ô2öÿ2û4y“üí¶Vä¾å}³bkîØC(†Ou£ÆAŒ®,X"2{“ñKª=b´ğ»ÛOšiÑé	œY¢
+SHAR_END
+echo x linux-bcompare/.git/objects/26/7341caba7b5d72205b1ef12ff56c58387ec90f
+mkdir -p linux-bcompare/.git/objects/26 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/26/7341caba7b5d72205b1ef12ff56c58387ec90f << 'SHAR_END'
+XxA
+XÂ0E]ç³¤Ó´q
+X"İzŒ1™`À4%›Ş`=Ÿ¿ù‹ÿ/9'¤ñ U¢#¶ÁR?öd9ÆV–|ÄñÙ†{œH¿õQ*dÖÄ/XÓÆµ¸ì{şíÓ"zt6¡ƒc×büWªòçİÜ–Ô¬OØ9æ	>I
+SHAR_END
+echo x linux-bcompare/.git/objects/f2/1e150af1896a4155a5105bc1f0f54074bebff8
+mkdir -p linux-bcompare/.git/objects/f2 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/f2/1e150af1896a4155a5105bc1f0f54074bebff8 << 'SHAR_END'
+XxÎÁJ1ÆqÏûs$³›L² â¡-ìE¡k‹×Ùdbî¦dS>½Z}ø}ğù<Ï©BëÜM-" ÁwÒ®%
+X±Eì¹3Îâ¤C˜öQ‘F¶Á7g.²T0¬{£¿eJt`&åØ"	­œØè©áK=å3×Ä+œÓ'—’áş·ÿún‘ú H
+X±3HnU«Tã¯'«üsŞV7Y¤$›a|9n÷ãğü4v»áÒ²Vá 9‚¿¬5ÏğÁ%ñô.W¼ß‡İ|¹®]f
+SHAR_END
+echo x linux-bcompare/.git/objects/70/8c0d5250824ca7aef1d540be3777e460fe45b1
+mkdir -p linux-bcompare/.git/objects/70 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/70/8c0d5250824ca7aef1d540be3777e460fe45b1 << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe8(õ˜7Ÿcÿ¥·½™GÒO•ŸX­U“’Y\’™—–ÏpybL”BñåæÖW&eSDÍvœÚkb 
+X #ŠJ²M²oAé¬Æ{­²Ïüõ÷ËäAÍ(ÈN×MI-N.bˆí:6ózrK”ø~…®Y“l\¯(GÇ#)*ÈÚÆĞÕ<3ÈÑakD©ÅÃµ-kJÚ½¦š. Ë¬Hq
+SHAR_END
+echo x linux-bcompare/.git/objects/5a/4954f21fd0e4da6ea60c87ba716e6d408e7fc6
+mkdir -p linux-bcompare/.git/objects/5a > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/5a/4954f21fd0e4da6ea60c87ba716e6d408e7fc6 << 'SHAR_END'
+XxÎM
+X1@a×=Eö‚ô7m@D’¶©8Ô*èéõ.¿ÅƒW–yXW£‹@ÀFÁÃ>5IÚgÌŞ’ÃhÈaNĞ8auå.—ìlÄ–Dk9Q+ì¹Pn•3ä¦RHŠïã´t˜yL|ƒëôâŞØ~½ÿys‘±ƒÚçÈGXk«µ*ŸÉ!æêP+TyÈ
+X9.ı©ŞšöL¸
+SHAR_END
+echo x linux-bcompare/.git/objects/e0/279cffd90878d4838b169c9d930664bf750d89
+mkdir -p linux-bcompare/.git/objects/e0 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/e0/279cffd90878d4838b169c9d930664bf750d89 << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe¸{øîƒwÎ&½Òj_+V\oı6³ª&%³¸$3/-Ÿáİ«¼MeÇ”ı‚Ó7ï,¸&'Ì`b 
+X #Š~rÅ,YÎ“4!ôÁ¤\µ"Ö½a–ÂŸ fd§ë¦¤'1Äv›y=¹%J|¿B×¬I6®W”£ã‘ä mcxØÙg;ï‘©Õõİ¡ïØ×‹x	¾ %ÌHd
+SHAR_END
+echo x linux-bcompare/.git/objects/6d/1959c1d2400040c8293442889bd6774c185a0a
+mkdir -p linux-bcompare/.git/objects/6d > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/6d/1959c1d2400040c8293442889bd6774c185a0a << 'SHAR_END'
+Xx;Â0D©}Ší‘Ğnâ_$„¸­íì
+Xq"ÇpzÂçtó¤™ÑKó4å¶»V™¶äÆ8ˆ'dİwı(š[‡¤Ç(6&Õ*—Ò“Á ä¶¢	†ĞÄD‚b4:9Šxîí6W˜BËa…%?C­3¿|şñ¡p;Y$ê­v{ìUúH6şs®.§,¸^WÈŞ—›ÿª^÷ÖO<
+SHAR_END
+echo x linux-bcompare/.git/objects/f5/d8a17b6f675d422f19084a261e5a15b6bb1999
+mkdir -p linux-bcompare/.git/objects/f5 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/f5/d8a17b6f675d422f19084a261e5a15b6bb1999 << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe0kL{Û°ö*ï©ï	·e,Û¤i	U“’Y\’™—–Ïğ¿îU^Œ¦²cÊ~Áé›w\“f01 Å?¹b–,çIšú`R®ZëŞ0KáOP3
+X²ÓuSR‹“‹b»Í¼Ü%¾_¡kÖ$×+ÊÑñHŠ
+Xr€¶1˜‡ó>¼rìùßÔm–÷lç?{  e­H
+SHAR_END
+echo x linux-bcompare/.git/objects/99/af47e05788e319946e8c0d7de0df6951cb691b
+mkdir -p linux-bcompare/.git/objects/99 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/99/af47e05788e319946e8c0d7de0df6951cb691b << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe¸{øîƒwÎ&½Òj_+V\oı6³ª&%³¸$3/-Ÿáİ«¼MeÇ”ı‚Ó7ï,¸&'Ì`b 
+X #ŠJ²M²oAé¬Æ{­²Ïüõ÷ËäAÍ(ÈN×MI-N.bˆí:6ózrK”ø~…®Y“l\¯(GÇ#)*ÈÚÆĞÕ<3ÈÑakD©ÅÃµ-kJÚ½¦š. MHè
+SHAR_END
+echo x linux-bcompare/.git/objects/dd/c3dde0ee4334888d1b26f57910a8d785f69981
+mkdir -p linux-bcompare/.git/objects/dd > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/dd/c3dde0ee4334888d1b26f57910a8d785f69981 << 'SHAR_END'
+XxVën›HŞ¿™§µVÕTe¨c×¢íjmB\Ûxl[©â2vh€¡ÌĞubùİ÷Ìà{hwSd;Ì¹_¾s&aÊBÜi·ßıö·®JJîe¡©íx“şØ|O±¬JŠ.-×ûÛt\ËHF—tHoŸèŞ\]YŸ€EÎŞ¾éuÑ÷Ì¡íX¦«ìĞ8¬ä8¦ßiŠÓ$¯hÜw=Óñ]Ë«…n…(.tGŒ	Zr6ÿ€gèhz=”1M³ör¢LhÈüä9}ÃóÁ½t~BÊ"C`Ùšxğ5å<Dğ?‹ä!(KFr*aÇæÄSl£Nñ5æ÷yôyŒ3ZÎ)%)åê<ci!á—ŸÚíS„F–aNÜºB®aÛ†k_yû¹áù›ºu:Ø]çƒGIDsN·‚WÖHYj-å›{i9+}í€ˆ…ØÊMMg¬Š'\hY©”8gš:rš¦¸¸›ïÑåI‘A&¨üD-BödôÙ¿²¿ï”Å ‹{]œtÎ{GLß1û®ìøMÁEIƒ³<½Ç¼*
+XV
+X¨R”SÊèÆ]÷»î´›ß	Vh²’Z%’”c~M!ÎŒjI>c@ aÏgÉBªû#kr£Zyœ^”U¬œ§IÈÕá›Ğí¶z0	ÆR~VI#GYv_…%{ÛZJÜJÚŠ,Î{~¯»’ËÔYLlÿ£síŞ RB”E@ÜX£K™{Ê²&®×\ß2ì‰ª£"_ö½¾­PHYMÜÇø‚ƒ<3¬åAFñ«/äVdi#ã+o$G¼™>OfòE>o¤-šéëv=Ö‘İúBd& F.Çæc¥Áz°H4¤ïLÇÚp:Ô®ÍÏÚÑÈ?6u$@JZ04uì¡ÓËZ×¨Û8Üê‡QÆª\tÎ)€×p¬©·S^Ë~»¾‹©±\Ğ…ğ3šW0Šƒ@<üKt§'œ‘·[- ¿{ Ò>¡ÊË Ü§åŒG·4B$É£´Š)ş=ä1‘ƒEX!–s’İı!ù3ÜZÊa]á÷ïëIÃğ@4k€ÊP¡é¡ šôX’'4“BC¦ä:†Buk)aï+½â¥ŞZÖVzHïYon‚µ7\ëÀM¹µZËz=¯tçH	¹ÌA2Ü•¯µÜ:u£ö‹ÀÔ	T”r}p¤é‚9WkcĞwÍ:ø0Éõyaí#`m6µ¬Õ«j¹[´›>€dƒ î^\¶lSÌö>Çà¼ŒbPØ¯ñ‹@\o¿ÆÙ
+XonR`5TÔNÑÉs¸ÃÕ]²…µQÃ~öÓôİp×¬0&Š·÷³ß®ğ3Ø»m´z.êˆ›lo^Õ
+X=˜0IXëíÿej“»ÌyoÜ î'›,‚<
+X–5Œ6„ŸF¥İÃìLµ^Â…ôJo÷´¶½3%õ’Ôaü§9eì0I©æ úÉ
+X('ú²*1uûÂ‡3V›¼!½ƒbÉÙÚ1%dâ@›¾î#Q¡½6L6€Pi¨ Ç×2ŸHé	,F®ßÂŸ”•z»·h÷ô (¸Lñ©Ú³Eçì—µ»ç‹îùV{S^Bôí§HYPpØ2õzDŞ‹?®Às;0°ßË­'x9v6«Ò´sö4—»‚ü’Ë§9ÛÕïĞYÓ½$ï£Ôã‰j
+SHAR_END
+echo x linux-bcompare/.git/objects/56/f95251a48fe804b6b429367191e96b8a5613ea
+mkdir -p linux-bcompare/.git/objects/56 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/56/f95251a48fe804b6b429367191e96b8a5613ea << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe¨Û=}9/7—wÜŒ‡7fOyåeU“’Y\’™—–Ïğ¿îU^Œ¦²cÊ~Áé›w\“f01 Å?¹b–,çIšú`R®ZëŞ0KáOP3
+X²ÓuSR‹“‹b»Í¼Ü%¾_¡kÖ$×+ÊÑñHŠ
+Xr€¶1˜‡ó>¼rìùßÔm–÷lç?{  lšFy
+SHAR_END
+echo x linux-bcompare/.git/objects/21/2ddd8f7e294154033d470d647496aea2900582
+mkdir -p linux-bcompare/.git/objects/21 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/21/2ddd8f7e294154033d470d647496aea2900582 << 'SHAR_END'
+XxmRÑNÛ0İ³¿â®RR%q@*£0xÙĞ^ªN*ía’•Ú±æÚÁ¾MÓöí»M ˆ7ûèŸãsîÆú|*¦J×ÆißVkqû}}óåš±©qÒvJÃgekéŠæêÔbt¥ÁˆÊø·P0î~‡1ãö4á¼o“ş0€º¥	¬"ë2˜Å¤(Šô§›d Dİ9)DzA“Ac”ì/cœCƒØÆsÎ#Vò—Ô¡¶ş©~Ë:Ñxùñ|¾X”'§¼ñO¹¬\nrRÓAêseãï-¡ÖÆ¼‹ä3·*oƒ¶¾Rüøììd^–ÓñÀ½Q3Ê
+X¢%ı-I*²©Â,ƒ#¯Œ,¡‘Ã’™5I<¢¥ïğR¸„Õz¹$Ş ÑOƒĞTNY} ôÎÆÛ]|”Š©!ùøJ à¡×GÏ7wË¯buıãbîE(âÁÖ._J€óïV"28Š‡¥d£2>øˆä¶M¤1Ö]!5×è`0ÊF«	}ûÊa	Ë»yö´/şåKÉ˜Ê>‰~#ş‹+æ«
+SHAR_END
+echo x linux-bcompare/.git/objects/36/8166ed80add50dcaf760f1b6685010a6b22939
+mkdir -p linux-bcompare/.git/objects/36 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/36/8166ed80add50dcaf760f1b6685010a6b22939 << 'SHAR_END'
+Xx¥Uks£6í×èW¨[Ú."±³n&Ótjœe‚Áx³¶Ãğ&€X$Z²^ş{¯Dì<6I“Öã’îë{ç,ÆÃÑOûßı€³šÒ©:@ház3™›'{ğŠVTQMÑ©åMÏ·\G’#c˜g®g™¾2¦i&XÍq•M‹æ?0½Ğ·‚şøRˆêX×yÂ˜ 5g+ñ7&@G‹ó3™rá™3ë“Œ¥Bh*ë®–Áf[Z§6w
+XêH¿ôÌ–,°Cæ§À›Aè/g*©«AE–ÀÇôT¹E$²ˆÿZe_¢ºf¤¤î|n::6zäï0¿.“w8*S\ĞzMñ*Ë)WëËS€‚m¦ã÷”ù†ëpßÏÜ…[~O öoÀv–Ğ’ÓáÌ²U¤ÁF>ù§–×é7	ˆhÅÎnazsE|šq¡€¨qÉ4µä4Ïquµ¾³/Wjl¢FÀW’ĞJ ä:öoáÌõÂ‰g|P£"âlt4~pzæÄ—XV\Ô4*0+ókÌ›ªbµ V”£äJ9£¥£şFqJù•`•&9Ô‘åóKA
+XuTËÊƒGåz•µÒ=´-g©.q/8=®›·¬^çYÌÕâ³ĞÚƒõ˜Ò¿c9?›,O‘’ÏVòN‡ï÷Ç£¨BU¬Üïå#/¨#íÑ8ŞImzl^xçşr
+X7$-DİP›Ó¥eŸÊ½kÊÑÂ†Î!NÕí{:©6»ç!Ëñƒ‰mû¡e¸ºé‹HV&y“RüsÌS")&¬+9)®~‘ç+<ØÈkëğÉIÏ¹mm’m#BóûV
+X6¨è@&´L³Bşs:qÎB¥¾ºÄéŞğZ‡Â•k§Çôš•éÍ„Ğã¤`M)¿Ä ‰^òúÇ«”†	+mEXĞ²A(e .¢<?Fd~.{ €Gg¦|¾K.A‚•±è°VW`ö‚¤ÏÓŸgå“O{)…?ë÷/U =’¸~	?9«õƒq{0Ö£ªâ/ è± £a;şŸ ‡GíáÑ.€í ı|…	Ñwï*k‹¨â ~–’ª\?ÉÃc5Ş‚¼C"~I¾U“ç£á«³Ş2óŸ²¾:ß-‘òı¿ÇZŠß<£üM=ôÿ‰¿~šg–súl×|ë‹µ2*(~K8ÃmiaÔü•#«ohFVáM‡T7!ô}ƒu’`íúk«…e€0ÔWEmÿÒJÆ“Kš°ÌS0dO*üA©[_ÎîJá›Zå†œrœñ—!À"dŸŒ_‘êç£YNâ ÃwİT
+SHAR_END
+echo x linux-bcompare/.git/objects/f6/8a3d3829541283affaffc138cd4e6a73dbf98e
+mkdir -p linux-bcompare/.git/objects/f6 > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/f6/8a3d3829541283affaffc138cd4e6a73dbf98e << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe¸ñÿwÛÛe{
+XÎ‡–ÜqÎüvS2TMJfqIf^Z>ÃÿºWy1šÊ)û§oŞYpMN˜ÁÄ @F3üäŠY²œ'iBèƒI¹jE¬{Ã,…?AÍ(ÈN×MI-N.bˆí:6ózrK”ø~…®Y“l\¯(GÇ#)*ÈÚÆ`ÎûğÊ±çS·-P`pXŞ³ÿì €Iğ
+SHAR_END
+echo x linux-bcompare/.git/objects/ff/7eea6e5c29234164bf301197b3b970d61e1300
+mkdir -p linux-bcompare/.git/objects/ff > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/ff/7eea6e5c29234164bf301197b3b970d61e1300 << 'SHAR_END'
+Xx=k1DSß¯¸Ò)rhWû¥"…C\ç*M´bl\ùçG)R¤1igŞcÊ×¥Ì1òÓqØ­Çíá}~)‘¡LëÛYæM©—ó5ßÚ-q‘9H\NÑd¹]ÏÏcU8×FÆÔÙ²24Ö0ú^Ü0EÉ0‚Ö°j* Ö1ÔiİìşÁåDôØìnò)ôëÖz7†²4úñrèê¥PñŠÈ6^CÀÚs MÅ%zòGnI`68ÀÓ7oÉXv
+SHAR_END
+echo x linux-bcompare/.git/objects/ed/c33048266df2119a35871b4ddb519f0641a7dc
+mkdir -p linux-bcompare/.git/objects/ed > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/objects/ed/c33048266df2119a35871b4ddb519f0641a7dc << 'SHAR_END'
+Xx+)JMU04·`040031QğMÌNMËÌIe`ó)(ñÙYİÇ¡²iáãã;ïêûWBÕ¤d—dæ¥å3ü¯{•£©ì˜²ß@púæ×ä„L€@dD1ÃO®˜%Ëy’&„>˜”«VÄº7ÌRøÔŒ‚ìtİ”Ôâä"†Ø®c3¯'·D‰ïWèš5ÉÆõŠrt<’¢‚ mæá¼¯{ş7uÛ‡å=ÛùÏ  Š6F¼
+SHAR_END
+echo x linux-bcompare/.git/hooks/fsmonitor-watchman.sample
+mkdir -p linux-bcompare/.git/hooks > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/hooks/fsmonitor-watchman.sample << 'SHAR_END'
+X#!/usr/local/bin/perl
+X
+Xuse strict;
+Xuse warnings;
+Xuse IPC::Open2;
+X
+X# An example hook script to integrate Watchman
+X# (https://facebook.github.io/watchman/) with git to speed up detecting
+X# new and modified files.
+X#
+X# The hook is passed a version (currently 2) and last update token
+X# formatted as a string and outputs to stdout a new update token and
+X# all files that have been modified since the update token. Paths must
+X# be relative to the root of the working tree and separated by a single NUL.
+X#
+X# To enable this hook, rename this file to "query-watchman" and set
+X# 'git config core.fsmonitor .git/hooks/query-watchman'
+X#
+Xmy ($version, $last_update_token) = @ARGV;
+X
+X# Uncomment for debugging
+X# print STDERR "$0 $version $last_update_token\n";
+X
+X# Check the hook interface version
+Xif ($version ne 2) {
+X	die "Unsupported query-fsmonitor hook version '$version'.\n" .
+X	    "Falling back to scanning...\n";
+X}
+X
+Xmy $git_work_tree = get_working_dir();
+X
+Xmy $retry = 1;
+X
+Xmy $json_pkg;
+Xeval {
+X	require JSON::XS;
+X	$json_pkg = "JSON::XS";
+X	1;
+X} or do {
+X	require JSON::PP;
+X	$json_pkg = "JSON::PP";
+X};
+X
+Xlaunch_watchman();
+X
+Xsub launch_watchman {
+X	my $o = watchman_query();
+X	if (is_work_tree_watched($o)) {
+X		output_result($o->{clock}, @{$o->{files}});
+X	}
+X}
+X
+Xsub output_result {
+X	my ($clockid, @files) = @_;
+X
+X	# Uncomment for debugging watchman output
+X	# open (my $fh, ">", ".git/watchman-output.out");
+X	# binmode $fh, ":utf8";
+X	# print $fh "$clockid\n@files\n";
+X	# close $fh;
+X
+X	binmode STDOUT, ":utf8";
+X	print $clockid;
+X	print "\0";
+X	local $, = "\0";
+X	print @files;
+X}
+X
+Xsub watchman_clock {
+X	my $response = qx/watchman clock "$git_work_tree"/;
+X	die "Failed to get clock id on '$git_work_tree'.\n" .
+X		"Falling back to scanning...\n" if $? != 0;
+X
+X	return $json_pkg->new->utf8->decode($response);
+X}
+X
+Xsub watchman_query {
+X	my $pid = open2(\*CHLD_OUT, \*CHLD_IN, 'watchman -j --no-pretty')
+X	or die "open2() failed: $!\n" .
+X	"Falling back to scanning...\n";
+X
+X	# In the query expression below we're asking for names of files that
+X	# changed since $last_update_token but not from the .git folder.
+X	#
+X	# To accomplish this, we're using the "since" generator to use the
+X	# recency index to select candidate nodes and "fields" to limit the
+X	# output to file names only. Then we're using the "expression" term to
+X	# further constrain the results.
+X	if (substr($last_update_token, 0, 1) eq "c") {
+X		$last_update_token = "\"$last_update_token\"";
+X	}
+X	my $query = <<"	END";
+X		["query", "$git_work_tree", {
+X			"since": $last_update_token,
+X			"fields": ["name"],
+X			"expression": ["not", ["dirname", ".git"]]
+X		}]
+X	END
+X
+X	# Uncomment for debugging the watchman query
+X	# open (my $fh, ">", ".git/watchman-query.json");
+X	# print $fh $query;
+X	# close $fh;
+X
+X	print CHLD_IN $query;
+X	close CHLD_IN;
+X	my $response = do {local $/; <CHLD_OUT>};
+X
+X	# Uncomment for debugging the watch response
+X	# open ($fh, ">", ".git/watchman-response.json");
+X	# print $fh $response;
+X	# close $fh;
+X
+X	die "Watchman: command returned no output.\n" .
+X	"Falling back to scanning...\n" if $response eq "";
+X	die "Watchman: command returned invalid output: $response\n" .
+X	"Falling back to scanning...\n" unless $response =~ /^\{/;
+X
+X	return $json_pkg->new->utf8->decode($response);
+X}
+X
+Xsub is_work_tree_watched {
+X	my ($output) = @_;
+X	my $error = $output->{error};
+X	if ($retry > 0 and $error and $error =~ m/unable to resolve root .* directory (.*) is not watched/) {
+X		$retry--;
+X		my $response = qx/watchman watch "$git_work_tree"/;
+X		die "Failed to make watchman watch '$git_work_tree'.\n" .
+X		    "Falling back to scanning...\n" if $? != 0;
+X		$output = $json_pkg->new->utf8->decode($response);
+X		$error = $output->{error};
+X		die "Watchman: $error.\n" .
+X		"Falling back to scanning...\n" if $error;
+X
+X		# Uncomment for debugging watchman output
+X		# open (my $fh, ">", ".git/watchman-output.out");
+X		# close $fh;
+X
+X		# Watchman will always return all files on the first query so
+X		# return the fast "everything is dirty" flag to git and do the
+X		# Watchman query just to get it over with now so we won't pay
+X		# the cost in git to look up each individual file.
+X		my $o = watchman_clock();
+X		$error = $output->{error};
+X
+X		die "Watchman: $error.\n" .
+X		"Falling back to scanning...\n" if $error;
+X
+X		output_result($o->{clock}, ("/"));
+X		$last_update_token = $o->{clock};
+X
+X		eval { launch_watchman() };
+X		return 0;
+X	}
+X
+X	die "Watchman: $error.\n" .
+X	"Falling back to scanning...\n" if $error;
+X
+X	return 1;
+X}
+X
+Xsub get_working_dir {
+X	my $working_dir;
+X	if ($^O =~ 'msys' || $^O =~ 'cygwin') {
+X		$working_dir = Win32::GetCwd();
+X		$working_dir =~ tr/\\/\//;
+X	} else {
+X		require Cwd;
+X		$working_dir = Cwd::cwd();
+X	}
+X
+X	return $working_dir;
+X}
+SHAR_END
+echo x linux-bcompare/.git/hooks/pre-commit.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/pre-commit.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to verify what is about to be committed.
+X# Called by "git commit" with no arguments.  The hook should
+X# exit with non-zero status after issuing an appropriate message if
+X# it wants to stop the commit.
+X#
+X# To enable this hook, rename this file to "pre-commit".
+X
+Xif git rev-parse --verify HEAD >/dev/null 2>&1
+Xthen
+X	against=HEAD
+Xelse
+X	# Initial commit: diff against an empty tree object
+X	against=$(git hash-object -t tree /dev/null)
+Xfi
+X
+X# If you want to allow non-ASCII filenames set this variable to true.
+Xallownonascii=$(git config --type=bool hooks.allownonascii)
+X
+X# Redirect output to stderr.
+Xexec 1>&2
+X
+X# Cross platform projects tend to avoid non-ASCII filenames; prevent
+X# them from being added to the repository. We exploit the fact that the
+X# printable range starts at the space character and ends with tilde.
+Xif [ "$allownonascii" != "true" ] &&
+X	# Note that the use of brackets around a tr range is ok here, (it's
+X	# even required, for portability to Solaris 10's /usr/bin/tr), since
+X	# the square bracket bytes happen to fall in the designated range.
+X	test $(git diff --cached --name-only --diff-filter=A -z $against |
+X	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+Xthen
+X	cat <<\EOF
+XError: Attempt to add a non-ASCII file name.
+X
+XThis can cause problems if you want to work with people on other platforms.
+X
+XTo be portable it is advisable to rename the file.
+X
+XIf you know what you are doing you can disable this check using:
+X
+X  git config hooks.allownonascii true
+XEOF
+X	exit 1
+Xfi
+X
+X# If there are whitespace errors, print the offending file names and fail.
+Xexec git diff-index --check --cached $against --
+SHAR_END
+echo x linux-bcompare/.git/hooks/pre-rebase.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/pre-rebase.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# Copyright (c) 2006, 2008 Junio C Hamano
+X#
+X# The "pre-rebase" hook is run just before "git rebase" starts doing
+X# its job, and can prevent the command from running by exiting with
+X# non-zero status.
+X#
+X# The hook is called with the following parameters:
+X#
+X# $1 -- the upstream the series was forked from.
+X# $2 -- the branch being rebased (or empty when rebasing the current branch).
+X#
+X# This sample shows how to prevent topic branches that are already
+X# merged to 'next' branch from getting rebased, because allowing it
+X# would result in rebasing already published history.
+X
+Xpublish=next
+Xbasebranch="$1"
+Xif test "$#" = 2
+Xthen
+X	topic="refs/heads/$2"
+Xelse
+X	topic=`git symbolic-ref HEAD` ||
+X	exit 0 ;# we do not interrupt rebasing detached HEAD
+Xfi
+X
+Xcase "$topic" in
+Xrefs/heads/??/*)
+X	;;
+X*)
+X	exit 0 ;# we do not interrupt others.
+X	;;
+Xesac
+X
+X# Now we are dealing with a topic branch being rebased
+X# on top of master.  Is it OK to rebase it?
+X
+X# Does the topic really exist?
+Xgit show-ref -q "$topic" || {
+X	echo >&2 "No such branch $topic"
+X	exit 1
+X}
+X
+X# Is topic fully merged to master?
+Xnot_in_master=`git rev-list --pretty=oneline ^master "$topic"`
+Xif test -z "$not_in_master"
+Xthen
+X	echo >&2 "$topic is fully merged to master; better remove it."
+X	exit 1 ;# we could allow it, but there is no point.
+Xfi
+X
+X# Is topic ever merged to next?  If so you should not be rebasing it.
+Xonly_next_1=`git rev-list ^master "^$topic" ${publish} | sort`
+Xonly_next_2=`git rev-list ^master           ${publish} | sort`
+Xif test "$only_next_1" = "$only_next_2"
+Xthen
+X	not_in_topic=`git rev-list "^$topic" master`
+X	if test -z "$not_in_topic"
+X	then
+X		echo >&2 "$topic is already up to date with master"
+X		exit 1 ;# we could allow it, but there is no point.
+X	else
+X		exit 0
+X	fi
+Xelse
+X	not_in_next=`git rev-list --pretty=oneline ^${publish} "$topic"`
+X	/usr/local/bin/perl -e '
+X		my $topic = $ARGV[0];
+X		my $msg = "* $topic has commits already merged to public branch:\n";
+X		my (%not_in_next) = map {
+X			/^([0-9a-f]+) /;
+X			($1 => 1);
+X		} split(/\n/, $ARGV[1]);
+X		for my $elem (map {
+X				/^([0-9a-f]+) (.*)$/;
+X				[$1 => $2];
+X			} split(/\n/, $ARGV[2])) {
+X			if (!exists $not_in_next{$elem->[0]}) {
+X				if ($msg) {
+X					print STDERR $msg;
+X					undef $msg;
+X				}
+X				print STDERR " $elem->[1]\n";
+X			}
+X		}
+X	' "$topic" "$not_in_next" "$not_in_master"
+X	exit 1
+Xfi
+X
+X<<\DOC_END
+X
+XThis sample hook safeguards topic branches that have been
+Xpublished from being rewound.
+X
+XThe workflow assumed here is:
+X
+X * Once a topic branch forks from "master", "master" is never
+X   merged into it again (either directly or indirectly).
+X
+X * Once a topic branch is fully cooked and merged into "master",
+X   it is deleted.  If you need to build on top of it to correct
+X   earlier mistakes, a new topic branch is created by forking at
+X   the tip of the "master".  This is not strictly necessary, but
+X   it makes it easier to keep your history simple.
+X
+X * Whenever you need to test or publish your changes to topic
+X   branches, merge them into "next" branch.
+X
+XThe script, being an example, hardcodes the publish branch name
+Xto be "next", but it is trivial to make it configurable via
+X$GIT_DIR/config mechanism.
+X
+XWith this workflow, you would want to know:
+X
+X(1) ... if a topic branch has ever been merged to "next".  Young
+X    topic branches can have stupid mistakes you would rather
+X    clean up before publishing, and things that have not been
+X    merged into other branches can be easily rebased without
+X    affecting other people.  But once it is published, you would
+X    not want to rewind it.
+X
+X(2) ... if a topic branch has been fully merged to "master".
+X    Then you can delete it.  More importantly, you should not
+X    build on top of it -- other people may already want to
+X    change things related to the topic as patches against your
+X    "master", so if you need further changes, it is better to
+X    fork the topic (perhaps with the same name) afresh from the
+X    tip of "master".
+X
+XLet's look at this example:
+X
+X		   o---o---o---o---o---o---o---o---o---o "next"
+X		  /       /           /           /
+X		 /   a---a---b A     /           /
+X		/   /               /           /
+X	       /   /   c---c---c---c B         /
+X	      /   /   /             \         /
+X	     /   /   /   b---b C     \       /
+X	    /   /   /   /             \     /
+X    ---o---o---o---o---o---o---o---o---o---o---o "master"
+X
+X
+XA, B and C are topic branches.
+X
+X * A has one fix since it was merged up to "next".
+X
+X * B has finished.  It has been fully merged up to "master" and "next",
+X   and is ready to be deleted.
+X
+X * C has not merged to "next" at all.
+X
+XWe would want to allow C to be rebased, refuse A, and encourage
+XB to be deleted.
+X
+XTo compute (1):
+X
+X	git rev-list ^master ^topic next
+X	git rev-list ^master        next
+X
+X	if these match, topic has not merged in next at all.
+X
+XTo compute (2):
+X
+X	git rev-list master..topic
+X
+X	if this is empty, it is fully merged to "master".
+X
+XDOC_END
+SHAR_END
+echo x linux-bcompare/.git/hooks/update.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/update.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to block unannotated tags from entering.
+X# Called by "git receive-pack" with arguments: refname sha1-old sha1-new
+X#
+X# To enable this hook, rename this file to "update".
+X#
+X# Config
+X# ------
+X# hooks.allowunannotated
+X#   This boolean sets whether unannotated tags will be allowed into the
+X#   repository.  By default they won't be.
+X# hooks.allowdeletetag
+X#   This boolean sets whether deleting tags will be allowed in the
+X#   repository.  By default they won't be.
+X# hooks.allowmodifytag
+X#   This boolean sets whether a tag may be modified after creation. By default
+X#   it won't be.
+X# hooks.allowdeletebranch
+X#   This boolean sets whether deleting branches will be allowed in the
+X#   repository.  By default they won't be.
+X# hooks.denycreatebranch
+X#   This boolean sets whether remotely creating branches will be denied
+X#   in the repository.  By default this is allowed.
+X#
+X
+X# --- Command line
+Xrefname="$1"
+Xoldrev="$2"
+Xnewrev="$3"
+X
+X# --- Safety check
+Xif [ -z "$GIT_DIR" ]; then
+X	echo "Don't run this script from the command line." >&2
+X	echo " (if you want, you could supply GIT_DIR then run" >&2
+X	echo "  $0 <ref> <oldrev> <newrev>)" >&2
+X	exit 1
+Xfi
+X
+Xif [ -z "$refname" -o -z "$oldrev" -o -z "$newrev" ]; then
+X	echo "usage: $0 <ref> <oldrev> <newrev>" >&2
+X	exit 1
+Xfi
+X
+X# --- Config
+Xallowunannotated=$(git config --type=bool hooks.allowunannotated)
+Xallowdeletebranch=$(git config --type=bool hooks.allowdeletebranch)
+Xdenycreatebranch=$(git config --type=bool hooks.denycreatebranch)
+Xallowdeletetag=$(git config --type=bool hooks.allowdeletetag)
+Xallowmodifytag=$(git config --type=bool hooks.allowmodifytag)
+X
+X# check for no description
+Xprojectdesc=$(sed -e '1q' "$GIT_DIR/description")
+Xcase "$projectdesc" in
+X"Unnamed repository"* | "")
+X	echo "*** Project description file hasn't been set" >&2
+X	exit 1
+X	;;
+Xesac
+X
+X# --- Check types
+X# if $newrev is 0000...0000, it's a commit to delete a ref.
+Xzero="0000000000000000000000000000000000000000"
+Xif [ "$newrev" = "$zero" ]; then
+X	newrev_type=delete
+Xelse
+X	newrev_type=$(git cat-file -t $newrev)
+Xfi
+X
+Xcase "$refname","$newrev_type" in
+X	refs/tags/*,commit)
+X		# un-annotated tag
+X		short_refname=${refname##refs/tags/}
+X		if [ "$allowunannotated" != "true" ]; then
+X			echo "*** The un-annotated tag, $short_refname, is not allowed in this repository" >&2
+X			echo "*** Use 'git tag [ -a | -s ]' for tags you want to propagate." >&2
+X			exit 1
+X		fi
+X		;;
+X	refs/tags/*,delete)
+X		# delete tag
+X		if [ "$allowdeletetag" != "true" ]; then
+X			echo "*** Deleting a tag is not allowed in this repository" >&2
+X			exit 1
+X		fi
+X		;;
+X	refs/tags/*,tag)
+X		# annotated tag
+X		if [ "$allowmodifytag" != "true" ] && git rev-parse $refname > /dev/null 2>&1
+X		then
+X			echo "*** Tag '$refname' already exists." >&2
+X			echo "*** Modifying a tag is not allowed in this repository." >&2
+X			exit 1
+X		fi
+X		;;
+X	refs/heads/*,commit)
+X		# branch
+X		if [ "$oldrev" = "$zero" -a "$denycreatebranch" = "true" ]; then
+X			echo "*** Creating a branch is not allowed in this repository" >&2
+X			exit 1
+X		fi
+X		;;
+X	refs/heads/*,delete)
+X		# delete branch
+X		if [ "$allowdeletebranch" != "true" ]; then
+X			echo "*** Deleting a branch is not allowed in this repository" >&2
+X			exit 1
+X		fi
+X		;;
+X	refs/remotes/*,commit)
+X		# tracking branch
+X		;;
+X	refs/remotes/*,delete)
+X		# delete tracking branch
+X		if [ "$allowdeletebranch" != "true" ]; then
+X			echo "*** Deleting a tracking branch is not allowed in this repository" >&2
+X			exit 1
+X		fi
+X		;;
+X	*)
+X		# Anything else (is there anything else?)
+X		echo "*** Update hook: unknown type of update to ref $refname of type $newrev_type" >&2
+X		exit 1
+X		;;
+Xesac
+X
+X# --- Finished
+Xexit 0
+SHAR_END
+echo x linux-bcompare/.git/hooks/pre-push.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/pre-push.sample << 'SHAR_END'
+X#!/bin/sh
+X
+X# An example hook script to verify what is about to be pushed.  Called by "git
+X# push" after it has checked the remote status, but before anything has been
+X# pushed.  If this script exits with a non-zero status nothing will be pushed.
+X#
+X# This hook is called with the following parameters:
+X#
+X# $1 -- Name of the remote to which the push is being done
+X# $2 -- URL to which the push is being done
+X#
+X# If pushing without using a named remote those arguments will be equal.
+X#
+X# Information about the commits which are being pushed is supplied as lines to
+X# the standard input in the form:
+X#
+X#   <local ref> <local sha1> <remote ref> <remote sha1>
+X#
+X# This sample shows how to prevent push of commits where the log message starts
+X# with "WIP" (work in progress).
+X
+Xremote="$1"
+Xurl="$2"
+X
+Xz40=0000000000000000000000000000000000000000
+X
+Xwhile read local_ref local_sha remote_ref remote_sha
+Xdo
+X	if [ "$local_sha" = $z40 ]
+X	then
+X		# Handle delete
+X		:
+X	else
+X		if [ "$remote_sha" = $z40 ]
+X		then
+X			# New branch, examine all commits
+X			range="$local_sha"
+X		else
+X			# Update to existing branch, examine new commits
+X			range="$remote_sha..$local_sha"
+X		fi
+X
+X		# Check for WIP commit
+X		commit=`git rev-list -n 1 --grep '^WIP' "$range"`
+X		if [ -n "$commit" ]
+X		then
+X			echo >&2 "Found WIP commit in $local_ref, not pushing"
+X			exit 1
+X		fi
+X	fi
+Xdone
+X
+Xexit 0
+SHAR_END
+echo x linux-bcompare/.git/hooks/applypatch-msg.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/applypatch-msg.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to check the commit log message taken by
+X# applypatch from an e-mail message.
+X#
+X# The hook should exit with non-zero status after issuing an
+X# appropriate message if it wants to stop the commit.  The hook is
+X# allowed to edit the commit message file.
+X#
+X# To enable this hook, rename this file to "applypatch-msg".
+X
+X. git-sh-setup
+Xcommitmsg="$(git rev-parse --git-path hooks/commit-msg)"
+Xtest -x "$commitmsg" && exec "$commitmsg" ${1+"$@"}
+X:
+SHAR_END
+echo x linux-bcompare/.git/hooks/commit-msg.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/commit-msg.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to check the commit log message.
+X# Called by "git commit" with one argument, the name of the file
+X# that has the commit message.  The hook should exit with non-zero
+X# status after issuing an appropriate message if it wants to stop the
+X# commit.  The hook is allowed to edit the commit message file.
+X#
+X# To enable this hook, rename this file to "commit-msg".
+X
+X# Uncomment the below to add a Signed-off-by line to the message.
+X# Doing this in a hook is a bad idea in general, but the prepare-commit-msg
+X# hook is more suited to it.
+X#
+X# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+X# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
+X
+X# This example catches duplicate Signed-off-by lines.
+X
+Xtest "" = "$(grep '^Signed-off-by: ' "$1" |
+X	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
+X	echo >&2 Duplicate Signed-off-by lines.
+X	exit 1
+X}
+SHAR_END
+echo x linux-bcompare/.git/hooks/post-update.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/post-update.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to prepare a packed repository for use over
+X# dumb transports.
+X#
+X# To enable this hook, rename this file to "post-update".
+X
+Xexec git update-server-info
+SHAR_END
+echo x linux-bcompare/.git/hooks/pre-merge-commit.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/pre-merge-commit.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to verify what is about to be committed.
+X# Called by "git merge" with no arguments.  The hook should
+X# exit with non-zero status after issuing an appropriate message to
+X# stderr if it wants to stop the merge commit.
+X#
+X# To enable this hook, rename this file to "pre-merge-commit".
+X
+X. git-sh-setup
+Xtest -x "$GIT_DIR/hooks/pre-commit" &&
+X        exec "$GIT_DIR/hooks/pre-commit"
+X:
+SHAR_END
+echo x linux-bcompare/.git/hooks/pre-applypatch.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/pre-applypatch.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to verify what is about to be committed
+X# by applypatch from an e-mail message.
+X#
+X# The hook should exit with non-zero status after issuing an
+X# appropriate message if it wants to stop the commit.
+X#
+X# To enable this hook, rename this file to "pre-applypatch".
+X
+X. git-sh-setup
+Xprecommit="$(git rev-parse --git-path hooks/pre-commit)"
+Xtest -x "$precommit" && exec "$precommit" ${1+"$@"}
+X:
+SHAR_END
+echo x linux-bcompare/.git/hooks/prepare-commit-msg.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/prepare-commit-msg.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to prepare the commit log message.
+X# Called by "git commit" with the name of the file that has the
+X# commit message, followed by the description of the commit
+X# message's source.  The hook's purpose is to edit the commit
+X# message file.  If the hook fails with a non-zero status,
+X# the commit is aborted.
+X#
+X# To enable this hook, rename this file to "prepare-commit-msg".
+X
+X# This hook includes three examples. The first one removes the
+X# "# Please enter the commit message..." help message.
+X#
+X# The second includes the output of "git diff --name-status -r"
+X# into the message, just before the "git status" output.  It is
+X# commented because it doesn't cope with --amend or with squashed
+X# commits.
+X#
+X# The third example adds a Signed-off-by line to the message, that can
+X# still be edited.  This is rarely a good idea.
+X
+XCOMMIT_MSG_FILE=$1
+XCOMMIT_SOURCE=$2
+XSHA1=$3
+X
+X/usr/local/bin/perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' "$COMMIT_MSG_FILE"
+X
+X# case "$COMMIT_SOURCE,$SHA1" in
+X#  ,|template,)
+X#    /usr/local/bin/perl -i.bak -pe '
+X#       print "\n" . `git diff --cached --name-status -r`
+X# 	 if /^#/ && $first++ == 0' "$COMMIT_MSG_FILE" ;;
+X#  *) ;;
+X# esac
+X
+X# SOB=$(git var GIT_COMMITTER_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+X# git interpret-trailers --in-place --trailer "$SOB" "$COMMIT_MSG_FILE"
+X# if test -z "$COMMIT_SOURCE"
+X# then
+X#   /usr/local/bin/perl -i.bak -pe 'print "\n" if !$first_line++' "$COMMIT_MSG_FILE"
+X# fi
+SHAR_END
+echo x linux-bcompare/.git/hooks/pre-receive.sample
+sed 's/^X//' > linux-bcompare/.git/hooks/pre-receive.sample << 'SHAR_END'
+X#!/bin/sh
+X#
+X# An example hook script to make use of push options.
+X# The example simply echoes all push options that start with 'echoback='
+X# and rejects all pushes when the "reject" push option is used.
+X#
+X# To enable this hook, rename this file to "pre-receive".
+X
+Xif test -n "$GIT_PUSH_OPTION_COUNT"
+Xthen
+X	i=0
+X	while test "$i" -lt "$GIT_PUSH_OPTION_COUNT"
+X	do
+X		eval "value=\$GIT_PUSH_OPTION_$i"
+X		case "$value" in
+X		echoback=*)
+X			echo "echo from the pre-receive-hook: ${value#*=}" >&2
+X			;;
+X		reject)
+X			exit 1
+X		esac
+X		i=$((i + 1))
+X	done
+Xfi
+SHAR_END
+echo x linux-bcompare/.git/refs/remotes
+mkdir -p linux-bcompare/.git/refs/remotes > /dev/null 2>&1
+echo x linux-bcompare/.git/refs/heads
+mkdir -p linux-bcompare/.git/refs/heads > /dev/null 2>&1
+echo x linux-bcompare/.git/refs/tags
+mkdir -p linux-bcompare/.git/refs/tags > /dev/null 2>&1
+echo x linux-bcompare/.git/refs/heads/master
+mkdir -p linux-bcompare/.git/refs/heads > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/refs/heads/master << 'SHAR_END'
+Xb5e37213c2734c7a45838674528e798f4ba206d6
+SHAR_END
+echo x linux-bcompare/.git/refs/remotes/origin
+mkdir -p linux-bcompare/.git/refs/remotes/origin > /dev/null 2>&1
+echo x linux-bcompare/.git/refs/remotes/origin/master
+sed 's/^X//' > linux-bcompare/.git/refs/remotes/origin/master << 'SHAR_END'
+Xb5e37213c2734c7a45838674528e798f4ba206d6
+SHAR_END
+echo x linux-bcompare/.git/logs/refs
+mkdir -p linux-bcompare/.git/logs/refs > /dev/null 2>&1
+echo x linux-bcompare/.git/logs/HEAD
+sed 's/^X//' > linux-bcompare/.git/logs/HEAD << 'SHAR_END'
+X0000000000000000000000000000000000000000 267341caba7b5d72205b1ef12ff56c58387ec90f matias pizarro <matias@pizarro.net> 1601128816 +0000	commit (initial): Initial commit
+X267341caba7b5d72205b1ef12ff56c58387ec90f a3c8d48e5eb72e2a227066710d070e6d69a58905 matias pizarro <matias@pizarro.net> 1601131380 +0200	commit: Limit to amd64 and i386 architectures
+Xa3c8d48e5eb72e2a227066710d070e6d69a58905 a3276f8e00a7b89fca4ac9bfdab956af0f69d769 matias pizarro <matias@pizarro.net> 1601132858 +0200	commit: Do not limit to Linux c7
+Xa3276f8e00a7b89fca4ac9bfdab956af0f69d769 5a4954f21fd0e4da6ea60c87ba716e6d408e7fc6 matias pizarro <matias@pizarro.net> 1601133947 +0200	commit: Add devel category
+X5a4954f21fd0e4da6ea60c87ba716e6d408e7fc6 f21e150af1896a4155a5105bc1f0f54074bebff8 matias pizarro <matias@pizarro.net> 1601135168 +0200	commit: Use generic DISTVERSIONSUFFIX instead of custom variable DISTREVISION
+Xf21e150af1896a4155a5105bc1f0f54074bebff8 6d1959c1d2400040c8293442889bd6774c185a0a matias pizarro <matias@pizarro.net> 1601136471 +0200	commit: Specify X11ness in comments
+X6d1959c1d2400040c8293442889bd6774c185a0a 1b8774a9b5103add063833ba917ea4291d171af5 matias pizarro <matias@pizarro.net> 1601222993 +0200	commit: Improve installation stage
+X1b8774a9b5103add063833ba917ea4291d171af5 6f7035bc2e8f19defa175e636c739e0bc5272fc5 matias pizarro <matias@pizarro.net> 1601225649 +0200	commit: Chmod files that do not need to be executable
+X6f7035bc2e8f19defa175e636c739e0bc5272fc5 b5e37213c2734c7a45838674528e798f4ba206d6 matias pizarro <matias@pizarro.net> 1601824103 +0200	commit: v4.3.7
+SHAR_END
+echo x linux-bcompare/.git/logs/refs/heads
+mkdir -p linux-bcompare/.git/logs/refs/heads > /dev/null 2>&1
+echo x linux-bcompare/.git/logs/refs/remotes
+mkdir -p linux-bcompare/.git/logs/refs/remotes > /dev/null 2>&1
+echo x linux-bcompare/.git/logs/refs/remotes/origin
+mkdir -p linux-bcompare/.git/logs/refs/remotes/origin > /dev/null 2>&1
+echo x linux-bcompare/.git/logs/refs/remotes/origin/master
+sed 's/^X//' > linux-bcompare/.git/logs/refs/remotes/origin/master << 'SHAR_END'
+X0000000000000000000000000000000000000000 267341caba7b5d72205b1ef12ff56c58387ec90f matias pizarro <matias@pizarro.net> 1601129024 +0200	update by push
+X267341caba7b5d72205b1ef12ff56c58387ec90f a3276f8e00a7b89fca4ac9bfdab956af0f69d769 matias pizarro <matias@pizarro.net> 1601132865 +0200	update by push
+Xa3276f8e00a7b89fca4ac9bfdab956af0f69d769 f21e150af1896a4155a5105bc1f0f54074bebff8 matias pizarro <matias@pizarro.net> 1601135176 +0200	update by push
+Xf21e150af1896a4155a5105bc1f0f54074bebff8 6d1959c1d2400040c8293442889bd6774c185a0a matias pizarro <matias@pizarro.net> 1601136512 +0200	update by push
+X6d1959c1d2400040c8293442889bd6774c185a0a 1b8774a9b5103add063833ba917ea4291d171af5 matias pizarro <matias@pizarro.net> 1601223002 +0200	update by push
+X1b8774a9b5103add063833ba917ea4291d171af5 6f7035bc2e8f19defa175e636c739e0bc5272fc5 matias pizarro <matias@pizarro.net> 1601225657 +0200	update by push
+X6f7035bc2e8f19defa175e636c739e0bc5272fc5 b5e37213c2734c7a45838674528e798f4ba206d6 matias pizarro <matias@pizarro.net> 1601824110 +0200	update by push
+SHAR_END
+echo x linux-bcompare/.git/logs/refs/heads/master
+mkdir -p linux-bcompare/.git/logs/refs/heads > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/.git/logs/refs/heads/master << 'SHAR_END'
+X0000000000000000000000000000000000000000 267341caba7b5d72205b1ef12ff56c58387ec90f matias pizarro <matias@pizarro.net> 1601128816 +0000	commit (initial): Initial commit
+X267341caba7b5d72205b1ef12ff56c58387ec90f a3c8d48e5eb72e2a227066710d070e6d69a58905 matias pizarro <matias@pizarro.net> 1601131380 +0200	commit: Limit to amd64 and i386 architectures
+Xa3c8d48e5eb72e2a227066710d070e6d69a58905 a3276f8e00a7b89fca4ac9bfdab956af0f69d769 matias pizarro <matias@pizarro.net> 1601132858 +0200	commit: Do not limit to Linux c7
+Xa3276f8e00a7b89fca4ac9bfdab956af0f69d769 5a4954f21fd0e4da6ea60c87ba716e6d408e7fc6 matias pizarro <matias@pizarro.net> 1601133947 +0200	commit: Add devel category
+X5a4954f21fd0e4da6ea60c87ba716e6d408e7fc6 f21e150af1896a4155a5105bc1f0f54074bebff8 matias pizarro <matias@pizarro.net> 1601135168 +0200	commit: Use generic DISTVERSIONSUFFIX instead of custom variable DISTREVISION
+Xf21e150af1896a4155a5105bc1f0f54074bebff8 6d1959c1d2400040c8293442889bd6774c185a0a matias pizarro <matias@pizarro.net> 1601136471 +0200	commit: Specify X11ness in comments
+X6d1959c1d2400040c8293442889bd6774c185a0a 1b8774a9b5103add063833ba917ea4291d171af5 matias pizarro <matias@pizarro.net> 1601222993 +0200	commit: Improve installation stage
+X1b8774a9b5103add063833ba917ea4291d171af5 6f7035bc2e8f19defa175e636c739e0bc5272fc5 matias pizarro <matias@pizarro.net> 1601225649 +0200	commit: Chmod files that do not need to be executable
+X6f7035bc2e8f19defa175e636c739e0bc5272fc5 b5e37213c2734c7a45838674528e798f4ba206d6 matias pizarro <matias@pizarro.net> 1601824103 +0200	commit: v4.3.7
+SHAR_END
+echo x linux-bcompare/files/nosched.c
+mkdir -p linux-bcompare/files > /dev/null 2>&1
+sed 's/^X//' > linux-bcompare/files/nosched.c << 'SHAR_END'
+X#define _GNU_SOURCE
+X
+X#include <dlfcn.h>
+X#include <pthread.h>
+X#include <stdio.h>
+X#include <string.h>
+X
+Xint pthread_noop() {
+X  fprintf(stderr, "%s(...)\n", __func__);
+X  return 0;
+X}
+X
+X// https://stackoverflow.com/questions/15599026/how-can-i-intercept-dlsym-calls-using-ld-preload/18825060#18825060
+Xvoid* _dl_sym(void*, const char*, void*);
+X
+Xstatic void* (*libc_dlsym)(void*, const char*) = NULL;
+X
+Xvoid* dlsym(void* handle, const char* symbol) {
+X
+X  if (!libc_dlsym) {
+X    libc_dlsym = _dl_sym(RTLD_NEXT, "dlsym", dlsym);
+X  }
+X
+X  //~ fprintf(stderr, "%s(_, %s)\n", __func__, symbol);
+X
+X  if (strcmp(symbol, "pthread_attr_setinheritsched") == 0) {
+X    return pthread_noop;
+X  }
+X
+X  return libc_dlsym(handle, symbol);
+X}
+X
+SHAR_END
+echo x linux-bcompare/files/LICENSE.txt
+sed 's/^X//' > linux-bcompare/files/LICENSE.txt << 'SHAR_END'
+XLicense Agreement
+X
+Xhttps://www.scootersoftware.com/v4help/index.html?support_ordering_and_license.html
+X
+XYour use of Beyond Compare is governed by the following Terms and
+XConditions:
+X
+XAcceptance of License Agreement
+X
+XYou should carefully read the following terms and conditions before
+Xusing Beyond Compare 4 (the "Software").  Unless you have a different
+Xlicense agreement signed by Scooter Software, your use of this software
+Xindicates your agreement to these terms and conditions.  If you do not
+Xaccept all of these terms and conditions, you must cease using the
+XSoftware immediately.
+X
+XCopyright
+X
+XCustomer acknowledges that the Software, License Key and accompanying
+Xuser documentation ("Documentation") are copyrighted works owned by
+XScooter Software and that Customer has no rights in the foregoing except
+Xas expressly granted herein.
+X
+XFree 30-Day Trial
+X
+XThis is not free software.  Scooter Software hereby grants you a
+Xnon-exclusive, non-transferable, limited license to use the Software
+Xfree of charge for a period of thirty (30) days.  Use of the Software
+Xbeyond the thirty-day (30-day) trial period requires the purchase of a
+XLicense Key as described below.  Use of the Software beyond the
+Xthirty-day (30-day) trial period without purchase of a License Key is a
+Xviolation of U.S. and international copyright laws.
+X
+XLicense Key
+X
+XA unique key that will allow you to use the Software beyond the
+Xthirty-day (30-day) free trial period ("License Key") may be purchased
+Xfrom the Scooter Software website, which is currently
+Xhttp://www.scootersoftware.com.  A License Key may be purchased for
+Xsingle or multiple users, all users at a named site, or an entire
+Xenterprise.  A License Key is further categorized by feature set
+X(Standard Edition or Pro Edition), and operating system platform
+X(Windows Platform, Mac Platform, Linux Platform, or Multi Platform).  A
+Xprice list on the Scooter Software website details pricing for all
+Xlicense options.  Upon purchase of a License Key, Scooter Software
+Xhereby grants you a non-exclusive, non-transferable license to use the
+XSoftware with the applicable feature set on the applicable operating
+Xsystem platform as follows:
+X
+X   Per-User License Key:  A Per-User License Key may be purchased for a
+X   specific quantity of users.  Each user of the total quantity may be
+X   either (a) a person who has access to the Software on any number of
+X   computers, or (b) a computer on which the Software will be installed
+X   for use by any number of persons, one at a time, while physically
+X   present at the computer.  Each person so licensed must be the
+X   Customer, an employee of the Customer, an employee of a Customer's
+X   subsidiary company, or a third party consultant retained by the
+X   Customer to perform information technology functions (each, a "Third
+X   Party") to use the Software solely for Customer's internal business
+X   operations and benefit, and for no other purpose whatsoever. 
+X   Customer shall ensure that such Third Party complies with the terms
+X   of this License Agreement and will be responsible for any breach by
+X   such Third Party.
+X
+X   Site License Key:  An unlimited user, single-location License Key may
+X   be used at Customer locations within a 100-mile radius of the site
+X   identified in the License Key (the "Site"), by any and all of
+X   Customer's employees while personally present at the Site.  This
+X   license is likewise granted to Customer's employees who typically
+X   work at the Site, while performing Customer work at other locations
+X   such as client locations or home.  Customer shall have the right to
+X   sublicense its rights under this License Agreement to third party
+X   consultants that it retains to perform information technology
+X   functions (each, an "Onsite Consultant"), while personally present at
+X   the Site to use the Software solely for Customer's internal business
+X   operations and benefit, and for no other purpose whatsoever. 
+X   Customer shall ensure that such Onsite Consultant complies with the
+X   terms of this License Agreement and will be responsible for any
+X   breach by such Onsite Consultant.
+X
+X   Enterprise License Key:  An enterprise-wide ("Enterprise") License
+X   Key may be used world-wide, by any and all of Customer's employees. 
+X   Customer shall have the right to sublicense its rights under this
+X   License Agreement to third party consultants that it retains to
+X   perform information technology functions (each, an "Enterprise
+X   Consultant"), while personally present at any Customer location to
+X   use the Software solely for Customer's internal business operations
+X   and benefit, and for no other purpose whatsoever.  Customer shall
+X   ensure that such Enterprise Consultant complies with the terms of
+X   this License Agreement and will be responsible for any breach by such
+X   Enterprise Consultant.
+X
+XYou shall be responsible for maintaining the License Key in a safe
+Xlocation and are specifically prohibited from distributing the License
+XKey, intentionally or unintentionally, to any third party not authorized
+Xby this License Agreement.  Upon loss or distribution of the License
+XKey, Customer shall be required to pay a reinstatement fee at Scooter
+XSoftware's discretion.
+X
+XDistribution of the Software
+X
+XProvided that you do not copy or distribute the License Key, and you
+Xinclude a copy of this License Agreement, you may (a) make copies of the
+XSoftware; (b) give exact, unmodified copies of the Software to anyone;
+Xand (c) distribute the Software in its unmodified form via electronic
+Xmeans.  You are specifically prohibited from charging any fees for any
+Xsuch copies or distributions.
+X
+XTerm and Termination
+X
+XYou may continue to use the Software for as long as you comply with the
+Xterms and conditions of this License Agreement.  Scooter Software may
+Xterminate this License Agreement immediately upon notice to you in the
+Xevent that Scooter Software has reason to believe you have breached this
+XLicense Agreement.  Upon termination, you shall immediately cease all
+Xuse of the Software, License Key and Documentation and shall not be
+Xentitled to a refund of any fees paid.
+X
+XWarranties
+X
+XScooter Software warrants and represents that: (a) it has all right,
+Xtitle and interest in the Software, the right to enter into and provide
+Xthe license rights granted by this Agreement, and is not party to and
+Xwill not enter into any agreement, covenant or encumbrance that
+Xconflicts with this Agreement; (b) the Software does not, to the best of
+XScooter Softwareâ€™s knowledge, infringe upon or violate any patent,
+Xcopyright, or trade secret or other proprietary right of any third
+Xparty; (c) the advent of any date or year shall not adversely affect the
+Xperformance of the Software; and (d) the Software is not contaminated by
+Xharmful code (e.g., self-propagating program instructions commonly
+Xcalled viruses, worms or Trojans).
+X
+XGeneral Disclaimer
+X
+XExcept for the limited warranties set forth herein, THE SOFTWARE AND
+XDOCUMENTATION ARE PROVIDED "AS IS".  TO THE MAXIMUM EXTENT PERMITTED BY
+XAPPLICABLE LAW, SCOOTER SOFTWARE DISCLAIMS ALL WARRANTIES, EITHER
+XEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF
+XMERCHANTABILITY, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. 
+XANY LIABILITY OF SCOOTER SOFTWARE WILL BE LIMITED EXCLUSIVELY TO REFUND
+XOF THE PURCHASE PRICE.
+X
+XMiscellaneous Provisions
+X
+XThe validity and interpretation of this Agreement shall be governed by
+Xthe laws of the United States of America and the State of Wisconsin. 
+XCustomer agrees that the state and federal courts located in the State
+Xof Wisconsin, Dane County, shall be the appropriate site of venue for
+Xactions relating to this Agreement, and hereby consents to the exclusive
+Xjurisdiction and venue of such courts.  If any provision of this
+XAgreement is declared by a court of competent jurisdiction to be
+Xinvalid, illegal or unenforceable, such provision or part thereof will
+Xbe severed from the Agreement and the remaining provisions will remain
+Xin full force and effect.
+SHAR_END
+echo x linux-bcompare/files/patch-usr_bin_bcompare
+sed 's/^X//' > linux-bcompare/files/patch-usr_bin_bcompare << 'SHAR_END'
+X--- usr/bin/bcompare.orig	2020-09-01 19:23:29 UTC
+X+++ usr/bin/bcompare
+X@@ -1,17 +1,22 @@
+X #!/bin/sh
+X 
+X-BC_LIB=/usr/lib64/beyondcompare
+X+LINUXULATOR_LIB=/compat/linux/usr/lib64
+X+
+X+BC_LIB=/usr/local/lib/beyondcompare
+X export BC_LIB
+X 
+X+_LD_PRELOAD="$BC_LIB/nosched.so"
+X+export _LD_PRELOAD
+X+
+X BC_PACKAGE_TYPE=rpm
+X export BC_PACKAGE_TYPE
+X 
+X EXEC="$BC_LIB/BCompare"
+X 
+X if [ -n "$LD_LIBRARY_PATH" ]; then
+X-export LD_LIBRARY_PATH="$BC_LIB:$LD_LIBRARY_PATH"
+X+export LD_LIBRARY_PATH="$BC_LIB:$LD_LIBRARY_PATH:$LINUXULATOR_LIB"
+X else
+X-export LD_LIBRARY_PATH="$BC_LIB"
+X+export LD_LIBRARY_PATH="$BC_LIB:$LINUXULATOR_LIB"
+X fi
+X 
+X #check to see if we have all of the shared libraries.
+X@@ -44,7 +49,7 @@ while [ "$#" -gt 0 ]; do
+X 	ARGS=$ARGS" \"$1\""
+X 	shift 1
+X done
+X-/bin/bash -c "exec -a $0 $EXEC $ARGS > /dev/null 2>&1" $0
+X+/usr/bin/env bash -c "exec -a $0 /usr/bin/env LD_PRELOAD=$_LD_PRELOAD $EXEC $ARGS > /dev/null 2>&1" $0
+X 
+X ########################################
+X # set exit code / wait on existing instance
+X@@ -54,4 +59,6 @@ if [ $EXIT = 99 ]; then
+X 	EXIT=`cat /tmp/BC4_.$$`
+X 	rm -f /tmp/BC4_.$$
+X fi
+X+[ ! -f bash.core ] || rm -f bash.core
+X+[ ! -f pgrep.core ] || rm -f pgrep.core
+X exit $EXIT
+SHAR_END
+exit

@@ -1,0 +1,194 @@
+#!/bin/sh
+# This is a shell archive
+echo x linux-sublime-merge
+mkdir -p linux-sublime-merge > /dev/null 2>&1
+echo x linux-sublime-merge/pkg-descr
+sed 's/^X//' > linux-sublime-merge/pkg-descr << 'SHAR_END'
+XSublime Text is a sophisticated text editor for code, markup and prose.
+X
+XWWW: http://www.sublimetext.com
+SHAR_END
+echo x linux-sublime-merge/Makefile
+sed 's/^X//' > linux-sublime-merge/Makefile << 'SHAR_END'
+X# Created by: Matías Pizarro <matias@pizarro.net>
+X
+XPORTNAME=	sublime-merge
+XDISTVERSION=	2056
+XCATEGORIES= editors linux
+XMASTER_SITES=	https://download.sublimetext.com/
+XPKGNAMEPREFIX=	linux-
+X
+XMAINTAINER=	matias@pizarro.net
+XCOMMENT=	Sophisticated Git client by the creators of Sublime Text
+X
+XLICENSE=				SUBLIMEHQ
+XLICENSE_NAME=			End User License Agreement
+XLICENSE_FILE=			${FILESDIR}/LICENSE.txt
+XLICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
+X
+XONLY_FOR_ARCHS=			amd64
+XONLY_FOR_ARCHS_REASON=	Upstream only supports amd64
+X
+XUSES=		desktop-file-utils gnome linux tar:xz
+XUSE_LINUX=	gtk3
+X
+XDISTNAME_amd64=	sublime_merge_build_${DISTVERSION}_x64
+X
+XINSTALLS_ICONS=	yes
+XWRKSRC=		${WRKDIR}/sublime_merge
+X
+XNO_BUILD=	yes
+XSUB_FILES=	sublime
+X
+Xdo-install:
+X	@${MKDIR} ${STAGEDIR}${DATADIR} \
+X		${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps/ \
+X		${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps/ \
+X		${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps/ \
+X		${STAGEDIR}${PREFIX}/share/icons/hicolor/128x128/apps/ \
+X		${STAGEDIR}${PREFIX}/share/icons/hicolor/256x256/apps/
+X
+X	${INSTALL_DATA} ${WRKSRC}/Icon/16x16/sublime-merge.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps/
+X	${INSTALL_DATA} ${WRKSRC}/Icon/32x32/sublime-merge.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps/
+X	${INSTALL_DATA} ${WRKSRC}/Icon/48x48/sublime-merge.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps/
+X	${INSTALL_DATA} ${WRKSRC}/Icon/128x128/sublime-merge.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/128x128/apps/
+X	${INSTALL_DATA} ${WRKSRC}/Icon/256x256/sublime-merge.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/256x256/apps/
+X	${INSTALL_DATA} ${WRKSRC}/sublime_merge.desktop ${STAGEDIR}${PREFIX}/share/applications/
+X	cd ${WRKSRC} && ${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR}
+X	${INSTALL_SCRIPT} ${WRKDIR}/sublime ${STAGEDIR}${PREFIX}/bin/sublime_merge
+X
+X.include <bsd.port.mk>
+SHAR_END
+echo x linux-sublime-merge/pkg-plist
+sed 's/^X//' > linux-sublime-merge/pkg-plist << 'SHAR_END'
+Xbin/sublime_merge
+Xshare/applications/sublime_merge.desktop
+Xshare/icons/hicolor/128x128/apps/sublime-merge.png
+Xshare/icons/hicolor/16x16/apps/sublime-merge.png
+Xshare/icons/hicolor/256x256/apps/sublime-merge.png
+Xshare/icons/hicolor/32x32/apps/sublime-merge.png
+Xshare/icons/hicolor/48x48/apps/sublime-merge.png
+X%%DATADIR%%/Icon/128x128/sublime-merge.png
+X%%DATADIR%%/Icon/16x16/sublime-merge.png
+X%%DATADIR%%/Icon/256x256/sublime-merge.png
+X%%DATADIR%%/Icon/32x32/sublime-merge.png
+X%%DATADIR%%/Icon/48x48/sublime-merge.png
+X%%DATADIR%%/Packages/Default - Merge.sublime-package
+X%%DATADIR%%/Packages/Theme - Merge.sublime-package
+X%%DATADIR%%/git-credential-sublime
+X%%DATADIR%%/ssh-askpass-sublime
+X%%DATADIR%%/sublime_merge
+X@(,,555) %%DATADIR%%/sublime_merge.desktop
+X%%DATADIR%%/Packages/ASP.sublime-package
+X%%DATADIR%%/Packages/ActionScript.sublime-package
+X%%DATADIR%%/Packages/AppleScript.sublime-package
+X%%DATADIR%%/Packages/Batch File.sublime-package
+X%%DATADIR%%/Packages/C#.sublime-package
+X%%DATADIR%%/Packages/C++.sublime-package
+X%%DATADIR%%/Packages/CSS.sublime-package
+X%%DATADIR%%/Packages/Clojure.sublime-package
+X%%DATADIR%%/Packages/Color Scheme - Default.sublime-package
+X%%DATADIR%%/Packages/Color Scheme - Legacy.sublime-package
+X%%DATADIR%%/Packages/D.sublime-package
+X%%DATADIR%%/Packages/Default.sublime-package
+X%%DATADIR%%/Packages/Erlang.sublime-package
+X%%DATADIR%%/Packages/Git Formats.sublime-package
+X%%DATADIR%%/Packages/Go.sublime-package
+X%%DATADIR%%/Packages/Graphviz.sublime-package
+X%%DATADIR%%/Packages/Groovy.sublime-package
+X%%DATADIR%%/Packages/HTML.sublime-package
+X%%DATADIR%%/Packages/Haskell.sublime-package
+X%%DATADIR%%/Packages/Java.sublime-package
+X%%DATADIR%%/Packages/JavaScript.sublime-package
+X%%DATADIR%%/Packages/LaTeX.sublime-package
+X%%DATADIR%%/Packages/Language - English.sublime-package
+X%%DATADIR%%/Packages/Lisp.sublime-package
+X%%DATADIR%%/Packages/Lua.sublime-package
+X%%DATADIR%%/Packages/Makefile.sublime-package
+X%%DATADIR%%/Packages/Markdown.sublime-package
+X%%DATADIR%%/Packages/Matlab.sublime-package
+X%%DATADIR%%/Packages/OCaml.sublime-package
+X%%DATADIR%%/Packages/Objective-C.sublime-package
+X%%DATADIR%%/Packages/PHP.sublime-package
+X%%DATADIR%%/Packages/Pascal.sublime-package
+X%%DATADIR%%/Packages/Perl.sublime-package
+X%%DATADIR%%/Packages/Python.sublime-package
+X%%DATADIR%%/Packages/R.sublime-package
+X%%DATADIR%%/Packages/Rails.sublime-package
+X%%DATADIR%%/Packages/Regular Expressions.sublime-package
+X%%DATADIR%%/Packages/RestructuredText.sublime-package
+X%%DATADIR%%/Packages/Ruby.sublime-package
+X%%DATADIR%%/Packages/Rust.sublime-package
+X%%DATADIR%%/Packages/SQL.sublime-package
+X%%DATADIR%%/Packages/Scala.sublime-package
+X%%DATADIR%%/Packages/ShellScript.sublime-package
+X%%DATADIR%%/Packages/TCL.sublime-package
+X%%DATADIR%%/Packages/Text.sublime-package
+X%%DATADIR%%/Packages/Textile.sublime-package
+X%%DATADIR%%/Packages/Theme - Default.sublime-package
+X%%DATADIR%%/Packages/XML.sublime-package
+X%%DATADIR%%/Packages/YAML.sublime-package
+X%%DATADIR%%/changelog.txt
+X%%DATADIR%%/crash_reporter
+X%%DATADIR%%/Packages/JSON.sublime-package
+SHAR_END
+echo x linux-sublime-merge/files
+mkdir -p linux-sublime-merge/files > /dev/null 2>&1
+echo x linux-sublime-merge/distinfo
+sed 's/^X//' > linux-sublime-merge/distinfo << 'SHAR_END'
+XTIMESTAMP = 1621624914
+XSHA256 (sublime_merge_build_2056_x64.tar.xz) = 29844c7305b7f192b8b0bea6a32eebb80e7317f00ff9c39b4bfdab4982108720
+XSIZE (sublime_merge_build_2056_x64.tar.xz) = 4713568
+SHAR_END
+echo x linux-sublime-merge/files/sublime.in
+sed 's/^X//' > linux-sublime-merge/files/sublime.in << 'SHAR_END'
+X#! /bin/sh
+Xexec %%DATADIR%%/sublime_merge "$@"
+SHAR_END
+echo x linux-sublime-merge/files/patch-sublime_merge.desktop
+sed 's/^X//' > linux-sublime-merge/files/patch-sublime_merge.desktop << 'SHAR_END'
+X--- sublime_merge.desktop.orig	2021-05-17 02:56:17 UTC
+X+++ sublime_merge.desktop
+X@@ -4,15 +4,10 @@
+X Name=Sublime Merge
+X GenericName=Git Client
+X Comment=Sublime Merge is a Git client, from the makers of Sublime Text
+X-Exec=/opt/sublime_merge/sublime_merge %F
+X+Exec=sublime_merge %F
+X Terminal=false
+X MimeType=text/plain;
+X Icon=sublime-merge
+X Categories=Development;
+X StartupNotify=true
+X-Actions=new-window;
+X 
+X-[Desktop Action new-window]
+X-Name=New Window
+X-Exec=/opt/sublime_merge/sublime_merge --launch-or-new-window
+X-OnlyShowIn=Unity;
+SHAR_END
+echo x linux-sublime-merge/files/LICENSE.txt
+sed 's/^X//' > linux-sublime-merge/files/LICENSE.txt << 'SHAR_END'
+X The SOFTWARE PRODUCT (SUBLIME TEXT and SUBLIME MERGE) is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. The SOFTWARE PRODUCT is licensed, not sold.
+X
+X    LICENSES
+X    The SOFTWARE PRODUCT is licensed as follows:
+X        Installation and Usage.
+X        Licenses are per user and valid for use on all supported operating systems. License keys may be used on multiple computers and operating systems, provided the license key holder is the primary user. Businesses must purchase at least as many licenses as the number of people using the SOFTWARE PRODUCT.
+X        Backup Copies.
+X        You may make copies of the license key and or the SOFTWARE PRODUCT for backup and archival purposes.
+X    DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS
+X        Maintenance of Copyright Notices.
+X        You must not remove or alter any copyright notices on any copy of the SOFTWARE PRODUCT.
+X        Distribution.
+X        You may not distribute or sell license keys or the SOFTWARE PRODUCT to third parties. Licenses will be revoked if distributed or sold to third parties.
+X        Rental.
+X        You may not rent, lease, or lend the license key or the SOFTWARE PRODUCT.
+X    COPYRIGHT
+X    All title, including but not limited to copyrights, in and to the SOFTWARE PRODUCT and any copies thereof are owned by SUBLIME HQ PTY LTD.
+X    NO WARRANTIES
+X    SUBLIME HQ PTY LTD expressly disclaims any warranty for the SOFTWARE PRODUCT, which is provided 'as is' without any express or implied warranty of any kind, including but not limited to any warranties of merchantability, non-infringement, or fitness of a particular purpose.
+X    LIMITATION OF LIABILITY
+X    In no event shall SUBLIME HQ PTY LTD be liable for any damages due to use of the SOFTWARE PRODUCT, to the maximum extent permitted by law. This includes without limitation, lost profits, business interruption, or lost information. In no event will SUBLIME HQ PTY LTD be liable for loss of data or for indirect, special, incidental, consequential (including lost profit), or other damages. SUBLIME HQ PTY LTD shall have no liability with respect to the content of the SOFTWARE PRODUCT or any part thereof, including but not limited to errors or omissions contained therein, libel, trademark rights, business interruption, loss of privacy or the disclosure of confidential information.
+SHAR_END
+exit
