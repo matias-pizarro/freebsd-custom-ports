@@ -1,3 +1,0 @@
-repository='external project URL'
-module='https://github.com/google/protobuf/archive/v3.5.1.tar.gz'
-tag=''

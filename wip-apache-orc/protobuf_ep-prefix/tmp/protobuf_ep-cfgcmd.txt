@@ -1,1 +1,0 @@
-cmd='/usr/local/bin/cmake;-DCMAKE_INSTALL_PREFIX=/usr/home/mpizarro/devel/ports/databases/apache-orc/c++/libs/thirdparty/protobuf_ep-install;-DCMAKE_INSTALL_LIBDIR=lib;-DBUILD_SHARED_LIBS=OFF;-Dprotobuf_BUILD_TESTS=OFF;-GNinja;<SOURCE_DIR><SOURCE_SUBDIR>'
