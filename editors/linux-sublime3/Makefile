@@ -2,7 +2,7 @@
 
 PORTNAME=	sublime
 PORTVERSION=	3.2.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	editors linux
 MASTER_SITES=	http://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
@@ -11,12 +11,12 @@ PKGNAMESUFFIX=	3
 MAINTAINER=	matias@pizarro.net
 COMMENT=	Sophisticated text editor for code, markup and prose
 
-LICENSE=				SUBLIMEHQ
-LICENSE_NAME=			End User License Agreement
-LICENSE_FILE=			${FILESDIR}/LICENSE.txt
-LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
+LICENSE=	SUBLIMEHQ
+LICENSE_NAME=	End User License Agreement
+LICENSE_FILE=	${FILESDIR}/LICENSE.txt
+LICENSE_PERMS=	dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
 
-ONLY_FOR_ARCHS=			amd64 i386
+ONLY_FOR_ARCHS=	amd64 i386
 ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
 
 USES=		desktop-file-utils gnome linux tar:bzip2

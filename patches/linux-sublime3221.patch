@@ -1,5 +1,5 @@
 diff -u ../editors/linux-sublime3/Makefile editors/linux-sublime3/Makefile
---- ../editors/linux-sublime3/Makefile	2021-05-07 17:44:30.878400000 +0200
+--- editors/linux-sublime3/Makefile	2021-05-07 17:44:30.878400000 +0200
 +++ editors/linux-sublime3/Makefile	2021-05-22 18:31:54.534857000 +0200
 @@ -2,23 +2,33 @@
  
