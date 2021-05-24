@@ -1,6 +1,6 @@
 diff -ruN ../editors/linux-sublime3/Makefile editors/linux-sublime3/Makefile
---- editors/linux-sublime3/Makefile	2021-05-23 16:02:38.214401000 +0200
-+++ editors/linux-sublime3/Makefile	2021-05-23 19:08:07.851464000 +0200
+--- ../editors/linux-sublime3/Makefile	2021-05-23 16:02:38.214401000 +0200
++++ editors/linux-sublime3/Makefile	2021-05-23 22:02:04.552027000 +0200
 @@ -2,7 +2,7 @@
  
  PORTNAME=	sublime
@@ -10,9 +10,55 @@ diff -ruN ../editors/linux-sublime3/Makefile editors/linux-sublime3/Makefile
  CATEGORIES=	editors linux
  MASTER_SITES=	http://download.sublimetext.com/
  PKGNAMEPREFIX=	linux-
+@@ -20,32 +20,27 @@
+ ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
+ 
+ USES=		desktop-file-utils gnome linux tar:bzip2
++INSTALLS_ICONS=	yes
+ USE_LINUX=	gtk3
+ 
+-DISTNAME_amd64=	sublime_text_3_build_3211_x64
+-DISTNAME_i386=	sublime_text_3_build_3211_x32
+-
+-INSTALLS_ICONS=	yes
+-WRKSRC=		${WRKDIR}/sublime_text_3
+-
+ CONFLICTS_INSTALL=	linux-sublime[0-9]*
+ 
+ NO_BUILD=	yes
+ SUB_FILES=	sublime
+ 
+-do-install:
+-	@${MKDIR} ${STAGEDIR}${DATADIR} \
+-		${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps/ \
+-		${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps/ \
+-		${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps/ \
+-		${STAGEDIR}${PREFIX}/share/icons/hicolor/128x128/apps/ \
+-		${STAGEDIR}${PREFIX}/share/icons/hicolor/256x256/apps/
++WRKSRC=		${WRKDIR}/sublime_text_3
+ 
+-	${INSTALL_DATA} ${WRKSRC}/Icon/16x16/sublime-text.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps/
+-	${INSTALL_DATA} ${WRKSRC}/Icon/32x32/sublime-text.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps/
+-	${INSTALL_DATA} ${WRKSRC}/Icon/48x48/sublime-text.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/48x48/apps/
+-	${INSTALL_DATA} ${WRKSRC}/Icon/128x128/sublime-text.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/128x128/apps/
+-	${INSTALL_DATA} ${WRKSRC}/Icon/256x256/sublime-text.png ${STAGEDIR}${PREFIX}/share/icons/hicolor/256x256/apps/
++DISTNAME_amd64=	sublime_text_3_build_3211_x64
++DISTNAME_i386=	sublime_text_3_build_3211_x32
++
++do-install:
++	@${MKDIR} ${STAGEDIR}${DATADIR}
++.for res in 16 32 48 128 256
++	@${MKDIR} \
++		${STAGEDIR}${PREFIX}/share/icons/hicolor/${res}x${res}/apps/
++	${INSTALL_DATA} ${WRKSRC}/Icon/${res}x${res}/sublime-text.png \
++		${STAGEDIR}${PREFIX}/share/icons/hicolor/${res}x${res}/apps/
++.endfor
+ 	${INSTALL_DATA} ${WRKSRC}/sublime_text.desktop ${STAGEDIR}${PREFIX}/share/applications/
+ 	cd ${WRKSRC} && ${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR}
+ 	${INSTALL_SCRIPT} ${WRKDIR}/sublime ${STAGEDIR}${PREFIX}/bin/sublime
 diff -ruN ../editors/linux-sublime3/files/LICENSE.txt editors/linux-sublime3/files/LICENSE.txt
---- editors/linux-sublime3/files/LICENSE.txt	1970-01-01 01:00:00.000000000 +0100
-+++ editors/linux-sublime3/files/LICENSE.txt	2021-05-23 19:07:38.965681000 +0200
+--- ../editors/linux-sublime3/files/LICENSE.txt	1970-01-01 01:00:00.000000000 +0100
++++ editors/linux-sublime3/files/LICENSE.txt	2021-05-23 22:00:09.811507000 +0200
 @@ -0,0 +1,21 @@
 + The SOFTWARE PRODUCT (SUBLIME TEXT and SUBLIME MERGE) is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. The SOFTWARE PRODUCT is licensed, not sold.
 +
