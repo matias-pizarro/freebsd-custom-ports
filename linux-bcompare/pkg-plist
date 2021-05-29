@@ -539,6 +539,6 @@ lib/beyondcompare/ext/bcompare_ext_konq.i386.so
 @(,,644) lib/beyondcompare/help/zoom_search.js
 @(,,644) lib/beyondcompare/help/zoomin.png
 @(,,644) lib/beyondcompare/help/zoomout.png
-@dir lib/beyondcompare/qt4
-lib/beyondcompare/qt4/libQtCore.so.4
-lib/beyondcompare/qt4/libQtGui.so.4
+%%QT4AMD64%%@dir lib/beyondcompare/qt4
+%%QT4AMD64%%lib/beyondcompare/qt4/libQtCore.so.4
+%%QT4AMD64%%lib/beyondcompare/qt4/libQtGui.so.4
