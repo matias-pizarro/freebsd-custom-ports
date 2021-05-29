@@ -5,28 +5,27 @@ DISTVERSION=	2056
 CATEGORIES=	mpizarro editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
+DISTNAME=	sublime_merge_build_${DISTVERSION}_x64
 
 MAINTAINER=	matias@pizarro.net
 COMMENT=	Sophisticated Git client by the creators of Sublime Text
 
-LICENSE=				SUBLIMEHQ
-LICENSE_NAME=			End User License Agreement
-LICENSE_FILE=			${FILESDIR}/LICENSE.txt
-LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
+LICENSE=	SUBLIMEHQ
+LICENSE_NAME=	End User License Agreement
+LICENSE_FILE=	${FILESDIR}/LICENSE.txt
+LICENSE_PERMS=	dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
 
-ONLY_FOR_ARCHS=			amd64
+ONLY_FOR_ARCHS=	amd64
 ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64
 
 USES=		desktop-file-utils gnome linux tar:xz
-USE_LINUX=	gtk3
-
-DISTNAME_amd64=	sublime_merge_build_${DISTVERSION}_x64
-
 INSTALLS_ICONS=	yes
-WRKSRC=		${WRKDIR}/sublime_merge
+USE_LINUX=	gtk3
 
 NO_BUILD=	yes
 SUB_FILES=	sublime
+
+WRKSRC=		${WRKDIR}/sublime_merge
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR} \
