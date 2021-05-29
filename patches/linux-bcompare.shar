@@ -6,88 +6,79 @@ echo x editors/linux-bcompare/Makefile
 sed 's/^X//' > editors/linux-bcompare/Makefile << 'SHAR_END'
 X# Created by: Matías Pizarro <matias@pizarro.net>
 X
-XPORTNAME=				bcompare
-XDISTVERSION=			4.3.7
-XDISTVERSIONSUFFIX=		.25118
-XCATEGORIES=			editors devel linux
-XMASTER_SITES=			http://scootersoftware.com/
-XPKGNAMEPREFIX=			linux-
-XEXTRACT_SUFX=			.rpm
+XPORTNAME=	bcompare
+XDISTVERSION=	4.3.7
+XDISTVERSIONSUFFIX=	.25118
+XCATEGORIES=	editors devel linux
+XMASTER_SITES=	http://scootersoftware.com/
+XPKGNAMEPREFIX=	linux-
+XEXTRACT_SUFX=	.rpm
 X
-XMAINTAINER=				matias@pizarro.net
-XCOMMENT=				Compare, sync, and merge files and folders (X11)
+XMAINTAINER=	matias@pizarro.net
+XCOMMENT=	Compare, sync, and merge files and folders (X11)
 X
-XLICENSE=				SCOOTERSOFTWARE
-XLICENSE_NAME=			Scooter Software License
-XLICENSE_FILE=			${FILESDIR}/LICENSE.txt
-XLICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
+XLICENSE=	SCOOTERSOFTWARE
+XLICENSE_NAME=	Scooter Software License
+XLICENSE_FILE=	${FILESDIR}/LICENSE.txt
+XLICENSE_PERMS=	dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
 X
-XONLY_FOR_ARCHS=			amd64 i386
+XONLY_FOR_ARCHS=	amd64 i386
 XONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and i386
 X
-XUSES=					linux desktop-file-utils shared-mime-info shebangfix
-XUSE_LINUX=				base:run xorglibs:run qt-x11:run devtools:build
+XUSES=		desktop-file-utils linux shared-mime-info shebangfix
+XINSTALLS_ICONS=	yes
+XUSE_LINUX=	base:run devtools:build qt-x11:run xorglibs:run
 X
-XDISTNAME_amd64=			${DISTNAME}.x86_64
-XDISTNAME_i386=			${DISTNAME}.i386
+XNO_BUILD=	yes
 X
-XNO_WRKSUBDIR=			true
-XNO_BUILD=				yes
+XNO_WRKSUBDIR=	true
 X
-XINSTALLS_ICONS=			yes
+XDATA_FILTER=	-type d -o -name *\.html -o -name *\.js -o -name *\.css -o \
+X		-name *\.gif -o -name *\.png -o -name *\.jpg -o -name \
+X		*\.desktop -o -name mime\.types -o -name README -o -name \
+X		BCompare.mad -o -name RPM-GPG-KEY-scootersoftware -o -name \
+X		scootersoftware.repo
 X
-XDATA_FILTER=			-type d \
-X						-o -name *\.html \
-X						-o -name *\.js \
-X						-o -name *\.css \
-X						-o -name *\.gif \
-X						-o -name *\.png \
-X						-o -name *\.jpg \
-X						-o -name *\.desktop \
-X						-o -name mime\.types \
-X						-o -name README \
-X						-o -name BCompare.mad \
-X						-o -name RPM-GPG-KEY-scootersoftware \
-X						-o -name scootersoftware.repo
-XPROGRAM_FILES=			BCompare \
-X						bcmount32 \
-X						bcmount64
-XSCRIPT_FILES=			bcmount.sh \
-X						kde_context_menu
-XLIB_FILES=				libQt4Pas.so.5 \
-X						lib7z.so \
-X						libunrar.so \
-X						nosched.so
+XDISTNAME_amd64=	${DISTNAME}.x86_64
+XDISTNAME_i386=	${DISTNAME}.i386
+XLIB_FILES=	libQt4Pas.so.5 lib7z.so libunrar.so nosched.so
+XPROGRAM_FILES=	BCompare bcmount32 bcmount64
+XSCRIPT_FILES=	bcmount.sh kde_context_menu
 X
 X.include <bsd.port.options.mk>
 X
 X.if ${ARCH} == i386
-X    LIBDIR=				lib
+XLIBDIR=		lib
+XEXTRA_PATCHES=	${PATCHDIR}/extra-patch-usr_bin_bcompare_i386
+XPLIST_SUB+=	QT4AMD64="@comment "
 X.elif ${ARCH} == amd64
-X    LIBDIR=				lib64
+XLIBDIR=		lib64
+XEXTRA_PATCHES=	${PATCHDIR}/extra-patch-usr_bin_bcompare_amd64
+XPLIST_SUB+=	QT4AMD64=""
 X.endif
 X
-XBCLIB_SRC=				${WRKSRC}/usr/${LIBDIR}/beyondcompare
-XBCLIB_STG=				${STAGEDIR}${PREFIX}/lib/beyondcompare
+XBCLIB_SRC=	${WRKSRC}/usr/${LIBDIR}/beyondcompare
+XBCLIB_STG=	${STAGEDIR}${PREFIX}/lib/beyondcompare
 X
-XSHEBANG_FILES=			${BCLIB_SRC}/bcmount.sh \
-X						${BCLIB_SRC}/kde_context_menu
+XSHEBANG_FILES=	${BCLIB_SRC}/bcmount.sh ${BCLIB_SRC}/kde_context_menu
 X
 Xpre-install:
 X	${LINUXBASE}/usr/bin/gcc -Wall -fPIC -shared ${FILESDIR}/nosched.c -ldl -o ${BCLIB_SRC}/nosched.so
 X
 Xdo-install:
-X	# bin
+X# bin
 X	(cd ${WRKSRC}/usr/bin && ${INSTALL_SCRIPT} bcompare ${STAGEDIR}${PREFIX}/bin)
-X	# lib
+X# lib
 X	(cd ${BCLIB_SRC}     && ${COPYTREE_SHARE}  .                ${BCLIB_STG} "${DATA_FILTER}")
 X	(cd ${BCLIB_SRC}     && ${INSTALL_PROGRAM} ${PROGRAM_FILES} ${BCLIB_STG})
 X	(cd ${BCLIB_SRC}     && ${INSTALL_SCRIPT}  ${SCRIPT_FILES}  ${BCLIB_STG})
 X	(cd ${BCLIB_SRC}     && ${INSTALL_LIB}     ${LIB_FILES}     ${BCLIB_STG})
+X.if ${ARCH} == amd64
 X	(cd ${BCLIB_SRC}/qt4 && ${INSTALL_LIB}     $$(ls *.so.4)    ${BCLIB_STG}/qt4)
+X.endif
 X	(cd ${BCLIB_SRC}/ext && ${INSTALL_LIB}     $$(ls *.so)      ${BCLIB_STG}/ext)
 X	${LN} -sf ${LINUXBASE}/usr/${LIBDIR}/libbz2.so.1.0.6 ${BCLIB_STG}/libbz2.so.1.0
-X	# data
+X# data
 X	(cd ${WRKSRC}/usr/share && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/share)
 X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps
 X	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/32x32/apps
@@ -98,16 +89,6 @@ X	${LN} -sf ../../../../pixmaps/bcompare.png ${STAGEDIR}${PREFIX}/share/icons/hi
 X
 X.include <bsd.port.mk>
 SHAR_END
-echo x editors/linux-bcompare/distinfo
-sed 's/^X//' > editors/linux-bcompare/distinfo << 'SHAR_END'
-XTIMESTAMP = 1601823220
-XSHA256 (bcompare-4.3.7.25118.i386.rpm) = 71a72fa4318b7afedb03ec7147523d3aa47e26b090e1a170316990eb88268828
-XSIZE (bcompare-4.3.7.25118.i386.rpm) = 12675958
-XSHA256 (bcompare-4.3.7.25118.x86_64.rpm) = c913df4d0df858c4d1de62ee269b82a3e231b7408e36ee43ba672fd07e97dee0
-XSIZE (bcompare-4.3.7.25118.x86_64.rpm) = 18808757
-SHAR_END
-echo x editors/linux-bcompare/files
-mkdir -p editors/linux-bcompare/files > /dev/null 2>&1
 echo x editors/linux-bcompare/pkg-plist
 sed 's/^X//' > editors/linux-bcompare/pkg-plist << 'SHAR_END'
 X@dir bin
@@ -651,9 +632,17 @@ X@(,,644) lib/beyondcompare/help/zoom_pageinfo.js
 X@(,,644) lib/beyondcompare/help/zoom_search.js
 X@(,,644) lib/beyondcompare/help/zoomin.png
 X@(,,644) lib/beyondcompare/help/zoomout.png
-X@dir lib/beyondcompare/qt4
-Xlib/beyondcompare/qt4/libQtCore.so.4
-Xlib/beyondcompare/qt4/libQtGui.so.4
+X%%QT4AMD64%%@dir lib/beyondcompare/qt4
+X%%QT4AMD64%%lib/beyondcompare/qt4/libQtCore.so.4
+X%%QT4AMD64%%lib/beyondcompare/qt4/libQtGui.so.4
+SHAR_END
+echo x editors/linux-bcompare/distinfo
+sed 's/^X//' > editors/linux-bcompare/distinfo << 'SHAR_END'
+XTIMESTAMP = 1601823220
+XSHA256 (bcompare-4.3.7.25118.i386.rpm) = 71a72fa4318b7afedb03ec7147523d3aa47e26b090e1a170316990eb88268828
+XSIZE (bcompare-4.3.7.25118.i386.rpm) = 12675958
+XSHA256 (bcompare-4.3.7.25118.x86_64.rpm) = c913df4d0df858c4d1de62ee269b82a3e231b7408e36ee43ba672fd07e97dee0
+XSIZE (bcompare-4.3.7.25118.x86_64.rpm) = 18808757
 SHAR_END
 echo x editors/linux-bcompare/pkg-descr
 sed 's/^X//' > editors/linux-bcompare/pkg-descr << 'SHAR_END'
@@ -667,43 +656,10 @@ XThanks to shkhln (https://forums.freebsd.org/members/shkhln.54069/) and
 Xaragats (https://forums.freebsd.org/members/aragats.37029/) for coming
 Xup with the nosched.c fix
 SHAR_END
-echo x editors/linux-bcompare/files/nosched.c
-sed 's/^X//' > editors/linux-bcompare/files/nosched.c << 'SHAR_END'
-X#define _GNU_SOURCE
-X
-X#include <dlfcn.h>
-X#include <pthread.h>
-X#include <stdio.h>
-X#include <string.h>
-X
-Xint pthread_noop() {
-X  fprintf(stderr, "%s(...)\n", __func__);
-X  return 0;
-X}
-X
-X// https://stackoverflow.com/questions/15599026/how-can-i-intercept-dlsym-calls-using-ld-preload/18825060#18825060
-Xvoid* _dl_sym(void*, const char*, void*);
-X
-Xstatic void* (*libc_dlsym)(void*, const char*) = NULL;
-X
-Xvoid* dlsym(void* handle, const char* symbol) {
-X
-X  if (!libc_dlsym) {
-X    libc_dlsym = _dl_sym(RTLD_NEXT, "dlsym", dlsym);
-X  }
-X
-X  //~ fprintf(stderr, "%s(_, %s)\n", __func__, symbol);
-X
-X  if (strcmp(symbol, "pthread_attr_setinheritsched") == 0) {
-X    return pthread_noop;
-X  }
-X
-X  return libc_dlsym(handle, symbol);
-X}
-X
-SHAR_END
-echo x editors/linux-bcompare/files/patch-usr_bin_bcompare
-sed 's/^X//' > editors/linux-bcompare/files/patch-usr_bin_bcompare << 'SHAR_END'
+echo x editors/linux-bcompare/files
+mkdir -p editors/linux-bcompare/files > /dev/null 2>&1
+echo x editors/linux-bcompare/files/extra-patch-usr_bin_bcompare_amd64
+sed 's/^X//' > editors/linux-bcompare/files/extra-patch-usr_bin_bcompare_amd64 << 'SHAR_END'
 X--- usr/bin/bcompare.orig	2020-09-01 19:23:29 UTC
 X+++ usr/bin/bcompare
 X@@ -1,17 +1,22 @@
@@ -905,5 +861,87 @@ XAgreement is declared by a court of competent jurisdiction to be
 Xinvalid, illegal or unenforceable, such provision or part thereof will
 Xbe severed from the Agreement and the remaining provisions will remain
 Xin full force and effect.
+SHAR_END
+echo x editors/linux-bcompare/files/nosched.c
+sed 's/^X//' > editors/linux-bcompare/files/nosched.c << 'SHAR_END'
+X#define _GNU_SOURCE
+X
+X#include <dlfcn.h>
+X#include <pthread.h>
+X#include <stdio.h>
+X#include <string.h>
+X
+Xint pthread_noop() {
+X  fprintf(stderr, "%s(...)\n", __func__);
+X  return 0;
+X}
+X
+X// https://stackoverflow.com/questions/15599026/how-can-i-intercept-dlsym-calls-using-ld-preload/18825060#18825060
+Xvoid* _dl_sym(void*, const char*, void*);
+X
+Xstatic void* (*libc_dlsym)(void*, const char*) = NULL;
+X
+Xvoid* dlsym(void* handle, const char* symbol) {
+X
+X  if (!libc_dlsym) {
+X    libc_dlsym = _dl_sym(RTLD_NEXT, "dlsym", dlsym);
+X  }
+X
+X  //~ fprintf(stderr, "%s(_, %s)\n", __func__, symbol);
+X
+X  if (strcmp(symbol, "pthread_attr_setinheritsched") == 0) {
+X    return pthread_noop;
+X  }
+X
+X  return libc_dlsym(handle, symbol);
+X}
+X
+SHAR_END
+echo x editors/linux-bcompare/files/extra-patch-usr_bin_bcompare_i386
+sed 's/^X//' > editors/linux-bcompare/files/extra-patch-usr_bin_bcompare_i386 << 'SHAR_END'
+X--- usr/bin/bcompare.orig	2020-09-24 21:23:08 UTC
+X+++ usr/bin/bcompare
+X@@ -1,17 +1,22 @@
+X #!/bin/sh
+X 
+X-BC_LIB=/usr/lib/beyondcompare
+X+LINUXULATOR_LIB=/compat/linux/usr/lib
+X+
+X+BC_LIB=/usr/local/lib/beyondcompare
+X export BC_LIB
+X 
+X+_LD_PRELOAD="$BC_LIB/nosched.so"
+X+export _LD_PRELOAD
+X+
+X BC_PACKAGE_TYPE=rpm
+X export BC_PACKAGE_TYPE
+X 
+X EXEC="$BC_LIB/BCompare"
+X 
+X if [ -n "$LD_LIBRARY_PATH" ]; then
+X-export LD_LIBRARY_PATH="$BC_LIB:$LD_LIBRARY_PATH"
+X+export LD_LIBRARY_PATH="$BC_LIB:$LD_LIBRARY_PATH:$LINUXULATOR_LIB"
+X else
+X-export LD_LIBRARY_PATH="$BC_LIB"
+X+export LD_LIBRARY_PATH="$BC_LIB:$LINUXULATOR_LIB"
+X fi
+X 
+X #check to see if we have all of the shared libraries.
+X@@ -44,7 +49,7 @@ while [ "$#" -gt 0 ]; do
+X    ARGS=$ARGS" \"$1\""
+X    shift 1
+X done
+X-/bin/bash -c "exec -a $0 $EXEC $ARGS > /dev/null 2>&1" $0
+X+/usr/bin/env bash -c "exec -a $0 /usr/bin/env LD_PRELOAD=$_LD_PRELOAD $EXEC $ARGS > /dev/null 2>&1" $0
+X 
+X ########################################
+X # set exit code / wait on existing instance
+X@@ -54,4 +59,6 @@ if [ $EXIT = 99 ]; then
+X 	EXIT=`cat /tmp/BC4_.$$`
+X 	rm -f /tmp/BC4_.$$
+X fi
+X+[ ! -f bash.core ] || rm -f bash.core
+X+[ ! -f pgrep.core ] || rm -f pgrep.core
+X exit $EXIT
 SHAR_END
 exit
