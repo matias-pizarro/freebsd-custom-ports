@@ -1,10 +1,11 @@
 # Created by: Matías Pizarro <matias@pizarro.net>
 
-PORTNAME=	sublime-merge
+PORTNAME=	sublime
 DISTVERSION=	2056
 CATEGORIES=	editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
+PKGNAMESUFFIX=	merge
 DISTNAME=	sublime_merge_build_${DISTVERSION}_x64
 
 MAINTAINER=	matias@pizarro.net
