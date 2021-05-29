@@ -5,31 +5,29 @@ DISTVERSION=	4107
 CATEGORIES=	editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
+DISTNAME=	sublime_text_build_${DISTVERSION}_x64
 
 MAINTAINER=	matias@pizarro.net
 COMMENT=	Sophisticated text editor for code, markup and prose
 
-LICENSE=				SUBLIMEHQ
-LICENSE_NAME=			End User License Agreement
-LICENSE_FILE=			${FILESDIR}/LICENSE.txt
-LICENSE_PERMS=			dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
+LICENSE=	SUBLIMEHQ
+LICENSE_NAME=	End User License Agreement
+LICENSE_FILE=	${FILESDIR}/LICENSE.txt
+LICENSE_PERMS=	dist-mirror no-dist-sell pkg-mirror no-pkg-sell auto-accept
 
-ONLY_FOR_ARCHS=			amd64 arm64
-ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and arm64
+ONLY_FOR_ARCHS=	amd64
+ONLY_FOR_ARCHS_REASON=	Upstream only supports amd64 and arm64. FreeBSD aarch64 doesn't support Linux X11 ports
 
-USES=		desktop-file-utils gnome linux tar:xz ssl
-USE_LINUX=	gtk3
-
-DISTNAME_amd64=	sublime_text_build_${DISTVERSION}_x64
-DISTNAME_arm64=	sublime_text_build_${DISTVERSION}_arm64
-
+USES=		desktop-file-utils gnome linux ssl tar:xz
 INSTALLS_ICONS=	yes
-WRKSRC=		${WRKDIR}/sublime_text
+USE_LINUX=	gtk3
 
 CONFLICTS_INSTALL=	linux-sublime[0-9]*
 
 NO_BUILD=	yes
 SUB_FILES=	sublime
+
+WRKSRC=		${WRKDIR}/sublime_text
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR} \
