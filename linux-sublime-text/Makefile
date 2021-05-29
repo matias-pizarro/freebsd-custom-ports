@@ -1,10 +1,11 @@
 # Created by: Matías Pizarro <matias@pizarro.net>
 
-PORTNAME=	sublime-text
+PORTNAME=	sublime
 DISTVERSION=	4107
 CATEGORIES=	mpizarro editors linux
 MASTER_SITES=	https://download.sublimetext.com/
 PKGNAMEPREFIX=	linux-
+PKGNAMESUFFIX=	text
 DISTNAME=	sublime_text_build_${DISTVERSION}_x64
 
 MAINTAINER=	matias@pizarro.net
